@@ -1,90 +1,90 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Maximize2, MoveUpRight } from 'lucide-react';
+import { Maximize2 } from 'lucide-react';
 
 const FireShow: React.FC = () => {
-  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
-  
-  // Scroll Reveal Logic
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+    const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
 
-    const items = document.querySelectorAll('.fs-reveal');
-    items.forEach(el => observer.observe(el));
+    // Scroll Reveal Logic
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
 
-    return () => observer.disconnect();
-  }, []);
+        const items = document.querySelectorAll('.fs-reveal');
+        items.forEach(el => observer.observe(el));
 
-  // Carousel Logic
-  const trackRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
+        return () => observer.disconnect();
+    }, []);
 
-    let animationFrameId: number;
-    let isPaused = false;
-    let scrollPos = 0;
-    const speed = 0.5;
+    // Carousel Logic
+    const trackRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const track = trackRef.current;
+        if (!track) return;
 
-    // Clone items for infinite effect
-    const originalChildren = Array.from(track.children);
-    originalChildren.forEach(child => {
-        track.appendChild((child as HTMLElement).cloneNode(true));
-    });
+        let animationFrameId: number;
+        let isPaused = false;
+        let scrollPos = 0;
+        const speed = 0.5;
 
-    const loop = () => {
-      if (!isPaused && track) {
-        scrollPos += speed;
-        if (scrollPos >= track.scrollWidth / 2) {
-            scrollPos = 0;
-        }
-        track.scrollLeft = scrollPos;
-      }
-      animationFrameId = requestAnimationFrame(loop);
+        // Clone items for infinite effect
+        const originalChildren = Array.from(track.children);
+        originalChildren.forEach(child => {
+            track.appendChild((child as HTMLElement).cloneNode(true));
+        });
+
+        const loop = () => {
+            if (!isPaused && track) {
+                scrollPos += speed;
+                if (scrollPos >= track.scrollWidth / 2) {
+                    scrollPos = 0;
+                }
+                track.scrollLeft = scrollPos;
+            }
+            animationFrameId = requestAnimationFrame(loop);
+        };
+
+        // Event Listeners for Pause
+        const pause = () => { isPaused = true; };
+        const resume = () => { isPaused = false; };
+
+        track.addEventListener('mouseenter', pause);
+        track.addEventListener('touchstart', pause);
+        track.addEventListener('mouseleave', resume);
+        track.addEventListener('touchend', resume);
+
+        loop();
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            track.removeEventListener('mouseenter', pause);
+            track.removeEventListener('touchstart', pause);
+            track.removeEventListener('mouseleave', resume);
+            track.removeEventListener('touchend', resume);
+        };
+    }, []);
+
+    // Image Click Handler (Lightbox)
+    const handleImageClick = (src: string) => {
+        setLightboxSrc(src);
     };
 
-    // Event Listeners for Pause
-    const pause = () => { isPaused = true; };
-    const resume = () => { isPaused = false; };
+    // Generate Sparks for Hero
+    const sparks = Array.from({ length: 20 }).map(() => ({
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 5}s`,
+        duration: `${3 + Math.random() * 4}s`
+    }));
 
-    track.addEventListener('mouseenter', pause);
-    track.addEventListener('touchstart', pause);
-    track.addEventListener('mouseleave', resume);
-    track.addEventListener('touchend', resume);
-
-    loop();
-
-    return () => {
-        cancelAnimationFrame(animationFrameId);
-        track.removeEventListener('mouseenter', pause);
-        track.removeEventListener('touchstart', pause);
-        track.removeEventListener('mouseleave', resume);
-        track.removeEventListener('touchend', resume);
-    };
-  }, []);
-
-  // Image Click Handler (Lightbox)
-  const handleImageClick = (src: string) => {
-    setLightboxSrc(src);
-  };
-
-  // Generate Sparks for Hero
-  const sparks = Array.from({ length: 20 }).map((_, i) => ({
-    left: `${Math.random() * 100}%`,
-    delay: `${Math.random() * 5}s`,
-    duration: `${3 + Math.random() * 4}s`
-  }));
-
-  return (
-    <div className="min-h-screen relative overflow-hidden">
-      <style>{`
+    return (
+        <div className="min-h-screen relative overflow-hidden">
+            <style>{`
         /* COMPONENT SPECIFIC STYLES */
         
         /* Fixed Background (Blur) */
@@ -483,196 +483,196 @@ const FireShow: React.FC = () => {
         .fs-lightbox.active img { transform: scale(1); }
       `}</style>
 
-      {/* FIXED BACKGROUND LAYER */}
-      <div className="fs-bg-layer"></div>
+            {/* FIXED BACKGROUND LAYER */}
+            <div className="fs-bg-layer"></div>
 
-      <div className="feuershow-landing-wrapper">
-        <div className="fs-hero-bg"></div>
+            <div className="feuershow-landing-wrapper">
+                <div className="fs-hero-bg"></div>
 
-        {/* =================== HERO =================== */}
-        <header className="fs-hero-section">
-            {/* Background Sparks */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                {sparks.map((s, i) => (
-                    <div 
-                        key={i} 
-                        className="fs-spark" 
-                        style={{
-                            left: s.left, 
-                            animation: `fs-spark-rise ${s.duration} ease-in infinite`, 
-                            animationDelay: s.delay
-                        }}
-                    ></div>
-                ))}
-            </div>
+                {/* =================== HERO =================== */}
+                <header className="fs-hero-section">
+                    {/* Background Sparks */}
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                        {sparks.map((s, i) => (
+                            <div
+                                key={i}
+                                className="fs-spark"
+                                style={{
+                                    left: s.left,
+                                    animation: `fs-spark-rise ${s.duration} ease-in infinite`,
+                                    animationDelay: s.delay
+                                }}
+                            ></div>
+                        ))}
+                    </div>
 
-            <div className="fs-hero-content z-10">
-                <h1 className="fs-hero-title">Feuershow – spektakuläre Momente, sicher inszeniert</h1>
-                <p className="fs-hero-sub">Intensive Effekte, sichere Abläufe und choreografierte Musik – ideal bei Dämmerung & Nacht.<br/>Der krönende Abschluss einer jeden Veranstaltung!</p>
-                
-                <Link className="fs-cta-button" to="/booking-request">
-                    Jetzt anfragen 🔥
-                </Link>
-            </div>
-        </header>
+                    <div className="fs-hero-content z-10">
+                        <h1 className="fs-hero-title">Feuershow – spektakuläre Momente, sicher inszeniert</h1>
+                        <p className="fs-hero-sub">Intensive Effekte, sichere Abläufe und choreografierte Musik – ideal bei Dämmerung & Nacht.<br />Der krönende Abschluss einer jeden Veranstaltung!</p>
 
-        {/* =================== MÖGLICHKEITEN =================== */}
-        <section className="fs-section fs-reveal fs-possibilities-section">
-            <h2>Das alles ist möglich</h2>
-            <ul className="fs-possibilities">
-                <li>Moderne und mittelalterliche Feuershow</li>
-                <li>Hochzeitsfeuershow</li>
-                <li>Comedyfeuershow</li>
-                <li>Individuelle Feuershow</li>
-                <li>Feuereffekte für Film und Theater</li>
-                <li>Feuerdekorationen</li>
-                <li>Bühnenpyrotechnik</li>
-            </ul>
-        </section>
+                        <Link className="fs-cta-button" to="/booking-request">
+                            Jetzt anfragen 🔥
+                        </Link>
+                    </div>
+                </header>
 
-        <div className="fs-divider"></div>
+                {/* =================== MÖGLICHKEITEN =================== */}
+                <section className="fs-section fs-reveal fs-possibilities-section">
+                    <h2>Das alles ist möglich</h2>
+                    <ul className="fs-possibilities">
+                        <li>Moderne und mittelalterliche Feuershow</li>
+                        <li>Hochzeitsfeuershow</li>
+                        <li>Comedyfeuershow</li>
+                        <li>Individuelle Feuershow</li>
+                        <li>Feuereffekte für Film und Theater</li>
+                        <li>Feuerdekorationen</li>
+                        <li>Bühnenpyrotechnik</li>
+                    </ul>
+                </section>
 
-        {/* =================== HIGHLIGHTS (UPDATED CARDS) =================== */}
-        <section className="fs-section fs-reveal">
-            <h2>Show-Highlights</h2>
-            <div className="fs-highlights-grid">
-                {[
-                    { title: "Feuerjonglage", subtitle: "Präzision & Flow", img: "https://maximilianboy.de/wp-content/uploads/2023/09/PARKS17Maerz23_1059-683x1024.jpg" },
-                    { title: "Flammenmeer", subtitle: "Energie Pur", img: "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2023/02/IMG_20210819_124617_236.jpg-neu.jpg?strip=info&w=704&ssl=1" },
-                    { title: "Etwas Romantik", subtitle: "Für das Herz", img: "https://maximilianboy.de/wp-content/uploads/2021/12/19-768x1024.jpg" },
-                    { title: "Funkenflug", subtitle: "Das große Finale", img: "https://maximilianboy.de/wp-content/uploads/2023/09/Neu-1-1024x809.jpg" },
-                ].map((item, i) => (
-                    <div className="fs-highlight-card group" key={i} onClick={() => handleImageClick(item.img)}>
-                        <div className="fs-card-icon">
-                            <Maximize2 size={20} />
-                        </div>
-                        <img src={item.img} alt={item.title} loading="lazy" />
-                        <div className="fs-card-overlay">
-                            <span className="fs-card-subtitle">{item.subtitle}</span>
-                            <h3 className="fs-card-title">{item.title}</h3>
+                <div className="fs-divider"></div>
+
+                {/* =================== HIGHLIGHTS (UPDATED CARDS) =================== */}
+                <section className="fs-section fs-reveal">
+                    <h2>Show-Highlights</h2>
+                    <div className="fs-highlights-grid">
+                        {[
+                            { title: "Feuerjonglage", subtitle: "Präzision & Flow", img: "https://maximilianboy.de/wp-content/uploads/2023/09/PARKS17Maerz23_1059-683x1024.jpg" },
+                            { title: "Flammenmeer", subtitle: "Energie Pur", img: "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2023/02/IMG_20210819_124617_236.jpg-neu.jpg?strip=info&w=704&ssl=1" },
+                            { title: "Etwas Romantik", subtitle: "Für das Herz", img: "https://maximilianboy.de/wp-content/uploads/2021/12/19-768x1024.jpg" },
+                            { title: "Funkenflug", subtitle: "Das große Finale", img: "https://maximilianboy.de/wp-content/uploads/2023/09/Neu-1-1024x809.jpg" },
+                        ].map((item, i) => (
+                            <div className="fs-highlight-card group" key={i} onClick={() => handleImageClick(item.img)}>
+                                <div className="fs-card-icon">
+                                    <Maximize2 size={20} />
+                                </div>
+                                <img src={item.img} alt={item.title} loading="lazy" />
+                                <div className="fs-card-overlay">
+                                    <span className="fs-card-subtitle">{item.subtitle}</span>
+                                    <h3 className="fs-card-title">{item.title}</h3>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* =================== TESTIMONIAL =================== */}
+                <section className="fs-section fs-reveal">
+                    <div className="bg-[#141415]/80 p-8 md:p-12 rounded-2xl border border-[#ebd297]/20 text-center max-w-4xl mx-auto relative backdrop-blur-md shadow-2xl">
+                        <div className="text-6xl text-[#ebd297] opacity-20 absolute top-4 left-4 font-serif leading-none">"</div>
+                        <p className="text-xl md:text-2xl text-stone-200 font-serif italic mb-8 relative z-10 leading-relaxed">
+                            Eine Wahnsinns-Feuershow als Überraschung! Wir kamen aus dem Staunen nicht heraus. Max gestaltet die Show so amüsant, dass Klein und Groß viel gelacht haben. Ein tolles Highlight und eine große Empfehlung!
+                        </p>
+                        <div className="flex items-center justify-center gap-4">
+                            <div className="w-16 h-16 rounded-full overflow-hidden border border-white/20 bg-[#ebd297]/10 flex items-center justify-center">
+                                <img
+                                    src="https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_8v3p158v3p158v3p_2-removebg-preview.png"
+                                    alt="Patrick"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            <div className="text-left">
+                                <div className="text-[#ebd297] font-bold text-base">Patrick</div>
+                                <div className="text-stone-500 text-xs uppercase tracking-wider font-bold">HOCHZEIT</div>
+                            </div>
                         </div>
                     </div>
-                ))}
-            </div>
-        </section>
-        
-        {/* =================== TESTIMONIAL =================== */}
-        <section className="fs-section fs-reveal">
-            <div className="bg-[#141415]/80 p-8 md:p-12 rounded-2xl border border-[#ebd297]/20 text-center max-w-4xl mx-auto relative backdrop-blur-md shadow-2xl">
-                <div className="text-6xl text-[#ebd297] opacity-20 absolute top-4 left-4 font-serif leading-none">"</div>
-                <p className="text-xl md:text-2xl text-stone-200 font-serif italic mb-8 relative z-10 leading-relaxed">
-                    Eine Wahnsinns-Feuershow als Überraschung! Wir kamen aus dem Staunen nicht heraus. Max gestaltet die Show so amüsant, dass Klein und Groß viel gelacht haben. Ein tolles Highlight und eine große Empfehlung!
-                </p>
-                <div className="flex items-center justify-center gap-4">
-                     <div className="w-16 h-16 rounded-full overflow-hidden border border-white/20 bg-[#ebd297]/10 flex items-center justify-center">
-                        <img 
-                            src="https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_8v3p158v3p158v3p_2-removebg-preview.png" 
-                            alt="Patrick" 
-                            className="w-full h-full object-cover"
-                        />
-                     </div>
-                     <div className="text-left">
-                         <div className="text-[#ebd297] font-bold text-base">Patrick</div>
-                         <div className="text-stone-500 text-xs uppercase tracking-wider font-bold">HOCHZEIT</div>
-                     </div>
-                </div>
-            </div>
-        </section>
+                </section>
 
-        <div className="fs-divider"></div>
+                <div className="fs-divider"></div>
 
-        {/* =================== VIDEOS =================== */}
-        <section className="fs-section fs-reveal">
-            <h2>Videos</h2>
-            <div className="fs-video-grid">
-                {[
-                    { title: "Feuershow Demovideo", src: "https://www.youtube-nocookie.com/embed/Y671VGMJWsc" },
-                    { title: "Einzelne Effekte", src: "https://www.youtube-nocookie.com/embed/vsFnFUEiL_Y" },
-                    { title: "Feuershow XXL", src: "https://www.youtube-nocookie.com/embed/AxW1R4ktRQ4" }
-                ].map((vid, i) => (
-                    <div className="fs-video-item" key={i}>
-                        <h3>{vid.title}</h3>
-                        <div className="fs-video-wrapper">
-                            <iframe src={vid.src} title={vid.title} allowFullScreen loading="lazy"></iframe>
+                {/* =================== VIDEOS =================== */}
+                <section className="fs-section fs-reveal">
+                    <h2>Videos</h2>
+                    <div className="fs-video-grid">
+                        {[
+                            { title: "Feuershow Demovideo", src: "https://www.youtube-nocookie.com/embed/Y671VGMJWsc" },
+                            { title: "Einzelne Effekte", src: "https://www.youtube-nocookie.com/embed/vsFnFUEiL_Y" },
+                            { title: "Feuershow XXL", src: "https://www.youtube-nocookie.com/embed/AxW1R4ktRQ4" }
+                        ].map((vid, i) => (
+                            <div className="fs-video-item" key={i}>
+                                <h3>{vid.title}</h3>
+                                <div className="fs-video-wrapper">
+                                    <iframe src={vid.src} title={vid.title} allowFullScreen loading="lazy"></iframe>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* =================== ECKDATEN =================== */}
+                <section className="fs-section fs-reveal">
+                    <h2>Eckdaten zur Show</h2>
+                    <div className="fs-eckdaten-box">
+                        <ul className="fs-check-list">
+                            <li>Sehr humorvolles Familienprogramm</li>
+                            <li>Dauer ca. 20 Minuten</li>
+                            <li>Anspruchsvolle Feuerjonglage</li>
+                            <li>Große Funken- und Flammeneffekte im Finale der Show</li>
+                            <li>Harmonisch gestaltetes Bühnenbild mit Feuerschalen und LED Lichtern</li>
+                            <li>Beschallungsanlage für bis zu 120 Personen</li>
+                            <li>Ein brennendes Herz für Hochzeiten (1,2×1,3m), oder Zahlen für Geburtstage und Jubiläen können mit eingebaut werden</li>
+                            <li>Alle Absprachen mit der Location, wie auch diverse organisatorische Dinge (Genehmigungen usw.) werden von mir im vollen Umfang übernommen.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                {/* =================== GALERIE (Carousel) =================== */}
+                <section className="fs-section fs-reveal">
+                    <h2>Weitere Impressionen</h2>
+                    <div className="fs-carousel-wrapper">
+                        <div className="fs-carousel-track" ref={trackRef}>
+                            {[
+                                "https://maximilianboy.de/wp-content/uploads/2023/09/PARKS17Maerz23_1059-683x1024.jpg",
+                                "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2023/02/IMG_20210819_124617_236.jpg-neu.jpg?strip=info&w=704&ssl=1",
+                                "https://maximilianboy.de/wp-content/uploads/2021/12/19-768x1024.jpg",
+                                "https://maximilianboy.de/wp-content/uploads/2023/09/Neu-1-1024x809.jpg"
+                            ].map((src, i) => (
+                                <div className="fs-carousel-item" key={i} onClick={() => handleImageClick(src)}>
+                                    <img src={src} alt={`Gallery ${i}`} loading="lazy" />
+                                </div>
+                            ))}
                         </div>
                     </div>
-                ))}
+                </section>
+
+                <div className="fs-divider"></div>
+
+                {/* =================== FAQ =================== */}
+                <section className="fs-section fs-reveal">
+                    <h2>Häufige Fragen</h2>
+                    <div className="fs-faq">
+                        <details>
+                            <summary>Wie viel Platz wird benötigt?</summary>
+                            <p>Im Idealfall sollte die Fläche ca. 10m breit und 5m tief sein. Eine kleinere Fläche ist aber nach Absprache auch möglich.</p>
+                        </details>
+                        <details>
+                            <summary>Ist eine Feuershow überall möglich?</summary>
+                            <p>Ja... zumindest fast :) Ein Parkplatz, eine Wiese oder eine größere Terrasse reichen aus. Ich prüfe Locations, Abstände und Auflagen im Vorfeld und schlage bei Bedarf Alternativen vor – Sicherheit hat Priorität.</p>
+                        </details>
+                        <details>
+                            <summary>Ist eine Feuershow auch im Innenbereich möglich?</summary>
+                            <p>Nein. Nicht nur das Feuer, sondern auch die Rauchentwicklung wären im Innenbereich problematisch. Daher muss die Show draußen stattfinden.</p>
+                        </details>
+                        <details>
+                            <summary>Was wird vor Ort an Technik benötigt?</summary>
+                            <p>Ich bin weitgehend autark. Eine leistungsstarke Musikanlage (Akku oder Strom) und Lichttechnik für die Showfläche bringe ich mit. Ein Stromanschluss in der Nähe ist hilfreich, aber nicht zwingend notwendig.</p>
+                        </details>
+                        <details>
+                            <summary>Wer kümmert sich um Genehmigungen?</summary>
+                            <p>Ich übernehme die Abstimmung mit Location und ggf. Behörden, damit Sie entspannt planen können.</p>
+                        </details>
+                    </div>
+                </section>
+
             </div>
-        </section>
 
-        {/* =================== ECKDATEN =================== */}
-        <section className="fs-section fs-reveal">
-            <h2>Eckdaten zur Show</h2>
-            <div className="fs-eckdaten-box">
-                <ul className="fs-check-list">
-                    <li>Sehr humorvolles Familienprogramm</li>
-                    <li>Dauer ca. 20 Minuten</li>
-                    <li>Anspruchsvolle Feuerjonglage</li>
-                    <li>Große Funken- und Flammeneffekte im Finale der Show</li>
-                    <li>Harmonisch gestaltetes Bühnenbild mit Feuerschalen und LED Lichtern</li>
-                    <li>Beschallungsanlage für bis zu 120 Personen</li>
-                    <li>Ein brennendes Herz für Hochzeiten (1,2×1,3m), oder Zahlen für Geburtstage und Jubiläen können mit eingebaut werden</li>
-                    <li>Alle Absprachen mit der Location, wie auch diverse organisatorische Dinge (Genehmigungen usw.) werden von mir im vollen Umfang übernommen.</li>
-                </ul>
+            {/* LIGHTBOX */}
+            <div className={`fs-lightbox ${lightboxSrc ? 'active' : ''}`} onClick={() => setLightboxSrc(null)}>
+                {lightboxSrc && <img src={lightboxSrc} alt="Lightbox" />}
             </div>
-        </section>
-        
-        {/* =================== GALERIE (Carousel) =================== */}
-        <section className="fs-section fs-reveal">
-            <h2>Weitere Impressionen</h2>
-            <div className="fs-carousel-wrapper">
-                <div className="fs-carousel-track" ref={trackRef}>
-                    {[
-                        "https://maximilianboy.de/wp-content/uploads/2023/09/PARKS17Maerz23_1059-683x1024.jpg",
-                        "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2023/02/IMG_20210819_124617_236.jpg-neu.jpg?strip=info&w=704&ssl=1",
-                        "https://maximilianboy.de/wp-content/uploads/2021/12/19-768x1024.jpg",
-                        "https://maximilianboy.de/wp-content/uploads/2023/09/Neu-1-1024x809.jpg"
-                    ].map((src, i) => (
-                        <div className="fs-carousel-item" key={i} onClick={() => handleImageClick(src)}>
-                            <img src={src} alt={`Gallery ${i}`} loading="lazy" />
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-
-        <div className="fs-divider"></div>
-
-        {/* =================== FAQ =================== */}
-        <section className="fs-section fs-reveal">
-            <h2>Häufige Fragen</h2>
-            <div className="fs-faq">
-                <details>
-                    <summary>Wie viel Platz wird benötigt?</summary>
-                    <p>Im Idealfall sollte die Fläche ca. 10m breit und 5m tief sein. Eine kleinere Fläche ist aber nach Absprache auch möglich.</p>
-                </details>
-                <details>
-                    <summary>Ist eine Feuershow überall möglich?</summary>
-                    <p>Ja... zumindest fast :) Ein Parkplatz, eine Wiese oder eine größere Terrasse reichen aus. Ich prüfe Locations, Abstände und Auflagen im Vorfeld und schlage bei Bedarf Alternativen vor – Sicherheit hat Priorität.</p>
-                </details>
-                <details>
-                    <summary>Ist eine Feuershow auch im Innenbereich möglich?</summary>
-                    <p>Nein. Nicht nur das Feuer, sondern auch die Rauchentwicklung wären im Innenbereich problematisch. Daher muss die Show draußen stattfinden.</p>
-                </details>
-                <details>
-                    <summary>Was wird vor Ort an Technik benötigt?</summary>
-                    <p>Ich bin weitgehend autark. Eine leistungsstarke Musikanlage (Akku oder Strom) und Lichttechnik für die Showfläche bringe ich mit. Ein Stromanschluss in der Nähe ist hilfreich, aber nicht zwingend notwendig.</p>
-                </details>
-                <details>
-                    <summary>Wer kümmert sich um Genehmigungen?</summary>
-                    <p>Ich übernehme die Abstimmung mit Location und ggf. Behörden, damit Sie entspannt planen können.</p>
-                </details>
-            </div>
-        </section>
-
-      </div>
-
-      {/* LIGHTBOX */}
-      <div className={`fs-lightbox ${lightboxSrc ? 'active' : ''}`} onClick={() => setLightboxSrc(null)}>
-        {lightboxSrc && <img src={lightboxSrc} alt="Lightbox" />}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default FireShow;

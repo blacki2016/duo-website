@@ -17,7 +17,6 @@ import PublicEvents from './pages/PublicEvents';
 import Socials from './pages/Socials';
 import Pyrotechnics from './pages/Pyrotechnics';
 import GlobalFX from './components/GlobalFX';
-import Chatbot from './components/Chatbot';
 import NotFound from './pages/NotFound';
 
 // Scroll to top wrapper
@@ -41,7 +40,7 @@ const App: React.FC = () => {
       if (target.tagName === 'IMG') {
         // Exclude images with 'no-zoom' class (like logos)
         if (target.classList.contains('no-zoom')) return;
-        
+
         // Exclude images that are inside buttons or links (to avoid conflict with navigation)
         // Unless they specifically want to be zoomed, but generally links handle navigation.
         if (target.closest('a') || target.closest('button')) return;
@@ -82,20 +81,19 @@ const App: React.FC = () => {
           </Routes>
         </main>
         <Footer />
-        <Chatbot />
 
         {/* Global Lightbox Overlay */}
         {lightboxSrc && (
-          <div 
+          <div
             className="fixed inset-0 z-[10000] bg-black/95 flex justify-center items-center cursor-zoom-out p-4 animate-in fade-in duration-300"
             onClick={() => setLightboxSrc(null)}
           >
             <button className="absolute top-6 right-6 text-gold-400 text-5xl hover:text-white transition-transform hover:rotate-90">
               &times;
             </button>
-            <img 
-              src={lightboxSrc} 
-              alt="Enlarged view" 
+            <img
+              src={lightboxSrc}
+              alt="Enlarged view"
               className="max-w-[95vw] max-h-[95vh] border-2 border-gold-500 rounded shadow-[0_0_50px_rgba(212,175,55,0.4)] object-contain no-zoom"
               onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
             />
