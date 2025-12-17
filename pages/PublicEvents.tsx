@@ -1,0 +1,325 @@
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
+const PublicEvents: React.FC = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fs-reveal').forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="min-h-screen">
+      <style>{`
+        /* === BASIS CSS === */
+        .public-events-wrapper {
+            font-family: 'Montserrat', sans-serif !important;
+            color: #EBD297;
+            line-height: 1.6;
+            text-align: center;
+            /* Neutraler, edler Hintergrund */
+            background: radial-gradient(circle at 70% 30%, #2a2010 0%, #121212 60%);
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            padding: 8rem 1rem 4rem; /* Adjusted top padding for navbar */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .public-events-wrapper * {
+            box-sizing: border-box;
+        }
+
+        /* Typografie */
+        .fs-hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem) !important;
+            margin-bottom: 0.5rem !important;
+            color: #EBD297 !important;
+            font-weight: 700 !important;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8) !important;
+            font-family: 'Cinzel', serif !important;
+        }
+
+        .fs-hero-sub {
+            font-size: clamp(1.1rem, 2vw, 1.3rem) !important;
+            color: #f7f7f7 !important;
+            max-width: 700px;
+            margin: 0 auto 4rem !important;
+            opacity: 0.9;
+        }
+
+        /* === SPLIT LAYOUT CONTAINER === */
+        .fs-content-split {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1100px;
+            width: 100%;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 900px) {
+            .fs-content-split {
+                flex-direction: row;
+                align-items: flex-start; /* Oben bündig */
+                justify-content: center;
+            }
+        }
+
+        /* === LINKER BEREICH: DAS BILD (Humorvoll) === */
+        .fs-image-col {
+            flex: 1;
+            max-width: 400px; /* Bild kleiner machen */
+            position: relative;
+        }
+
+        .fs-sign-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 2px solid rgba(235, 210, 151, 0.1);
+            transform: rotate(-2deg); /* Leicht schräg für lockeren Look */
+            transition: transform 0.3s ease;
+        }
+
+        .fs-sign-image:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* Subtext unter dem Bild */
+        .fs-fun-subtext {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #888;
+            font-style: italic;
+        }
+
+        /* === RECHTER BEREICH: DIE TERMINE === */
+        .fs-dates-col {
+            flex: 1.5;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .fs-dates-header {
+            text-align: left;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #EBD297;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+            font-size: 1.5rem;
+            color: #fff;
+            font-family: 'Cinzel', serif !important;
+        }
+
+        /* Karte Design */
+        .fs-date-card {
+            display: flex;
+            flex-direction: row; /* Immer nebeneinander für bessere Lesbarkeit */
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(235, 210, 151, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .fs-date-card:hover {
+            background: rgba(235, 210, 151, 0.1);
+            transform: translateX(5px);
+            border-color: #EBD297;
+        }
+
+        /* Datum Box */
+        .fs-date-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+            padding-right: 1.5rem;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            margin-right: 1.5rem;
+        }
+
+        .fs-date-day {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #EBD297;
+            line-height: 1;
+            margin-bottom: 5px;
+            font-family: 'Cinzel', serif !important;
+        }
+        .fs-date-year {
+            font-size: 0.8rem;
+            color: #bbb;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* Info Text */
+        .fs-date-info h3 {
+            font-size: 1.3rem !important;
+            margin: 0 0 0.5rem !important;
+            color: #fff !important;
+            font-weight: 700 !important;
+            font-family: 'Montserrat', sans-serif !important;
+        }
+
+        .fs-date-location {
+            color: #EBD297 !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Mobile Anpassung */
+        @media (max-width: 600px) {
+            .fs-date-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .fs-date-box {
+                flex-direction: row;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding-right: 0;
+                margin-right: 0;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+                width: 100%;
+                justify-content: flex-start;
+                gap: 15px;
+            }
+            .fs-date-year {
+                text-align: left;
+            }
+        }
+
+        /* Footer & Buttons */
+        .fs-cta-button {
+            display: inline-block !important;
+            padding: 12px 28px !important;
+            background: linear-gradient(135deg, #EBD297 0%, #d4b56a 100%) !important;
+            color: #000000 !important; 
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+            border: none !important;
+            text-decoration: none !important;
+            transition: all .3s ease !important;
+            font-size: 1.1rem !important;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            font-family: 'Montserrat', sans-serif !important;
+        }
+        .fs-cta-button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #fcebbb 0%, #EBD297 100%) !important;
+        }
+        
+        .fs-footer-note {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(235, 210, 151, 0.2);
+            max-width: 600px;
+            margin-top: 2rem;
+        }
+        .fs-footer-note h3 {
+            color: #EBD297 !important;
+            margin: 0 0 1rem !important;
+            font-size: 1.5rem !important;
+            font-family: 'Cinzel', serif !important;
+        }
+        .fs-footer-note p {
+            color: #e5e5e5 !important;
+        }
+
+        /* Animation */
+        .fs-reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+        .fs-reveal.show { opacity: 1; transform: translateY(0); }
+      `}</style>
+
+      <div className="public-events-wrapper">
+
+          {/* HERO HEADER */}
+          <h1 className="fs-hero-title">Öffentliche Termine</h1>
+          <p className="fs-hero-sub">Erleben Sie unsere Shows live. Hier finden Sie alle kommenden öffentlichen Auftritte.</p>
+
+          {/* SPLIT CONTENT */}
+          <div className="fs-content-split fs-reveal">
+              
+              {/* LINKS: DAS BILD (Humorvoll) */}
+              <div className="fs-image-col">
+                  <img className="fs-sign-image" src="https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/Gemini_Generated_Image_p5bt4yp5bt4yp5bt.png" alt="Termin Schild" />
+                  <div className="fs-fun-subtext">Schwerstarbeit für Ihre Unterhaltung.</div>
+              </div>
+              
+              {/* RECHTS: DIE TERMINE */}
+              <div className="fs-dates-col">
+                  <h2 className="fs-dates-header">Nächste Shows</h2>
+                  
+                  {/* TERMIN 1 */}
+                  <div className="fs-date-card">
+                      <div className="fs-date-box">
+                          <div className="fs-date-day">31.12.</div>
+                          <div className="fs-date-year">
+                              2025<br/>MITTWOCH
+                          </div>
+                      </div>
+                      <div className="fs-date-info">
+                          <div className="fs-date-location">📍 Nürnberg PARKS</div>
+                          <h3>Neujahres Feuershow</h3>
+                          <p style={{margin:0, opacity:0.8}}>Ein feuriger Start ins neue Jahr.</p>
+                      </div>
+                  </div>
+
+                  {/* Placeholder for more events */}
+                  {/* 
+                  <div className="fs-date-card">
+                      <div className="fs-date-box">
+                          <div className="fs-date-day">15.06.</div>
+                          <div className="fs-date-year">2026<br>SAMSTAG</div>
+                      </div>
+                      <div className="fs-date-info">
+                          <div className="fs-date-location">📍 Stadtfest Beispiel</div>
+                          <h3>Große Gala Show</h3>
+                      </div>
+                  </div> 
+                  */}
+
+              </div>
+          </div>
+
+          {/* FOOTER NOTE */}
+          <div className="fs-footer-note fs-reveal">
+              <h3>Kein passender Termin?</h3>
+              <p>Buchen Sie uns exklusiv für Ihre eigene Veranstaltung, Hochzeit oder Firmenfeier.</p>
+              <Link className="fs-cta-button" to="/booking-request">Verfügbarkeit prüfen</Link>
+          </div>
+
+      </div>
+    </div>
+  );
+};
+
+export default PublicEvents;
