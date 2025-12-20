@@ -137,7 +137,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-stone-500">
             <p>&copy; {currentYear} Maximilian Boy. Alle Rechte vorbehalten.</p>
             <p className="flex gap-4">
-                Designed by WieseWeb
+                Designed by WieseWeb2025
             </p>
         </div>
       </div>
