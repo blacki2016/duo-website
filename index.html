@@ -1,142 +1,162 @@
 <!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Maximilian Boy & MB Feuerentertainment</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              serif: ['"Cinzel"', 'serif'],
-              sans: ['"Montserrat"', 'sans-serif'],
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Maximilian Boy & MB Feuerentertainment</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cinzel"', 'serif'],
+            sans: ['"Montserrat"', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              100: '#f9f1d8',
+              300: '#f7e7b8',
+              400: '#ebd297', // Main Text Gold
+              500: '#d4af37', // Button/Darker Gold
+              600: '#b08d26',
             },
-            colors: {
-              gold: {
-                100: '#f9f1d8',
-                300: '#f7e7b8',
-                400: '#ebd297', // Main Text Gold
-                500: '#d4af37', // Button/Darker Gold
-                600: '#b08d26',
-              },
-              dark: {
-                800: '#1f1f20',
-                900: '#141415', // Main Dark BG
-                950: '#0a0a0a',
-              }
-            },
-            animation: {
-              'shimmer-move': 'shimmer-move 4s linear infinite',
-              'shine': 'shine 6s linear infinite',
-            },
-            keyframes: {
-              shine: {
-                'to': { 'background-position': '200% center' },
-              }
+            dark: {
+              800: '#1f1f20',
+              900: '#141415', // Main Dark BG
+              950: '#0a0a0a',
+            }
+          },
+          animation: {
+            'shimmer-move': 'shimmer-move 4s linear infinite',
+            'shine': 'shine 6s linear infinite',
+          },
+          keyframes: {
+            shine: {
+              'to': { 'background-position': '200% center' },
             }
           }
         }
       }
-    </script>
-    <style>
-      /* Custom scrollbar for dark theme */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #141415; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #44403c; 
-        border-radius: 5px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #d4af37; 
-      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar for dark theme */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
 
-      /* GLOBAL CURSOR STYLES */
+    ::-webkit-scrollbar-track {
+      background: #141415;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #44403c;
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d4af37;
+    }
+
+    /* GLOBAL CURSOR STYLES */
+    body {
+      cursor: none;
+      /* Hide default cursor if custom is active */
+      overflow-x: hidden;
+      /* Prevent horizontal scroll from full-width elements */
+    }
+
+    @media (pointer: coarse) {
       body {
-        cursor: none; /* Hide default cursor if custom is active */
-        overflow-x: hidden; /* Prevent horizontal scroll from full-width elements */
+        cursor: auto;
       }
-      @media (pointer: coarse) {
-        body { cursor: auto; }
-        .cursor-dot { display: none !important; }
-      }
+
       .cursor-dot {
-        position: fixed;
-        top: 0;
-        left: 0;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        z-index: 9999;
-        pointer-events: none;
-        width: 8px;
-        height: 8px;
-        background-color: #f7e7b8;
-        box-shadow: 0 0 10px 2px rgba(235, 210, 151, 0.9);
-        transition: width 0.2s, height 0.2s, background-color 0.2s;
+        display: none !important;
       }
-      .cursor-dot.active {
-        width: 20px;
-        height: 20px;
-        background-color: rgba(255, 255, 255, 0.8);
-        mix-blend-mode: difference;
-      }
+    }
 
-      /* TEXT SHINE EFFECT (Header Title) */
-      .text-shine-gold {
-        background: linear-gradient(to right, #bf953f 0%, #fffebb 20%, #b38728 40%, #fbf5b7 60%, #aa771c 80%, #bf953f 100%);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: shine 6s linear infinite;
-      }
+    .cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      z-index: 9999;
+      pointer-events: none;
+      width: 8px;
+      height: 8px;
+      background-color: #f7e7b8;
+      box-shadow: 0 0 10px 2px rgba(235, 210, 151, 0.9);
+      transition: width 0.2s, height 0.2s, background-color 0.2s;
+    }
 
-      /* GOLD GRADIENT BUTTON (Metallic Look) */
-      .btn-gold-gradient {
-        background: linear-gradient(#141415, #141415) padding-box, linear-gradient(45deg, #b38728, #fffebb, #b38728) border-box !important;
-        border: 2px solid transparent !important;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.4s ease;
-      }
-      .btn-gold-gradient:hover {
-        box-shadow: 0 0 30px rgba(179, 135, 40, 0.5);
-        transform: translateY(-2px);
-        color: #fff !important;
-        background: linear-gradient(rgba(179, 135, 40, 0.2), rgba(179, 135, 40, 0.2)) padding-box, linear-gradient(45deg, #fffebb, #b38728) border-box !important;
-      }
-      .btn-gold-gradient::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: 0.5s;
-      }
-      .btn-gold-gradient:hover::after {
-        left: 100%;
-      }
+    .cursor-dot.active {
+      width: 20px;
+      height: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      mix-blend-mode: difference;
+    }
 
-      /* FX Canvas */
-      #fx-canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0; /* Behind content */
-      }
-    </style>
+    /* TEXT SHINE EFFECT (Header Title) */
+    .text-shine-gold {
+      background: linear-gradient(to right, #bf953f 0%, #fffebb 20%, #b38728 40%, #fbf5b7 60%, #aa771c 80%, #bf953f 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 6s linear infinite;
+    }
+
+    /* GOLD GRADIENT BUTTON (Metallic Look) */
+    .btn-gold-gradient {
+      background: linear-gradient(#141415, #141415) padding-box, linear-gradient(45deg, #b38728, #fffebb, #b38728) border-box !important;
+      border: 2px solid transparent !important;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .btn-gold-gradient:hover {
+      box-shadow: 0 0 30px rgba(179, 135, 40, 0.5);
+      transform: translateY(-2px);
+      color: #fff !important;
+      background: linear-gradient(rgba(179, 135, 40, 0.2), rgba(179, 135, 40, 0.2)) padding-box, linear-gradient(45deg, #fffebb, #b38728) border-box !important;
+    }
+
+    .btn-gold-gradient::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-gold-gradient:hover::after {
+      left: 100%;
+    }
+
+    /* FX Canvas */
+    #fx-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      /* Behind content */
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -151,10 +171,13 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-dark-900 text-stone-200 font-sans antialiased selection:bg-gold-500 selection:text-black overscroll-none">
-    <div id="root"></div>
+
+<body
+  class="bg-dark-900 text-stone-200 font-sans antialiased selection:bg-gold-500 selection:text-black overscroll-none">
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
