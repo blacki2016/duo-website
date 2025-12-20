@@ -73,14 +73,28 @@ const Navbar: React.FC = () => {
     return (
         <>
             <style>{`
-        /* Title Gradient - Static Gold */
+        :root {
+            --font-title: 'Cinzel', serif;
+            --font-button: 'Montserrat', sans-serif;
+            --font-dropdown: 'Montserrat', sans-serif;
+        }
+
+        /* Utility: explicit title font class */
+        .font-title { font-family: var(--font-title); }
+        .font-button { font-family: var(--font-button); }
+
+        /* Title Gradient - Gold Shine per spec */
         .title-gold {
             background: linear-gradient(
                 to right,
-                #b38728 0%,
-                #ebd297 50%,
-                #fffebb 100%
+                #bf953f,
+                #fffebb,
+                #b38728,
+                #fbf5b7,
+                #aa771c,
+                #bf953f
             );
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -98,7 +112,49 @@ const Navbar: React.FC = () => {
         }
 
         .booking-button {
+            font-family: var(--font-button);
             animation: goldShimmer 3s ease-in-out infinite;
+        }
+
+        /* Set menu + dropdown font to title font */
+        .main-nav .nav-button,
+        .main-nav a {
+            font-family: var(--font-title);
+            white-space: nowrap; /* prevent label wrapping */
+        }
+
+        /* Override: use dropdown font for items inside dropdown panel */
+        .main-nav .dropdown-panel a {
+            font-family: var(--font-dropdown);
+            font-weight: 700; /* bold */
+        }
+
+        /* Shine animation (6s linear infinite) */
+        @keyframes shine {
+            from { background-position: 0% 50%; }
+            to   { background-position: 200% 50%; }
+        }
+        .title-gold-animated {
+            animation: shine 6s linear infinite;
+        }
+
+        /* CTA Shine / Pulse / Float */
+        @keyframes shineGradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 18px rgba(235, 210, 151, 0.35); }
+            50% { box-shadow: 0 0 34px rgba(235, 210, 151, 0.65); }
+        }
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
+        }
+        .cta-animated {
+            background-image: linear-gradient(90deg, #ebd297, #b38728, #fffebb, #b38728, #ebd297);
+            background-size: 300% 100%;
+            animation: shineGradient 6s linear infinite, pulseGlow 3s ease-in-out infinite, floatUp 4s ease-in-out infinite;
         }
 
         /* Logo Shimmer - Subtle */
@@ -131,87 +187,106 @@ const Navbar: React.FC = () => {
       `}</style>
 
             <nav
-                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${scrolled
-                    ? 'bg-[#121212]/95 backdrop-blur-md py-3 shadow-[0_4px_30px_rgba(0,0,0,0.5)] border-b border-[#ebd297]/10'
-                    : 'bg-gradient-to-b from-black via-black/80 to-transparent py-6'
+                className={`site-header fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${scrolled
+                    ? 'bg-[#121212]/95 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.5)] border-b border-[#ebd297]/10 scrolled'
+                    : 'bg-gradient-to-b from-black via-black/80 to-transparent'
                     }`}
             >
-                <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative">
+                <div className="header-container container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6 relative">
 
-                    {/* LOGO */}
-                    <Link to="/" className="flex items-center gap-4 group relative z-50">
-                        <img
-                            src={LOGO_URL}
-                            alt="Maximilian Boy Logo"
-                            className={`w-auto object-contain logo-hover transition-all duration-500 ${scrolled ? 'h-12' : 'h-16 md:h-20'
-                                }`}
-                        />
-                        <div className="flex flex-col justify-center">
-                            <span className={`font-serif font-bold tracking-wide title-gold leading-none transition-all duration-500 ${scrolled ? 'text-lg md:text-xl' : 'text-xl md:text-2xl'
-                                }`}>
-                                MAXIMILIAN BOY &
-                            </span>
-                            <span className={`font-serif font-bold tracking-wide title-gold leading-tight transition-all duration-500 ${scrolled ? 'text-sm md:text-base' : 'text-lg md:text-xl'
-                                }`}>
-                                MB FEUERENTERTAINMENT
-                            </span>
-                        </div>
-                    </Link>
-
-                    {/* DESKTOP NAV */}
-                    <div className="hidden lg:flex items-center gap-2 xl:gap-4">
-                        {navItems.map((item, index) => (
-                            <div key={index} className="relative group px-2 py-2">
-                                {item.children ? (
-                                    <>
-                                        <button className={`flex items-center gap-1 font-medium text-stone-200 hover:text-[#ebd297] transition-colors nav-link-hover uppercase tracking-wider ${scrolled ? 'text-sm' : 'text-base'
-                                            }`}>
-                                            {item.label} <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
-                                        </button>
-                                        {/* Dropdown */}
-                                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2">
-                                            <div className="bg-[#1a1a1b] border border-[#ebd297]/20 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] overflow-hidden min-w-[240px] backdrop-blur-md p-2">
-                                                {item.children.map((child, cIdx) => (
-                                                    <Link
-                                                        key={cIdx}
-                                                        to={child.path}
-                                                        className="block px-4 py-3 text-sm text-stone-300 hover:text-white hover:bg-[#ebd297]/10 rounded-lg transition-colors flex items-center justify-between group/item"
-                                                    >
-                                                        <span>{child.label.replace(/ .*/, '')}</span>
-                                                        <span className="text-xs opacity-70 transform group-hover/item:scale-125 transition-transform">{child.label.split(' ').pop()}</span>
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <Link
-                                        to={item.path!}
-                                        className={`font-medium text-stone-200 hover:text-[#ebd297] transition-colors nav-link-hover uppercase tracking-wider ${scrolled ? 'text-sm' : 'text-base'
-                                            }`}
-                                    >
-                                        {item.label}
-                                    </Link>
-                                )}
+                    {/* MOBILE: Logo + Titel mittig (Desktop ausgeblendet) */}
+                    <div className="flex justify-center items-center mb-8 lg:hidden">
+                        <Link to="/" className="flex items-center gap-5 group">
+                            <img
+                                src={LOGO_URL}
+                                alt="Maximilian Boy Logo"
+                                className={`header-logo w-auto object-contain logo-hover transition-all duration-500`}
+                            />
+                            <div className="flex flex-col justify-center">
+                                <span className={`header-title title-gold title-gold-animated text-xl font-serif font-bold tracking-widest whitespace-nowrap leading-none transition-all duration-500`}>
+                                    MAXIMILIAN BOY & MB FEUERENTERTAINMENT
+                                </span>
                             </div>
-                        ))}
+                        </Link>
                     </div>
 
-                    {/* CTA BUTTON DESKTOP */}
-                    <div className="hidden lg:block ml-4">
-                        <Link
-                            to="/booking-request"
-                            className={`booking-button bg-gradient-to-br from-[#ebd297]/20 to-[#b38728]/20 border-2 border-[#ebd297] text-[#ebd297] rounded-full font-bold uppercase tracking-widest hover:from-[#ebd297]/40 hover:to-[#b38728]/40 hover:text-white hover:border-white transition-all hover:scale-110 flex items-center justify-center backdrop-blur-sm ${scrolled ? 'px-5 py-2 text-xs' : 'px-8 py-3 text-sm'
-                                }`}
-                        >
-                            Buchung anfragen
-                        </Link>
+                    {/* DESKTOP: Drei Bereiche (Links/Mitte/Rechts) */}
+                    <div className="hidden lg:grid grid-cols-3 items-center gap-12">
+                        {/* Links: Logo (Unterzeile entfernt) */}
+                        <div className="flex items-center justify-start">
+                            <Link to="/" className="flex flex-col items-start group">
+                                <img
+                                    src={LOGO_URL}
+                                    alt="Maximilian Boy Logo"
+                                    className={`header-logo w-auto object-contain logo-hover transition-all duration-500`}
+                                />
+                            </Link>
+                        </div>
+
+                        {/* Mitte: Titel (Zeile 1) + Navigation (Zeile 2) */}
+                        <div className="flex flex-col items-center justify-center text-center space-y-4">
+                            <span className={`header-title title-gold title-gold-animated text-3xl font-serif font-bold tracking-widest whitespace-nowrap leading-tight transition-all duration-500`}>
+                                MAXIMILIAN BOY & MB FEUERENTERTAINMENT
+                            </span>
+
+                            <div className="main-nav py-3 flex items-center justify-center gap-4 xl:gap-8">
+                                {navItems.filter(i => i.label !== 'Startseite').map((item, index) => (
+                                    <div key={index} className="relative group px-2 py-2">
+                                        {item.children ? (
+                                            <>
+                                                <button className={`nav-button flex items-center gap-2 font-title font-extrabold text-[#ebd297] hover:text-white transition-colors nav-link-hover uppercase tracking-wider`}>
+                                                    {item.label} <ChevronDown size={18} className="group-hover:rotate-180 transition-transform duration-300" />
+                                                </button>
+                                                {/* Dropdown */}
+                                                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-1">
+                                                    <div className="dropdown-panel bg-[#1f1f20] border border-[#ebd297]/20 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] overflow-hidden min-w-[280px] backdrop-blur-md p-2">
+                                                        {item.children.map((child, cIdx) => {
+                                                            const parts = child.label.split(' ');
+                                                            const emoji = parts.length > 1 ? parts.pop() : '';
+                                                            const text = parts.join(' ');
+
+                                                            return (
+                                                                <Link
+                                                                    key={cIdx}
+                                                                    to={child.path}
+                                                                    className="block px-4 py-3 text-base text-[#ebd297] hover:text-white hover:bg-[#ebd297]/10 rounded-lg transition-colors flex items-center justify-between group/item"
+                                                                >
+                                                                    <span>{text}</span>
+                                                                    <span className="text-xs opacity-70 transform group-hover/item:scale-125 transition-transform">{emoji}</span>
+                                                                </Link>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <Link
+                                                to={item.path!}
+                                                className={`font-title font-extrabold text-[#ebd297] hover:text-white transition-colors nav-link-hover uppercase tracking-wider px-1`}
+                                            >
+                                                {item.label}
+                                            </Link>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Rechts: Ghost-Button CTA */}
+                        <div className="flex justify-end">
+                            <Link
+                                to="/booking-request"
+                                className={`cta-animated text-black rounded-full font-button font-bold shadow-[0_0_20px_rgba(235,210,151,0.35)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] transition-transform duration-300 hover:scale-110 transform -translate-y-1 md:-translate-y-2 flex items-center justify-center text-center ${scrolled ? 'px-6 py-3 text-sm' : 'px-9 py-4 text-base'}`}
+                            >
+                                Buchung anfragen
+                            </Link>
+                        </div>
                     </div>
 
                     {/* MOBILE TOGGLE */}
                     <button
                         onClick={toggleMobile}
-                        className="lg:hidden text-[#ebd297] p-2 focus:outline-none z-50 hover:bg-[#ebd297]/10 rounded-lg transition-colors"
+                        className="lg:hidden text-[#ebd297] p-2 focus:outline-none z-50 hover:bg-[#ebd297]/10 rounded-lg transition-colors absolute top-4 right-4"
                     >
                         {isOpen ? <X size={32} /> : <Menu size={32} />}
                     </button>
@@ -219,7 +294,7 @@ const Navbar: React.FC = () => {
 
                 {/* MOBILE MENU */}
                 <div
-                    className={`fixed inset-0 bg-black/98 backdrop-blur-xl z-40 lg:hidden flex flex-col pt-28 px-6 transition-all duration-300 ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
+                    className={`fixed inset-0 bg-black/98 backdrop-blur-xl z-40 lg:hidden flex flex-col pt-32 px-10 transition-all duration-300 ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
                         }`}
                 >
                     <div className="flex flex-col gap-4 overflow-y-auto max-h-[85vh] pb-10">
@@ -229,22 +304,22 @@ const Navbar: React.FC = () => {
                                     <div>
                                         <button
                                             onClick={() => toggleMobileSubmenu(item.label)}
-                                            className="flex items-center justify-between w-full py-3 text-xl font-serif text-stone-200"
+                                            className="flex items-center justify-between w-full py-5 text-2xl font-title font-bold text-[#ebd297]"
                                         >
                                             {item.label}
                                             {mobileExpanded === item.label ? <ChevronUp size={24} className="text-[#ebd297]" /> : <ChevronDown size={24} />}
                                         </button>
                                         <div
-                                            className={`pl-4 flex flex-col gap-3 overflow-hidden transition-all duration-300 ${mobileExpanded === item.label ? 'max-h-[500px] mt-2 mb-4 opacity-100' : 'max-h-0 opacity-0'
+                                            className={`pl-4 flex flex-col gap-6 overflow-hidden transition-all duration-300 ${mobileExpanded === item.label ? 'max-h-[700px] mt-3 mb-5 opacity-100' : 'max-h-0 opacity-0'
                                                 }`}
                                         >
                                             {item.children.map((child, cIdx) => (
                                                 <Link
                                                     key={cIdx}
                                                     to={child.path}
-                                                    className="text-stone-400 hover:text-[#ebd297] py-2 flex items-center gap-3 text-lg"
+                                                    className="text-[#ebd297] hover:text-white py-4 flex items-center gap-5 text-xl"
                                                 >
-                                                    <span className="w-1.5 h-1.5 bg-[#ebd297] rounded-full"></span>
+                                                    <span className="w-2 h-2 bg-[#ebd297] rounded-full"></span>
                                                     {child.label}
                                                 </Link>
                                             ))}
@@ -253,7 +328,7 @@ const Navbar: React.FC = () => {
                                 ) : (
                                     <Link
                                         to={item.path!}
-                                        className="block py-3 text-xl font-serif text-stone-200 hover:text-[#ebd297]"
+                                        className="block py-5 text-2xl font-title font-bold text-[#ebd297] hover:text-white"
                                     >
                                         {item.label}
                                     </Link>
@@ -264,17 +339,20 @@ const Navbar: React.FC = () => {
                         <div className="mt-8">
                             <Link
                                 to="/booking-request"
-                                className="booking-button block w-full text-center py-5 bg-gradient-to-br from-[#ebd297] to-[#b38728] text-black font-bold text-lg uppercase rounded-xl hover:from-white hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.8)]"
+                                className="booking-button block w-full text-center py-5 bg-gradient-to-br from-[#ebd297] to-[#b38728] text-black font-button font-bold text-sm rounded-xl hover:from-white hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.8)]"
                             >
                                 Buchung anfragen
-                                {/* Socials Mobile */}
-                                <div className="mt-8 flex justify-center gap-8 text-[#ebd297]">
-                                    <a href="https://www.instagram.com/maximilian.boy" target="_blank" rel="noreferrer"><i className="fa-brands fa-instagram text-3xl"></i></a>
-                                    <a href="https://www.facebook.com/maximilian.h.boy" target="_blank" rel="noreferrer"><i className="fa-brands fa-facebook text-3xl"></i></a>
-                                    <a href="https://wa.me/4915785585713" target="_blank" rel="noreferrer"><i className="fa-brands fa-whatsapp text-3xl"></i></a>
-                                </div>
+                            </Link>
+
+                            {/* Socials Mobile */}
+                            <div className="mt-8 flex justify-center gap-8 text-[#ebd297]">
+                                <a href="https://www.instagram.com/maximilian.boy" target="_blank" rel="noreferrer"><i className="fa-brands fa-instagram text-3xl"></i></a>
+                                <a href="https://www.facebook.com/maximilian.h.boy" target="_blank" rel="noreferrer"><i className="fa-brands fa-facebook text-3xl"></i></a>
+                                <a href="https://wa.me/4015785585713" target="_blank" rel="noreferrer"><i className="fa-brands fa-whatsapp text-3xl"></i></a>
+                            </div>
                         </div>
                     </div>
+                </div>
 
             </nav>
         </>
