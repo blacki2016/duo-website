@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, HeartHandshake } from 'lucide-react';
 
-// Using the requested image twice to create a seamless cross-fade loop (infinite feel)
+// Hero Background Slides (4 Bilder im Crossfade)
 const SLIDES = [
-  'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/cropped-Z62_3654-46.jpg',
-  'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/cropped-Z62_3654-46.jpg'
+  'https://maximilianboy.de/mystaging02/wp-content/uploads/2023/09/cropped-cropped-Neu1-scaled-1.jpg',
+  'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/cropped-DSCF1317-1-scaled-1-2.jpg',
+  'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/cropped-20241123-limaex-ukongu-117.jpg',
+  'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/cropped-Bild-237-scaled-1.jpg'
 ];
 
 // USP Data - UPDATED
@@ -306,6 +308,15 @@ const Home: React.FC = () => {
             animation: kenBurns 20s ease-in-out infinite alternate;
         }
 
+        /* Gezielt nur für Hero-Slides: Opacity-Transition zentral steuern */
+        .hero-slide { transition: opacity 2000ms ease-in-out; }
+
+        /* Reduced Motion: Animationen reduzieren/abschalten */
+        @media (prefers-reduced-motion: reduce) {
+          .animate-ken-burns { animation: none !important; }
+          .hero-slide { transition-duration: 0ms !important; }
+        }
+
         /* Quote Icon Background */
         .quote-bg {
             position: absolute;
@@ -332,12 +343,12 @@ const Home: React.FC = () => {
         {SLIDES.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+            className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out hero-slide ${index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
           >
             {/* Image Container with Ken Burns */}
             <div
-              className="w-full h-full bg-cover bg-center animate-ken-burns"
+              className={`w-full h-full bg-cover bg-center ${index === currentSlide ? 'animate-ken-burns' : ''}`}
               style={{
                 backgroundImage: `url('${slide}')`,
               }}

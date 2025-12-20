@@ -23,6 +23,17 @@ const Navbar: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            const prev = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+            return () => { document.body.style.overflow = prev; };
+        } else {
+            document.body.style.overflow = '';
+        }
+    }, [isOpen]);
+
     // Close mobile menu on route change
     useEffect(() => {
         setIsOpen(false);
@@ -184,6 +195,12 @@ const Navbar: React.FC = () => {
         .nav-link-hover:hover::after {
             width: 100%;
         }
+
+                /* Safe-Area Support for Mobile (Notch) */
+                @supports (padding: max(0px)) {
+                    .site-header { padding-top: max(env(safe-area-inset-top), 0px); }
+                    .mobile-menu { padding-bottom: max(env(safe-area-inset-bottom), 0px); }
+                }
       `}</style>
 
             <nav
@@ -286,7 +303,9 @@ const Navbar: React.FC = () => {
                     {/* MOBILE TOGGLE */}
                     <button
                         onClick={toggleMobile}
-                        className="lg:hidden text-[#ebd297] p-2 focus:outline-none z-50 hover:bg-[#ebd297]/10 rounded-lg transition-colors absolute top-4 right-4"
+                        aria-expanded={isOpen}
+                        aria-label={isOpen ? 'Menü schließen' : 'Menü öffnen'}
+                        className="lg:hidden text-[#ebd297] h-12 w-12 flex items-center justify-center focus:outline-none z-50 hover:bg-[#ebd297]/10 rounded-lg transition-colors absolute top-4 right-4"
                     >
                         {isOpen ? <X size={32} /> : <Menu size={32} />}
                     </button>
@@ -294,7 +313,7 @@ const Navbar: React.FC = () => {
 
                 {/* MOBILE MENU */}
                 <div
-                    className={`fixed inset-0 bg-black/98 backdrop-blur-xl z-40 lg:hidden flex flex-col pt-32 px-10 transition-all duration-300 ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
+                    className={`mobile-menu fixed inset-0 bg-black/98 backdrop-blur-xl z-40 lg:hidden flex flex-col pt-32 px-10 transition-all duration-300 ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
                         }`}
                 >
                     <div className="flex flex-col gap-4 overflow-y-auto max-h-[85vh] pb-10">
@@ -317,7 +336,7 @@ const Navbar: React.FC = () => {
                                                 <Link
                                                     key={cIdx}
                                                     to={child.path}
-                                                    className="text-[#ebd297] hover:text-white py-4 flex items-center gap-5 text-xl"
+                                                    className="text-[#ebd297] hover:text-white py-4 flex items-center gap-5 text-xl min-h-[44px]"
                                                 >
                                                     <span className="w-2 h-2 bg-[#ebd297] rounded-full"></span>
                                                     {child.label}
@@ -328,7 +347,7 @@ const Navbar: React.FC = () => {
                                 ) : (
                                     <Link
                                         to={item.path!}
-                                        className="block py-5 text-2xl font-title font-bold text-[#ebd297] hover:text-white"
+                                        className="block py-5 text-2xl font-title font-bold text-[#ebd297] hover:text-white min-h-[44px]"
                                     >
                                         {item.label}
                                     </Link>
