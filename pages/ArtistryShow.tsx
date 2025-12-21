@@ -2,8 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Maximize2 } from 'lucide-react';
 
+// Hero Background Slides (mit weichem Crossfade)
+const SLIDES = [
+    'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-042-scaled.jpg'
+];
+
 const ArtistryShow: React.FC = () => {
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     // Scroll Reveal Logic
     useEffect(() => {
@@ -20,6 +26,14 @@ const ArtistryShow: React.FC = () => {
         items.forEach(el => observer.observe(el));
 
         return () => observer.disconnect();
+    }, []);
+
+    // Background Slider (8-Sekunden-Wechsel mit Crossfade)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+        }, 8000);
+        return () => clearInterval(interval);
     }, []);
 
     // Carousel Logic
@@ -111,13 +125,20 @@ const ArtistryShow: React.FC = () => {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 0;
-            background-image: url("https://i0.wp.com/maximilianboy.de/wp-content/uploads/2025/09/Bild-042-683x1024.jpg?strip=info&w=1706&ssl=1");
+            background-color: #000;
+            pointer-events: none;
+        }
+
+        /* Background Slides mit Crossfade */
+        .as-slide {
+            position: absolute;
+            inset: 0;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            filter: blur(3px) brightness(0.3); 
+            transition: opacity 2000ms ease-in-out;
+            filter: blur(3px) brightness(0.3);
             transform: scale(1.02);
-            pointer-events: none;
         }
 
         .as-wrapper {
@@ -133,7 +154,7 @@ const ArtistryShow: React.FC = () => {
             top: 0; left: 0; width: 100%;
             height: 1200px;
             z-index: -1;
-            background-image: url("https://i0.wp.com/maximilianboy.de/wp-content/uploads/2025/09/Bild-042-683x1024.jpg?strip=info&w=1706&ssl=1");
+            background-image: url("https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-042-scaled.jpg");
             background-position: center 40px;
             background-size: 100% auto;
             background-repeat: no-repeat;
@@ -144,6 +165,11 @@ const ArtistryShow: React.FC = () => {
         }
         @media (max-width: 768px) {
             .as-hero-bg { background-size: cover; background-position: center 50px; height: 100vh; }
+        }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            .as-slide { transition-duration: 0ms !important; }
         }
 
         /* TYPOGRAPHY */
@@ -414,7 +440,15 @@ const ArtistryShow: React.FC = () => {
       `}</style>
 
             {/* BACKGROUNDS */}
-            <div className="as-bg-layer"></div>
+            <div className="as-bg-layer">
+                {SLIDES.map((slide, index) => (
+                    <div
+                        key={index}
+                        className={`as-slide ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                        style={{ backgroundImage: `url('${slide}')` }}
+                    />
+                ))}
+            </div>
 
             <div className="as-wrapper">
                 <div className="as-hero-bg"></div>

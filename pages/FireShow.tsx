@@ -2,8 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Maximize2 } from 'lucide-react';
 
+// Hero Background Slides (mit weichem Crossfade)
+const SLIDES = [
+    'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/cropped-Z62_3654-46.jpg'
+];
+
 const FireShow: React.FC = () => {
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     // Scroll Reveal Logic
     useEffect(() => {
@@ -20,6 +26,14 @@ const FireShow: React.FC = () => {
         items.forEach(el => observer.observe(el));
 
         return () => observer.disconnect();
+    }, []);
+
+    // Background Slider (8-Sekunden-Wechsel mit Crossfade)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+        }, 8000);
+        return () => clearInterval(interval);
     }, []);
 
     // Carousel Logic
@@ -92,13 +106,20 @@ const FireShow: React.FC = () => {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 0;
-            background-image: url("https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/cropped-Z62_3654-46-3-2.jpg");
+            background-color: #000;
+            pointer-events: none;
+        }
+
+        /* Background Slides mit Crossfade */
+        .fs-slide {
+            position: absolute;
+            inset: 0;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            filter: blur(3px) brightness(0.3); 
+            transition: opacity 2000ms ease-in-out;
+            filter: blur(3px) brightness(0.3);
             transform: scale(1.02);
-            pointer-events: none;
         }
 
         /* Wrapper */
@@ -126,6 +147,11 @@ const FireShow: React.FC = () => {
         }
         @media (max-width: 768px) {
             .fs-hero-bg { background-position: center top; height: 100vh; }
+        }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            .fs-slide { transition-duration: 0ms !important; }
         }
 
         /* Sparks Animation */
@@ -483,8 +509,16 @@ const FireShow: React.FC = () => {
         .fs-lightbox.active img { transform: scale(1); }
       `}</style>
 
-            {/* FIXED BACKGROUND LAYER */}
-            <div className="fs-bg-layer"></div>
+            {/* FIXED BACKGROUND LAYER WITH SLIDES */}
+            <div className="fs-bg-layer">
+                {SLIDES.map((slide, index) => (
+                    <div
+                        key={index}
+                        className={`fs-slide ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                        style={{ backgroundImage: `url('${slide}')` }}
+                    />
+                ))}
+            </div>
 
             <div className="feuershow-landing-wrapper">
                 <div className="fs-hero-bg"></div>

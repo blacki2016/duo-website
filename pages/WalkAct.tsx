@@ -1,7 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Hero Background Slides (mit weichem Crossfade)
+const SLIDES = [
+  'https://maximilianboy.de/mystaging02/wp-content/uploads/2023/08/20230805_181721-768x1024-1.jpg'
+];
+
 const WalkAct: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
 
   // Scroll Reveal Logic
@@ -19,6 +25,14 @@ const WalkAct: React.FC = () => {
     items.forEach(el => observer.observe(el));
 
     return () => observer.disconnect();
+  }, []);
+
+  // Background Slider (8-Sekunden-Wechsel mit Crossfade)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+    }, 8000);
+    return () => clearInterval(interval);
   }, []);
 
   // Carousel Logic
@@ -50,8 +64,8 @@ const WalkAct: React.FC = () => {
           track.scrollLeft = scrollPos;
         }
       } else if (track) {
-         // Sync scrollPos when paused/dragged
-         scrollPos = track.scrollLeft;
+        // Sync scrollPos when paused/dragged
+        scrollPos = track.scrollLeft;
       }
       animationFrameId = requestAnimationFrame(loop);
     };
@@ -131,13 +145,20 @@ const WalkAct: React.FC = () => {
             width: 100%;
             height: 100%;
             z-index: 0;
-            background-image: url("https://maximilianboy.de/mystaging02/wp-content/uploads/2023/08/20230805_181721-768x1024-1.jpg");
+            background-color: #000;
+            pointer-events: none;
+        }
+
+        /* Background Slides mit Crossfade */
+        .wa-slide {
+            position: absolute;
+            inset: 0;
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
-            filter: blur(5px) brightness(0.3); 
+            transition: opacity 2000ms ease-in-out;
+            filter: blur(5px) brightness(0.3);
             transform: scale(1.05);
-            pointer-events: none;
         }
 
         /* === WRAPPER === */
@@ -528,10 +549,23 @@ const WalkAct: React.FC = () => {
         /* === REVEAL ANIMATION === */
         .wa-reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s ease; }
         .wa-reveal.show { opacity: 1; transform: translateY(0); }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            .wa-slide { transition-duration: 0ms !important; }
+        }
       `}</style>
 
       {/* Background Layer */}
-      <div className="wa-bg-layer"></div>
+      <div className="wa-bg-layer">
+        {SLIDES.map((slide, index) => (
+          <div
+            key={index}
+            className={`wa-slide ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+            style={{ backgroundImage: `url('${slide}')` }}
+          />
+        ))}
+      </div>
 
       <div className="walkact-landing-wrapper">
 
@@ -540,58 +574,58 @@ const WalkAct: React.FC = () => {
           <div className="wa-hero-glow"></div>
           <div className="wa-hero-content">
             <h1 className="wa-hero-title">Fantasievolle Walkacts – Interaktive Performance</h1>
-            <p className="wa-hero-sub">Lebendige Charaktere, interaktives Entertainment und unvergessliche Momente.<br/>Ideal für Events, Messen & Empfänge, die begeistern.</p>
+            <p className="wa-hero-sub">Lebendige Charaktere, interaktives Entertainment und unvergessliche Momente.<br />Ideal für Events, Messen & Empfänge, die begeistern.</p>
             <Link className="wa-cta-button" to="/booking-request">Jetzt anfragen</Link>
           </div>
         </header>
 
         {/* =================== HIGHLIGHTS =================== */}
         <section className="wa-reveal">
-            <h2>Performance-Highlights</h2>
-            <ul className="wa-possibilities">
-                <li>Interaktives Spiel mit dem Publikum – charmant & professionell.</li>
-                <li>Flexibel einsetzbar: Ob auf Stelzen, mobil oder stationär.</li>
-                <li>Perfekt für Messen, Firmenevents, Festivals & private Feiern.</li>
-            </ul>
+          <h2>Performance-Highlights</h2>
+          <ul className="wa-possibilities">
+            <li>Interaktives Spiel mit dem Publikum – charmant & professionell.</li>
+            <li>Flexibel einsetzbar: Ob auf Stelzen, mobil oder stationär.</li>
+            <li>Perfekt für Messen, Firmenevents, Festivals & private Feiern.</li>
+          </ul>
         </section>
 
         {/* =================== VIDEO =================== */}
         <section className="wa-reveal">
-            <div className="wa-video-grid">
-              <div className="wa-video-item">
-                  <div className="wa-video-wrapper">
-                      <iframe 
-                          src="https://www.youtube-nocookie.com/embed/H37JeSz9618" 
-                          title="Walkact Highlight" 
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                          allowFullScreen 
-                          loading="lazy">
-                      </iframe>
-                  </div>
+          <div className="wa-video-grid">
+            <div className="wa-video-item">
+              <div className="wa-video-wrapper">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/H37JeSz9618"
+                  title="Walkact Highlight"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy">
+                </iframe>
               </div>
             </div>
+          </div>
         </section>
 
         {/* =================== ECKDATEN =================== */}
         <section className="wa-reveal">
           <h2>Eckdaten zu den Walkacts</h2>
           <div className="wa-eckdaten-box">
-              <ul className="wa-check-list">
-                  <li>Humorvolle Animation der Gäste</li>
-                  <li>Dauer ca. 30-45 Minuten pro Block</li>
-                  <li>Stelzenlauf (auf Wunsch mit Jonglage oder Modellierballons)</li>
-                  <li>Jonglage Walkact (mit Leuchtjonglage bei Nacht)</li>
-              </ul>
+            <ul className="wa-check-list">
+              <li>Humorvolle Animation der Gäste</li>
+              <li>Dauer ca. 30-45 Minuten pro Block</li>
+              <li>Stelzenlauf (auf Wunsch mit Jonglage oder Modellierballons)</li>
+              <li>Jonglage Walkact (mit Leuchtjonglage bei Nacht)</li>
+            </ul>
           </div>
         </section>
 
         {/* =================== IMPRESSIONEN (CAROUSEL) =================== */}
         <section className="wa-reveal">
           <h2>Impressionen</h2>
-          
+
           <div className="wa-carousel-wrapper">
             <button className="wa-carousel-btn wa-prev" onClick={handlePrev} aria-label="Zurück">❮</button>
-            
+
             <div className="wa-carousel-track" ref={trackRef}>
               {[
                 "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2023/08/IMG-20230811-WA0020-576x1024.jpg?strip=info&w=900&ssl=1",
@@ -603,11 +637,11 @@ const WalkAct: React.FC = () => {
                 "https://i2.wp.com/maximilianboy.de/wp-content/uploads/2023/08/IMG-20230805-WA0037-576x1024.jpg?strip=info&w=900&ssl=1"
               ].map((src, i) => (
                 <div className="wa-carousel-item" key={i}>
-                    <img src={src} alt={`Walkact Impression ${i+1}`} loading="lazy" />
+                  <img src={src} alt={`Walkact Impression ${i + 1}`} loading="lazy" />
                 </div>
               ))}
             </div>
-            
+
             <button className="wa-carousel-btn wa-next" onClick={handleNext} aria-label="Weiter">❯</button>
           </div>
         </section>
@@ -616,25 +650,25 @@ const WalkAct: React.FC = () => {
         <section className="wa-reveal wa-faq">
           <h2>Häufige Fragen</h2>
           <div className="wa-faq-container">
-              <details>
+            <details>
               <summary>Ist eine Walkact überall möglich?</summary>
               <p>Ja! Walkacts sind sehr flexibel einsetzbar, da man keine Bühne oder Technik braucht. Ob innen oder außen, alles ist möglich. Nur für einen Stelzenwalkact sollte die Deckenhöhe mindestens 2,7 Meter betragen.</p>
-              </details>
-              
-              <details>
+            </details>
+
+            <details>
               <summary>Wie viel Platz wird benötigt?</summary>
               <p>Überall dort wo Personen stehen und laufen können reicht auch für einen Walkact der Platz.</p>
-              </details>
-              
-              <details>
+            </details>
+
+            <details>
               <summary>Wie lange dauert ein Walkact?</summary>
               <p>Ein Einsatz geht immer ca. 30-45 Minuten. Im Schnitt werden 1-2 Blöcke pro Auftritt gebucht. Es sind aber auch darüber hinaus weitere Einsätze möglich. Zwischen den Blöcken sollten immer mindestens 30 Minuten Pause sein.</p>
-              </details>
-              
-              <details>
+            </details>
+
+            <details>
               <summary>Was wird vor Ort an Technik benötigt?</summary>
               <p>An Technik wird nichts benötigt. Jedoch ist es vom Vorteil, wenn ein Umkleideraum in der Nähe ist.</p>
-              </details>
+            </details>
           </div>
         </section>
 
@@ -642,7 +676,7 @@ const WalkAct: React.FC = () => {
         <section className="wa-reveal wa-cta-bottom">
           <h2>Bereit für Entertainment?</h2>
           <p>Teilen Sie uns Ihr Datum und die Art des Events mit – wir schicken Ihnen passende Kostümvorschläge.</p>
-          <br/>
+          <br />
           <Link className="wa-cta-button" to="/booking-request">Walk Act anfragen</Link>
         </section>
 

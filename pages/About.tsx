@@ -1,5 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+const SLIDES = [
+    'https://maximilianboy.de/mystaging02/wp-content/uploads/2020/11/schauspiel-maximilian-boy-17.jpg'
+];
 
 const timelineEvents = [
   { year: '1993', text: <>👶 Geburt von <strong>Maximilian Boy</strong> in Schwabach (Bayern).</> },
@@ -22,6 +26,8 @@ const timelineEvents = [
 ];
 
 const About: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   // Intersection Observer for Timeline Animation
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -36,9 +42,47 @@ const About: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Background Slider (8-Sekunden-Wechsel mit Crossfade)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-stone-950 text-stone-200 font-sans">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Fixed Background Layer */}
+      <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
+        {SLIDES.map((slide, idx) => (
+          <div
+            key={idx}
+            className="fs-slide"
+            style={{
+              backgroundImage: `url('${slide}')`,
+              opacity: idx === currentSlide ? 1 : 0
+            }}
+          />
+        ))}
+      </div>
       <style>{`
+        /* Background Slides mit Crossfade */
+        .fs-slide {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          transition: opacity 2000ms ease-in-out;
+          filter: blur(3px) brightness(0.3);
+          transform: scale(1.02);
+        }
+
+        /* Wrapper with relative positioning */
+        .about-wrapper {
+          position: relative;
+          z-index: 1;
+        }
         :root {
           --gold-primary: #ebd297;
           --gold-glow: rgba(235, 210, 151, 0.3);
