@@ -185,15 +185,15 @@ const BookingRequest: React.FC = () => {
                                 <div className="w-24 h-24 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center mb-6 animate-bounce border border-green-500/20">
                                     <CheckCircle className="w-12 h-12" />
                                 </div>
-                                <h3 className="text-3xl font-serif font-bold text-white mb-4">Anfrage vorbereitet!</h3>
+                                <h3 className="text-3xl font-serif font-bold text-white mb-4">Anfrage übermittelt! ✅</h3>
                                 <p className="text-stone-300 mb-8 max-w-md mx-auto text-xl">
-                                    Vielen Dank! Ihre Anfrage wurde übermittelt. Ich melde mich zeitnah bei Ihnen.
+                                    Vielen Dank! Ihre Buchungsanfrage wurde erfolgreich an mich gesendet. Ich melde mich schnellstmöglich bei Ihnen.
                                 </p>
                                 <button
                                     onClick={() => setStatus(ContactStatus.IDLE)}
                                     className="px-10 py-4 text-lg bg-stone-800 text-white rounded-full hover:bg-stone-700 transition-colors font-medium border border-stone-600"
                                 >
-                                    Zurück zum Formular
+                                    Neue Anfrage stellen
                                 </button>
                             </div>
                         ) : (
