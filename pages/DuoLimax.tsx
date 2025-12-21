@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Sparkles, Star, Users, Target, Laugh, Music, ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Play } from 'lucide-react';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
