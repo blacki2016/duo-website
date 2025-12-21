@@ -35,30 +35,44 @@ const BookingRequest: React.FC = () => {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsFlying(true);
         setStatus(ContactStatus.SUBMITTING);
 
-        // Animation time allows button to fly out before success screen
-        setTimeout(() => {
-            setStatus(ContactStatus.SUCCESS);
+        try {
+            const response = await fetch('/api/send-booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to send');
+            }
+
+            setTimeout(() => {
+                setStatus(ContactStatus.SUCCESS);
+                setIsFlying(false);
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    date: '',
+                    location: '',
+                    showFormat: '',
+                    eventType: '',
+                    foundVia: '',
+                    message: ''
+                });
+                e.currentTarget.reset();
+            }, 1500);
+        } catch (err) {
+            console.error(err);
+            setStatus(ContactStatus.IDLE);
             setIsFlying(false);
-
-            const subject = `Buchungsanfrage: ${formData.eventType} am ${formData.date} - ${formData.name}`;
-            const body = `Neue Buchungsanfrage über die Website:%0D%0A%0D%0A` +
-                `Name / Firma: ${formData.name}%0D%0A` +
-                `E-Mail: ${formData.email}%0D%0A` +
-                `Telefon: ${formData.phone}%0D%0A` +
-                `Datum: ${formData.date}%0D%0A` +
-                `Ort: ${formData.location}%0D%0A` +
-                `Showformat: ${formData.showFormat}%0D%0A` +
-                `Art des Events: ${formData.eventType}%0D%0A` +
-                `Gefunden über: ${formData.foundVia}%0D%0A%0D%0A` +
-                `Individuelle Details:%0D%0A${formData.message}`;
-
-            window.location.href = `mailto:info@maximilianboy.de?subject=${subject}&body=${body}`;
-        }, 1500);
+            alert('Fehler beim Versenden. Bitte versuchen Sie es später erneut.');
+        }
     };
 
     return (
@@ -173,7 +187,7 @@ const BookingRequest: React.FC = () => {
                                 </div>
                                 <h3 className="text-3xl font-serif font-bold text-white mb-4">Anfrage vorbereitet!</h3>
                                 <p className="text-stone-300 mb-8 max-w-md mx-auto text-xl">
-                                    Ihr E-Mail Programm hat sich geöffnet. Bitte senden Sie die Nachricht dort ab, damit ich alle Details erhalte.
+                                    Vielen Dank! Ihre Anfrage wurde übermittelt. Ich melde mich zeitnah bei Ihnen.
                                 </p>
                                 <button
                                     onClick={() => setStatus(ContactStatus.IDLE)}

@@ -16,20 +16,31 @@ const Booking: React.FC = () => {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setStatus(ContactStatus.SUBMITTING);
 
-        // 1. Simulate API call for visual feedback
-        setTimeout(() => {
-            setStatus(ContactStatus.SUCCESS);
+        try {
+            const response = await fetch('/api/send-contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
 
-            // 2. ACTUAL ACTION: Open User's Email Client (Mailto)
-            const subject = `Neue Nachricht von ${formData.name} (Website Kontakt)`;
-            const body = `Name: ${formData.name}%0D%0AE-Mail: ${formData.email}%0D%0A%0D%0ANachricht:%0D%0A${formData.message}`;
-            window.location.href = `mailto:info@maximilianboy.de?subject=${subject}&body=${body}`;
+            if (!response.ok) {
+                throw new Error('Failed to send');
+            }
 
-        }, 1000);
+            setTimeout(() => {
+                setStatus(ContactStatus.SUCCESS);
+                setFormData({ name: '', email: '', message: '' });
+                e.currentTarget.reset();
+            }, 1000);
+        } catch (err) {
+            console.error(err);
+            setStatus(ContactStatus.IDLE);
+            alert('Fehler beim Versenden. Bitte versuchen Sie es später erneut.');
+        }
     };
 
     return (
@@ -206,8 +217,8 @@ const Booking: React.FC = () => {
                                     <div className="w-24 h-24 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center mb-6 animate-bounce border border-green-500/20">
                                         <CheckCircle className="w-12 h-12" />
                                     </div>
-                                    <h3 className="text-2xl font-bold text-white mb-2 font-serif">E-Mail Programm geöffnet!</h3>
-                                    <p className="text-stone-400 mb-8 max-w-xs mx-auto font-sans">Bitte senden Sie die vorbereitete E-Mail in Ihrem Programm ab, um den Vorgang abzuschließen.</p>
+                                    <h3 className="text-2xl font-bold text-white mb-2 font-serif">Anfrage übermittelt!</h3>
+                                    <p className="text-stone-400 mb-8 max-w-xs mx-auto font-sans">Ihre Nachricht wurde erfolgreich übermittelt. Ich melde mich zeitnah bei Ihnen.</p>
                                     <button
                                         onClick={() => setStatus(ContactStatus.IDLE)}
                                         className="px-8 py-3 bg-stone-800 text-white rounded-full hover:bg-stone-700 transition-colors font-medium font-sans"
