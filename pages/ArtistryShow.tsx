@@ -303,12 +303,27 @@ const ArtistryShow: React.FC = () => {
 
         .as-highlight-card img {
             width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.8s ease, filter 0.5s ease;
+            transition: transform 0.8s ease, filter 0.5s ease, opacity 0.5s ease;
             filter: brightness(0.85);
         }
         .as-highlight-card:hover img {
             transform: scale(1.08);
             filter: brightness(1.05);
+        }
+        
+        /* Hover image swap effect */
+        .as-highlight-card img.hover-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            z-index: 1;
+        }
+        .as-highlight-card:hover img.hover-img {
+            opacity: 1;
+        }
+        .as-highlight-card:hover img.default-img {
+            opacity: 0;
         }
 
         .as-card-overlay {
@@ -470,16 +485,17 @@ const ArtistryShow: React.FC = () => {
                     <h2>Show-Highlights</h2>
                     <div className="as-highlights-grid">
                         {[
-                            { title: "Jonglage", subtitle: "Dynamik & Präzision", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-072.jpg" },
+                            { title: "Jonglage", subtitle: "Dynamik & Präzision", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/06_IMG-20241124-WA0140-scaled.jpg", hoverImg: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_pawu91pawu91pawu.jpg" },
                             { title: "Zauberei", subtitle: "Magische Momente", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-237-scaled.jpg" },
-                            { title: "Handstandakrobatik", subtitle: "Hoch Hinaus", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-044-scaled.jpg" },
+                            { title: "Handstandakrobatik", subtitle: "Hoch Hinaus", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-044-scaled.jpg", hoverImg: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/unnamed-4.jpg" },
                             { title: "Rola Rola", subtitle: "Balance & Kontrolle", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-098.jpg" }
                         ].map((item, idx) => (
-                            <div className="as-highlight-card group" key={idx} onClick={() => handleImageClick(item.img)}>
+                            <div className="as-highlight-card group" key={idx} onClick={() => handleImageClick(item.hoverImg || item.img)}>
                                 <div className="as-card-icon">
                                     <Maximize2 size={20} />
                                 </div>
-                                <img src={item.img} alt={item.title} loading="lazy" />
+                                <img src={item.img} alt={item.title} loading="lazy" className="default-img" />
+                                {item.hoverImg && <img src={item.hoverImg} alt={`${item.title} Hover`} loading="lazy" className="hover-img" />}
                                 <div className="as-card-overlay">
                                     <span className="as-card-subtitle">{item.subtitle}</span>
                                     <h3 className="as-card-title">{item.title}</h3>
