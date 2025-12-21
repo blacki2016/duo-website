@@ -513,7 +513,7 @@ const ArtistryShow: React.FC = () => {
                         {/* 1. Main Video: Jonglage */}
                         <div className="as-main-video-card">
                             <div className="as-video-wrapper">
-                                <iframe src="https://www.youtube-nocookie.com/embed/Y671VGMJWsc" title="Jonglage Showreel" allowFullScreen loading="lazy"></iframe>
+                                <iframe src="https://www.youtube.com/embed/CpNsX5JBlRM" title="Jonglage Showreel" allowFullScreen loading="lazy"></iframe>
                             </div>
                             <div className="as-video-caption text-center">
                                 <h3 className="text-2xl font-serif text-[#EBD297] mb-2">Jonglage</h3>
@@ -566,6 +566,7 @@ const ArtistryShow: React.FC = () => {
                     <div className="as-carousel-wrapper">
                         <div className="as-carousel-track" ref={trackRef}>
                             {[
+                                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Z62_3388-26.jpg",
                                 "https://maximilianboy.de/wp-content/uploads/2020/11/akrobatik-maximilian-boy-005-1024x1024.jpg",
                                 "https://maximilianboy.de/wp-content/uploads/2025/01/05_IMG-20241124-WA0142-768x1024.jpg",
                                 "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-030-682x1024.jpg?strip=info&w=1333&ssl=1",
@@ -576,11 +577,14 @@ const ArtistryShow: React.FC = () => {
                                 "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2025/09/Bild-045-683x1024.jpg?strip=info&w=1707&ssl=1",
                                 "https://maximilianboy.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-024-682x1024.jpg",
                                 "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2025/09/Z62_3403-28-1024x682.jpg?strip=info&w=2000&ssl=1"
-                            ].map((src, i) => (
-                                <div className="as-carousel-item" key={i} onClick={() => handleImageClick(src)}>
-                                    <img src={src} alt={`Gallery ${i}`} loading="lazy" />
-                                </div>
-                            ))}
+                            ].map((src, i) => {
+                                const shiftLeft = src.includes('Z62_3388-26.jpg');
+                                return (
+                                    <div className="as-carousel-item" key={i} onClick={() => handleImageClick(src)}>
+                                        <img src={src} alt={`Gallery ${i}`} loading="lazy" style={shiftLeft ? { objectPosition: '20% center' } : undefined} />
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </section>
