@@ -417,7 +417,18 @@ const FireShow: React.FC = () => {
 
         /* Videos */
         .fs-video-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .fs-video-grid {
+                flex-direction: row;
+                gap: 2rem;
+            }
+            .fs-video-item {
+                flex: 1;
+            }
         }
         .fs-video-item h3 {
             font-size: 1.1rem; margin-bottom: 0.5rem; border-left: 3px solid #EBD297; padding-left: 0.5rem;
