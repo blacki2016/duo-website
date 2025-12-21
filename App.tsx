@@ -15,7 +15,6 @@ import DuoLimax from './pages/DuoLimax';
 import About from './pages/About';
 import PublicEvents from './pages/PublicEvents';
 import Socials from './pages/Socials';
-import Pyrotechnics from './pages/Pyrotechnics';
 import Partner from './pages/Partner';
 import GlobalFX from './components/GlobalFX';
 import NotFound from './pages/NotFound';

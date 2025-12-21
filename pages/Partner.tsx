@@ -21,7 +21,7 @@ const partnerCategories: PartnerCategory[] = [
     {
         title: 'WebDesign & Hosting',
         partners: [
-            { name: 'Leo Wieseckel - WieseWeb', url: 'https://wieseweb.de' }
+            { name: 'Leo Wieseckel - WieseWeb', url: 'https://webdesign.wieseckel.com' }
         ]
     },
     {
