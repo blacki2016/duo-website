@@ -486,9 +486,9 @@ const ArtistryShow: React.FC = () => {
                     <div className="as-highlights-grid">
                         {[
                             { title: "Jonglage", subtitle: "Dynamik & Präzision", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/06_IMG-20241124-WA0140-scaled.jpg", hoverImg: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_pawu91pawu91pawu.jpg" },
-                            { title: "Zauberei", subtitle: "Magische Momente", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-237-scaled.jpg" },
+                            { title: "Zauberei", subtitle: "Magische Momente", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-237-scaled.jpg", hoverImg: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_k70wj1k70wj1k70w.jpg" },
                             { title: "Handstandakrobatik", subtitle: "Hoch Hinaus", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-044-scaled.jpg", hoverImg: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/unnamed-4.jpg" },
-                            { title: "Rola Rola", subtitle: "Balance & Kontrolle", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-098.jpg" }
+                            { title: "Rola Rola", subtitle: "Balance & Kontrolle", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-098.jpg", hoverImg: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_z9jggtz9jggtz9jg.jpg" }
                         ].map((item, idx) => (
                             <div className="as-highlight-card group" key={idx} onClick={() => handleImageClick(item.hoverImg || item.img)}>
                                 <div className="as-card-icon">
