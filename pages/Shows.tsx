@@ -250,7 +250,7 @@ const Shows: React.FC = () => {
                     </div>
                   </div>
 
-                  <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-3 group-hover:text-[#ebd297] transition-colors shadow-black drop-shadow-md">
+                  <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#ebd297] mb-3 group-hover:text-white transition-colors shadow-black drop-shadow-md">
                     {show.title}
                   </h2>
 
@@ -266,8 +266,8 @@ const Shows: React.FC = () => {
                     ))}
                   </div>
 
-                  <span className="inline-flex items-center gap-2 text-white font-bold uppercase tracking-wider text-sm border-b-2 border-[#ebd297] pb-1 group-hover:gap-4 transition-all">
-                    Zur Show <ArrowRight size={16} className="text-[#ebd297]" />
+                  <span className="inline-flex items-center gap-2 text-[#ebd297] font-bold uppercase tracking-wider text-sm border-b-2 border-[#ebd297] pb-1 group-hover:gap-4 group-hover:text-white transition-all">
+                    Zur Show <ArrowRight size={16} className="text-[#ebd297] group-hover:text-white transition-colors" />
                   </span>
                 </div>
               </div>
