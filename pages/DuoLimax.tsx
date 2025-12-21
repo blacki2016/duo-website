@@ -337,6 +337,9 @@ const DuoLimax: React.FC = () => {
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
+        @media (max-width: 900px) {
+            .cards-grid { grid-template-columns: 1fr; }
+        }
 
         .limax-card {
             position: relative;

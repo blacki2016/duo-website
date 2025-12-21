@@ -309,6 +309,9 @@ const FireShow: React.FC = () => {
             gap: 2.5rem; 
             margin-top: 2rem;
         }
+        @media (max-width: 900px) {
+            .fs-highlights-grid { grid-template-columns: 1fr; }
+        }
         
         .fs-highlight-card {
             position: relative;
