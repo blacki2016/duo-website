@@ -178,6 +178,9 @@ const Navbar: React.FC = () => {
             animation: logoShimmer 2s infinite;
         }
 
+        /* Balanced wrapping for long mobile titles */
+        .title-balance { text-wrap: balance; }
+
         /* Menu Link Hover Underline */
         .nav-link-hover {
             position: relative;
@@ -211,20 +214,33 @@ const Navbar: React.FC = () => {
             >
                 <div className="header-container container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6 relative">
 
-                    {/* MOBILE: Logo + Titel mittig (Desktop ausgeblendet) */}
-                    <div className="flex justify-center items-center mb-4 lg:hidden">
-                        <Link to="/" className="flex items-center gap-5 group">
+                    {/* MOBILE: 3 Spalten (Logo | Titel | Menü) */}
+                    <div className="lg:hidden flex items-center justify-between px-4 py-3">
+                        {/* Logo links */}
+                        <Link to="/" className="flex items-center group">
                             <img
                                 src={LOGO_URL}
                                 alt="Maximilian Boy Logo"
-                                className={`header-logo w-auto object-contain logo-hover transition-all duration-500 h-10 sm:h-12 md:h-14`}
+                                className={`header-logo h-10 sm:h-11 md:h-12 w-auto object-contain logo-hover transition-all duration-500`}
                             />
-                            <div className="flex flex-col justify-center">
-                                <span className={`header-title title-gold title-gold-animated text-lg sm:text-xl font-serif font-bold tracking-wide whitespace-nowrap leading-none transition-all duration-500`}>
-                                    MAXIMILIAN BOY & MB FEUERENTERTAINMENT
-                                </span>
-                            </div>
                         </Link>
+
+                        {/* Titel mittig */}
+                        <div className="flex-1 px-3 text-center">
+                            <span className={`header-title title-gold title-gold-animated text-sm sm:text-base md:text-lg font-serif font-bold tracking-wide leading-snug title-balance break-words`}>
+                                MAXIMILIAN BOY & MB FEUERENTERTAINMENT
+                            </span>
+                        </div>
+
+                        {/* Menü-Icon rechts */}
+                        <button
+                            onClick={toggleMobile}
+                            aria-expanded={isOpen}
+                            aria-label={isOpen ? 'Menü schließen' : 'Menü öffnen'}
+                            className="text-[#ebd297] h-11 w-11 flex items-center justify-center focus:outline-none z-50 hover:bg-[#ebd297]/10 rounded-lg transition-colors"
+                        >
+                            {isOpen ? <X size={28} /> : <Menu size={28} />}
+                        </button>
                     </div>
 
                     {/* DESKTOP: Drei Bereiche (Links/Mitte/Rechts) */}
@@ -300,15 +316,7 @@ const Navbar: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* MOBILE TOGGLE */}
-                    <button
-                        onClick={toggleMobile}
-                        aria-expanded={isOpen}
-                        aria-label={isOpen ? 'Menü schließen' : 'Menü öffnen'}
-                        className="lg:hidden text-[#ebd297] h-12 w-12 flex items-center justify-center focus:outline-none z-50 hover:bg-[#ebd297]/10 rounded-lg transition-colors absolute top-4 right-4"
-                    >
-                        {isOpen ? <X size={32} /> : <Menu size={32} />}
-                    </button>
+                    {/* (Button oben entfernt, da im 3-Spalten-Header integriert) */}
                 </div>
 
                 {/* MOBILE MENU */}
