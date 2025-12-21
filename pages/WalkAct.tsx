@@ -275,28 +275,28 @@ const WalkAct: React.FC = () => {
 
         /* BUTTON STYLING */
         .wa-cta-button {
-            display: inline-block !important;
-            padding: 16px 32px !important;
-            background: linear-gradient(135deg, #EBD297 0%, #d4b56a 100%) !important;
-            color: #000000 !important; 
-            border-radius: 50px !important;
-            font-weight: 700 !important;
-            border: none !important;
-            box-shadow: 0 4px 15px rgba(235, 210, 151, 0.3) !important;
-            transition: all .3s ease !important;
-            font-family: sans-serif !important;
-            cursor: pointer;
-            text-shadow: none !important; 
-            font-size: 1.15rem !important;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-decoration: none !important;
+          display: inline-block !important;
+          padding: 16px 32px !important;
+          background: linear-gradient(135deg, #EBD297 0%, #d4b56a 100%) !important;
+          color: #000000 !important; 
+          border-radius: 50px !important;
+          font-weight: 700 !important;
+          border: none !important;
+          box-shadow: 0 4px 15px rgba(235, 210, 151, 0.3) !important;
+          transition: all .3s ease !important;
+          font-family: sans-serif !important;
+          cursor: pointer;
+          text-shadow: none !important; 
+          font-size: 1.15rem !important;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          text-decoration: none !important;
         }
 
         .wa-cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(235, 210, 151, 0.5) !important;
-            background: linear-gradient(135deg, #fcebbb 0%, #EBD297 100%) !important;
+          transform: translateY(-3px);
+          box-shadow: 0 6px 25px rgba(235, 210, 151, 0.5) !important;
+          background: linear-gradient(135deg, #fcebbb 0%, #EBD297 100%) !important;
         }
 
         /* === GENERAL SECTIONS === */
@@ -484,24 +484,15 @@ const WalkAct: React.FC = () => {
         .wa-next { right: 10px; }
 
         /* === FAQ === */
-        .wa-faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(25, 25, 24, 0.85); 
-            border: 1px solid rgba(235, 210, 151, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-        }
+        .wa-faq-container { max-width: 800px; margin: 0 auto; }
 
         .wa-faq details {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            margin-bottom: 1rem !important;
-            border: 1px solid rgba(235, 210, 151, 0.1);
-            padding: 0 !important;
-            transition: background 0.3s;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 8px;
+          margin-bottom: 1rem;
+          border: 1px solid rgba(235, 210, 151, 0.1);
+          padding: 0;
+          transition: background 0.3s;
         }
         .wa-faq details[open] {
             background: rgba(235, 210, 151, 0.08);
@@ -511,8 +502,8 @@ const WalkAct: React.FC = () => {
         .wa-faq summary {
             padding: 1.2rem;
             cursor: pointer;
-            font-weight: 700 !important;
-            color: #EBD297 !important;
+            font-weight: 700;
+            color: #EBD297;
             list-style: none;
             position: relative;
             padding-right: 40px;
@@ -528,10 +519,10 @@ const WalkAct: React.FC = () => {
         .wa-faq details[open] summary::after { content: '−'; }
         
         .wa-faq p {
-            padding: 0 1.2rem 1.2rem 1.2rem !important;
-            margin: 0 !important;
-            line-height: 1.6;
-            color: #e0e0e0 !important;
+          padding: 0 1.2rem 1.2rem 1.2rem;
+          margin: 0;
+          line-height: 1.6;
+          color: #e0e0e0;
         }
 
         /* === CTA BOTTOM === */
