@@ -346,7 +346,7 @@ const Navbar: React.FC = () => {
 
                 {/* MOBILE MENU */}
                 <div
-                    className={`mobile-menu fixed inset-0 bg-black/98 backdrop-blur-xl z-[60] lg:hidden flex flex-col pt-28 px-6 sm:px-10 transition-all duration-300 ${isOpen ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 translate-x-full pointer-events-none'
+                    className={`mobile-menu fixed inset-0 bg-black/98 backdrop-blur-xl z-[60] lg:hidden flex flex-col pt-28 px-6 sm:px-10 transition-all duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                         }`}
                 >
                     <div className="flex-1 flex flex-col gap-4 overflow-y-auto pb-12">
