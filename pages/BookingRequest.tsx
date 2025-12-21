@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, User, MessageSquare, Send, CheckCircle, Phone, Mail } from 'lucide-react';
 import { ContactStatus } from '../types';
+
+const SLIDES = [
+    'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/unnamed-3.jpg'
+];
 
 const BookingRequest: React.FC = () => {
     const [status, setStatus] = useState<ContactStatus>(ContactStatus.IDLE);
     const [isFlying, setIsFlying] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -17,6 +22,14 @@ const BookingRequest: React.FC = () => {
         foundVia: '',
         message: ''
     });
+
+    // Background Slider (8-Sekunden-Wechsel mit Crossfade)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+        }, 8000);
+        return () => clearInterval(interval);
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -49,14 +62,34 @@ const BookingRequest: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#121212] pt-32 pb-20 relative">
-
-            {/* BACKGROUND IMAGE LAYER */}
+        <div className="min-h-screen relative overflow-hidden">
+            {/* Fixed Background Layer */}
             <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[url('https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/955a3bed-be2e-449c-9372-4383e58d3eb7.jpg')] bg-cover bg-center opacity-20 blur-sm"></div>
+                {SLIDES.map((slide, idx) => (
+                    <div
+                        key={idx}
+                        className="fs-slide"
+                        style={{
+                            backgroundImage: `url('${slide}')`,
+                            opacity: idx === currentSlide ? 1 : 0
+                        }}
+                    />
+                ))}
             </div>
 
             <style>{`
+        /* Background Slides mit Crossfade */
+        .fs-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center 100px;
+            background-repeat: no-repeat;
+            transition: opacity 2000ms ease-in-out;
+            filter: blur(3px) brightness(0.3);
+            transform: scale(1.02);
+        }
+
         /* Fly Out Animation */
         @keyframes planeFly {
             0% { transform: translate(0, 0) rotate(0) scale(1); opacity: 1; }
@@ -113,7 +146,7 @@ const BookingRequest: React.FC = () => {
         option { color: white; background: #0a0a0a; }
       `}</style>
 
-            <div className="relative z-10">
+            <div className="relative z-10 pt-24 pb-20">
                 {/* HEADER */}
                 <div className="container mx-auto px-4 mb-12 text-center">
                     <h1 className="text-4xl md:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#ebd297] via-[#fffebb] to-[#ebd297] mb-3 drop-shadow-sm">

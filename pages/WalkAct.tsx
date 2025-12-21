@@ -154,7 +154,7 @@ const WalkAct: React.FC = () => {
             position: absolute;
             inset: 0;
             background-size: cover;
-            background-position: center top;
+            background-position: center -150px;
             background-repeat: no-repeat;
             transition: opacity 2000ms ease-in-out;
             filter: blur(5px) brightness(0.3);
@@ -186,7 +186,7 @@ const WalkAct: React.FC = () => {
             z-index: -1;
             background-image: url("https://maximilianboy.de/mystaging02/wp-content/uploads/2023/08/20230805_181721-768x1024-1.jpg");
             background-size: 100% auto;
-            background-position: top center;
+            background-position: top -100px center;
             background-repeat: no-repeat;
             -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
             mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
@@ -197,7 +197,7 @@ const WalkAct: React.FC = () => {
         @media (min-width: 1024px) {
             .walkact-landing-wrapper::before {
                 background-size: cover;
-                background-position: center top; 
+                background-position: center -100px; 
             }
         }
 

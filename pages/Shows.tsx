@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Flame, Star, Tent, Sparkles, ArrowRight, RefreshCcw, HelpCircle } from 'lucide-react';
 
+const SLIDES = [
+  'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/955a3bed-be2e-449c-9372-4383e58d3eb7.jpg'
+];
+
 const SHOW_CARDS = [
   {
     id: 'feuershow',
@@ -160,6 +164,8 @@ const ShowBerater: React.FC = () => {
 
 
 const Shows: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -173,8 +179,30 @@ const Shows: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Background Slider (8-Sekunden-Wechsel mit Crossfade)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#121212] pt-32 pb-20 px-4 relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden pt-32 pb-20 px-4">
+
+      {/* Fixed Background Layer */}
+      <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
+        {SLIDES.map((slide, idx) => (
+          <div
+            key={idx}
+            className="shows-slide"
+            style={{
+              backgroundImage: `url('${slide}')`,
+              opacity: idx === currentSlide ? 1 : 0
+            }}
+          />
+        ))}
+      </div>
 
       {/* Background Styling */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-30"
@@ -245,6 +273,7 @@ const Shows: React.FC = () => {
               </div>
             </Link>
           ))}
+
         </div>
 
         {/* SEPARATOR */}
@@ -277,6 +306,29 @@ const Shows: React.FC = () => {
         .show-reveal.show {
             opacity: 1;
             transform: translateY(0);
+        }
+        /* Background Slides mit Crossfade */
+        .shows-slide {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center -240px;
+          background-repeat: no-repeat;
+          transition: opacity 2000ms ease-in-out;
+          filter: blur(3px) brightness(0.3);
+          transform: scale(1.02);
+        }
+
+        /* Responsive fine-tuning for background offset */
+        @media (max-width: 1024px) {
+          .shows-slide {
+            background-position: center -180px;
+          }
+        }
+        @media (max-width: 640px) {
+          .shows-slide {
+            background-position: center -120px;
+          }
         }
       `}</style>
     </div>

@@ -134,7 +134,7 @@ const ArtistryShow: React.FC = () => {
             position: absolute;
             inset: 0;
             background-size: cover;
-            background-position: center;
+            background-position: center -100px;
             background-repeat: no-repeat;
             transition: opacity 2000ms ease-in-out;
             filter: blur(3px) brightness(0.3);
@@ -155,7 +155,7 @@ const ArtistryShow: React.FC = () => {
             height: 1200px;
             z-index: -1;
             background-image: url("https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-042-scaled.jpg");
-            background-position: center 40px;
+            background-position: center -80px;
             background-size: 100% auto;
             background-repeat: no-repeat;
             -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
@@ -164,7 +164,7 @@ const ArtistryShow: React.FC = () => {
             pointer-events: none;
         }
         @media (max-width: 768px) {
-            .as-hero-bg { background-size: cover; background-position: center 50px; height: 100vh; }
+            .as-hero-bg { background-size: cover; background-position: center -60px; height: 100vh; }
         }
 
         /* Reduced Motion Support */

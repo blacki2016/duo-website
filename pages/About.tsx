@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const SLIDES = [
-    'https://maximilianboy.de/mystaging02/wp-content/uploads/2020/11/schauspiel-maximilian-boy-17.jpg'
+  'https://maximilianboy.de/mystaging02/wp-content/uploads/2020/11/schauspiel-maximilian-boy-17.jpg'
 ];
 
 const timelineEvents = [
   { year: '1993', text: <>👶 Geburt von <strong>Maximilian Boy</strong> in Schwabach (Bayern).</> },
   { year: '2000 – 2006', text: 'Frühe Begeisterung für Bühne, Musik und Theater – erste kleine Schulauftritte und Kinderzirkus-Erfahrungen.' },
   { year: '2009 – 2012', text: <>Ausbildung als <strong>Zootierpfleger im Erlebnis Zoo Hannover</strong> – parallel wächst die Leidenschaft für Artistik, Jonglage und Feuer.</> },
-  { year: '2013', text: <>Ausbildung als <strong>Sprecher, Synchronsprecher und TV Moderator</strong>.<br/>Moderation von Tierpräsentationen und erste Schauspielerfahrung im Theater sowie bei kleineren Filmprojekten.</> },
+  { year: '2013', text: <>Ausbildung als <strong>Sprecher, Synchronsprecher und TV Moderator</strong>.<br />Moderation von Tierpräsentationen und erste Schauspielerfahrung im Theater sowie bei kleineren Filmprojekten.</> },
   { year: '2014', text: <>Offizieller Start in die <strong>Selbstständigkeit als Feuerkünstler</strong> – Gründung von <strong>MB Feuerentertainment</strong>.</> },
   { year: '2015', text: <>Ausbildung als <strong>Bühnenpyrotechniker</strong>.</> },
   { year: '2016 – 2017', text: <>Redakteur und Moderator bei <strong>Radio max neo Nürnberg</strong>.</> },
@@ -71,7 +71,7 @@ const About: React.FC = () => {
           position: absolute;
           inset: 0;
           background-size: cover;
-          background-position: center;
+          background-position: center -40px;
           background-repeat: no-repeat;
           transition: opacity 2000ms ease-in-out;
           filter: blur(3px) brightness(0.3);
@@ -217,41 +217,44 @@ const About: React.FC = () => {
         }
       `}</style>
 
-      {/* Header */}
-      <div className="pt-32 pb-16 px-4 text-center">
-        <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">Über Mich</h1>
-        <p className="text-xl text-stone-400 max-w-2xl mx-auto">
+      {/* Content Wrapper */}
+      <div className="about-wrapper">
+        {/* Header */}
+        <div className="pt-32 pb-16 px-4 text-center text-stone-200">
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">Über Mich</h1>
+          <p className="text-xl text-stone-400 max-width-2xl mx-auto">
             Vom Zootierpfleger zum Feuerkünstler – eine Reise voller Leidenschaft, Funken und Magie.
-        </p>
-      </div>
-
-      {/* Timeline Section */}
-      <div className="container mx-auto px-4 pb-24">
-        <div className="timeline-container">
-            <div className="timeline">
-                {timelineEvents.map((event, index) => (
-                    <div key={index} className="event">
-                        <div className="event-content">
-                            <div className="event-year text-lg">{event.year}</div>
-                            <div className="text-stone-300 leading-relaxed">
-                                {event.text}
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+          </p>
         </div>
-      </div>
-      
-      {/* CTA */}
-      <div className="py-16 bg-stone-900 border-t border-stone-800 text-center px-4">
-        <h2 className="text-3xl font-serif font-bold text-white mb-6">Lernen wir uns kennen!</h2>
-        <Link 
-            to="/booking-request" 
+
+        {/* Timeline Section */}
+        <div className="container mx-auto px-4 pb-24">
+          <div className="timeline-container">
+            <div className="timeline">
+              {timelineEvents.map((event, index) => (
+                <div key={index} className="event">
+                  <div className="event-content">
+                    <div className="event-year text-lg">{event.year}</div>
+                    <div className="text-stone-300 leading-relaxed">
+                      {event.text}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="py-16 bg-stone-900/80 border-t border-stone-800 text-center px-4">
+          <h2 className="text-3xl font-serif font-bold text-white mb-6">Lernen wir uns kennen!</h2>
+          <Link
+            to="/booking-request"
             className="inline-block px-10 py-4 bg-gradient-to-r from-[#ebd297] to-[#d4b56a] text-black font-bold rounded-full hover:scale-105 transition-transform"
-        >
+          >
             Kontakt aufnehmen
-        </Link>
+          </Link>
+        </div>
       </div>
     </div>
   );

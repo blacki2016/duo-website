@@ -51,7 +51,7 @@ const PublicEvents: React.FC = () => {
             position: absolute;
             inset: 0;
             background-size: cover;
-            background-position: center;
+            background-position: center -100px;
             background-repeat: no-repeat;
             transition: opacity 2000ms ease-in-out;
             filter: blur(3px) brightness(0.3);
