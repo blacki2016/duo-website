@@ -6,6 +6,41 @@ const SLIDES = [
     'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-012.jpg'
 ];
 
+const HIGHLIGHTS = [
+    {
+        title: 'Magie',
+        text: 'Großillusionen mit Wow-Effekt – Menschen erscheinen, verschwinden, schweben.',
+        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-122-682x1024.jpg?strip=info&w=1333&ssl=1'
+    },
+    {
+        title: 'Jonglage',
+        text: 'Rasante Manipulation und Timing, perfekt choreografiert zu Musik und Licht.',
+        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/03_IMG-20241124-WA0126-619x1024.jpg?strip=info&w=1548&ssl=1'
+    },
+    {
+        title: 'Akrobatik',
+        text: 'Partner-Akrobatik mit Kraft, Balance und Vertrauen – ästhetisch und dynamisch.',
+        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-117.jpg?strip=info&w=651&ssl=1',
+        backgroundPosition: 'center 15%'
+    },
+    {
+        title: 'Comedy',
+        text: 'Charmante Situationskomik und Publikumsnähe – humorvoll, ohne die Magie zu brechen.',
+        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-094-682x1024.jpg?strip=info&w=1333&ssl=1'
+    },
+    {
+        title: 'Illusionen',
+        text: 'Signature-Illusionen aus eigener Werkstatt – überraschend, modern, visuell stark.',
+        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/11_IMG-20241124-WA0046-820x1024.jpg?strip=info&w=2000&ssl=1',
+        backgroundPosition: 'center 25%'
+    },
+    {
+        title: 'Musik',
+        text: 'Live gespielte Akzente und Sounddesign, die jede Szene tragen und verdichten.',
+        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-124-1024x682.jpg?strip=info&w=2000&ssl=1'
+    }
+];
+
 const DuoLimax: React.FC = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const trackRef = useRef<HTMLDivElement>(null);
@@ -193,6 +228,22 @@ const DuoLimax: React.FC = () => {
             position: relative;
         }
 
+        /* SECTION HEADERS (match FireShow) */
+        .limax-section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            position: relative;
+            color: #EBD297;
+            font-weight: 700;
+        }
+        .limax-section h2::after {
+            content: '';
+            display: block;
+            width: 60px; height: 3px;
+            background: #EBD297; margin: 0.8rem auto 0; border-radius: 2px;
+        }
+
         /* GLOW EFFECT BEHIND HERO TEXT */
         .hero-glow-spot {
             position: absolute;
@@ -283,53 +334,114 @@ const DuoLimax: React.FC = () => {
         /* CARDS GRID */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
         }
 
         .limax-card {
-            background: rgba(20, 20, 20, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 2.5rem 2rem;
-            border-radius: 4px;
-            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-        
-        .limax-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(235, 210, 151, 0.4);
-            background: rgba(30, 30, 30, 0.8);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 1px solid rgba(235, 210, 151, 0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
         }
 
-        .limax-card::before {
+        .limax-card::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background: #EBD297;
-            opacity: 0;
-            transition: opacity 0.3s;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 80%);
+            transition: background 0.4s ease;
         }
-        .limax-card:hover::before { opacity: 1; }
 
-        .card-icon {
-            color: #EBD297;
-            margin-bottom: 1.5rem;
-            background: rgba(235, 210, 151, 0.1);
-            width: 60px; height: 60px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%;
+        .limax-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+            border-color: rgba(235, 210, 151, 0.45);
+        }
+
+        .limax-card:hover::after {
+            background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 85%);
         }
 
         .limax-card h3 {
+            position: relative;
+            z-index: 1;
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: #fff;
-            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+            color: #EBD297;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
+
+        .limax-card p {
+            position: relative;
+            z-index: 1;
+            color: #e9e9e9;
+            line-height: 1.6;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+        }
+
+        /* Facts box (match FireShow eckdaten) */
+        .limax-facts-box {
+            background: rgba(25, 25, 24, 0.85);
+            border: 1px solid rgba(235, 210, 151, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+        .limax-check-list { list-style: none; padding: 0; }
+        .limax-check-list li {
+            position: relative; padding-left: 2.2rem; margin-bottom: 1rem;
+            font-size: 1.05rem; color: #f0f0f0;
+        }
+        .limax-check-list li::before {
+            content: '✓'; position: absolute; left: 0; top: 0;
+            color: #EBD297; font-weight: bold; font-size: 1.2em;
+        }
+
+        /* FAQ styles (match FireShow aesthetics) */
+        .limax-faq details {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(235, 210, 151, 0.1);
+            transition: background 0.3s;
+        }
+        .limax-faq details[open] {
+            background: rgba(235, 210, 151, 0.08);
+            border-color: rgba(235, 210, 151, 0.3);
+        }
+        .limax-faq summary {
+            padding: 1.2rem;
+            cursor: pointer;
+            font-weight: 700;
+            color: #EBD297;
+            list-style: none;
+            position: relative;
+            padding-right: 40px;
+        }
+        .limax-faq summary::-webkit-details-marker { display: none; }
+        .limax-faq summary::after {
+            content: '+';
+            position: absolute; right: 1.2rem; top: 1.2rem;
+            font-weight: bold; font-size: 1.4rem; line-height: 1;
+        }
+        .limax-faq details[open] summary::after { content: '−'; }
+        .limax-faq p { padding: 0 1.2rem 1.2rem; margin: 0; line-height: 1.6; color: #e0e0e0; }
 
         /* VIDEO */
         .video-container {
@@ -477,7 +589,7 @@ const DuoLimax: React.FC = () => {
                             <a href="http://www.limäx.de/" target="_blank" rel="noopener noreferrer" className="limax-btn primary">
                                 Offizielle Website
                             </a>
-                            <a href="#trailer" className="limax-btn">
+                            <a href="https://youtu.be/fLi4wht1iwI" target="_blank" rel="noopener noreferrer" className="limax-btn">
                                 <Play size={18} fill="currentColor" /> Trailer ansehen
                             </a>
                         </div>
@@ -498,7 +610,7 @@ const DuoLimax: React.FC = () => {
                             </p>
 
                             <div className="flex gap-4 flex-wrap">
-                                <a href="mailto:buchung@limax.de" className="limax-btn primary" style={{ fontSize: '0.9rem', padding: '12px 24px' }}>
+                                <a href="https://www.limaex.de" target="_blank" rel="noopener noreferrer" className="limax-btn primary" style={{ fontSize: '0.9rem', padding: '12px 24px' }}>
                                     Buchung anfragen
                                 </a>
                             </div>
@@ -509,40 +621,23 @@ const DuoLimax: React.FC = () => {
                     </div>
                 </section>
 
-                {/* FEATURES GRID */}
+                {/* SHOW HIGHLIGHTS */}
                 <section className="limax-section limax-reveal">
-                    <h2>Show Elemente</h2>
+                    <h2>Show-Highlights</h2>
                     <div className="cards-grid">
-                        <div className="limax-card">
-                            <div className="card-icon"><Sparkles size={28} /></div>
-                            <h3>Großillusionen</h3>
-                            <p className="limax-text">Spektakuläre Illusionen im XXL-Format: Personen erscheinen, verschwinden oder werden zerteilt.</p>
-                        </div>
-                        <div className="limax-card">
-                            <div className="card-icon"><Users size={28} /></div>
-                            <h3>Akrobatik</h3>
-                            <p className="limax-text">Kraftvolle Partnerakrobatik und Balance-Acts, die Körperbeherrschung und Vertrauen demonstrieren.</p>
-                        </div>
-                        <div className="limax-card">
-                            <div className="card-icon"><Laugh size={28} /></div>
-                            <h3>Comedy</h3>
-                            <p className="limax-text">Spontaner Witz und Situationskomik. Wir nehmen uns selbst nicht zu ernst – das Publikum liebt es.</p>
-                        </div>
-                        <div className="limax-card">
-                            <div className="card-icon"><Target size={28} /></div>
-                            <h3>Präzision</h3>
-                            <p className="limax-text">Meisterhafte Jonglage und Manipulation, perfekt choreografiert auf Musik und Licht.</p>
-                        </div>
-                        <div className="limax-card">
-                            <div className="card-icon"><Music size={28} /></div>
-                            <h3>Live Musik</h3>
-                            <p className="limax-text">Überraschende musikalische Einlagen, live performt, geben der Show eine persönliche Note.</p>
-                        </div>
-                        <div className="limax-card">
-                            <div className="card-icon"><Star size={28} /></div>
-                            <h3>Variabilität</h3>
-                            <p className="limax-text">Jede Show ist einzigartig. Wir passen unser Programm an Ihre Bühne und Ihr Publikum an.</p>
-                        </div>
+                        {HIGHLIGHTS.map((item, idx) => (
+                            <div
+                                key={idx}
+                                className="limax-card"
+                                style={{
+                                    backgroundImage: `url(${item.image})`,
+                                    backgroundPosition: item.backgroundPosition || 'center'
+                                }}
+                            >
+                                <h3>{item.title}</h3>
+                                <p>{item.text}</p>
+                            </div>
+                        ))}
                     </div>
                 </section>
 
@@ -561,6 +656,23 @@ const DuoLimax: React.FC = () => {
                     </div>
                 </section>
 
+                {/* KEY FACTS */}
+                <section className="limax-section limax-reveal">
+                    <h2>Eckdaten zur Show</h2>
+                    <div className="limax-facts-box">
+                        <ul className="limax-check-list">
+                            <li>Sehr humorvolles Familienprogramm</li>
+                            <li>Dauer 20–90 Minuten</li>
+                            <li>Anspruchsvolle Jonglage</li>
+                            <li>Zauberkunst in Höchstform</li>
+                            <li>Handstandakrobatik</li>
+                            <li>Großillusionen</li>
+                            <li>Rola Rola Performance</li>
+                            <li>Mit Musik und Moderation</li>
+                        </ul>
+                    </div>
+                </section>
+
                 {/* GALERIE */}
                 <section className="limax-section limax-reveal">
                     <h2>Impressionen</h2>
@@ -568,12 +680,14 @@ const DuoLimax: React.FC = () => {
                         <div className="carousel-nav-btn nav-prev" onClick={handlePrev}>❮</div>
                         <div className="carousel-track" ref={trackRef}>
                             {[
-                                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-014-682x1024.jpg",
-                                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/05_IMG-20241124-WA0036-761x1024.jpg",
-                                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-124-1024x682.jpg",
-                                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/10_IMG-20241124-WA0095-900x1024.jpg",
-                                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-085-1024x682.jpg",
-                                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/05/16_DSC08078-788x1024.jpg"
+                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/10_IMG-20241124-WA0095-900x1024.jpg?strip=info&w=1027&ssl=1",
+                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-085-1024x682.jpg?strip=info&w=2000&ssl=1",
+                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/05_IMG-20241124-WA0036-761x1024.jpg?strip=info&w=1904&ssl=1",
+                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-014-682x1024.jpg?strip=info&w=1333&ssl=1",
+                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-129-1024x682.jpg?strip=info&w=2000&ssl=1",
+                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-009-682x1024.jpg?strip=info&w=1333&ssl=1",
+                                "https://i0.wp.com/limaex.de/wp-content/uploads/2024/10/cropped-IMG_1134-3.jpg?strip=info&w=512&ssl=1",
+                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/02_IMG-20241124-WA0007-689x1024.jpg?strip=info&w=1723&ssl=1"
                             ].map((src, idx) => (
                                 <div key={idx} className="carousel-item" onClick={() => setLightboxSrc(src)}>
                                     <img src={src} alt={`Galerie ${idx}`} loading="lazy" />
@@ -583,6 +697,43 @@ const DuoLimax: React.FC = () => {
                         <div className="carousel-nav-btn nav-next" onClick={handleNext}>❯</div>
                     </div>
                 </section>
+
+                {/* FAQ */}
+                <section className="limax-section limax-reveal">
+                    <h2>Häufige Fragen</h2>
+                    <div className="limax-faq">
+                        <details>
+                            <summary>Ist eine Duo Limäx Show überall möglich?</summary>
+                            <p>
+                                Ja! Grundsätzlich kann diese Show überall vorgeführt werden. Für manche Nummern ist jedoch eine Deckenhöhe
+                                von mindestens 4,5&nbsp;m erforderlich. Außerdem muss die Bühne sowie der Lagerplatz hinter der Bühne groß genug sein.
+                                Allerdings ist diese Show sehr variabel, sodass sich eigentlich für fast jede Bühne ein passendes Programm
+                                zusammenstellen lässt.
+                            </p>
+                        </details>
+                        <details>
+                            <summary>Wie viel Platz wird benötigt?</summary>
+                            <p>
+                                Im Idealfall sollte die Fläche mindestens ca. 5&nbsp;m breit und 4&nbsp;m tief sein. Eine kleinere Fläche ist aber
+                                nach Absprache auch möglich.
+                            </p>
+                        </details>
+                        <details>
+                            <summary>Wie lange dauert die Show?</summary>
+                            <p>Es sind Showzeiten von 20–90 Minuten möglich.</p>
+                        </details>
+                        <details>
+                            <summary>Was wird vor Ort an Technik benötigt?</summary>
+                            <p>
+                                Grundsätzlich kann alles, was an Technik benötigt wird, bis zu einer Publikumsgröße von ca. 200 Personen
+                                mitgebracht werden. Jedoch ist es von Vorteil, wenn so viel wie möglich schon vor Ort ist.
+                                Dadurch sparen wir uns Arbeit – und euch Kosten.
+                            </p>
+                        </details>
+                    </div>
+                </section>
+
+
 
                 {/* BOTTOM CTA */}
                 <section className="limax-section limax-reveal text-center pt-12 border-t border-white/10">
