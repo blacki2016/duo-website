@@ -181,6 +181,22 @@ const Navbar: React.FC = () => {
         /* Balanced wrapping for long mobile titles */
         .title-balance { text-wrap: balance; }
 
+        /* Glassmorphism Header when scrolled */
+        .glass-header {
+            background: rgba(18, 18, 18, 0.45);
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            border-bottom: 1px solid rgba(235, 210, 151, 0.12);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+        .glass-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0));
+        }
+
         /* Menu Link Hover Underline */
         .nav-link-hover {
             position: relative;
@@ -208,9 +224,9 @@ const Navbar: React.FC = () => {
 
             <nav
                 className={`site-header fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${scrolled
-                    ? 'bg-[#121212]/95 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.5)] border-b border-[#ebd297]/10 scrolled'
+                    ? 'glass-header scrolled'
                     : 'bg-gradient-to-b from-black via-black/80 to-transparent'
-                    }`}
+                    } relative`}
             >
                 <div className="header-container container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6 relative">
 
