@@ -231,18 +231,97 @@ const Navbar: React.FC = () => {
                 }
       `}</style>
 
+            {/* MOBILE MENU OVERLAY - Outside nav for proper layering */}
+            <div
+                className={`fixed inset-0 bg-black/98 backdrop-blur-xl z-[100] lg:hidden transition-all duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+                    }`}
+                style={{ WebkitOverflowScrolling: 'touch' }}
+            >
+                <div className="h-full w-full flex flex-col overflow-y-auto overscroll-contain safe-top safe-bottom">
+                    {/* Mobile Menu Header */}
+                    <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 shrink-0">
+                        <span className="text-[#ebd297] font-serif font-bold text-lg">Menü</span>
+                        <button
+                            onClick={toggleMobile}
+                            aria-label="Menü schließen"
+                            className="text-[#ebd297] h-11 w-11 flex items-center justify-center hover:bg-[#ebd297]/10 rounded-lg transition-colors touch-manipulation"
+                        >
+                            <X size={28} />
+                        </button>
+                    </div>
+
+                    {/* Menu Content */}
+                    <div className="flex-1 px-6 py-6 space-y-2">
+                        {navItems.map((item, index) => (
+                            <div key={index} className="border-b border-white/10 last:border-0 pb-2">
+                                {item.children ? (
+                                    <div>
+                                        <button
+                                            onClick={() => toggleMobileSubmenu(item.label)}
+                                            type="button"
+                                            className="flex items-center justify-between w-full py-4 text-xl font-title font-bold text-[#ebd297] touch-manipulation"
+                                        >
+                                            {item.label}
+                                            {mobileExpanded === item.label ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
+                                        </button>
+                                        <div
+                                            className={`pl-4 flex flex-col gap-2 overflow-hidden transition-all duration-300 ${mobileExpanded === item.label ? 'max-h-[700px] mt-2 mb-3 opacity-100' : 'max-h-0 opacity-0'
+                                                }`}
+                                        >
+                                            {item.children.map((child, cIdx) => (
+                                                <Link
+                                                    key={cIdx}
+                                                    to={child.path}
+                                                    className="text-[#ebd297] hover:text-white py-3 flex items-center gap-4 text-lg min-h-[48px] touch-manipulation"
+                                                >
+                                                    <span className="w-2 h-2 bg-[#ebd297] rounded-full shrink-0"></span>
+                                                    <span>{child.label}</span>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <Link
+                                        to={item.path!}
+                                        className="block py-4 text-xl font-title font-bold text-[#ebd297] hover:text-white min-h-[48px] touch-manipulation"
+                                    >
+                                        {item.label}
+                                    </Link>
+                                )}
+                            </div>
+                        ))}
+
+                        <div className="pt-6">
+                            <Link
+                                to="/booking-request"
+                                className="booking-button block w-full text-center py-4 bg-gradient-to-br from-[#ebd297] to-[#b38728] text-black font-button font-bold text-base rounded-xl hover:from-white hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.8)] touch-manipulation"
+                            >
+                                Buchung anfragen
+                            </Link>
+
+                            {/* Socials Mobile */}
+                            <div className="mt-8 flex justify-center gap-8 text-[#ebd297]">
+                                <a href="https://www.instagram.com/maximilian.boy" target="_blank" rel="noreferrer" className="touch-manipulation"><i className="fa-brands fa-instagram text-3xl"></i></a>
+                                <a href="https://www.facebook.com/maximilian.h.boy" target="_blank" rel="noreferrer" className="touch-manipulation"><i className="fa-brands fa-facebook text-3xl"></i></a>
+                                <a href="https://wa.me/4015785585713" target="_blank" rel="noreferrer" className="touch-manipulation"><i className="fa-brands fa-whatsapp text-3xl"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <nav
-                className={`site-header fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${scrolled
+                className={`site-header fixed top-0 left-0 w-full z-[90] transition-all duration-500 ease-in-out ${scrolled
                     ? 'glass-header scrolled'
                     : 'bg-gradient-to-b from-black via-black/80 to-transparent'
-                    } relative`}
+                    }`}
             >
-                <div className="header-container container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6 relative">
+                <div className="header-container container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6">
 
                     {/* MOBILE: 3 Spalten (Logo | Titel | Menü) */}
-                    <div className="lg:hidden flex items-center justify-between px-4 py-3 relative z-[70]">
+                    <div className="lg:hidden flex items-center justify-between px-4 py-3">
                         {/* Logo links */}
-                        <Link to="/" className="flex items-center group relative z-[70]">
+                        <Link to="/" className="flex items-center group">
                             <img
                                 src={LOGO_URL}
                                 alt="Maximilian Boy Logo"
@@ -251,7 +330,7 @@ const Navbar: React.FC = () => {
                         </Link>
 
                         {/* Titel mittig */}
-                        <div className="flex-1 px-3 text-center relative z-[70]">
+                        <div className="flex-1 px-3 text-center">
                             <span className={`header-title title-gold title-gold-animated text-sm sm:text-base md:text-lg font-serif font-bold tracking-wide leading-snug title-balance break-words`}>
                                 MAXIMILIAN BOY & MB FEUERENTERTAINMENT
                             </span>
@@ -261,10 +340,10 @@ const Navbar: React.FC = () => {
                         <button
                             onClick={toggleMobile}
                             aria-expanded={isOpen}
-                            aria-label={isOpen ? 'Menü schließen' : 'Menü öffnen'}
-                            className="text-[#ebd297] h-11 w-11 flex items-center justify-center focus:outline-none relative z-[70] hover:bg-[#ebd297]/10 rounded-lg transition-colors touch-manipulation"
+                            aria-label="Menü öffnen"
+                            className="text-[#ebd297] h-11 w-11 flex items-center justify-center focus:outline-none hover:bg-[#ebd297]/10 rounded-lg transition-colors touch-manipulation"
                         >
-                            {isOpen ? <X size={28} /> : <Menu size={28} />}
+                            <Menu size={28} />
                         </button>
                     </div>
 
@@ -342,72 +421,6 @@ const Navbar: React.FC = () => {
                     </div>
 
                     {/* (Button oben entfernt, da im 3-Spalten-Header integriert) */}
-                </div>
-
-                {/* MOBILE MENU */}
-                <div
-                    className={`mobile-menu fixed inset-0 bg-black/98 backdrop-blur-xl z-[60] lg:hidden transition-all duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-                        }`}
-                    style={{ WebkitOverflowScrolling: 'touch' }}
-                >
-                    <div className="h-full w-full flex flex-col pt-24 sm:pt-28 px-6 sm:px-10 overflow-y-auto overscroll-contain">
-                        <div className="flex-1 flex flex-col gap-4 pb-12 min-h-0">
-                            {navItems.map((item, index) => (
-                                <div key={index} className="border-b border-white/10 last:border-0 pb-2">
-                                    {item.children ? (
-                                        <div>
-                                            <button
-                                                onClick={() => toggleMobileSubmenu(item.label)}
-                                                type="button"
-                                                className="flex items-center justify-between w-full py-5 text-2xl font-title font-bold text-[#ebd297]"
-                                            >
-                                                {item.label}
-                                                {mobileExpanded === item.label ? <ChevronUp size={24} className="text-[#ebd297]" /> : <ChevronDown size={24} />}
-                                            </button>
-                                            <div
-                                                className={`pl-4 flex flex-col gap-6 overflow-hidden transition-all duration-300 ${mobileExpanded === item.label ? 'max-h-[700px] mt-3 mb-5 opacity-100' : 'max-h-0 opacity-0'
-                                                    }`}
-                                            >
-                                                {item.children.map((child, cIdx) => (
-                                                    <Link
-                                                        key={cIdx}
-                                                        to={child.path}
-                                                        className="text-[#ebd297] hover:text-white py-4 flex items-center gap-5 text-xl min-h-[44px]"
-                                                    >
-                                                        <span className="w-2 h-2 bg-[#ebd297] rounded-full"></span>
-                                                        {child.label}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <Link
-                                            to={item.path!}
-                                            className="block py-5 text-2xl font-title font-bold text-[#ebd297] hover:text-white min-h-[44px]"
-                                        >
-                                            {item.label}
-                                        </Link>
-                                    )}
-                                </div>
-                            ))}
-
-                            <div className="mt-8">
-                                <Link
-                                    to="/booking-request"
-                                    className="booking-button block w-full text-center py-5 bg-gradient-to-br from-[#ebd297] to-[#b38728] text-black font-button font-bold text-sm rounded-xl hover:from-white hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.8)]"
-                                >
-                                    Buchung anfragen
-                                </Link>
-
-                                {/* Socials Mobile */}
-                                <div className="mt-8 flex justify-center gap-8 text-[#ebd297]">
-                                    <a href="https://www.instagram.com/maximilian.boy" target="_blank" rel="noreferrer"><i className="fa-brands fa-instagram text-3xl"></i></a>
-                                    <a href="https://www.facebook.com/maximilian.h.boy" target="_blank" rel="noreferrer"><i className="fa-brands fa-facebook text-3xl"></i></a>
-                                    <a href="https://wa.me/4015785585713" target="_blank" rel="noreferrer"><i className="fa-brands fa-whatsapp text-3xl"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </nav>
