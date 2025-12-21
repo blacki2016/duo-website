@@ -136,24 +136,26 @@ const About: React.FC = () => {
         }
 
         .event-content {
-            position: relative;
-            margin-left: 50px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(235, 210, 151, 0.1);
-            padding: 20px;
-            border-radius: 8px;
-            backdrop-filter: blur(5px);
+          position: relative;
+          margin-left: 50px;
+          background: linear-gradient(135deg, rgba(235, 210, 151, 0.15), rgba(235, 210, 151, 0.08));
+          border: 1px solid rgba(235, 210, 151, 0.25);
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: inset 0 1px 4px rgba(235, 210, 151, 0.18), 0 12px 30px rgba(0,0,0,0.3);
+          backdrop-filter: blur(6px);
         }
 
         .event-year {
-            position: absolute;
-            top: 0;
-            left: -50px;
-            width: 40px;
-            text-align: right;
-            color: var(--gold-primary);
-            font-weight: bold;
-            font-family: serif;
+          position: absolute;
+          top: 0;
+          left: -50px;
+          width: 48px;
+          text-align: right;
+          color: #f4e6c3;
+          font-weight: bold;
+          font-family: serif;
+          letter-spacing: 0.5px;
         }
         
         /* Dot on the line */
@@ -221,7 +223,7 @@ const About: React.FC = () => {
       <div className="about-wrapper">
         {/* Header */}
         <div className="pt-32 pb-16 px-4 text-center text-stone-200">
-          <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">Über Mich</h1>
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-[#ebd297] mb-6">Über Mich</h1>
           <p className="text-xl text-stone-400 max-width-2xl mx-auto">
             Vom Zootierpfleger zum Feuerkünstler – eine Reise voller Leidenschaft, Funken und Magie.
           </p>

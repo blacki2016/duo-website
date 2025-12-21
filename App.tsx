@@ -16,6 +16,7 @@ import About from './pages/About';
 import PublicEvents from './pages/PublicEvents';
 import Socials from './pages/Socials';
 import Pyrotechnics from './pages/Pyrotechnics';
+import Partner from './pages/Partner';
 import GlobalFX from './components/GlobalFX';
 import NotFound from './pages/NotFound';
 
@@ -69,12 +70,13 @@ const App: React.FC = () => {
             <Route path="/artistikshow" element={<ArtistryShow />} />
             <Route path="/walkact" element={<WalkAct />} />
             <Route path="/duolimax" element={<DuoLimax />} />
-            <Route path="/pyrotechnik" element={<Pyrotechnics />} />
+            {/* <Route path="/pyrotechnik" element={<Pyrotechnics />} /> */}
             <Route path="/about" element={<About />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/booking-request" element={<BookingRequest />} />
             <Route path="/termine" element={<PublicEvents />} />
             <Route path="/socials" element={<Socials />} />
+            <Route path="/partner" element={<Partner />} />
             <Route path="/impressum" element={<Imprint />} />
             <Route path="/datenschutz" element={<Privacy />} />
             <Route path="*" element={<NotFound />} />

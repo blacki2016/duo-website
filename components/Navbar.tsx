@@ -72,9 +72,9 @@ const Navbar: React.FC = () => {
         {
             label: 'Mehr',
             children: [
-                { label: 'Pyrotechnik 💥', path: '/pyrotechnik' },
+                // { label: 'Pyrotechnik 💥', path: '/pyrotechnik' },
                 { label: 'Socials 📸', path: '/socials' },
-                { label: 'Partner 🤝', path: '/' },
+                { label: 'Partner 🤝', path: '/partner' },
                 { label: 'Impressum 📝', path: '/impressum' },
                 { label: 'Datenschutzerklärung 🦺', path: '/datenschutz' }
             ]
