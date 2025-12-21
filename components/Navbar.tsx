@@ -90,6 +90,15 @@ const Navbar: React.FC = () => {
             --font-dropdown: 'Montserrat', sans-serif;
         }
 
+        /* Ensure header stays fixed on scroll */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transform: translateZ(0); /* avoid flicker on mobile */
+        }
+
         /* Utility: explicit title font class */
         .font-title { font-family: var(--font-title); }
         .font-button { font-family: var(--font-button); }
@@ -337,16 +346,17 @@ const Navbar: React.FC = () => {
 
                 {/* MOBILE MENU */}
                 <div
-                    className={`mobile-menu fixed inset-0 bg-black/98 backdrop-blur-xl z-40 lg:hidden flex flex-col pt-32 px-10 transition-all duration-300 ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
+                    className={`mobile-menu fixed inset-0 bg-black/98 backdrop-blur-xl z-[60] lg:hidden flex flex-col pt-28 px-6 sm:px-10 transition-all duration-300 ${isOpen ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 translate-x-full pointer-events-none'
                         }`}
                 >
-                    <div className="flex flex-col gap-4 overflow-y-auto max-h-[85vh] pb-10">
+                    <div className="flex-1 flex flex-col gap-4 overflow-y-auto pb-12">
                         {navItems.map((item, index) => (
                             <div key={index} className="border-b border-white/10 last:border-0 pb-2">
                                 {item.children ? (
                                     <div>
                                         <button
                                             onClick={() => toggleMobileSubmenu(item.label)}
+                                            type="button"
                                             className="flex items-center justify-between w-full py-5 text-2xl font-title font-bold text-[#ebd297]"
                                         >
                                             {item.label}

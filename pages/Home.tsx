@@ -407,10 +407,10 @@ const Home: React.FC = () => {
           {/* 2. Profile Section - EXACT SAME HEIGHT & MOBILE MATCH */}
           <section className="py-24 bg-transparent flex justify-center items-center">
             <div className="container mx-auto px-4">
-              <div className="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-8 items-stretch">
+              <div className="max-w-[1050px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
 
-                {/* Left Column: Image Square */}
-                <div className="w-full aspect-square border-2 border-gold-400 rounded-t-lg md:rounded-lg overflow-hidden shadow-2xl relative group">
+                {/* Left Card: Image */}
+                <div className="w-full aspect-square border-2 border-[#ebd29780] rounded-2xl overflow-hidden shadow-2xl relative group bg-black/40 backdrop-blur-md">
                   <img
                     src="https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6.jpg"
                     alt="Maximilian Boy Portrait"
@@ -418,8 +418,8 @@ const Home: React.FC = () => {
                   />
                 </div>
 
-                {/* Right Column: Text Square - CLEANER BORDER (No inner div) */}
-                <div className="w-full aspect-square flex flex-col justify-center items-center border-2 border-t-0 md:border-t-2 md:border-l-0 border-gold-400 rounded-b-lg md:rounded-lg p-8 md:p-10 relative text-center backdrop-blur-md bg-black/60">
+                {/* Right Card: Text */}
+                <div className="w-full aspect-square flex flex-col justify-center items-center p-8 md:p-10 relative text-center bg-black/60 backdrop-blur-lg border-2 border-[#ebd29780] rounded-2xl shadow-2xl">
 
                   <h2 className="font-serif text-2xl md:text-3xl text-gold-400 mb-6 leading-snug drop-shadow-md">
                     Atemberaubende <br /> <span className="text-gold-100 font-bold">Feuershows</span> & Magie.
