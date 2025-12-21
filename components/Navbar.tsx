@@ -212,15 +212,15 @@ const Navbar: React.FC = () => {
                 <div className="header-container container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6 relative">
 
                     {/* MOBILE: Logo + Titel mittig (Desktop ausgeblendet) */}
-                    <div className="flex justify-center items-center mb-8 lg:hidden">
+                    <div className="flex justify-center items-center mb-4 lg:hidden">
                         <Link to="/" className="flex items-center gap-5 group">
                             <img
                                 src={LOGO_URL}
                                 alt="Maximilian Boy Logo"
-                                className={`header-logo w-auto object-contain logo-hover transition-all duration-500`}
+                                className={`header-logo w-auto object-contain logo-hover transition-all duration-500 h-10 sm:h-12 md:h-14`}
                             />
                             <div className="flex flex-col justify-center">
-                                <span className={`header-title title-gold title-gold-animated text-xl font-serif font-bold tracking-widest whitespace-nowrap leading-none transition-all duration-500`}>
+                                <span className={`header-title title-gold title-gold-animated text-lg sm:text-xl font-serif font-bold tracking-wide whitespace-nowrap leading-none transition-all duration-500`}>
                                     MAXIMILIAN BOY & MB FEUERENTERTAINMENT
                                 </span>
                             </div>
@@ -256,7 +256,7 @@ const Navbar: React.FC = () => {
                                                 </button>
                                                 {/* Dropdown */}
                                                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-1">
-                                                    <div className="dropdown-panel bg-[#1f1f20] border border-[#ebd297]/20 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] overflow-hidden min-w-[280px] backdrop-blur-md p-2">
+                                                    <div className="dropdown-panel bg-[#1f1f20]/60 border border-[#ebd297]/20 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] overflow-hidden min-w-[280px] backdrop-blur-lg p-2">
                                                         {item.children.map((child, cIdx) => {
                                                             const parts = child.label.split(' ');
                                                             const emoji = parts.length > 1 ? parts.pop() : '';
@@ -269,7 +269,7 @@ const Navbar: React.FC = () => {
                                                                     className="block px-4 py-3 text-base text-[#ebd297] hover:text-white hover:bg-[#ebd297]/10 rounded-lg transition-colors flex items-center justify-between group/item"
                                                                 >
                                                                     <span>{text}</span>
-                                                                    <span className="text-xs opacity-70 transform group-hover/item:scale-125 transition-transform">{emoji}</span>
+                                                                    <span className="text-2xl opacity-90 leading-none transform group-hover/item:scale-110 transition-transform">{emoji}</span>
                                                                 </Link>
                                                             );
                                                         })}
