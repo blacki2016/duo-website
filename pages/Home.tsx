@@ -598,11 +598,11 @@ const Home: React.FC = () => {
                     href="https://api.whatsapp.com/send/?phone=4915785585713&text&type=phone_number&app_absent=0"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-[#25D366] text-black w-14 h-14 rounded-full flex items-center justify-center text-3xl hover:scale-110 transition-transform shadow-lg mb-4"
+                    className="bg-[#ebd297] text-black w-14 h-14 rounded-full flex items-center justify-center text-3xl hover:scale-110 transition-transform shadow-lg mb-4"
                   >
                     <i className="fa-brands fa-whatsapp"></i>
                   </a>
-                  <a href="https://api.whatsapp.com/send/?phone=4915785585713&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="text-white text-lg font-bold hover:text-[#25D366] transition-colors">WhatsApp</a>
+                  <a href="https://api.whatsapp.com/send/?phone=4915785585713&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="text-white text-lg font-bold hover:text-[#ebd297] transition-colors">WhatsApp</a>
                   <span className="text-sm text-stone-400 mt-1">Schnell & Einfach</span>
                 </div>
 

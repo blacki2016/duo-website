@@ -401,7 +401,7 @@ const BookingRequest: React.FC = () => {
                                             rel="noopener noreferrer"
                                             className="flex items-center gap-3 hover:text-[#ebd297] transition-colors group"
                                         >
-                                            <div className="w-10 h-10 rounded-full bg-[#25D366]/20 flex items-center justify-center text-[#25D366] group-hover:bg-[#25D366] group-hover:text-black transition-all">
+                                            <div className="w-10 h-10 rounded-full bg-[#ebd297]/20 flex items-center justify-center text-[#ebd297] group-hover:bg-[#ebd297] group-hover:text-black transition-all">
                                                 <i className="fa-brands fa-whatsapp text-lg"></i>
                                             </div>
                                             <span className="font-bold">WhatsApp</span>

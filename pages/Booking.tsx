@@ -187,7 +187,7 @@ const Booking: React.FC = () => {
                                         href="https://api.whatsapp.com/send/?phone=4915785585713&text&type=phone_number&app_absent=0"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-3 bg-[#25D366] text-black px-8 py-4 rounded-full font-bold hover:bg-[#128C7E] hover:text-white transition-all shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)] transform hover:scale-105 duration-200 font-sans"
+                                        className="inline-flex items-center gap-3 bg-[#ebd297] text-black px-8 py-4 rounded-full font-bold hover:bg-[#b38728] hover:text-white transition-all shadow-[0_0_20px_rgba(235,210,151,0.3)] hover:shadow-[0_0_30px_rgba(235,210,151,0.5)] transform hover:scale-105 duration-200 font-sans"
                                     >
                                         <i className="fa-brands fa-whatsapp text-2xl"></i>
                                         WhatsApp schreiben
