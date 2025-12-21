@@ -470,10 +470,10 @@ const ArtistryShow: React.FC = () => {
                     <h2>Show-Highlights</h2>
                     <div className="as-highlights-grid">
                         {[
-                            { title: "Lichtjonglage", subtitle: "Modern & Visuell", img: "https://maximilianboy.de/wp-content/uploads/2023/09/PARKS17Maerz23_1059-683x1024.jpg" },
-                            { title: "Kontaktjonglage", subtitle: "Gläserne Illusion", img: "https://maximilianboy.de/wp-content/uploads/2021/12/19-768x1024.jpg" },
-                            { title: "Magische Momente", subtitle: "Zauberei hautnah", img: "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2025/09/Bild-042-683x1024.jpg?strip=info&w=1706&ssl=1" },
-                            { title: "Duo Limäx", subtitle: "Doppelte Power", img: "https://maximilianboy.de/wp-content/uploads/2023/09/Neu-1-1024x809.jpg" }
+                            { title: "Jonglage", subtitle: "Dynamik & Präzision", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-072.jpg" },
+                            { title: "Zauberei", subtitle: "Magische Momente", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-237-scaled.jpg" },
+                            { title: "Handstandakrobatik", subtitle: "Hoch Hinaus", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-044-scaled.jpg" },
+                            { title: "Rola Rola", subtitle: "Balance & Kontrolle", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-098.jpg" }
                         ].map((item, idx) => (
                             <div className="as-highlight-card group" key={idx} onClick={() => handleImageClick(item.img)}>
                                 <div className="as-card-icon">
