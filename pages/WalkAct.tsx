@@ -10,6 +10,7 @@ const SLIDES = [
 const WalkAct: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
 
   // Scroll Reveal Logic
   useEffect(() => {
@@ -140,6 +141,10 @@ const WalkAct: React.FC = () => {
 
   const handleNext = () => {
     if (trackRef.current) trackRef.current.scrollBy({ left: 350, behavior: 'smooth' });
+  };
+
+  const handleImageClick = (src: string) => {
+    setLightboxSrc(src);
   };
 
   return (
@@ -459,6 +464,7 @@ const WalkAct: React.FC = () => {
           position: relative;
           user-select: none;
           display: inline-flex; align-items: center; justify-content: center;
+          cursor: pointer;
         }
         .wa-carousel-item.portrait {}
         .wa-carousel-item.landscape {}
@@ -552,6 +558,31 @@ const WalkAct: React.FC = () => {
         .wa-reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s ease; }
         .wa-reveal.show { opacity: 1; transform: translateY(0); }
 
+        /* === LIGHTBOX === */
+        .wa-lightbox {
+          position: fixed;
+          z-index: 99999;
+          top: 0; left: 0; width: 100%; height: 100%;
+          background: rgba(0,0,0,0.95);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: zoom-out;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+        }
+        .wa-lightbox.active { opacity: 1; pointer-events: auto; }
+        .wa-lightbox img {
+          max-width: 95%;
+          max-height: 95%;
+          border: 1px solid #EBD297;
+          box-shadow: 0 0 40px rgba(0,0,0,0.8);
+          transform: scale(0.95);
+          transition: transform 0.3s ease;
+        }
+        .wa-lightbox.active img { transform: scale(1); }
+
         /* Reduced Motion Support */
         @media (prefers-reduced-motion: reduce) {
             .wa-slide { transition-duration: 0ms !important; }
@@ -638,7 +669,7 @@ const WalkAct: React.FC = () => {
                 { src: `${import.meta.env.BASE_URL}images/walk.7.jpg`, format: 'portrait' },
                 { src: `${import.meta.env.BASE_URL}images/showformate.walkact.jpg`, format: 'landscape' }
               ].map((item, i) => (
-                <div className={`wa-carousel-item ${item.format}`} key={i}>
+                <div className={`wa-carousel-item ${item.format}`} key={i} onClick={() => handleImageClick(item.src)}>
                   <SmartImage src={item.src} alt={`Walkact Impression ${i + 1}`} loading="lazy" />
                 </div>
               ))}
@@ -681,6 +712,11 @@ const WalkAct: React.FC = () => {
           <Link className="wa-cta-button" to="/booking-request">Walk Act anfragen</Link>
         </section>
 
+      </div>
+
+      {/* LIGHTBOX */}
+      <div className={`wa-lightbox ${lightboxSrc ? 'active' : ''}`} onClick={() => setLightboxSrc(null)}>
+        {lightboxSrc && <img src={lightboxSrc} alt="Walkact Lightbox" />}
       </div>
     </div>
   );

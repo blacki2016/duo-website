@@ -4,41 +4,41 @@ import SmartImage from '../components/SmartImage';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
-    'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-012.jpg'
+    '/images/showformate.limaex.jpg'
 ];
 
 const HIGHLIGHTS = [
     {
         title: 'Magie',
         text: 'Großillusionen mit Wow-Effekt – Menschen erscheinen, verschwinden, schweben.',
-        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-122-682x1024.jpg?strip=info&w=1333&ssl=1'
+        image: '/images/limaex.magie.jpg'
     },
     {
         title: 'Jonglage',
         text: 'Rasante Manipulation und Timing, perfekt choreografiert zu Musik und Licht.',
-        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/03_IMG-20241124-WA0126-619x1024.jpg?strip=info&w=1548&ssl=1'
+        image: '/images/limaex.jonglage.jpg'
     },
     {
         title: 'Akrobatik',
         text: 'Partner-Akrobatik mit Kraft, Balance und Vertrauen – ästhetisch und dynamisch.',
-        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-117.jpg?strip=info&w=651&ssl=1',
+        image: '/images/heroslider4.jpg',
         backgroundPosition: 'center 15%'
     },
     {
         title: 'Comedy',
         text: 'Charmante Situationskomik und Publikumsnähe – humorvoll, ohne die Magie zu brechen.',
-        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-094-682x1024.jpg?strip=info&w=1333&ssl=1'
+        image: '/images/limaex.comedy.jpg'
     },
     {
         title: 'Illusionen',
         text: 'Signature-Illusionen aus eigener Werkstatt – überraschend, modern, visuell stark.',
-        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/11_IMG-20241124-WA0046-820x1024.jpg?strip=info&w=2000&ssl=1',
+        image: '/images/limaex.illusionen.jpg',
         backgroundPosition: 'center 25%'
     },
     {
         title: 'Musik',
         text: 'Live gespielte Akzente und Sounddesign, die jede Szene tragen und verdichten.',
-        image: 'https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-124-1024x682.jpg?strip=info&w=2000&ssl=1'
+        image: '/images/showformate.limaex.jpg'
     }
 ];
 
@@ -155,6 +155,10 @@ const DuoLimax: React.FC = () => {
 
     const handleNext = () => {
         if (trackRef.current) trackRef.current.scrollBy({ left: 350, behavior: 'smooth' });
+    };
+
+    const handleImageClick = (src: string) => {
+        setLightboxSrc(src);
     };
 
     return (
@@ -343,6 +347,7 @@ const DuoLimax: React.FC = () => {
             border: 1px solid rgba(235, 210, 151, 0.2);
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            cursor: pointer;
         }
 
         .limax-card::after {
@@ -608,7 +613,7 @@ const DuoLimax: React.FC = () => {
                             </div>
                         </div>
                         <div className="poster-frame">
-                            <img src="https://maximilianboy.de/mystaging02/wp-content/uploads/2024/10/ukongu-Final-without-date-2.jpg" alt="UKONGU Poster" />
+                            <img src="/images/ukongu.plakat.jpg" alt="UKONGU Poster" />
                         </div>
                     </div>
                 </section>
@@ -625,6 +630,7 @@ const DuoLimax: React.FC = () => {
                                     backgroundImage: `url(${item.image})`,
                                     backgroundPosition: item.backgroundPosition || 'center'
                                 }}
+                                onClick={() => handleImageClick(item.image)}
                             >
                                 <h3>{item.title}</h3>
                                 <p>{item.text}</p>
@@ -681,7 +687,7 @@ const DuoLimax: React.FC = () => {
                                 "https://i0.wp.com/limaex.de/wp-content/uploads/2024/10/cropped-IMG_1134-3.jpg?strip=info&w=512&ssl=1",
                                 "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/02_IMG-20241124-WA0007-689x1024.jpg?strip=info&w=1723&ssl=1"
                             ].map((src, idx) => (
-                                <div key={idx} className="carousel-item" onClick={() => setLightboxSrc(src)}>
+                                <div key={idx} className="carousel-item" onClick={() => handleImageClick(src)}>
                                     <SmartImage src={src} alt={`Galerie ${idx}`} loading="lazy" />
                                 </div>
                             ))}
