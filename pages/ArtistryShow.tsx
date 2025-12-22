@@ -703,4 +703,4 @@ const ArtistryShow: React.FC = () => {
     );
 };
 
-export default ScrollToTop(ArtistryShow);
+export default ArtistryShow;

@@ -217,4 +217,4 @@ const Partner: React.FC = () => {
     );
 };
 
-export default ScrollToTop(Partner);
+export default Partner;
