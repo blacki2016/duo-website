@@ -38,7 +38,7 @@ const FireShow: React.FC = () => {
 
     const trackRef = useRef<HTMLDivElement>(null);
 
-    // Infinite autoplay carousel with seamless loop
+    // Infinite autoplay carousel with seamless loop (supports touch swipe)
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
@@ -60,9 +60,11 @@ const FireShow: React.FC = () => {
         let paused = false;
         let scrollPos = 0;
         const speed = 0.65;
+        let userInteracting = false;
+        let interactionTimeout: NodeJS.Timeout | null = null;
 
         const step = () => {
-            if (!paused) {
+            if (!paused && !userInteracting) {
                 scrollPos += speed;
                 const maxScroll = track.scrollWidth / 3; // Since we cloned twice
 
@@ -79,15 +81,37 @@ const FireShow: React.FC = () => {
         const pause = () => { paused = true; };
         const resume = () => { paused = false; };
 
+        // Handle touch/scroll interaction
+        const handleInteractionStart = () => {
+            userInteracting = true;
+            if (interactionTimeout) clearTimeout(interactionTimeout);
+        };
+
+        const handleInteractionEnd = () => {
+            if (interactionTimeout) clearTimeout(interactionTimeout);
+            // Resume autoplay after 2 seconds of no interaction
+            interactionTimeout = setTimeout(() => {
+                userInteracting = false;
+                scrollPos = track.scrollLeft;
+            }, 2000);
+        };
+
         track.addEventListener('mouseenter', pause);
         track.addEventListener('mouseleave', resume);
+        track.addEventListener('touchstart', handleInteractionStart);
+        track.addEventListener('touchend', handleInteractionEnd);
+        track.addEventListener('scroll', handleInteractionStart, { passive: true });
 
         rafId = requestAnimationFrame(step);
 
         return () => {
             cancelAnimationFrame(rafId);
+            if (interactionTimeout) clearTimeout(interactionTimeout);
             track.removeEventListener('mouseenter', pause);
             track.removeEventListener('mouseleave', resume);
+            track.removeEventListener('touchstart', handleInteractionStart);
+            track.removeEventListener('touchend', handleInteractionEnd);
+            track.removeEventListener('scroll', handleInteractionStart);
         };
     }, []);
 
