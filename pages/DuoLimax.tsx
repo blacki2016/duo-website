@@ -32,7 +32,7 @@ const HIGHLIGHTS = [
     {
         title: 'Illusionen',
         text: 'Signature-Illusionen aus eigener Werkstatt – überraschend, modern, visuell stark.',
-        image: '/images/limaex.illusionen.jpg',
+        image: '/images/limaex.illusion.jpg',
         backgroundPosition: 'center 25%'
     },
     {
@@ -678,14 +678,14 @@ const DuoLimax: React.FC = () => {
                         <div className="carousel-nav-btn nav-prev" onClick={handlePrev}>❮</div>
                         <div className="carousel-track" ref={trackRef}>
                             {[
-                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/10_IMG-20241124-WA0095-900x1024.jpg?strip=info&w=1027&ssl=1",
-                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-085-1024x682.jpg?strip=info&w=2000&ssl=1",
-                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/05_IMG-20241124-WA0036-761x1024.jpg?strip=info&w=1904&ssl=1",
-                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-014-682x1024.jpg?strip=info&w=1333&ssl=1",
-                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-129-1024x682.jpg?strip=info&w=2000&ssl=1",
-                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-009-682x1024.jpg?strip=info&w=1333&ssl=1",
-                                "https://i0.wp.com/limaex.de/wp-content/uploads/2024/10/cropped-IMG_1134-3.jpg?strip=info&w=512&ssl=1",
-                                "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/02_IMG-20241124-WA0007-689x1024.jpg?strip=info&w=1723&ssl=1"
+                                "/images/limaex.slider1.jpg",
+                                "/images/limaex.slider2.jpg",
+                                "/images/limaex.slider3.jpg.webp",
+                                "/images/limaex.slider4.jpg",
+                                "/images/limaex.slider5.jpg",
+                                "/images/limaex.slider6.jpg",
+                                "/images/limaex.slider7.jpg",
+                                "/images/limaex.logo.jpg"
                             ].map((src, idx) => (
                                 <div key={idx} className="carousel-item" onClick={() => handleImageClick(src)}>
                                     <SmartImage src={src} alt={`Galerie ${idx}`} loading="lazy" />
