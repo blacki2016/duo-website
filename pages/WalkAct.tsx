@@ -4,7 +4,7 @@ import SmartImage from '../components/SmartImage';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
-  'https://maximilianboy.de/mystaging02/wp-content/uploads/2023/08/20230805_181721-768x1024-1.jpg'
+  `${import.meta.env.BASE_URL}images/showformate.walkact.jpg`
 ];
 
 const WalkAct: React.FC = () => {
@@ -78,6 +78,21 @@ const WalkAct: React.FC = () => {
       rafId = requestAnimationFrame(step);
     };
 
+    // Handle manual scrolling to loop infinitely
+    const handleScroll = () => {
+      const maxScroll = track.scrollWidth / 3;
+
+      if (track.scrollLeft >= maxScroll * 2) {
+        // Scrolled too far right, reset to beginning of second set
+        track.scrollLeft = track.scrollLeft - maxScroll;
+        scrollPos = track.scrollLeft;
+      } else if (track.scrollLeft <= 0) {
+        // Scrolled to beginning, jump to end of first set
+        track.scrollLeft = maxScroll;
+        scrollPos = track.scrollLeft;
+      }
+    };
+
     const handleMouseEnter = () => { pausedByHover = true; };
     const handleMouseLeave = () => { pausedByHover = false; };
 
@@ -96,6 +111,7 @@ const WalkAct: React.FC = () => {
       }, 2000);
     };
 
+    track.addEventListener('scroll', handleScroll, { passive: true });
     track.addEventListener('mouseenter', handleMouseEnter);
     track.addEventListener('mouseleave', handleMouseLeave);
     track.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -106,20 +122,13 @@ const WalkAct: React.FC = () => {
     return () => {
       cancelAnimationFrame(rafId);
       if (touchTimeout) clearTimeout(touchTimeout);
+      track.removeEventListener('scroll', handleScroll);
       track.removeEventListener('mouseenter', handleMouseEnter);
       track.removeEventListener('mouseleave', handleMouseLeave);
       track.removeEventListener('touchstart', handleTouchStart);
       track.removeEventListener('touchend', handleTouchEnd);
     };
   }, []);
-
-  const handlePrev = () => {
-    if (trackRef.current) trackRef.current.scrollBy({ left: -350, behavior: 'smooth' });
-  };
-
-  const handleNext = () => {
-    if (trackRef.current) trackRef.current.scrollBy({ left: 350, behavior: 'smooth' });
-  };
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#121212]">
@@ -439,6 +448,8 @@ const WalkAct: React.FC = () => {
           user-select: none;
           display: inline-flex; align-items: center; justify-content: center;
         }
+        .wa-carousel-item.portrait {}
+        .wa-carousel-item.landscape {}
         .wa-carousel-item img {
           width: auto !important;
           height: auto !important;
@@ -446,6 +457,9 @@ const WalkAct: React.FC = () => {
           object-fit: contain !important;
           display: block;
           pointer-events: none;
+          cursor: zoom-in;
+          position: relative;
+          z-index: 1;
         }
         @media (max-width: 768px) { .wa-carousel-item img { max-height: 350px; } }
 
@@ -600,25 +614,22 @@ const WalkAct: React.FC = () => {
           <h2>Impressionen</h2>
 
           <div className="wa-carousel-wrapper">
-            <button className="wa-carousel-btn wa-prev" onClick={handlePrev} aria-label="Zurück">❮</button>
-
             <div className="wa-carousel-track" ref={trackRef}>
               {[
-                "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2023/08/IMG-20230811-WA0020-576x1024.jpg?strip=info&w=900&ssl=1",
-                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-03-at-22.09.39.jpeg",
-                "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2023/08/20230805_181733-768x1024.jpg?strip=info&w=1920&ssl=1",
-                "https://i2.wp.com/maximilianboy.de/wp-content/uploads/2023/08/20230805_181832-768x1024.jpg?strip=info&w=1920&ssl=1",
-                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-03-at-22.10.18.jpeg",
-                "https://i2.wp.com/maximilianboy.de/wp-content/uploads/2023/08/IMG-20230805-WA0042-576x1024.jpg?strip=info&w=900&ssl=1",
-                "https://i2.wp.com/maximilianboy.de/wp-content/uploads/2023/08/IMG-20230805-WA0037-576x1024.jpg?strip=info&w=900&ssl=1"
-              ].map((src, i) => (
-                <div className="wa-carousel-item" key={i}>
-                  <SmartImage src={src} alt={`Walkact Impression ${i + 1}`} loading="lazy" />
+                { src: `${import.meta.env.BASE_URL}images/walk.1.jpeg`, format: 'portrait' },
+                { src: `${import.meta.env.BASE_URL}images/walk.2.jpeg`, format: 'landscape' },
+                { src: `${import.meta.env.BASE_URL}images/walk.3.jpg`, format: 'portrait' },
+                { src: `${import.meta.env.BASE_URL}images/walk.4.jpg`, format: 'portrait' },
+                { src: `${import.meta.env.BASE_URL}images/walk.5.jpg`, format: 'landscape' },
+                { src: `${import.meta.env.BASE_URL}images/walk.6.jpg`, format: 'portrait' },
+                { src: `${import.meta.env.BASE_URL}images/walk.7.jpg`, format: 'portrait' },
+                { src: `${import.meta.env.BASE_URL}images/showformate.walkact.jpg`, format: 'landscape' }
+              ].map((item, i) => (
+                <div className={`wa-carousel-item ${item.format}`} key={i}>
+                  <SmartImage src={item.src} alt={`Walkact Impression ${i + 1}`} loading="lazy" />
                 </div>
               ))}
             </div>
-
-            <button className="wa-carousel-btn wa-next" onClick={handleNext} aria-label="Weiter">❯</button>
           </div>
         </section>
 
