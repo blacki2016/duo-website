@@ -34,7 +34,7 @@ const Wedding: React.FC = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const SLIDES = [
-        `${import.meta.env.BASE_URL}images/heroslider1.jpg`
+        `${import.meta.env.BASE_URL}images/hochzeit.hintergrund.jpg`
     ];
 
     useEffect(() => {
