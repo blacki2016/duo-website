@@ -15,12 +15,12 @@ const FireShowWedding: React.FC = () => {
                     <img
                         src="/images/feuerherz.jpg"
                         alt="Feuerherz"
-                        className="hidden md:block w-32 sm:w-44 lg:w-56 rounded-xl shadow-[0_20px_50px_rgba(255,128,128,0.35)] border border-white/15 bg-white/5 backdrop-blur-sm ring-1 ring-white/20 brightness-105 contrast-110"
+                        className="hidden md:block w-40 sm:w-52 lg:w-64 rounded-xl shadow-[0_20px_50px_rgba(255,128,128,0.35)] border border-white/15 bg-white/5 backdrop-blur-sm ring-1 ring-white/20 brightness-105 contrast-110"
                     />
                     <img
                         src="/images/hochzeit.test.png"
                         alt="Hochzeitsmoment"
-                        className="hidden sm:block w-28 sm:w-40 lg:w-52 rounded-xl shadow-[0_20px_50px_rgba(255,221,186,0.35)] border border-white/15 bg-white/5 backdrop-blur-sm ring-1 ring-white/20 brightness-105 contrast-110"
+                        className="hidden sm:block w-36 sm:w-48 lg:w-60 rounded-xl shadow-[0_20px_50px_rgba(255,221,186,0.35)] border border-white/15 bg-white/5 backdrop-blur-sm ring-1 ring-white/20 brightness-105 contrast-110"
                     />
                 </div>
 
