@@ -396,6 +396,58 @@ const Home: React.FC = () => {
         </div>
       </header>
 
+      {/* REVIEWS SECTION - SEHR KOMPAKT NACH HERO */}
+      <section className="py-6 px-4 bg-black/30 overflow-hidden border-b border-white/5 relative z-20">
+        <div className="container mx-auto mb-4 text-center">
+          <h2 className="text-lg md:text-xl font-serif font-bold text-white mb-0">Gänsehaut garantiert</h2>
+          <p className="text-[#ebd297] uppercase tracking-widest text-xs">Das sagen Zuschauer</p>
+        </div>
+
+        {/* INFINITE CAROUSEL TRACK */}
+        <div className="w-full overflow-hidden py-2">
+          <div
+            ref={testimonialRef}
+            className="flex gap-4 w-full cursor-grab px-4 no-scrollbar overflow-x-auto"
+            style={{ scrollBehavior: 'auto' }}
+          >
+            {TESTIMONIALS.map((t: any, i) => (
+              <div key={i} className="flex-shrink-0 w-[240px] md:w-[320px] bg-black/40 backdrop-blur-sm p-4 rounded-lg border border-[#ebd297]/10 relative overflow-hidden group hover:border-[#ebd297]/30 transition-colors flex flex-col select-none max-h-[320px] md:max-h-[360px] overflow-y-auto">
+                <div className="quote-bg" style={{ fontSize: '2rem' }}>"</div>
+                <div className="flex gap-0.5 mb-2">
+                  {[...Array(5)].map((_, starI) => (
+                    <Star key={starI} className="w-3 h-3 text-[#ebd297] fill-[#ebd297]" />
+                  ))}
+                </div>
+                <p className="text-stone-300 italic mb-2 relative z-10 leading-tight flex-grow text-xs">
+                  "{t.text}"
+                </p>
+                <div className="flex items-center gap-1.5 border-t border-white/10 pt-2 mt-auto">
+                  {/* UNIFIED LOGO CONTAINER */}
+                  <div className="w-10 h-10 flex items-center justify-center shrink-0">
+                    {t.logo ? (
+                      <img src={t.logo} alt="Partner Logo" className="max-w-full max-h-full object-contain pointer-events-none" />
+                    ) : t.customIcon ? (
+                      <div className="w-8 h-8 rounded-full bg-[#ebd297]/10 flex items-center justify-center border border-[#ebd297]/20 text-[#ebd297] text-[10px]">
+                        {t.customIcon}
+                      </div>
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-[#ebd297]/20 flex items-center justify-center text-[#ebd297] font-bold font-serif text-[9px]">
+                        {t.name.charAt(0)}
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <h4 className="font-bold text-white text-xs">{t.name}</h4>
+                    <span className="text-[10px] text-[#ebd297] uppercase tracking-wider">{t.event}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* WRAPPER FOR CONTENT BELOW HERO WITH BACKGROUND */}
       <div className="relative w-full">
         {/* Background Image Layer for lower section */}
@@ -448,30 +500,7 @@ const Home: React.FC = () => {
             </div>
           </section>
 
-          {/* 2.5 USP Section (Why Me?) - UNIFIED ICON SIZES */}
-          <section className="py-20 bg-transparent border-t border-white/5">
-            <div className="container mx-auto px-4">
-              <h2 className="text-center text-3xl font-serif font-bold text-white mb-16">
-                Warum <span className="text-[#ebd297]">Maximilian Boy</span> buchen?
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-                {USPS.map((usp, idx) => (
-                  <div key={idx} className="flex flex-col items-center text-center p-6 bg-black/40 backdrop-blur-sm rounded-xl border border-[#ebd297]/10 hover:border-[#ebd297]/40 transition-colors shadow-lg group">
-                    {/* Nur interne Icons anzeigen */}
-                    <div className="mb-6 h-32 w-full flex items-center justify-center shrink-0">
-                      <div className="h-28 w-28 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_15px_rgba(235,210,151,0.2)]">
-                        {usp.icon}
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold text-[#ebd297] mb-3">{usp.title}</h3>
-                    <p className="text-stone-400 leading-relaxed">{usp.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* 3. Showformate Preview (CARDS UPDATED: TALLER HEIGHT FOR FULL IMAGE) */}
+          {/* 2.75 Showformate Preview (CARDS UPDATED: TALLER HEIGHT FOR FULL IMAGE) - MOVED UP */}
           <section className="py-24 bg-transparent border-t border-white/5">
             <div className="container mx-auto px-4 md:px-6">
               <div className="text-center mb-16">
@@ -523,52 +552,25 @@ const Home: React.FC = () => {
             </div>
           </section>
 
-          {/* 3.25 Testimonials Section - NEW SLIDER CAROUSEL */}
-          <section className="py-24 bg-transparent overflow-hidden">
-            <div className="container mx-auto px-4 mb-12 text-center">
-              <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-2">Gänsehaut garantiert</h2>
-              <p className="text-[#ebd297] uppercase tracking-widest">Das sagen Zuschauer & Veranstalter</p>
-            </div>
 
-            {/* INFINITE CAROUSEL TRACK */}
-            <div className="w-full overflow-hidden py-10">
-              <div
-                ref={testimonialRef}
-                className="flex gap-8 w-full cursor-grab px-4 no-scrollbar overflow-x-auto"
-                style={{ scrollBehavior: 'auto' }}
-              >
-                {TESTIMONIALS.map((t: any, i) => (
-                  <div key={i} className="flex-shrink-0 w-[320px] md:w-[450px] bg-black/40 backdrop-blur-sm p-8 rounded-2xl border border-[#ebd297]/10 relative overflow-hidden group hover:border-[#ebd297]/30 transition-colors flex flex-col select-none">
-                    <div className="quote-bg">"</div>
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(5)].map((_, starI) => (
-                        <Star key={starI} className="w-5 h-5 text-[#ebd297] fill-[#ebd297]" />
-                      ))}
-                    </div>
-                    <p className="text-stone-300 italic mb-6 relative z-10 leading-relaxed flex-grow text-lg">
-                      "{t.text}"
-                    </p>
-                    <div className="flex items-center gap-3 border-t border-white/10 pt-4 mt-auto">
-                      {/* UNIFIED LOGO CONTAINER */}
-                      <div className="w-16 h-16 flex items-center justify-center shrink-0">
-                        {t.logo ? (
-                          <img src={t.logo} alt="Partner Logo" className="max-w-full max-h-full object-contain pointer-events-none" />
-                        ) : t.customIcon ? (
-                          <div className="w-12 h-12 rounded-full bg-[#ebd297]/10 flex items-center justify-center border border-[#ebd297]/20 text-[#ebd297]">
-                            {t.customIcon}
-                          </div>
-                        ) : (
-                          <div className="w-12 h-12 rounded-full bg-[#ebd297]/20 flex items-center justify-center text-[#ebd297] font-bold font-serif">
-                            {t.name.charAt(0)}
-                          </div>
-                        )}
-                      </div>
 
-                      <div>
-                        <h4 className="font-bold text-white text-base">{t.name}</h4>
-                        <span className="text-xs text-[#ebd297] uppercase tracking-wider">{t.event}</span>
+          {/* 2.5 USP Section (Why Me?) - NACH REVIEWS */}
+          <section className="py-20 bg-transparent border-t border-white/5">
+            <div className="container mx-auto px-4">
+              <h2 className="text-center text-3xl font-serif font-bold text-white mb-16">
+                Warum <span className="text-[#ebd297]">Maximilian Boy</span> buchen?
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+                {USPS.map((usp, idx) => (
+                  <div key={idx} className="flex flex-col items-center text-center p-6 bg-black/40 backdrop-blur-sm rounded-xl border border-[#ebd297]/10 hover:border-[#ebd297]/40 transition-colors shadow-lg group">
+                    {/* Nur interne Icons anzeigen */}
+                    <div className="mb-6 h-32 w-full flex items-center justify-center shrink-0">
+                      <div className="h-28 w-28 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_15px_rgba(235,210,151,0.2)]">
+                        {usp.icon}
                       </div>
                     </div>
+                    <h3 className="text-xl font-bold text-[#ebd297] mb-3">{usp.title}</h3>
+                    <p className="text-stone-400 leading-relaxed">{usp.desc}</p>
                   </div>
                 ))}
               </div>
