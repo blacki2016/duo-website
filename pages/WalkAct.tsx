@@ -134,6 +134,14 @@ const WalkAct: React.FC = () => {
     };
   }, []);
 
+  const handlePrev = () => {
+    if (trackRef.current) trackRef.current.scrollBy({ left: -350, behavior: 'smooth' });
+  };
+
+  const handleNext = () => {
+    if (trackRef.current) trackRef.current.scrollBy({ left: 350, behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#121212]">
       <style>{`
@@ -618,6 +626,7 @@ const WalkAct: React.FC = () => {
           <h2>Impressionen</h2>
 
           <div className="wa-carousel-wrapper">
+            <button className="wa-carousel-btn wa-prev" onClick={handlePrev} aria-label="Zurück">❮</button>
             <div className="wa-carousel-track" ref={trackRef}>
               {[
                 { src: `${import.meta.env.BASE_URL}images/walk.1.jpeg`, format: 'portrait' },
@@ -634,6 +643,7 @@ const WalkAct: React.FC = () => {
                 </div>
               ))}
             </div>
+            <button className="wa-carousel-btn wa-next" onClick={handleNext} aria-label="Weiter">❯</button>
           </div>
         </section>
 
