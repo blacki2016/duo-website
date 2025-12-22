@@ -6,9 +6,12 @@ const FireShowWedding: React.FC = () => {
     return (
         <div>
             {/* Custom Wedding Hero */}
-            <section className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-black">
+            <section className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-black mt-24">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60 z-10"></div>
-                <div className="absolute inset-0 bg-[url('/images/hochzeit.hintergrund.jpg')] bg-cover bg-center"></div>
+                <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/hochzeit.hintergrund.jpg')` }}
+                ></div>
 
                 <div className="relative z-20 text-center px-4 max-w-4xl">
                     <h1 className="text-5xl md:text-7xl font-serif font-extrabold mb-6 text-white drop-shadow-2xl">
