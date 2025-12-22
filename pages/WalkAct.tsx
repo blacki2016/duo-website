@@ -35,13 +35,18 @@ const WalkAct: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Infinite autoplay like homepage testimonials (pause on hover)
+  // Infinite autoplay carousel with seamless loop (touch-enabled for mobile)
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
+    // Clone all children for seamless infinite scroll
     if (track.getAttribute('data-cloned') !== 'true') {
       const originals = Array.from(track.children);
+      // Clone twice for smoother infinite effect
+      originals.forEach(child => {
+        track.appendChild((child as HTMLElement).cloneNode(true));
+      });
       originals.forEach(child => {
         track.appendChild((child as HTMLElement).cloneNode(true));
       });
@@ -49,38 +54,61 @@ const WalkAct: React.FC = () => {
     }
 
     let rafId = 0;
-    let paused = false;
-    let scrollPos = track.scrollLeft;
-    const speed = 0.65; // px per frame for clearer motion
+    let pausedByHover = false;
+    let pausedByTouch = false;
+    let scrollPos = 0;
+    const speed = 0.65;
+    let touchTimeout: NodeJS.Timeout | null = null;
 
     const step = () => {
-      if (!paused) {
+      const isPaused = pausedByHover || pausedByTouch;
+
+      if (!isPaused) {
         scrollPos += speed;
-        const resetAt = track.scrollWidth / 2;
-        if (scrollPos >= resetAt) {
+        const maxScroll = track.scrollWidth / 3; // Since we cloned twice
+
+        if (scrollPos >= maxScroll) {
           scrollPos = 0;
-          track.scrollLeft = 0;
-        } else {
-          track.scrollLeft = scrollPos;
         }
+        track.scrollLeft = scrollPos;
       } else {
         scrollPos = track.scrollLeft;
       }
       rafId = requestAnimationFrame(step);
     };
 
-    const pause = () => { paused = true; };
-    const resume = () => { paused = false; };
+    const handleMouseEnter = () => { pausedByHover = true; };
+    const handleMouseLeave = () => { pausedByHover = false; };
 
-    track.addEventListener('mouseenter', pause);
-    track.addEventListener('mouseleave', resume);
+    // Handle touch interaction (mobile only)
+    const handleTouchStart = () => {
+      pausedByTouch = true;
+      if (touchTimeout) clearTimeout(touchTimeout);
+    };
+
+    const handleTouchEnd = () => {
+      if (touchTimeout) clearTimeout(touchTimeout);
+      // Resume autoplay after 2 seconds
+      touchTimeout = setTimeout(() => {
+        pausedByTouch = false;
+        scrollPos = track.scrollLeft;
+      }, 2000);
+    };
+
+    track.addEventListener('mouseenter', handleMouseEnter);
+    track.addEventListener('mouseleave', handleMouseLeave);
+    track.addEventListener('touchstart', handleTouchStart, { passive: true });
+    track.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     rafId = requestAnimationFrame(step);
 
     return () => {
       cancelAnimationFrame(rafId);
-      track.removeEventListener('mouseenter', pause);
-      track.removeEventListener('mouseleave', resume);
+      if (touchTimeout) clearTimeout(touchTimeout);
+      track.removeEventListener('mouseenter', handleMouseEnter);
+      track.removeEventListener('mouseleave', handleMouseLeave);
+      track.removeEventListener('touchstart', handleTouchStart);
+      track.removeEventListener('touchend', handleTouchEnd);
     };
   }, []);
 
@@ -396,7 +424,7 @@ const WalkAct: React.FC = () => {
             scrollbar-width: none;
           cursor: grab;
           -webkit-overflow-scrolling: touch;
-          touch-action: pan-y;
+          touch-action: pan-x;
         }
         .wa-carousel-track::-webkit-scrollbar { display: none; }
 

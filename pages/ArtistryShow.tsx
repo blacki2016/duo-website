@@ -4,7 +4,7 @@ import { Maximize2 } from 'lucide-react';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
-    'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-042-scaled.jpg'
+    `${import.meta.env.BASE_URL}images/showformate.artistik.jpg`
 ];
 
 const ArtistryShow: React.FC = () => {
@@ -38,14 +38,18 @@ const ArtistryShow: React.FC = () => {
 
     const trackRef = useRef<HTMLDivElement>(null);
 
-    // Infinite autoplay like homepage testimonials (pause on hover)
+    // Infinite autoplay carousel with seamless loop (touch-enabled for mobile)
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
 
-        // Clone children once for seamless loop
+        // Clone all children for seamless infinite scroll
         if (track.getAttribute('data-cloned') !== 'true') {
             const originals = Array.from(track.children);
+            // Clone twice for smoother infinite effect
+            originals.forEach(child => {
+                track.appendChild((child as HTMLElement).cloneNode(true));
+            });
             originals.forEach(child => {
                 track.appendChild((child as HTMLElement).cloneNode(true));
             });
@@ -53,38 +57,61 @@ const ArtistryShow: React.FC = () => {
         }
 
         let rafId = 0;
-        let paused = false;
-        let scrollPos = track.scrollLeft;
-        const speed = 0.65; // px per frame for clearer motion
+        let pausedByHover = false;
+        let pausedByTouch = false;
+        let scrollPos = 0;
+        const speed = 0.65;
+        let touchTimeout: NodeJS.Timeout | null = null;
 
         const step = () => {
-            if (!paused) {
+            const isPaused = pausedByHover || pausedByTouch;
+
+            if (!isPaused) {
                 scrollPos += speed;
-                const resetAt = track.scrollWidth / 2; // after original set
-                if (scrollPos >= resetAt) {
+                const maxScroll = track.scrollWidth / 3; // Since we cloned twice
+
+                if (scrollPos >= maxScroll) {
                     scrollPos = 0;
-                    track.scrollLeft = 0;
-                } else {
-                    track.scrollLeft = scrollPos;
                 }
+                track.scrollLeft = scrollPos;
             } else {
                 scrollPos = track.scrollLeft;
             }
             rafId = requestAnimationFrame(step);
         };
 
-        const pause = () => { paused = true; };
-        const resume = () => { paused = false; };
+        const handleMouseEnter = () => { pausedByHover = true; };
+        const handleMouseLeave = () => { pausedByHover = false; };
 
-        track.addEventListener('mouseenter', pause);
-        track.addEventListener('mouseleave', resume);
+        // Handle touch interaction (mobile only)
+        const handleTouchStart = () => {
+            pausedByTouch = true;
+            if (touchTimeout) clearTimeout(touchTimeout);
+        };
+
+        const handleTouchEnd = () => {
+            if (touchTimeout) clearTimeout(touchTimeout);
+            // Resume autoplay after 2 seconds
+            touchTimeout = setTimeout(() => {
+                pausedByTouch = false;
+                scrollPos = track.scrollLeft;
+            }, 2000);
+        };
+
+        track.addEventListener('mouseenter', handleMouseEnter);
+        track.addEventListener('mouseleave', handleMouseLeave);
+        track.addEventListener('touchstart', handleTouchStart, { passive: true });
+        track.addEventListener('touchend', handleTouchEnd, { passive: true });
 
         rafId = requestAnimationFrame(step);
 
         return () => {
             cancelAnimationFrame(rafId);
-            track.removeEventListener('mouseenter', pause);
-            track.removeEventListener('mouseleave', resume);
+            if (touchTimeout) clearTimeout(touchTimeout);
+            track.removeEventListener('mouseenter', handleMouseEnter);
+            track.removeEventListener('mouseleave', handleMouseLeave);
+            track.removeEventListener('touchstart', handleTouchStart);
+            track.removeEventListener('touchend', handleTouchEnd);
         };
     }, []);
 
@@ -129,7 +156,7 @@ const ArtistryShow: React.FC = () => {
             top: 0; left: 0; width: 100%;
             height: 1200px;
             z-index: -1;
-            background-image: url("https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-042-scaled.jpg");
+            background-image: url("${import.meta.env.BASE_URL}images/showformate.artistik.jpg");
             background-position: center -80px;
             background-size: 100% auto;
             background-repeat: no-repeat;
@@ -381,7 +408,7 @@ const ArtistryShow: React.FC = () => {
         .as-carousel-track {
             display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem;
             width: 100%; scrollbar-width: none; cursor: grab;
-            -webkit-overflow-scrolling: touch; touch-action: pan-y;
+            -webkit-overflow-scrolling: touch; touch-action: pan-x;
         }
         .as-carousel-track::-webkit-scrollbar { display: none; }
         .as-carousel-item {
@@ -465,10 +492,10 @@ const ArtistryShow: React.FC = () => {
                     <h2>Show-Highlights</h2>
                     <div className="as-highlights-grid">
                         {[
-                            { title: "Jonglage", subtitle: "Dynamik & Präzision", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/06_IMG-20241124-WA0140-scaled.jpg", hoverImg: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_pawu91pawu91pawu.jpg" },
-                            { title: "Zauberei", subtitle: "Magische Momente", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-237-scaled.jpg", hoverImg: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_k70wj1k70wj1k70w.jpg" },
-                            { title: "Handstandakrobatik", subtitle: "Hoch Hinaus", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-044-scaled.jpg", hoverImg: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/unnamed-4.jpg" },
-                            { title: "Rola Rola", subtitle: "Balance & Kontrolle", img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-098.jpg", hoverImg: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_z9jggtz9jggtz9jg.jpg" }
+                            { title: "Jonglage", subtitle: "Dynamik & Präzision", img: `${import.meta.env.BASE_URL}images/artistik.jonglage1.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/artistik.jonglage.hover.jpg` },
+                            { title: "Zauberei", subtitle: "Magische Momente", img: `${import.meta.env.BASE_URL}images/heroslider3.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/heroslider3.hover.jpg` },
+                            { title: "Handstandakrobatik", subtitle: "Hoch Hinaus", img: `${import.meta.env.BASE_URL}images/artistik.handstand.normal.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/artistik.handstand.hover.jpg` },
+                            { title: "Rola Rola", subtitle: "Balance & Kontrolle", img: `${import.meta.env.BASE_URL}images/artistik.rola.normal.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/artistik.rola.hover.jpg` }
                         ].map((item, idx) => (
                             <div className="as-highlight-card group" key={idx} onClick={() => handleImageClick(item.hoverImg || item.img)}>
                                 <div className="as-card-icon">
