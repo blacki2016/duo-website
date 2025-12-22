@@ -3,7 +3,7 @@ import { Calendar, User, MessageSquare, Send, CheckCircle, Phone, Mail } from 'l
 import { ContactStatus } from '../types';
 
 const SLIDES = [
-    'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/unnamed-3.jpg'
+    '/images/Feuerjonglage.jpg'
 ];
 
 const BookingRequest: React.FC = () => {

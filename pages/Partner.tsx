@@ -98,7 +98,7 @@ const Partner: React.FC = () => {
                 <div
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                     style={{
-                        backgroundImage: 'url(https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/JPEG-Bild-46A1-AD79-09-0.jpeg)',
+                        backgroundImage: "url('/images/partner.jpeg')",
                         filter: 'blur(3px) brightness(0.3)',
                         transform: 'scale(1.02)'
                     }}

@@ -48,7 +48,7 @@ const Booking: React.FC = () => {
 
             {/* BACKGROUND IMAGE LAYER */}
             <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[url('https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-057.jpg')] bg-cover bg-center opacity-20 blur-sm"></div>
+                <div className="absolute inset-0 bg-[url('/images/kontakt.jpg')] bg-cover bg-center opacity-20 blur-sm"></div>
             </div>
 
             <style>{`

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const SLIDES = [
-    'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-109.jpg'
+    '/images/termine.jpg'
 ];
 
 const PublicEvents: React.FC = () => {
@@ -432,7 +432,7 @@ const PublicEvents: React.FC = () => {
                     {/* LINKS: DAS BILD (Humorvoll) */}
                     <div className="fs-image-col">
                         <div className="fs-image-wrap">
-                            <img className="fs-sign-image" src="https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/Gemini_Generated_Image_p5bt4yp5bt4yp5bt.png" alt="Termin Schild" />
+                            <img className="fs-sign-image" src="/images/termin.parks.png" alt="Nächste Show: PARKS Nürnberg" />
                             <span className="fs-ai-sticker" aria-label="KI generiert">*KI generiert</span>
                         </div>
                         <div className="fs-fun-subtext">Schwerstarbeit für Ihre Unterhaltung.</div>
