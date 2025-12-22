@@ -21,7 +21,8 @@ const BookingRequest: React.FC = () => {
         showFormat: '',
         eventType: '',
         foundVia: '',
-        message: ''
+        message: '',
+        romanceFireHeart: false
     });
 
     // Background Slider (8-Sekunden-Wechsel mit Crossfade)
@@ -33,7 +34,8 @@ const BookingRequest: React.FC = () => {
     }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -64,7 +66,8 @@ const BookingRequest: React.FC = () => {
                     showFormat: '',
                     eventType: '',
                     foundVia: '',
-                    message: ''
+                    message: '',
+                    romanceFireHeart: false
                 });
                 e.currentTarget.reset();
             }, 1500);
@@ -314,6 +317,21 @@ const BookingRequest: React.FC = () => {
                                                 <option value="Beratung gewünscht ❓">Weiß ich noch nicht / Beratung gewünscht ❓</option>
                                                 <option value="Ich weiß es noch nicht 🤷‍♂️">Ich weiß es noch nicht 🤷‍♂️</option>
                                             </select>
+
+                                            {formData.showFormat === 'Feuershow 🔥' && (
+                                                <div className="flex items-start gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3 mt-3">
+                                                    <input
+                                                        type="checkbox"
+                                                        name="romanceFireHeart"
+                                                        checked={formData.romanceFireHeart}
+                                                        onChange={handleChange}
+                                                        className="mt-1 h-5 w-5 rounded border-stone-500 text-[#ebd297] focus:ring-[#ebd297] bg-black"
+                                                    />
+                                                    <div className="text-stone-200 text-sm sm:text-base leading-relaxed">
+                                                        Romantik gewünscht: Ein brennendes Feuerherz als extra Highlight ist super hot ❤️‍🔥
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
