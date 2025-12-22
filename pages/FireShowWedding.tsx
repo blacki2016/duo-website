@@ -32,7 +32,7 @@ const FireShowWedding: React.FC = () => {
                         {/* Hochzeit Test Bild */}
                         <div className="mb-8 flex justify-center">
                             <img
-                                src="/images/hochzeit.test.jpg"
+                                src="/images/hochzeit.test.png"
                                 alt="Hochzeit Referenz"
                                 className="w-full max-w-md h-auto rounded-lg shadow-xl"
                             />
