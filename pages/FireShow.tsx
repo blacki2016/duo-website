@@ -494,7 +494,7 @@ const FireShow: React.FC = () => {
         .fs-carousel-track {
             display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem;
             width: 100%; scrollbar-width: none; cursor: grab;
-            -webkit-overflow-scrolling: touch; touch-action: pan-y;
+            -webkit-overflow-scrolling: touch; touch-action: pan-x;
             align-items: center;
         }
         .fs-carousel-track::-webkit-scrollbar { display: none; }
