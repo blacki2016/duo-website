@@ -22,7 +22,7 @@ ${message}
 
         const response = await resend.emails.send({
             from: 'noreply@resend.dev',
-            to: ['leonard@wieseckel.com', 'info@maximilianboy.de'],
+            to: 'leonard@wieseckel.com,info@maximilianboy.de',
             replyTo: email,
             subject: `Neue Nachricht von ${name} (Website Kontakt)`,
             text: emailBody,
