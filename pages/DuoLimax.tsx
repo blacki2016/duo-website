@@ -71,27 +71,37 @@ const DuoLimax: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
-    // Gentle autoplay with pause on hover/touch
+    // Infinite autoplay like homepage testimonials (pause on hover)
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
 
-        let rafId: number;
-        let last = 0;
+        if (track.getAttribute('data-cloned') !== 'true') {
+            const originals = Array.from(track.children);
+            originals.forEach(child => {
+                track.appendChild((child as HTMLElement).cloneNode(true));
+            });
+            track.setAttribute('data-cloned', 'true');
+        }
+
+        let rafId = 0;
         let paused = false;
-        const speed = 0.08; // px per ms
+        let scrollPos = track.scrollLeft;
+        const speed = 0.5; // px per frame
 
-        const step = (ts: number) => {
-            if (!last) last = ts;
-            const delta = ts - last;
-            last = ts;
-
+        const step = () => {
             if (!paused) {
-                const next = track.scrollLeft + delta * speed;
-                const maxScroll = track.scrollWidth - track.clientWidth;
-                track.scrollLeft = next >= maxScroll ? 0 : next;
+                scrollPos += speed;
+                const resetAt = track.scrollWidth / 2;
+                if (scrollPos >= resetAt) {
+                    scrollPos = 0;
+                    track.scrollLeft = 0;
+                } else {
+                    track.scrollLeft = scrollPos;
+                }
+            } else {
+                scrollPos = track.scrollLeft;
             }
-
             rafId = requestAnimationFrame(step);
         };
 
