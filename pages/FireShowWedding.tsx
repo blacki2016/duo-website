@@ -7,20 +7,20 @@ const FireShowWedding: React.FC = () => {
         <div>
             {/* Custom Wedding Hero */}
             <section className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-black mt-24">
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60 z-10"></div>
-                <div className="absolute inset-0 bg-[url('/images/hochzeit.hintergrund.jpg')] bg-cover bg-center"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/55 to-black/70 z-10"></div>
+                <div className="absolute inset-0 bg-[url('/images/hochzeit.test.png')] bg-cover bg-center scale-105"></div>
 
                 {/* Dekorative Wedding-Visuals */}
                 <div className="absolute inset-0 flex items-end justify-between px-4 sm:px-10 pb-8 sm:pb-12 gap-4 sm:gap-8 z-10 pointer-events-none">
                     <img
                         src="/images/feuerherz.jpg"
                         alt="Feuerherz"
-                        className="hidden md:block w-32 sm:w-44 lg:w-56 rounded-lg shadow-2xl border border-white/10 bg-white/5 backdrop-blur-sm"
+                        className="hidden md:block w-32 sm:w-44 lg:w-56 rounded-xl shadow-[0_20px_50px_rgba(255,128,128,0.35)] border border-white/15 bg-white/5 backdrop-blur-sm ring-1 ring-white/20 brightness-105 contrast-110"
                     />
                     <img
                         src="/images/hochzeit.test.png"
                         alt="Hochzeitsmoment"
-                        className="hidden sm:block w-28 sm:w-40 lg:w-52 rounded-lg shadow-2xl border border-white/10 bg-white/5 backdrop-blur-sm"
+                        className="hidden sm:block w-28 sm:w-40 lg:w-52 rounded-xl shadow-[0_20px_50px_rgba(255,221,186,0.35)] border border-white/15 bg-white/5 backdrop-blur-sm ring-1 ring-white/20 brightness-105 contrast-110"
                     />
                 </div>
 
