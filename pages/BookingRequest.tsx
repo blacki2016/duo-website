@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, User, MessageSquare, Send, CheckCircle, Phone, Mail } from 'lucide-react';
 import { ContactStatus } from '../types';
+import ScrollToTop from '../components/ScrollToTop';
 
 const SLIDES = [
     '/images/Feuerjonglage.jpg'
@@ -414,6 +415,7 @@ const BookingRequest: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <ScrollToTop />
         </div>
     );
 };

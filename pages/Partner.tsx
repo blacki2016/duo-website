@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ScrollToTop from '../components/ScrollToTop';
 
 interface Partner {
     name: string;
@@ -92,92 +93,93 @@ const partnerCategories: PartnerCategory[] = [
 
 const Partner: React.FC = () => {
     return (
-        <div className="min-h-screen relative overflow-hidden">
-            {/* Fixed Background Layer */}
-            <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
-                <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                    style={{
-                        backgroundImage: "url('/images/partner.jpeg')",
-                        filter: 'blur(3px) brightness(0.3)',
-                        transform: 'scale(1.02)'
-                    }}
-                />
-            </div>
-
-            {/* Content Wrapper */}
-            <div className="relative z-1">
-                {/* Header */}
-                <div className="pt-32 pb-16 px-4 text-center">
-                    <h1 className="text-4xl md:text-6xl font-serif font-bold text-[#ebd297] mb-6">
-                        Partner
-                    </h1>
-                    <p className="text-xl text-stone-400 max-w-2xl mx-auto">
-                        Gemeinsam für unvergessliche Events – meine geschätzten Partner und Netzwerk.
-                    </p>
+        <>
+            <div className="min-h-screen relative overflow-hidden">
+                {/* Fixed Background Layer */}
+                <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
+                    <div
+                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                        style={{
+                            backgroundImage: "url('/images/partner.jpeg')",
+                            filter: 'blur(3px) brightness(0.3)',
+                            transform: 'scale(1.02)'
+                        }}
+                    />
                 </div>
 
-                {/* Partner Grid */}
-                <div className="container mx-auto px-4 py-16">
-                    <div className="space-y-16 max-w-6xl mx-auto">
-                        {partnerCategories.map((category, idx) => (
-                            <div key={idx} className="partner-category">
-                                <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#ebd297] mb-8 text-center">
-                                    {category.title}
-                                </h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {category.partners.map((partner, pidx) => (
-                                        <a
-                                            key={pidx}
-                                            href={partner.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="partner-card group"
-                                        >
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-[#ebd297] font-bold transition-colors">
-                                                    {partner.name}
-                                                </span>
-                                                <svg
-                                                    className="w-5 h-5 text-stone-500 group-hover:text-[#ebd297] transition-colors"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={2}
-                                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                                    />
-                                                </svg>
-                                            </div>
-                                            <div className="text-sm text-stone-500 group-hover:text-stone-400 transition-colors mt-1">
-                                                {partner.url.replace('https://', '').replace('http://', '')}
-                                            </div>
-                                        </a>
-                                    ))}
+                {/* Content Wrapper */}
+                <div className="relative z-1">
+                    {/* Header */}
+                    <div className="pt-32 pb-16 px-4 text-center">
+                        <h1 className="text-4xl md:text-6xl font-serif font-bold text-[#ebd297] mb-6">
+                            Partner
+                        </h1>
+                        <p className="text-xl text-stone-400 max-w-2xl mx-auto">
+                            Gemeinsam für unvergessliche Events – meine geschätzten Partner und Netzwerk.
+                        </p>
+                    </div>
+
+                    {/* Partner Grid */}
+                    <div className="container mx-auto px-4 py-16">
+                        <div className="space-y-16 max-w-6xl mx-auto">
+                            {partnerCategories.map((category, idx) => (
+                                <div key={idx} className="partner-category">
+                                    <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#ebd297] mb-8 text-center">
+                                        {category.title}
+                                    </h2>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                        {category.partners.map((partner, pidx) => (
+                                            <a
+                                                key={pidx}
+                                                href={partner.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="partner-card group"
+                                            >
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-[#ebd297] font-bold transition-colors">
+                                                        {partner.name}
+                                                    </span>
+                                                    <svg
+                                                        className="w-5 h-5 text-stone-500 group-hover:text-[#ebd297] transition-colors"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                                <div className="text-sm text-stone-500 group-hover:text-stone-400 transition-colors mt-1">
+                                                    {partner.url.replace('https://', '').replace('http://', '')}
+                                                </div>
+                                            </a>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="py-16 bg-stone-900/80 border-t border-stone-800 text-center px-4">
+                        <h2 className="text-3xl font-serif font-bold text-white mb-6">
+                            Möchten Sie Partner werden?
+                        </h2>
+                        <Link
+                            to="/booking-request"
+                            className="inline-block px-10 py-4 bg-gradient-to-r from-[#ebd297] to-[#d4b56a] text-black font-bold rounded-full hover:scale-105 transition-transform"
+                        >
+                            Kontakt aufnehmen
+                        </Link>
                     </div>
                 </div>
 
-                {/* CTA */}
-                <div className="py-16 bg-stone-900/80 border-t border-stone-800 text-center px-4">
-                    <h2 className="text-3xl font-serif font-bold text-white mb-6">
-                        Möchten Sie Partner werden?
-                    </h2>
-                    <Link
-                        to="/booking-request"
-                        className="inline-block px-10 py-4 bg-gradient-to-r from-[#ebd297] to-[#d4b56a] text-black font-bold rounded-full hover:scale-105 transition-transform"
-                    >
-                        Kontakt aufnehmen
-                    </Link>
-                </div>
-            </div>
-
-            <style>{`
+                <style>{`
         .partner-card {
           display: block;
           padding: 1.5rem;
@@ -210,8 +212,9 @@ const Partner: React.FC = () => {
           }
         }
       `}</style>
-        </div>
+            </div>
+        </>
     );
 };
 
-export default Partner;
+export default ScrollToTop(Partner);

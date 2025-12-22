@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SmartImage from '../components/SmartImage';
+import ScrollToTop from '../components/ScrollToTop';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
@@ -718,6 +719,7 @@ const WalkAct: React.FC = () => {
       <div className={`wa-lightbox ${lightboxSrc ? 'active' : ''}`} onClick={() => setLightboxSrc(null)}>
         {lightboxSrc && <img src={lightboxSrc} alt="Walkact Lightbox" />}
       </div>
+      <ScrollToTop />
     </div>
   );
 };

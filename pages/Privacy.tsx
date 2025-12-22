@@ -1,9 +1,10 @@
 import React from 'react';
+import ScrollToTop from '../components/ScrollToTop';
 
 const Privacy: React.FC = () => {
-  return (
-    <div className="min-h-screen relative w-full overflow-x-hidden">
-      <style>{`
+    return (
+        <div className="min-h-screen relative w-full overflow-x-hidden">
+            <style>{`
         :root {
             --bg-dark: #1f1f20;
             --text-gold: #ebd297;
@@ -137,147 +138,148 @@ const Privacy: React.FC = () => {
             }
         }
       `}</style>
-      
-      <div className="legal-page-wrapper">
-        <div className="legal-container">
-            <h1>Datenschutzerklärung</h1>
 
-            <h2>1. Datenschutz auf einen Blick</h2>
-            <h3>Allgemeine Hinweise</h3>
-            <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
-            
-            <h3>Datenerfassung auf dieser Website</h3>
-            <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
+            <div className="legal-page-wrapper">
+                <div className="legal-container">
+                    <h1>Datenschutzerklärung</h1>
 
-            <hr/>
+                    <h2>1. Datenschutz auf einen Blick</h2>
+                    <h3>Allgemeine Hinweise</h3>
+                    <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
 
-            <h2>2. Verantwortliche Stelle</h2>
-            <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
-            <p>
-                <strong>Maximilian Boy</strong><br/>
-                Schafhof 5<br/>
-                90616 Neuhof an der Zenn<br/>
-                Deutschland
-            </p>
-            <p>
-                Telefon: 0157-85585713<br/>
-                E-Mail: <a href="mailto:info@maximilianboy.de">info@maximilianboy.de</a>
-            </p>
-            <p>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
+                    <h3>Datenerfassung auf dieser Website</h3>
+                    <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
 
-            <hr/>
+                    <hr />
 
-            <h2>3. Hosting</h2>
-            <p>Diese Website wird bei folgendem Anbieter gehostet:</p>
-            <h3>Alpha Hosting GmbH</h3>
-            <p>(Deutschland)</p>
-            <p>Der Einsatz des Hosters erfolgt zum Zwecke der sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter.</p>
-            <p>Dabei werden alle Daten verarbeitet, die für den Betrieb und die Nutzung der Website erforderlich sind (z. B. IP-Adressen, Meta- und Kommunikationsdaten, Websitezugriffe).</p>
-            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen Betrieb der Website)</p>
+                    <h2>2. Verantwortliche Stelle</h2>
+                    <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
+                    <p>
+                        <strong>Maximilian Boy</strong><br />
+                        Schafhof 5<br />
+                        90616 Neuhof an der Zenn<br />
+                        Deutschland
+                    </p>
+                    <p>
+                        Telefon: 0157-85585713<br />
+                        E-Mail: <a href="mailto:info@maximilianboy.de">info@maximilianboy.de</a>
+                    </p>
+                    <p>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
 
-            <hr/>
+                    <hr />
 
-            <h2>4. Allgemeine Hinweise und Pflichtinformationen</h2>
-            
-            <h3>Datenschutz</h3>
-            <p>Der Betreiber dieser Seiten nimmt den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+                    <h2>3. Hosting</h2>
+                    <p>Diese Website wird bei folgendem Anbieter gehostet:</p>
+                    <h3>Alpha Hosting GmbH</h3>
+                    <p>(Deutschland)</p>
+                    <p>Der Einsatz des Hosters erfolgt zum Zwecke der sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter.</p>
+                    <p>Dabei werden alle Daten verarbeitet, die für den Betrieb und die Nutzung der Website erforderlich sind (z. B. IP-Adressen, Meta- und Kommunikationsdaten, Websitezugriffe).</p>
+                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen Betrieb der Website)</p>
 
-            <h3>SSL- bzw. TLS-Verschlüsselung</h3>
-            <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie an der „https://“-Adresszeile Ihres Browsers.</p>
+                    <hr />
 
-            <hr/>
+                    <h2>4. Allgemeine Hinweise und Pflichtinformationen</h2>
 
-            <h2>5. Ihre Rechte als betroffene Person</h2>
-            <p>Sie haben jederzeit das Recht auf:</p>
-            <ul>
-                <li>Auskunft über Ihre gespeicherten personenbezogenen Daten (Art. 15 DSGVO)</li>
-                <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
-                <li>Löschung Ihrer Daten (Art. 17 DSGVO)</li>
-                <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-                <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
-                <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
-            </ul>
-            <p>Außerdem haben Sie das Recht, sich bei einer zuständigen Datenschutzaufsichtsbehörde zu beschweren.</p>
+                    <h3>Datenschutz</h3>
+                    <p>Der Betreiber dieser Seiten nimmt den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
 
-            <hr/>
+                    <h3>SSL- bzw. TLS-Verschlüsselung</h3>
+                    <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie an der „https://“-Adresszeile Ihres Browsers.</p>
 
-            <h2>6. Datenerfassung auf dieser Website</h2>
-            
-            <h3>Server-Log-Dateien</h3>
-            <p>Der Hostinganbieter erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch übermittelt. Dies sind:</p>
-            <ul>
-                <li>Browsertyp und Browserversion</li>
-                <li>verwendetes Betriebssystem</li>
-                <li>Referrer-URL</li>
-                <li>Hostname des zugreifenden Rechners</li>
-                <li>Uhrzeit der Serveranfrage</li>
-                <li>IP-Adresse</li>
-            </ul>
-            <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen erfolgt nicht.</p>
-            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO</p>
+                    <hr />
 
-            <hr/>
+                    <h2>5. Ihre Rechte als betroffene Person</h2>
+                    <p>Sie haben jederzeit das Recht auf:</p>
+                    <ul>
+                        <li>Auskunft über Ihre gespeicherten personenbezogenen Daten (Art. 15 DSGVO)</li>
+                        <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+                        <li>Löschung Ihrer Daten (Art. 17 DSGVO)</li>
+                        <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+                        <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+                        <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+                    </ul>
+                    <p>Außerdem haben Sie das Recht, sich bei einer zuständigen Datenschutzaufsichtsbehörde zu beschweren.</p>
 
-            <h2>7. Kontaktformulare & Buchungsanfragen (Forminator)</h2>
-            <p>Wenn Sie uns per Formular Anfragen zukommen lassen (z. B. Kontakt- oder Buchungsanfragen), werden Ihre Angaben inklusive der von Ihnen angegebenen Kontaktdaten gespeichert, um Ihre Anfrage zu bearbeiten.</p>
-            <p>Die Daten verbleiben bei uns, bis der Zweck der Speicherung entfällt oder Sie deren Löschung verlangen.</p>
-            <p><strong>Rechtsgrundlagen:</strong></p>
-            <ul>
-                <li>Art. 6 Abs. 1 lit. b DSGVO (Vertrag / Vertragsanbahnung)</li>
-                <li>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung Ihrer Anfrage)</li>
-            </ul>
+                    <hr />
 
-            <hr/>
+                    <h2>6. Datenerfassung auf dieser Website</h2>
 
-            <h2>8. WordPress Jetpack</h2>
-            <p>Diese Website nutzt Funktionen des Plugins <strong>Jetpack</strong>, bereitgestellt von Automattic Inc., USA. Jetpack kann technische Informationen über Seitenaufrufe erfassen.</p>
-            <p>Dabei können Cookies gesetzt und Daten an Server von Automattic übertragen werden.</p>
-            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br/>
-            Datenschutzerklärung: <a href="https://automattic.com/privacy/" target="_blank" rel="noopener noreferrer">https://automattic.com/privacy/</a></p>
+                    <h3>Server-Log-Dateien</h3>
+                    <p>Der Hostinganbieter erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch übermittelt. Dies sind:</p>
+                    <ul>
+                        <li>Browsertyp und Browserversion</li>
+                        <li>verwendetes Betriebssystem</li>
+                        <li>Referrer-URL</li>
+                        <li>Hostname des zugreifenden Rechners</li>
+                        <li>Uhrzeit der Serveranfrage</li>
+                        <li>IP-Adresse</li>
+                    </ul>
+                    <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen erfolgt nicht.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO</p>
 
-            <hr/>
+                    <hr />
 
-            <h2>9. Live-Chat (Tawk.to)</h2>
-            <p>Diese Website nutzt den Live-Chat-Dienst <strong>Tawk.to</strong>, bereitgestellt von tawk.to Inc., USA. Über den Chat können personenbezogene Daten wie Name, E-Mail-Adresse oder Chatverläufe verarbeitet werden.</p>
-            <p>Die Nutzung erfolgt freiwillig.</p>
-            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br/>
-            Datenschutzerklärung: <a href="https://www.tawk.to/privacy-policy/" target="_blank" rel="noopener noreferrer">https://www.tawk.to/privacy-policy/</a></p>
+                    <h2>7. Kontaktformulare & Buchungsanfragen (Forminator)</h2>
+                    <p>Wenn Sie uns per Formular Anfragen zukommen lassen (z. B. Kontakt- oder Buchungsanfragen), werden Ihre Angaben inklusive der von Ihnen angegebenen Kontaktdaten gespeichert, um Ihre Anfrage zu bearbeiten.</p>
+                    <p>Die Daten verbleiben bei uns, bis der Zweck der Speicherung entfällt oder Sie deren Löschung verlangen.</p>
+                    <p><strong>Rechtsgrundlagen:</strong></p>
+                    <ul>
+                        <li>Art. 6 Abs. 1 lit. b DSGVO (Vertrag / Vertragsanbahnung)</li>
+                        <li>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung Ihrer Anfrage)</li>
+                    </ul>
 
-            <hr/>
+                    <hr />
 
-            <h2>10. Instagram Feed (Smash Balloon)</h2>
-            <p>Diese Website nutzt das Plugin <strong>Smash Balloon Instagram Feed</strong>, um Inhalte von Instagram darzustellen. Beim Aufruf entsprechender Seiten können personenbezogene Daten (z. B. IP-Adresse) an Meta Platforms Inc. übermittelt werden.</p>
-            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br/>
-            Datenschutzerklärung Instagram: <a href="https://privacycenter.instagram.com/" target="_blank" rel="noopener noreferrer">https://privacycenter.instagram.com/</a></p>
+                    <h2>8. WordPress Jetpack</h2>
+                    <p>Diese Website nutzt Funktionen des Plugins <strong>Jetpack</strong>, bereitgestellt von Automattic Inc., USA. Jetpack kann technische Informationen über Seitenaufrufe erfassen.</p>
+                    <p>Dabei können Cookies gesetzt und Daten an Server von Automattic übertragen werden.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br />
+                        Datenschutzerklärung: <a href="https://automattic.com/privacy/" target="_blank" rel="noopener noreferrer">https://automattic.com/privacy/</a></p>
 
-            <hr/>
+                    <hr />
 
-            <h2>11. Pop and Convert</h2>
-            <p>Diese Website nutzt <strong>Pop and Convert</strong>, um interaktive Pop-ups und Hinweise darzustellen. Dabei können technische Informationen wie Gerätetyp oder IP-Adresse verarbeitet werden.</p>
-            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO</p>
+                    <h2>9. Live-Chat (Tawk.to)</h2>
+                    <p>Diese Website nutzt den Live-Chat-Dienst <strong>Tawk.to</strong>, bereitgestellt von tawk.to Inc., USA. Über den Chat können personenbezogene Daten wie Name, E-Mail-Adresse oder Chatverläufe verarbeitet werden.</p>
+                    <p>Die Nutzung erfolgt freiwillig.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br />
+                        Datenschutzerklärung: <a href="https://www.tawk.to/privacy-policy/" target="_blank" rel="noopener noreferrer">https://www.tawk.to/privacy-policy/</a></p>
 
-            <hr/>
+                    <hr />
 
-            <h2>12. YouTube (eingebettete Videos)</h2>
-            <p>Diese Website bindet Videos der Plattform <strong>YouTube</strong> ein, betrieben von Google Ireland Limited. Beim Aufruf einer Seite mit eingebettetem YouTube-Video wird eine Verbindung zu den Servern von YouTube hergestellt.</p>
-            <p>Dabei können Cookies gesetzt und Nutzungsdaten verarbeitet werden.</p>
-            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br/>
-            Datenschutzerklärung: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></p>
+                    <h2>10. Instagram Feed (Smash Balloon)</h2>
+                    <p>Diese Website nutzt das Plugin <strong>Smash Balloon Instagram Feed</strong>, um Inhalte von Instagram darzustellen. Beim Aufruf entsprechender Seiten können personenbezogene Daten (z. B. IP-Adresse) an Meta Platforms Inc. übermittelt werden.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br />
+                        Datenschutzerklärung Instagram: <a href="https://privacycenter.instagram.com/" target="_blank" rel="noopener noreferrer">https://privacycenter.instagram.com/</a></p>
 
-            <hr/>
+                    <hr />
 
-            <h2>13. Widerruf Ihrer Einwilligung</h2>
-            <p>Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt unberührt.</p>
+                    <h2>11. Pop and Convert</h2>
+                    <p>Diese Website nutzt <strong>Pop and Convert</strong>, um interaktive Pop-ups und Hinweise darzustellen. Dabei können technische Informationen wie Gerätetyp oder IP-Adresse verarbeitet werden.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO</p>
 
-            <hr/>
+                    <hr />
 
-            <h2>14. Aktualität und Änderung dieser Datenschutzerklärung</h2>
-            <p>Diese Datenschutzerklärung ist aktuell gültig und hat den Stand <strong>Dezember 2025</strong>. Durch Weiterentwicklung der Website oder gesetzliche Änderungen kann eine Anpassung erforderlich werden.</p>
+                    <h2>12. YouTube (eingebettete Videos)</h2>
+                    <p>Diese Website bindet Videos der Plattform <strong>YouTube</strong> ein, betrieben von Google Ireland Limited. Beim Aufruf einer Seite mit eingebettetem YouTube-Video wird eine Verbindung zu den Servern von YouTube hergestellt.</p>
+                    <p>Dabei können Cookies gesetzt und Nutzungsdaten verarbeitet werden.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br />
+                        Datenschutzerklärung: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></p>
 
+                    <hr />
+
+                    <h2>13. Widerruf Ihrer Einwilligung</h2>
+                    <p>Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt unberührt.</p>
+
+                    <hr />
+
+                    <h2>14. Aktualität und Änderung dieser Datenschutzerklärung</h2>
+                    <p>Diese Datenschutzerklärung ist aktuell gültig und hat den Stand <strong>Dezember 2025</strong>. Durch Weiterentwicklung der Website oder gesetzliche Änderungen kann eine Anpassung erforderlich werden.</p>
+
+                </div>
+            </div>
+            <ScrollToTop />
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Privacy;

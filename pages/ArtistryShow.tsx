@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Maximize2 } from 'lucide-react';
 import SmartImage from '../components/SmartImage';
+import ScrollToTop from '../components/ScrollToTop';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
@@ -146,8 +147,9 @@ const ArtistryShow: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen relative overflow-hidden bg-[#121212]">
-            <style>{`
+        <>
+            <div className="min-h-screen relative overflow-hidden bg-[#121212]">
+                <style>{`
         /* BACKGROUND LAYERS */
         .as-bg-layer {
             position: fixed;
@@ -525,179 +527,180 @@ const ArtistryShow: React.FC = () => {
         .as-lightbox.active img { transform: scale(1); }
       `}</style>
 
-            {/* BACKGROUNDS */}
-            <div className="as-bg-layer">
-                {SLIDES.map((slide, index) => (
-                    <div
-                        key={index}
-                        className={`as-slide ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-                        style={{ backgroundImage: `url('${slide}')` }}
-                    />
-                ))}
-            </div>
+                {/* BACKGROUNDS */}
+                <div className="as-bg-layer">
+                    {SLIDES.map((slide, index) => (
+                        <div
+                            key={index}
+                            className={`as-slide ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                            style={{ backgroundImage: `url('${slide}')` }}
+                        />
+                    ))}
+                </div>
 
-            <div className="as-wrapper">
-                <div className="as-hero-bg"></div>
-                <div className="as-hero-glow"></div>
+                <div className="as-wrapper">
+                    <div className="as-hero-bg"></div>
+                    <div className="as-hero-glow"></div>
 
-                {/* HERO SECTION */}
-                <header className="as-hero">
-                    <div className="z-10">
-                        <h1 className="as-hero-title">Magie, Artistik & Licht</h1>
-                        <p className="as-hero-sub">Eine faszinierende Show aus Bewegung, Lichteffekten und magischen Momenten. Perfekt für Galas, Innenbereiche und anspruchsvolle Events.</p>
-                        <Link className="as-btn-magic" to="/booking-request">
-                            <span className="text-xl">✨</span> Show anfragen
-                        </Link>
-                    </div>
-                </header>
-
-                {/* HIGHLIGHTS SECTION (CINEMATIC CARDS) */}
-                <section className="as-section as-reveal">
-                    <h2>Show-Highlights</h2>
-                    <div className="as-highlights-grid">
-                        {[
-                            { title: "Jonglage", subtitle: "Dynamik & Präzision", img: `${import.meta.env.BASE_URL}images/artistik.jonglage1.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/artistik.jonglage.hover.jpg` },
-                            { title: "Zauberei", subtitle: "Magische Momente", img: `${import.meta.env.BASE_URL}images/heroslider3.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/heroslider3.hover.jpg` },
-                            { title: "Handstandakrobatik", subtitle: "Hoch Hinaus", img: `${import.meta.env.BASE_URL}images/artistik.handstand.normal.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/artistik.handstand.hover.jpg` },
-                            { title: "Rola Rola", subtitle: "Balance & Kontrolle", img: `${import.meta.env.BASE_URL}images/artistik.rola.normal.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/artistik.rola.hover.jpg` }
-                        ].map((item, idx) => (
-                            <div className="as-highlight-card group" key={idx} onClick={() => handleImageClick(item.hoverImg || item.img)}>
-                                <div className="as-card-icon">
-                                    <Maximize2 size={20} />
-                                </div>
-                                <img src={item.img} alt={item.title} loading="lazy" className="default-img" />
-                                {item.hoverImg && <img src={item.hoverImg} alt={`${item.title} Hover`} loading="lazy" className="hover-img" />}
-                                <div className="as-card-overlay">
-                                    <span className="as-card-subtitle">{item.subtitle}</span>
-                                    <h3 className="as-card-title">
-                                        {item.title === 'Handstandakrobatik' ? (
-                                            <>
-                                                Handstand
-                                                <br className="as-mobile-break" />
-                                                akrobatik
-                                            </>
-                                        ) : item.title}
-                                    </h3>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* VIDEOS SECTION (RESTRUCTURED) */}
-                <section className="as-section as-reveal">
-                    <h2>Videos & Einblicke</h2>
-                    <div className="as-video-section-content">
-
-                        {/* 1. Main Video: Jonglage */}
-                        <div className="as-main-video-card">
-                            <div className="as-video-wrapper">
-                                <iframe src="https://www.youtube.com/embed/CpNsX5JBlRM" title="Jonglage Showreel" allowFullScreen loading="lazy"></iframe>
-                            </div>
-                            <div className="as-video-caption text-center">
-                                <h3 className="text-2xl font-serif text-[#EBD297] mb-2">Jonglage</h3>
-                                <p className="text-sm text-stone-300">Dynamische Performance mit Bällen, Keulen und Ringen.</p>
-                            </div>
+                    {/* HERO SECTION */}
+                    <header className="as-hero">
+                        <div className="z-10">
+                            <h1 className="as-hero-title">Magie, Artistik & Licht</h1>
+                            <p className="as-hero-sub">Eine faszinierende Show aus Bewegung, Lichteffekten und magischen Momenten. Perfekt für Galas, Innenbereiche und anspruchsvolle Events.</p>
+                            <Link className="as-btn-magic" to="/booking-request">
+                                <span className="text-xl">✨</span> Show anfragen
+                            </Link>
                         </div>
+                    </header>
 
-                        {/* 2. Shorts Grid */}
-                        <div className="as-shorts-grid">
-                            {/* Handstand */}
-                            <div className="as-short-card">
-                                <div className="as-short-wrapper">
-                                    <iframe src="https://www.youtube.com/embed/DReI5yQfBHI" title="Handstand" allowFullScreen loading="lazy"></iframe>
-                                </div>
-                                <div className="as-short-content text-center">
-                                    <h3 className="text-lg font-bold text-[#EBD297] mb-1">Handstand</h3>
-                                    <p className="text-xs text-stone-400">Atemberaubende Kraft und perfekte Balance.</p>
-                                </div>
-                            </div>
-
-                            {/* Magie */}
-                            <div className="as-short-card">
-                                <div className="as-short-wrapper">
-                                    <iframe src="https://www.youtube.com/embed/f6hCSr0qQJw" title="Magie" allowFullScreen loading="lazy"></iframe>
-                                </div>
-                                <div className="as-short-content text-center">
-                                    <h3 className="text-lg font-bold text-[#EBD297] mb-1">Magie</h3>
-                                    <p className="text-xs text-stone-400">Verblüffende Illusionen, wie der schwebende Tisch.</p>
-                                </div>
-                            </div>
-
-                            {/* Rola Rola */}
-                            <div className="as-short-card">
-                                <div className="as-short-wrapper">
-                                    <iframe src="https://www.youtube.com/embed/qzy-T_ti2wY" title="Rola Rola" allowFullScreen loading="lazy"></iframe>
-                                </div>
-                                <div className="as-short-content text-center">
-                                    <h3 className="text-lg font-bold text-[#EBD297] mb-1">Rola Rola</h3>
-                                    <p className="text-xs text-stone-400">Waghalsige Balanceakte auf der freistehenden Rolle.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-
-                {/* GALLERY CAROUSEL (UPDATED IMAGES) */}
-                <section className="as-section as-reveal">
-                    <h2>Impressionen</h2>
-                    <div className="as-carousel-wrapper">
-                        <button className="as-carousel-btn as-carousel-prev" onClick={handlePrev} aria-label="Zurück">❮</button>
-                        <div className="as-carousel-track" ref={trackRef}>
+                    {/* HIGHLIGHTS SECTION (CINEMATIC CARDS) */}
+                    <section className="as-section as-reveal">
+                        <h2>Show-Highlights</h2>
+                        <div className="as-highlights-grid">
                             {[
-                                { src: `${import.meta.env.BASE_URL}images/artistk.1.jpg`, format: 'portrait' },
-                                { src: `${import.meta.env.BASE_URL}images/artistk.2.jpg`, format: 'landscape' },
-                                { src: `${import.meta.env.BASE_URL}images/artistk.3.jpg`, format: 'portrait' },
-                                { src: `${import.meta.env.BASE_URL}images/artistk.4.jpg.webp`, format: 'landscape' },
-                                { src: `${import.meta.env.BASE_URL}images/artistk.5.jpg`, format: 'portrait' },
-                                { src: `${import.meta.env.BASE_URL}images/artistk.6.jpg`, format: 'landscape' },
-                                { src: `${import.meta.env.BASE_URL}images/artistk.7.jpg`, format: 'portrait' },
-                                { src: `${import.meta.env.BASE_URL}images/artistk.8.jpg`, format: 'landscape' },
-                                { src: `${import.meta.env.BASE_URL}images/artistk.9.jpg`, format: 'portrait' }
-                            ].map((item, i) => (
-                                <div className={`as-carousel-item ${item.format}`} key={i} onClick={() => handleImageClick(item.src)}>
-                                    <SmartImage src={item.src} alt={`Gallery ${i}`} loading="lazy" />
+                                { title: "Jonglage", subtitle: "Dynamik & Präzision", img: `${import.meta.env.BASE_URL}images/artistik.jonglage1.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/artistik.jonglage.hover.jpg` },
+                                { title: "Zauberei", subtitle: "Magische Momente", img: `${import.meta.env.BASE_URL}images/heroslider3.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/heroslider3.hover.jpg` },
+                                { title: "Handstandakrobatik", subtitle: "Hoch Hinaus", img: `${import.meta.env.BASE_URL}images/artistik.handstand.normal.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/artistik.handstand.hover.jpg` },
+                                { title: "Rola Rola", subtitle: "Balance & Kontrolle", img: `${import.meta.env.BASE_URL}images/artistik.rola.normal.jpg`, hoverImg: `${import.meta.env.BASE_URL}images/artistik.rola.hover.jpg` }
+                            ].map((item, idx) => (
+                                <div className="as-highlight-card group" key={idx} onClick={() => handleImageClick(item.hoverImg || item.img)}>
+                                    <div className="as-card-icon">
+                                        <Maximize2 size={20} />
+                                    </div>
+                                    <img src={item.img} alt={item.title} loading="lazy" className="default-img" />
+                                    {item.hoverImg && <img src={item.hoverImg} alt={`${item.title} Hover`} loading="lazy" className="hover-img" />}
+                                    <div className="as-card-overlay">
+                                        <span className="as-card-subtitle">{item.subtitle}</span>
+                                        <h3 className="as-card-title">
+                                            {item.title === 'Handstandakrobatik' ? (
+                                                <>
+                                                    Handstand
+                                                    <br className="as-mobile-break" />
+                                                    akrobatik
+                                                </>
+                                            ) : item.title}
+                                        </h3>
+                                    </div>
                                 </div>
                             ))}
                         </div>
-                        <button className="as-carousel-btn as-carousel-next" onClick={handleNext} aria-label="Weiter">❯</button>
-                    </div>
-                </section>
+                    </section>
 
-                {/* FAQ SECTION */}
-                <section className="as-section as-reveal">
-                    <h2>Häufige Fragen</h2>
-                    <div className="as-faq-container">
-                        <div className="as-faq">
-                            <details>
-                                <summary>Ist eine Artistikshow überall möglich?</summary>
-                                <p>Ja! Grundsätzlich kann diese Show überall vorführt werden. Für manche Nummern ist jedoch eine Deckenhöhe von mindestens 4,5m erforderlich. Allerdings ist diese Show sehr variabel, so dass sich auch bei normaler Deckenhöhe ein passendes Programm kreieren lässt.</p>
-                            </details>
-                            <details>
-                                <summary>Wie viel Platz wird benötigt?</summary>
-                                <p>Im Idealfall sollte die Fläche ca. 5m breit und 4m tief sein. Eine kleinere Fläche ist aber nach Absprache auch möglich.</p>
-                            </details>
-                            <details>
-                                <summary>Wie lange dauert die Show?</summary>
-                                <p>Die Showzeit beträgt ca. 30 Minuten.</p>
-                            </details>
-                            <details>
-                                <summary>Was wird vor Ort an Technik benötigt?</summary>
-                                <p>Ich bin weitgehend autark. Eine leistungsstarke Musikanlage (Akku oder Strom) und Lichttechnik für die Showfläche bringe ich mit. Ein Stromanschluss in der Nähe ist hilfreich, aber nicht zwingend notwendig.</p>
-                            </details>
+                    {/* VIDEOS SECTION (RESTRUCTURED) */}
+                    <section className="as-section as-reveal">
+                        <h2>Videos & Einblicke</h2>
+                        <div className="as-video-section-content">
+
+                            {/* 1. Main Video: Jonglage */}
+                            <div className="as-main-video-card">
+                                <div className="as-video-wrapper">
+                                    <iframe src="https://www.youtube.com/embed/CpNsX5JBlRM" title="Jonglage Showreel" allowFullScreen loading="lazy"></iframe>
+                                </div>
+                                <div className="as-video-caption text-center">
+                                    <h3 className="text-2xl font-serif text-[#EBD297] mb-2">Jonglage</h3>
+                                    <p className="text-sm text-stone-300">Dynamische Performance mit Bällen, Keulen und Ringen.</p>
+                                </div>
+                            </div>
+
+                            {/* 2. Shorts Grid */}
+                            <div className="as-shorts-grid">
+                                {/* Handstand */}
+                                <div className="as-short-card">
+                                    <div className="as-short-wrapper">
+                                        <iframe src="https://www.youtube.com/embed/DReI5yQfBHI" title="Handstand" allowFullScreen loading="lazy"></iframe>
+                                    </div>
+                                    <div className="as-short-content text-center">
+                                        <h3 className="text-lg font-bold text-[#EBD297] mb-1">Handstand</h3>
+                                        <p className="text-xs text-stone-400">Atemberaubende Kraft und perfekte Balance.</p>
+                                    </div>
+                                </div>
+
+                                {/* Magie */}
+                                <div className="as-short-card">
+                                    <div className="as-short-wrapper">
+                                        <iframe src="https://www.youtube.com/embed/f6hCSr0qQJw" title="Magie" allowFullScreen loading="lazy"></iframe>
+                                    </div>
+                                    <div className="as-short-content text-center">
+                                        <h3 className="text-lg font-bold text-[#EBD297] mb-1">Magie</h3>
+                                        <p className="text-xs text-stone-400">Verblüffende Illusionen, wie der schwebende Tisch.</p>
+                                    </div>
+                                </div>
+
+                                {/* Rola Rola */}
+                                <div className="as-short-card">
+                                    <div className="as-short-wrapper">
+                                        <iframe src="https://www.youtube.com/embed/qzy-T_ti2wY" title="Rola Rola" allowFullScreen loading="lazy"></iframe>
+                                    </div>
+                                    <div className="as-short-content text-center">
+                                        <h3 className="text-lg font-bold text-[#EBD297] mb-1">Rola Rola</h3>
+                                        <p className="text-xs text-stone-400">Waghalsige Balanceakte auf der freistehenden Rolle.</p>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                </section>
+                    </section>
 
-            </div>
+                    {/* GALLERY CAROUSEL (UPDATED IMAGES) */}
+                    <section className="as-section as-reveal">
+                        <h2>Impressionen</h2>
+                        <div className="as-carousel-wrapper">
+                            <button className="as-carousel-btn as-carousel-prev" onClick={handlePrev} aria-label="Zurück">❮</button>
+                            <div className="as-carousel-track" ref={trackRef}>
+                                {[
+                                    { src: `${import.meta.env.BASE_URL}images/artistk.1.jpg`, format: 'portrait' },
+                                    { src: `${import.meta.env.BASE_URL}images/artistk.2.jpg`, format: 'landscape' },
+                                    { src: `${import.meta.env.BASE_URL}images/artistk.3.jpg`, format: 'portrait' },
+                                    { src: `${import.meta.env.BASE_URL}images/artistk.4.jpg.webp`, format: 'landscape' },
+                                    { src: `${import.meta.env.BASE_URL}images/artistk.5.jpg`, format: 'portrait' },
+                                    { src: `${import.meta.env.BASE_URL}images/artistk.6.jpg`, format: 'landscape' },
+                                    { src: `${import.meta.env.BASE_URL}images/artistk.7.jpg`, format: 'portrait' },
+                                    { src: `${import.meta.env.BASE_URL}images/artistk.8.jpg`, format: 'landscape' },
+                                    { src: `${import.meta.env.BASE_URL}images/artistk.9.jpg`, format: 'portrait' }
+                                ].map((item, i) => (
+                                    <div className={`as-carousel-item ${item.format}`} key={i} onClick={() => handleImageClick(item.src)}>
+                                        <SmartImage src={item.src} alt={`Gallery ${i}`} loading="lazy" />
+                                    </div>
+                                ))}
+                            </div>
+                            <button className="as-carousel-btn as-carousel-next" onClick={handleNext} aria-label="Weiter">❯</button>
+                        </div>
+                    </section>
 
-            {/* LIGHTBOX */}
-            <div className={`as-lightbox ${lightboxSrc ? 'active' : ''}`} onClick={() => setLightboxSrc(null)}>
-                {lightboxSrc && <img src={lightboxSrc} alt="Show" />}
+                    {/* FAQ SECTION */}
+                    <section className="as-section as-reveal">
+                        <h2>Häufige Fragen</h2>
+                        <div className="as-faq-container">
+                            <div className="as-faq">
+                                <details>
+                                    <summary>Ist eine Artistikshow überall möglich?</summary>
+                                    <p>Ja! Grundsätzlich kann diese Show überall vorführt werden. Für manche Nummern ist jedoch eine Deckenhöhe von mindestens 4,5m erforderlich. Allerdings ist diese Show sehr variabel, so dass sich auch bei normaler Deckenhöhe ein passendes Programm kreieren lässt.</p>
+                                </details>
+                                <details>
+                                    <summary>Wie viel Platz wird benötigt?</summary>
+                                    <p>Im Idealfall sollte die Fläche ca. 5m breit und 4m tief sein. Eine kleinere Fläche ist aber nach Absprache auch möglich.</p>
+                                </details>
+                                <details>
+                                    <summary>Wie lange dauert die Show?</summary>
+                                    <p>Die Showzeit beträgt ca. 30 Minuten.</p>
+                                </details>
+                                <details>
+                                    <summary>Was wird vor Ort an Technik benötigt?</summary>
+                                    <p>Ich bin weitgehend autark. Eine leistungsstarke Musikanlage (Akku oder Strom) und Lichttechnik für die Showfläche bringe ich mit. Ein Stromanschluss in der Nähe ist hilfreich, aber nicht zwingend notwendig.</p>
+                                </details>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                {/* LIGHTBOX */}
+                <div className={`as-lightbox ${lightboxSrc ? 'active' : ''}`} onClick={() => setLightboxSrc(null)}>
+                    {lightboxSrc && <img src={lightboxSrc} alt="Show" />}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
-export default ArtistryShow;
+export default ScrollToTop(ArtistryShow);

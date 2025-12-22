@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, HeartHandshake, ShieldCheck, Megaphone } from 'lucide-react';
+import ScrollToTop from '../components/ScrollToTop';
 
 // Hero Background: Einzelnes Bild (keine Rotation)
 const SLIDES = [
@@ -628,6 +629,7 @@ const Home: React.FC = () => {
 
         </div>
       </div>
+      <ScrollToTop />
     </div>
   );
 };

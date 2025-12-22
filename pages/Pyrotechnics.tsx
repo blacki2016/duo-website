@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ScrollToTop from '../components/ScrollToTop';
 import { ShieldCheck, Zap, Heart, Flame } from 'lucide-react';
 
 const Pyrotechnics: React.FC = () => {
@@ -224,6 +225,7 @@ const Pyrotechnics: React.FC = () => {
                     />
                 </div>
             )}
+            <ScrollToTop />
         </div>
     );
 };

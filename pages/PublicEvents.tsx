@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ScrollToTop from '../components/ScrollToTop';
 
 const SLIDES = [
     '/images/termine.jpg'
@@ -482,6 +483,7 @@ const PublicEvents: React.FC = () => {
                 </div>
 
             </div>
+            <ScrollToTop />
         </div>
     );
 };

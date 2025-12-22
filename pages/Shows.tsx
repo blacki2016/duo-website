@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Flame, Zap, Tent, Sparkles, ArrowRight, RefreshCcw, HelpCircle } from 'lucide-react';
+import ScrollToTop from '../components/ScrollToTop';
 
 const SLIDES = [
   `${import.meta.env.BASE_URL}images/showformate.hintergrund.jpg`
@@ -331,6 +332,7 @@ const Shows: React.FC = () => {
           }
         }
       `}</style>
+      <ScrollToTop />
     </div>
   );
 };

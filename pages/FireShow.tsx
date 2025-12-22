@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Maximize2 } from 'lucide-react';
 import SmartImage from '../components/SmartImage';
+import ScrollToTop from '../components/ScrollToTop';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
@@ -790,6 +791,7 @@ const FireShow: React.FC = () => {
             <div className={`fs-lightbox ${lightboxSrc ? 'active' : ''}`} onClick={() => setLightboxSrc(null)}>
                 {lightboxSrc && <img src={lightboxSrc} alt="Lightbox" />}
             </div>
+            <ScrollToTop />
         </div>
     );
 };

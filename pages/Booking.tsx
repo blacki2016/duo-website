@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Loader2, CheckCircle, Send } from 'lucide-react';
 import { ContactStatus } from '../types';
+import ScrollToTop from '../components/ScrollToTop';
 
 const Booking: React.FC = () => {
     const [status, setStatus] = useState<ContactStatus>(ContactStatus.IDLE);
@@ -301,6 +302,7 @@ const Booking: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <ScrollToTop />
         </div>
     );
 };

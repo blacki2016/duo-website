@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ScrollToTop from '../components/ScrollToTop';
 
 const NotFound: React.FC = () => {
   return (
@@ -9,6 +10,7 @@ const NotFound: React.FC = () => {
       <Link to="/" className="px-8 py-3 bg-[#ebd297] text-black font-bold rounded-full hover:bg-white transition-colors font-sans">
         Zurück zur Startseite
       </Link>
+      <ScrollToTop />
     </div>
   );
 };

@@ -1,13 +1,14 @@
 import React from 'react';
+import ScrollToTop from '../components/ScrollToTop';
 
 const Imprint: React.FC = () => {
-  return (
-    <div className="min-h-screen relative w-full overflow-x-hidden">
-      {/* 
+    return (
+        <div className="min-h-screen relative w-full overflow-x-hidden">
+            {/* 
         Injecting specific styles provided by the user for the Legal pages.
         Using a style tag ensures exact match to the requested design.
       */}
-      <style>{`
+            <style>{`
         :root {
             --bg-dark: #1f1f20;
             --text-gold: #ebd297;
@@ -125,67 +126,68 @@ const Imprint: React.FC = () => {
         }
       `}</style>
 
-      <div className="legal-page-wrapper">
-        <div className="legal-container">
-            <h1>Impressum</h1>
+            <div className="legal-page-wrapper">
+                <div className="legal-container">
+                    <h1>Impressum</h1>
 
-            <h2>Angaben gemäß § 5 TMG</h2>
-            <p>
-                <strong>Maximilian Boy</strong><br/>
-                Schafhof 5<br/>
-                90616 Neuhof an der Zenn<br/>
-                Deutschland
-            </p>
+                    <h2>Angaben gemäß § 5 TMG</h2>
+                    <p>
+                        <strong>Maximilian Boy</strong><br />
+                        Schafhof 5<br />
+                        90616 Neuhof an der Zenn<br />
+                        Deutschland
+                    </p>
 
-            <p><strong>Rechtsform:</strong> Einzelunternehmer</p>
+                    <p><strong>Rechtsform:</strong> Einzelunternehmer</p>
 
-            <hr/>
+                    <hr />
 
-            <h2>Kontakt</h2>
-            <p>
-                Telefon: <a href="tel:015785585713">0157-85585713</a><br/>
-                E-Mail: <a href="mailto:info@maximilianboy.de">info@maximilianboy.de</a>
-            </p>
+                    <h2>Kontakt</h2>
+                    <p>
+                        Telefon: <a href="tel:015785585713">0157-85585713</a><br />
+                        E-Mail: <a href="mailto:info@maximilianboy.de">info@maximilianboy.de</a>
+                    </p>
 
-            <hr/>
+                    <hr />
 
-            <h2>Umsatzsteuer</h2>
-            <p>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).</p>
+                    <h2>Umsatzsteuer</h2>
+                    <p>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).</p>
 
-            <hr/>
+                    <hr />
 
-            <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
-            <p>
-                <strong>Maximilian Boy</strong><br/>
-                Schafhof 5<br/>
-                90616 Neuhof an der Zenn
-            </p>
+                    <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+                    <p>
+                        <strong>Maximilian Boy</strong><br />
+                        Schafhof 5<br />
+                        90616 Neuhof an der Zenn
+                    </p>
 
-            <hr/>
+                    <hr />
 
-            <h2>Haftung für Inhalte</h2>
-            <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+                    <h2>Haftung für Inhalte</h2>
+                    <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
 
-            <hr/>
+                    <hr />
 
-            <h2>Haftung für Links</h2>
-            <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+                    <h2>Haftung für Links</h2>
+                    <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
 
-            <hr/>
+                    <hr />
 
-            <h2>Urheberrecht</h2>
-            <p>Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+                    <h2>Urheberrecht</h2>
+                    <p>Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
 
-            <hr/>
+                    <hr />
 
-            <h2>Online-Streitbeilegung (OS)</h2>
-            <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:<br/>
-            <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr</a></p>
-            <p>Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+                    <h2>Online-Streitbeilegung (OS)</h2>
+                    <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:<br />
+                        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr</a></p>
+                    <p>Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+                </div>
+            </div>
+            <ScrollToTop />
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Imprint;

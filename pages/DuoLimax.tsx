@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 import SmartImage from '../components/SmartImage';
+import ScrollToTop from '../components/ScrollToTop';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
@@ -748,6 +749,7 @@ const DuoLimax: React.FC = () => {
             <div className={`limax-lightbox ${lightboxSrc ? 'active' : ''}`} onClick={() => setLightboxSrc(null)}>
                 {lightboxSrc && <img src={lightboxSrc} alt="Lightbox View" />}
             </div>
+            <ScrollToTop />
         </div>
     );
 }
