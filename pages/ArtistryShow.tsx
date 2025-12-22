@@ -36,80 +36,44 @@ const ArtistryShow: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
-    // Carousel Logic
     const trackRef = useRef<HTMLDivElement>(null);
+
+    // Gentle autoplay with pause on hover/touch
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
 
-        let animationFrameId: number;
-        let isPaused = false;
-        let scrollPos = 0;
-        const speed = 0.5;
-        let isDown = false;
-        let startX = 0;
-        let startScrollLeft = 0;
+        let rafId: number;
+        let last = 0;
+        let paused = false;
+        const speed = 0.08; // px per ms
 
-        // Clone items for infinite effect
-        const originalChildren = Array.from(track.children);
-        originalChildren.forEach(child => {
-            track.appendChild((child as HTMLElement).cloneNode(true));
-        });
+        const step = (ts: number) => {
+            if (!last) last = ts;
+            const delta = ts - last;
+            last = ts;
 
-        const loop = () => {
-            if (!isPaused && !isDown && track) {
-                scrollPos += speed;
-                if (scrollPos >= track.scrollWidth / 2) {
-                    scrollPos = 0;
-                }
-                track.scrollLeft = scrollPos;
+            if (!paused) {
+                const next = track.scrollLeft + delta * speed;
+                const maxScroll = track.scrollWidth - track.clientWidth;
+                track.scrollLeft = next >= maxScroll ? 0 : next;
             }
-            animationFrameId = requestAnimationFrame(loop);
+
+            rafId = requestAnimationFrame(step);
         };
 
-        const handleMouseDown = (e: MouseEvent) => {
-            isDown = true;
-            startX = e.pageX - track.offsetLeft;
-            startScrollLeft = track.scrollLeft;
-        };
+        const pause = () => { paused = true; };
+        const resume = () => { paused = false; };
 
-        const handleMouseLeave = () => {
-            isDown = false;
-            isPaused = false;
-        };
+        track.addEventListener('mouseenter', pause);
+        track.addEventListener('mouseleave', resume);
 
-        const handleMouseUp = () => {
-            isDown = false;
-        };
-
-        const handleMouseMove = (e: MouseEvent) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - track.offsetLeft;
-            const walk = (x - startX) * 2;
-            track.scrollLeft = startScrollLeft - walk;
-            scrollPos = track.scrollLeft;
-        };
-
-        const handleMouseEnter = () => { isPaused = true; };
-
-        track.addEventListener('mousedown', handleMouseDown);
-        track.addEventListener('mouseleave', handleMouseLeave);
-        track.addEventListener('mouseup', handleMouseUp);
-        track.addEventListener('mousemove', handleMouseMove);
-        track.addEventListener('mouseenter', handleMouseEnter);
-
-        loop();
+        rafId = requestAnimationFrame(step);
 
         return () => {
-            cancelAnimationFrame(animationFrameId);
-            if (track) {
-                track.removeEventListener('mousedown', handleMouseDown);
-                track.removeEventListener('mouseleave', handleMouseLeave);
-                track.removeEventListener('mouseup', handleMouseUp);
-                track.removeEventListener('mousemove', handleMouseMove);
-                track.removeEventListener('mouseenter', handleMouseEnter);
-            }
+            cancelAnimationFrame(rafId);
+            track.removeEventListener('mouseenter', pause);
+            track.removeEventListener('mouseleave', resume);
         };
     }, []);
 
@@ -270,6 +234,10 @@ const ArtistryShow: React.FC = () => {
             gap: 2.5rem;
             margin-top: 2rem;
         }
+        @media (max-width: 768px) {
+            .as-highlights-grid { grid-template-columns: 1fr; }
+            .as-highlight-card { height: 420px; }
+        }
         
         .as-highlight-card {
             position: relative;
@@ -402,11 +370,14 @@ const ArtistryShow: React.FC = () => {
         .as-carousel-track {
             display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem;
             width: 100%; scrollbar-width: none; cursor: grab;
+            scroll-snap-type: x mandatory; scroll-padding: 1rem;
+            -webkit-overflow-scrolling: touch; touch-action: pan-y;
         }
         .as-carousel-track::-webkit-scrollbar { display: none; }
         .as-carousel-item {
             flex: 0 0 70%; background: #000; border: 1px solid rgba(235, 210, 151, 0.15);
             border-radius: 12px; overflow: hidden; aspect-ratio: 2/3; position: relative;
+            scroll-snap-align: start;
         }
         @media (min-width: 600px) { .as-carousel-item { flex: 0 0 300px; } }
         .as-carousel-item img {

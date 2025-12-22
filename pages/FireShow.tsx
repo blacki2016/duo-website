@@ -36,51 +36,44 @@ const FireShow: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
-    // Carousel Logic
     const trackRef = useRef<HTMLDivElement>(null);
+
+    // Gentle autoplay with pause on hover/touch
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
 
-        let animationFrameId: number;
-        let isPaused = false;
-        let scrollPos = 0;
-        const speed = 0.5;
+        let rafId: number;
+        let last = 0;
+        let paused = false;
+        const speed = 0.08; // px per ms
 
-        // Clone items for infinite effect
-        const originalChildren = Array.from(track.children);
-        originalChildren.forEach(child => {
-            track.appendChild((child as HTMLElement).cloneNode(true));
-        });
+        const step = (ts: number) => {
+            if (!last) last = ts;
+            const delta = ts - last;
+            last = ts;
 
-        const loop = () => {
-            if (!isPaused && track) {
-                scrollPos += speed;
-                if (scrollPos >= track.scrollWidth / 2) {
-                    scrollPos = 0;
-                }
-                track.scrollLeft = scrollPos;
+            if (!paused) {
+                const next = track.scrollLeft + delta * speed;
+                const maxScroll = track.scrollWidth - track.clientWidth;
+                track.scrollLeft = next >= maxScroll ? 0 : next;
             }
-            animationFrameId = requestAnimationFrame(loop);
+
+            rafId = requestAnimationFrame(step);
         };
 
-        // Event Listeners for Pause
-        const pause = () => { isPaused = true; };
-        const resume = () => { isPaused = false; };
+        const pause = () => { paused = true; };
+        const resume = () => { paused = false; };
 
         track.addEventListener('mouseenter', pause);
-        track.addEventListener('touchstart', pause);
         track.addEventListener('mouseleave', resume);
-        track.addEventListener('touchend', resume);
 
-        loop();
+        rafId = requestAnimationFrame(step);
 
         return () => {
-            cancelAnimationFrame(animationFrameId);
+            cancelAnimationFrame(rafId);
             track.removeEventListener('mouseenter', pause);
-            track.removeEventListener('touchstart', pause);
             track.removeEventListener('mouseleave', resume);
-            track.removeEventListener('touchend', resume);
         };
     }, []);
 
@@ -463,6 +456,8 @@ const FireShow: React.FC = () => {
         .fs-carousel-track {
             display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem;
             width: 100%; scrollbar-width: none; cursor: grab;
+            scroll-snap-type: x mandatory; scroll-padding: 1rem;
+            -webkit-overflow-scrolling: touch; touch-action: pan-y;
         }
         .fs-carousel-track::-webkit-scrollbar { display: none; }
         .fs-carousel-item {
@@ -472,6 +467,7 @@ const FireShow: React.FC = () => {
             border-radius: 12px; overflow: hidden; 
             aspect-ratio: 2/3;
             position: relative;
+            scroll-snap-align: start;
         }
         @media (min-width: 600px) { 
             .fs-carousel-item { 

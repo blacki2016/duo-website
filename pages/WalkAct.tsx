@@ -35,94 +35,42 @@ const WalkAct: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Carousel Logic
+  // Gentle autoplay with pause on hover/touch
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
-    let animationFrameId: number;
-    let isPaused = false;
-    let scrollPos = 0;
-    const speed = 0.5;
-    let isDown = false;
-    let startX = 0;
-    let startScrollLeft = 0;
+    let rafId: number;
+    let last = 0;
+    let paused = false;
+    const speed = 0.08; // px per ms
 
-    // Clone items for infinite effect
-    const originalChildren = Array.from(track.children);
-    originalChildren.forEach(child => {
-      track.appendChild((child as HTMLElement).cloneNode(true));
-    });
+    const step = (ts: number) => {
+      if (!last) last = ts;
+      const delta = ts - last;
+      last = ts;
 
-    const loop = () => {
-      if (!isPaused && !isDown && track) {
-        scrollPos += speed;
-        if (scrollPos >= track.scrollWidth / 2) {
-          scrollPos = 0;
-          track.scrollLeft = 0;
-        } else {
-          track.scrollLeft = scrollPos;
-        }
-      } else if (track) {
-        // Sync scrollPos when paused/dragged
-        scrollPos = track.scrollLeft;
+      if (!paused) {
+        const next = track.scrollLeft + delta * speed;
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        track.scrollLeft = next >= maxScroll ? 0 : next;
       }
-      animationFrameId = requestAnimationFrame(loop);
+
+      rafId = requestAnimationFrame(step);
     };
 
-    // Event Handlers
-    const handleMouseDown = (e: MouseEvent) => {
-      isDown = true;
-      track.classList.add('active');
-      startX = e.pageX - track.offsetLeft;
-      startScrollLeft = track.scrollLeft;
-    };
+    const pause = () => { paused = true; };
+    const resume = () => { paused = false; };
 
-    const handleMouseLeave = () => {
-      isDown = false;
-      isPaused = false;
-      track.classList.remove('active');
-    };
+    track.addEventListener('mouseenter', pause);
+    track.addEventListener('mouseleave', resume);
 
-    const handleMouseUp = () => {
-      isDown = false;
-      track.classList.remove('active');
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - track.offsetLeft;
-      const walk = (x - startX) * 2;
-      track.scrollLeft = startScrollLeft - walk;
-      scrollPos = track.scrollLeft;
-    };
-
-    const handleMouseEnter = () => { isPaused = true; };
-    const handleTouchStart = () => { isPaused = true; };
-    const handleTouchEnd = () => { setTimeout(() => isPaused = false, 1500); };
-
-    track.addEventListener('mousedown', handleMouseDown);
-    track.addEventListener('mouseleave', handleMouseLeave);
-    track.addEventListener('mouseup', handleMouseUp);
-    track.addEventListener('mousemove', handleMouseMove);
-    track.addEventListener('mouseenter', handleMouseEnter);
-    track.addEventListener('touchstart', handleTouchStart, { passive: true });
-    track.addEventListener('touchend', handleTouchEnd);
-
-    loop();
+    rafId = requestAnimationFrame(step);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      if (track) {
-        track.removeEventListener('mousedown', handleMouseDown);
-        track.removeEventListener('mouseleave', handleMouseLeave);
-        track.removeEventListener('mouseup', handleMouseUp);
-        track.removeEventListener('mousemove', handleMouseMove);
-        track.removeEventListener('mouseenter', handleMouseEnter);
-        track.removeEventListener('touchstart', handleTouchStart);
-        track.removeEventListener('touchend', handleTouchEnd);
-      }
+      cancelAnimationFrame(rafId);
+      track.removeEventListener('mouseenter', pause);
+      track.removeEventListener('mouseleave', resume);
     };
   }, []);
 
@@ -436,10 +384,13 @@ const WalkAct: React.FC = () => {
             padding-bottom: 1rem;
             width: 100%;
             scrollbar-width: none;
-            cursor: grab;
+          cursor: grab;
+          scroll-snap-type: x mandatory;
+          scroll-padding: 1rem;
+          -webkit-overflow-scrolling: touch;
+          touch-action: pan-y;
         }
         .wa-carousel-track::-webkit-scrollbar { display: none; }
-        .wa-carousel-track.active { cursor: grabbing; }
 
         .wa-carousel-item {
             flex: 0 0 70%; 
@@ -450,6 +401,7 @@ const WalkAct: React.FC = () => {
             aspect-ratio: 9/16; 
             position: relative;
             user-select: none;
+          scroll-snap-align: start;
         }
         @media (min-width: 600px) {
             .wa-carousel-item { 
