@@ -81,6 +81,21 @@ const ArtistryShow: React.FC = () => {
             rafId = requestAnimationFrame(step);
         };
 
+        // Handle manual scrolling to loop infinitely
+        const handleScroll = () => {
+            const maxScroll = track.scrollWidth / 3;
+
+            if (track.scrollLeft >= maxScroll * 2) {
+                // Scrolled too far right, reset to beginning of second set
+                track.scrollLeft = track.scrollLeft - maxScroll;
+                scrollPos = track.scrollLeft;
+            } else if (track.scrollLeft <= 0) {
+                // Scrolled to beginning, jump to end of first set
+                track.scrollLeft = maxScroll;
+                scrollPos = track.scrollLeft;
+            }
+        };
+
         const handleMouseEnter = () => { pausedByHover = true; };
         const handleMouseLeave = () => { pausedByHover = false; };
 
@@ -99,6 +114,7 @@ const ArtistryShow: React.FC = () => {
             }, 2000);
         };
 
+        track.addEventListener('scroll', handleScroll, { passive: true });
         track.addEventListener('mouseenter', handleMouseEnter);
         track.addEventListener('mouseleave', handleMouseLeave);
         track.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -109,6 +125,7 @@ const ArtistryShow: React.FC = () => {
         return () => {
             cancelAnimationFrame(rafId);
             if (touchTimeout) clearTimeout(touchTimeout);
+            track.removeEventListener('scroll', handleScroll);
             track.removeEventListener('mouseenter', handleMouseEnter);
             track.removeEventListener('mouseleave', handleMouseLeave);
             track.removeEventListener('touchstart', handleTouchStart);
