@@ -9,6 +9,9 @@ import BookingRequest from './pages/BookingRequest';
 import Imprint from './pages/Imprint';
 import Privacy from './pages/Privacy';
 import FireShow from './pages/FireShow';
+import FireShowWedding from './pages/FireShowWedding';
+import FireShowCorporate from './pages/FireShowCorporate';
+import FireShowNuernberg from './pages/FireShowNuernberg';
 import ArtistryShow from './pages/ArtistryShow';
 import WalkAct from './pages/WalkAct';
 import DuoLimax from './pages/DuoLimax';
@@ -66,6 +69,9 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/shows" element={<Shows />} />
             <Route path="/feuershow" element={<FireShow />} />
+            <Route path="/hochzeit" element={<FireShowWedding />} />
+            <Route path="/firmen" element={<FireShowCorporate />} />
+            <Route path="/feuershow-nuernberg" element={<FireShowNuernberg />} />
             <Route path="/artistikshow" element={<ArtistryShow />} />
             <Route path="/walkact" element={<WalkAct />} />
             <Route path="/duolimax" element={<DuoLimax />} />
