@@ -9,7 +9,7 @@ const SLIDES = [
 
 const HIGHLIGHTS = [
     {
-        title: 'Magiee',
+        title: 'Magie',
         text: 'Großillusionen mit Wow-Effekt – Menschen erscheinen, verschwinden, schweben.',
         image: '/images/limaex.magie.jpg'
     },
