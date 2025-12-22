@@ -117,11 +117,15 @@ const WalkAct: React.FC = () => {
     track.addEventListener('touchstart', handleTouchStart, { passive: true });
     track.addEventListener('touchend', handleTouchEnd, { passive: true });
 
-    rafId = requestAnimationFrame(step);
+    // Start autoplay after a small delay to ensure content is loaded
+    const startAutoplay = setTimeout(() => {
+      rafId = requestAnimationFrame(step);
+    }, 100);
 
     return () => {
       cancelAnimationFrame(rafId);
       if (touchTimeout) clearTimeout(touchTimeout);
+      clearTimeout(startAutoplay);
       track.removeEventListener('scroll', handleScroll);
       track.removeEventListener('mouseenter', handleMouseEnter);
       track.removeEventListener('mouseleave', handleMouseLeave);
