@@ -38,7 +38,7 @@ const FireShow: React.FC = () => {
 
     const trackRef = useRef<HTMLDivElement>(null);
 
-    // Infinite autoplay carousel with seamless loop (supports touch swipe)
+    // Infinite autoplay carousel with seamless loop (touch-enabled for mobile)
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
@@ -57,14 +57,16 @@ const FireShow: React.FC = () => {
         }
 
         let rafId = 0;
-        let paused = false;
+        let pausedByHover = false;
+        let pausedByTouch = false;
         let scrollPos = 0;
         const speed = 0.65;
-        let userInteracting = false;
-        let interactionTimeout: NodeJS.Timeout | null = null;
+        let touchTimeout: NodeJS.Timeout | null = null;
 
         const step = () => {
-            if (!paused && !userInteracting) {
+            const isPaused = pausedByHover || pausedByTouch;
+
+            if (!isPaused) {
                 scrollPos += speed;
                 const maxScroll = track.scrollWidth / 3; // Since we cloned twice
 
@@ -78,40 +80,38 @@ const FireShow: React.FC = () => {
             rafId = requestAnimationFrame(step);
         };
 
-        const pause = () => { paused = true; };
-        const resume = () => { paused = false; };
+        const handleMouseEnter = () => { pausedByHover = true; };
+        const handleMouseLeave = () => { pausedByHover = false; };
 
-        // Handle touch/scroll interaction
-        const handleInteractionStart = () => {
-            userInteracting = true;
-            if (interactionTimeout) clearTimeout(interactionTimeout);
+        // Handle touch interaction (mobile only)
+        const handleTouchStart = () => {
+            pausedByTouch = true;
+            if (touchTimeout) clearTimeout(touchTimeout);
         };
 
-        const handleInteractionEnd = () => {
-            if (interactionTimeout) clearTimeout(interactionTimeout);
-            // Resume autoplay after 2 seconds of no interaction
-            interactionTimeout = setTimeout(() => {
-                userInteracting = false;
+        const handleTouchEnd = () => {
+            if (touchTimeout) clearTimeout(touchTimeout);
+            // Resume autoplay after 2 seconds
+            touchTimeout = setTimeout(() => {
+                pausedByTouch = false;
                 scrollPos = track.scrollLeft;
             }, 2000);
         };
 
-        track.addEventListener('mouseenter', pause);
-        track.addEventListener('mouseleave', resume);
-        track.addEventListener('touchstart', handleInteractionStart);
-        track.addEventListener('touchend', handleInteractionEnd);
-        track.addEventListener('scroll', handleInteractionStart, { passive: true });
+        track.addEventListener('mouseenter', handleMouseEnter);
+        track.addEventListener('mouseleave', handleMouseLeave);
+        track.addEventListener('touchstart', handleTouchStart, { passive: true });
+        track.addEventListener('touchend', handleTouchEnd, { passive: true });
 
         rafId = requestAnimationFrame(step);
 
         return () => {
             cancelAnimationFrame(rafId);
-            if (interactionTimeout) clearTimeout(interactionTimeout);
-            track.removeEventListener('mouseenter', pause);
-            track.removeEventListener('mouseleave', resume);
-            track.removeEventListener('touchstart', handleInteractionStart);
-            track.removeEventListener('touchend', handleInteractionEnd);
-            track.removeEventListener('scroll', handleInteractionStart);
+            if (touchTimeout) clearTimeout(touchTimeout);
+            track.removeEventListener('mouseenter', handleMouseEnter);
+            track.removeEventListener('mouseleave', handleMouseLeave);
+            track.removeEventListener('touchstart', handleTouchStart);
+            track.removeEventListener('touchend', handleTouchEnd);
         };
     }, []);
 
