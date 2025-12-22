@@ -332,6 +332,12 @@ const ArtistryShow: React.FC = () => {
             opacity: 0;
         }
 
+        /* Mobile-only break to avoid truncation on narrow screens */
+        .as-mobile-break { display: none; }
+        @media (max-width: 600px) {
+            .as-mobile-break { display: inline; }
+        }
+
         .as-card-overlay {
             position: absolute; bottom: 0; left: 0; width: 100%;
             padding: 2.5rem 2rem;
@@ -406,16 +412,35 @@ const ArtistryShow: React.FC = () => {
         /* CAROUSEL */
         .as-carousel-wrapper { position: relative; width: 100%; overflow: hidden; padding: 2rem 0; }
         .as-carousel-track {
-            display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem;
+            display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem;
             width: 100%; scrollbar-width: none; cursor: grab;
             -webkit-overflow-scrolling: touch; touch-action: pan-x;
+            align-items: center;
         }
         .as-carousel-track::-webkit-scrollbar { display: none; }
         .as-carousel-item {
-            flex: 0 0 70%; background: #000; border: 1px solid rgba(235, 210, 151, 0.15);
-            border-radius: 12px; overflow: hidden; aspect-ratio: 2/3; position: relative;
+            flex-shrink: 0;
+            background: #000; border: 1px solid rgba(235, 210, 151, 0.15);
+            border-radius: 12px; overflow: hidden; position: relative;
+            height: 400px;
         }
-        @media (min-width: 600px) { .as-carousel-item { flex: 0 0 300px; } }
+        .as-carousel-item.portrait {
+            width: 280px;
+        }
+        .as-carousel-item.landscape {
+            width: 550px;
+        }
+        @media (max-width: 768px) {
+            .as-carousel-item {
+                height: 350px;
+            }
+            .as-carousel-item.portrait {
+                width: 240px;
+            }
+            .as-carousel-item.landscape {
+                width: 450px;
+            }
+        }
         .as-carousel-item img {
             width: 100%; height: 100%; object-fit: cover; cursor: zoom-in;
             user-select: none;
@@ -505,7 +530,15 @@ const ArtistryShow: React.FC = () => {
                                 {item.hoverImg && <img src={item.hoverImg} alt={`${item.title} Hover`} loading="lazy" className="hover-img" />}
                                 <div className="as-card-overlay">
                                     <span className="as-card-subtitle">{item.subtitle}</span>
-                                    <h3 className="as-card-title">{item.title}</h3>
+                                    <h3 className="as-card-title">
+                                        {item.title === 'Handstandakrobatik' ? (
+                                            <>
+                                                Handstand
+                                                <br className="as-mobile-break" />
+                                                akrobatik
+                                            </>
+                                        ) : item.title}
+                                    </h3>
                                 </div>
                             </div>
                         ))}
@@ -573,25 +606,20 @@ const ArtistryShow: React.FC = () => {
                     <div className="as-carousel-wrapper">
                         <div className="as-carousel-track" ref={trackRef}>
                             {[
-                                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Z62_3388-26.jpg",
-                                "https://maximilianboy.de/wp-content/uploads/2020/11/akrobatik-maximilian-boy-005-1024x1024.jpg",
-                                "https://maximilianboy.de/wp-content/uploads/2025/01/05_IMG-20241124-WA0142-768x1024.jpg",
-                                "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-030-682x1024.jpg?strip=info&w=1333&ssl=1",
-                                "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Z62_3394-27.jpg",
-                                "https://maximilianboy.de/wp-content/uploads/2025/01/08_IMG-20241124-WA0068-608x1024.jpg",
-                                "https://maximilianboy.de/wp-content/uploads/2025/01/03_IMG-20241124-WA0126-619x1024.jpg",
-                                "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-033-682x1024.jpg?strip=info&w=1333&ssl=1",
-                                "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2025/09/Bild-045-683x1024.jpg?strip=info&w=1707&ssl=1",
-                                "https://maximilianboy.de/wp-content/uploads/2025/01/20241123-limaex-ukongu-024-682x1024.jpg",
-                                "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2025/09/Z62_3403-28-1024x682.jpg?strip=info&w=2000&ssl=1"
-                            ].map((src, i) => {
-                                const shiftLeft = src.includes('Z62_3388-26.jpg');
-                                return (
-                                    <div className="as-carousel-item" key={i} onClick={() => handleImageClick(src)}>
-                                        <img src={src} alt={`Gallery ${i}`} loading="lazy" style={shiftLeft ? { objectPosition: '20% center' } : undefined} />
-                                    </div>
-                                );
-                            })}
+                                { src: `${import.meta.env.BASE_URL}images/artistk.1.jpg`, format: 'portrait' },
+                                { src: `${import.meta.env.BASE_URL}images/artistk.2.jpg`, format: 'landscape' },
+                                { src: `${import.meta.env.BASE_URL}images/artistk.3.jpg`, format: 'portrait' },
+                                { src: `${import.meta.env.BASE_URL}images/artistk.4.jpg.webp`, format: 'landscape' },
+                                { src: `${import.meta.env.BASE_URL}images/artistk.5.jpg`, format: 'portrait' },
+                                { src: `${import.meta.env.BASE_URL}images/artistk.6.jpg`, format: 'landscape' },
+                                { src: `${import.meta.env.BASE_URL}images/artistk.7.jpg`, format: 'portrait' },
+                                { src: `${import.meta.env.BASE_URL}images/artistk.8.jpg`, format: 'landscape' },
+                                { src: `${import.meta.env.BASE_URL}images/artistk.9.jpg`, format: 'portrait' }
+                            ].map((item, i) => (
+                                <div className={`as-carousel-item ${item.format}`} key={i} onClick={() => handleImageClick(item.src)}>
+                                    <img src={item.src} alt={`Gallery ${i}`} loading="lazy" />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>

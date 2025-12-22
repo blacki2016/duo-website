@@ -272,7 +272,7 @@ const Navbar: React.FC = () => {
                                                 <Link
                                                     key={cIdx}
                                                     to={child.path}
-                                                    className="text-[#ebd297] hover:text-white py-3 flex items-center gap-4 text-lg min-h-[48px] touch-manipulation"
+                                                    className="font-bold text-[#ebd297] hover:text-white py-3 flex items-center gap-4 text-lg min-h-[48px] touch-manipulation"
                                                 >
                                                     <span className="w-2 h-2 bg-[#ebd297] rounded-full shrink-0"></span>
                                                     <span>{child.label}</span>
@@ -386,7 +386,7 @@ const Navbar: React.FC = () => {
                                                                 <Link
                                                                     key={cIdx}
                                                                     to={child.path}
-                                                                    className="block px-4 py-3 text-base text-[#ebd297] hover:text-white hover:bg-[#ebd297]/10 rounded-lg transition-colors flex items-center justify-between group/item"
+                                                                    className="block px-4 py-3 text-base font-bold text-[#ebd297] hover:text-white hover:bg-[#ebd297]/10 rounded-lg transition-colors flex items-center justify-between group/item"
                                                                 >
                                                                     <span>{text}</span>
                                                                     <span className="text-2xl opacity-90 leading-none transform group-hover/item:scale-110 transition-transform">{emoji}</span>

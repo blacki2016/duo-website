@@ -4,7 +4,7 @@ import { Maximize2 } from 'lucide-react';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
-    `${import.meta.env.BASE_URL}images/heroslider1.jpg`
+    `${import.meta.env.BASE_URL}images/feuer.hero.jpg`
 ];
 
 const FireShow: React.FC = () => {
@@ -168,7 +168,7 @@ const FireShow: React.FC = () => {
             top: 0; left: 0; width: 100%;
             height: 920px;
             z-index: -1;
-            background-image: url("${import.meta.env.BASE_URL}images/heroslider1.jpg");
+            background-image: url("${import.meta.env.BASE_URL}images/feuer.hero.jpg");
             background-position: center -100px; /* Adjusted for navbar */
             background-size: cover;
             -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);

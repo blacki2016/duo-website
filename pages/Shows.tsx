@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Flame, Star, Tent, Sparkles, ArrowRight, RefreshCcw, HelpCircle } from 'lucide-react';
+import { Flame, Zap, Tent, Sparkles, ArrowRight, RefreshCcw, HelpCircle } from 'lucide-react';
 
 const SLIDES = [
   `${import.meta.env.BASE_URL}images/showformate.hintergrund.jpg`
@@ -22,7 +22,7 @@ const SHOW_CARDS = [
     description: "Moderne Jonglage, Lichteffekte und Akrobatik. Perfekt für Indoor-Events und Galas.",
     image: `${import.meta.env.BASE_URL}images/showformate.artistik.jpg`,
     link: "/artistikshow",
-    icon: <Star className="w-6 h-6" />,
+    icon: <Zap className="w-6 h-6" />,
     tags: ['Indoor', 'Gala', 'Licht']
   },
   {
