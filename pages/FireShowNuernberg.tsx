@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin } from 'lucide-react';
 import FireShow from './FireShow';
 
 const FireShowNuernberg: React.FC = () => {
