@@ -4,7 +4,7 @@ import { Maximize2 } from 'lucide-react';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
-    'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/cropped-Z62_3654-46.jpg'
+    `${import.meta.env.BASE_URL}images/heroslider1.jpg`
 ];
 
 const FireShow: React.FC = () => {
@@ -38,13 +38,18 @@ const FireShow: React.FC = () => {
 
     const trackRef = useRef<HTMLDivElement>(null);
 
-    // Infinite autoplay like homepage testimonials (pause on hover)
+    // Infinite autoplay carousel with seamless loop
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
 
+        // Clone all children for seamless infinite scroll
         if (track.getAttribute('data-cloned') !== 'true') {
             const originals = Array.from(track.children);
+            // Clone twice for smoother infinite effect
+            originals.forEach(child => {
+                track.appendChild((child as HTMLElement).cloneNode(true));
+            });
             originals.forEach(child => {
                 track.appendChild((child as HTMLElement).cloneNode(true));
             });
@@ -53,19 +58,18 @@ const FireShow: React.FC = () => {
 
         let rafId = 0;
         let paused = false;
-        let scrollPos = track.scrollLeft;
-        const speed = 0.65; // px per frame for clearer motion
+        let scrollPos = 0;
+        const speed = 0.65;
 
         const step = () => {
             if (!paused) {
                 scrollPos += speed;
-                const resetAt = track.scrollWidth / 2;
-                if (scrollPos >= resetAt) {
+                const maxScroll = track.scrollWidth / 3; // Since we cloned twice
+
+                if (scrollPos >= maxScroll) {
                     scrollPos = 0;
-                    track.scrollLeft = 0;
-                } else {
-                    track.scrollLeft = scrollPos;
                 }
+                track.scrollLeft = scrollPos;
             } else {
                 scrollPos = track.scrollLeft;
             }
@@ -140,7 +144,7 @@ const FireShow: React.FC = () => {
             top: 0; left: 0; width: 100%;
             height: 920px;
             z-index: -1;
-            background-image: url("https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/cropped-Z62_3654-46-3-2.jpg");
+            background-image: url("${import.meta.env.BASE_URL}images/heroslider1.jpg");
             background-position: center -100px; /* Adjusted for navbar */
             background-size: cover;
             -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
@@ -467,24 +471,37 @@ const FireShow: React.FC = () => {
             display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem;
             width: 100%; scrollbar-width: none; cursor: grab;
             -webkit-overflow-scrolling: touch; touch-action: pan-y;
+            align-items: center;
         }
         .fs-carousel-track::-webkit-scrollbar { display: none; }
         .fs-carousel-item {
-            flex: 0 0 70%; /* Mobile: smaller than 85% */
+            flex-shrink: 0;
             background: #000; 
             border: 1px solid rgba(235, 210, 151, 0.3);
             border-radius: 12px; overflow: hidden; 
-            aspect-ratio: 2/3;
             position: relative;
+            height: 400px;
         }
-        @media (min-width: 600px) { 
-            .fs-carousel-item { 
-                flex: 0 0 300px; /* Desktop: smaller than 380px */
-            } 
+        .fs-carousel-item.portrait {
+            width: 280px;
+        }
+        .fs-carousel-item.landscape {
+            width: 550px;
+        }
+        @media (max-width: 768px) {
+            .fs-carousel-item {
+                height: 350px;
+            }
+            .fs-carousel-item.portrait {
+                width: 240px;
+            }
+            .fs-carousel-item.landscape {
+                width: 450px;
+            }
         }
         .fs-carousel-item img {
             width: 100%; height: 100%; 
-            object-fit: contain; 
+            object-fit: cover; 
             cursor: zoom-in;
             user-select: none;
         }
@@ -589,10 +606,10 @@ const FireShow: React.FC = () => {
                     <h2>Show-Highlights</h2>
                     <div className="fs-highlights-grid">
                         {[
-                            { title: "Feuerjonglage", subtitle: "Präzision & Flow", img: "https://maximilianboy.de/wp-content/uploads/2023/09/PARKS17Maerz23_1059-683x1024.jpg" },
-                            { title: "Flammenmeer", subtitle: "Energie Pur", img: "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2023/02/IMG_20210819_124617_236.jpg-neu.jpg?strip=info&w=704&ssl=1" },
-                            { title: "Etwas Romantik", subtitle: "Für das Herz", img: "https://maximilianboy.de/wp-content/uploads/2021/12/19-768x1024.jpg" },
-                            { title: "Funkenflug", subtitle: "Das große Finale", img: "https://maximilianboy.de/wp-content/uploads/2023/09/Neu-1-1024x809.jpg" },
+                            { title: "Feuerjonglage", subtitle: "Präzision & Flow", img: `${import.meta.env.BASE_URL}images/Feuerjonglage.jpg` },
+                            { title: "Flammenmeer", subtitle: "Energie Pur", img: `${import.meta.env.BASE_URL}images/flammenmeer.jpg` },
+                            { title: "Etwas Romantik", subtitle: "Für das Herz", img: `${import.meta.env.BASE_URL}images/feuerherz.jpg` },
+                            { title: "Funkenflug", subtitle: "Das große Finale", img: `${import.meta.env.BASE_URL}images/funkenflug.jpg` },
                         ].map((item, i) => (
                             <div className="fs-highlight-card group" key={i} onClick={() => handleImageClick(item.img)}>
                                 <div className="fs-card-icon">
@@ -617,11 +634,7 @@ const FireShow: React.FC = () => {
                         </p>
                         <div className="flex items-center justify-center gap-4">
                             <div className="w-16 h-16 rounded-full overflow-hidden border border-white/20 bg-[#ebd297]/10 flex items-center justify-center">
-                                <img
-                                    src="https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_8v3p158v3p158v3p_2-removebg-preview.png"
-                                    alt="Patrick"
-                                    className="w-full h-full object-cover"
-                                />
+                                <span className="font-serif font-bold text-xl">P</span>
                             </div>
                             <div className="text-left">
                                 <div className="text-[#ebd297] font-bold text-base">Patrick</div>
@@ -675,13 +688,20 @@ const FireShow: React.FC = () => {
                     <div className="fs-carousel-wrapper">
                         <div className="fs-carousel-track" ref={trackRef}>
                             {[
-                                "https://maximilianboy.de/wp-content/uploads/2023/09/PARKS17Maerz23_1059-683x1024.jpg",
-                                "https://i0.wp.com/maximilianboy.de/wp-content/uploads/2023/02/IMG_20210819_124617_236.jpg-neu.jpg?strip=info&w=704&ssl=1",
-                                "https://maximilianboy.de/wp-content/uploads/2021/12/19-768x1024.jpg",
-                                "https://maximilianboy.de/wp-content/uploads/2023/09/Neu-1-1024x809.jpg"
-                            ].map((src, i) => (
-                                <div className="fs-carousel-item" key={i} onClick={() => handleImageClick(src)}>
-                                    <img src={src} alt={`Gallery ${i}`} loading="lazy" />
+                                { src: `${import.meta.env.BASE_URL}images/flammenmeer.jpg`, format: 'landscape' },
+                                { src: `${import.meta.env.BASE_URL}images/feuerherz.jpg`, format: 'portrait' },
+                                { src: `${import.meta.env.BASE_URL}images/funkenflug.jpg`, format: 'landscape' },
+                                { src: `${import.meta.env.BASE_URL}images/Feuerjonglage.jpg`, format: 'portrait' },
+                                { src: `${import.meta.env.BASE_URL}images/heroslider1.jpg`, format: 'landscape' },
+                                { src: `${import.meta.env.BASE_URL}images/heroslider2.jpg`, format: 'landscape' },
+                                { src: `${import.meta.env.BASE_URL}images/feuer.impression1.jpg`, format: 'landscape' },
+                                { src: `${import.meta.env.BASE_URL}images/feuer.impression2.jpg`, format: 'landscape' },
+                                { src: `${import.meta.env.BASE_URL}images/feuer.impression3.jpg`, format: 'portrait' },
+                                { src: `${import.meta.env.BASE_URL}images/feuer.impression4.jpg`, format: 'portrait' },
+                                { src: `${import.meta.env.BASE_URL}images/feuer.impression5.jpg`, format: 'landscape' }
+                            ].map((item, i) => (
+                                <div className={`fs-carousel-item ${item.format}`} key={i} onClick={() => handleImageClick(item.src)}>
+                                    <img src={item.src} alt={`Gallery ${i}`} loading="lazy" />
                                 </div>
                             ))}
                         </div>

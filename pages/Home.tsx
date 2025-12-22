@@ -1,31 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, HeartHandshake } from 'lucide-react';
+import { Star, HeartHandshake, ShieldCheck, Megaphone } from 'lucide-react';
 
-// Hero Background Slides (4 Bilder im Crossfade)
+// Hero Background: Einzelnes Bild (keine Rotation)
 const SLIDES = [
-  'https://maximilianboy.de/mystaging02/wp-content/uploads/2023/09/cropped-cropped-Neu1-scaled-1.jpg',
-  'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/cropped-DSCF1317-1-scaled-1-2.jpg',
-  'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/cropped-20241123-limaex-ukongu-117.jpg',
-  'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/cropped-Bild-237-scaled-1.jpg'
+  `${import.meta.env.BASE_URL}images/heroslider1.jpg`
 ];
 
 // USP Data - UPDATED
 const USPS = [
   {
-    // Updated Image for "Geprüfte Sicherheit"
-    imgSrc: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_eli44reli44reli4_2-removebg-preview.png",
+    // Internes Icon für "Geprüfte Sicherheit"
+    icon: <ShieldCheck className="w-full h-full text-[#ebd297]" />,
     title: "Geprüfte Sicherheit",
     desc: "Sicherheit geht vor Showeffekt. Als ausgebildeter Bühnenpyrotechniker garantiere ich einen sicheren Ablauf für Location und Gäste."
   },
   {
-    // Updated Image for "All In"
-    imgSrc: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_eli44reli44reli4_3-removebg-preview.png",
+    // Internes Icon für "All In"
+    icon: <Megaphone className="w-full h-full text-[#ebd297]" />,
     title: "All In",
     desc: "Kein LKW, aber volles Equipment: Ich bringe meine professionelle Ton- und Lichttechnik direkt mit. Sie können entspannt die Füße hochlegen."
   },
   {
-    // Icon fallback for "Hautnah & Interaktiv"
+    // Internes Icon für "Hautnah & Interaktiv"
     icon: <HeartHandshake className="w-full h-full text-[#ebd297]" />,
     title: "Hautnah & Interaktiv",
     desc: "Kein steriler Programmpunkt, sondern Entertainment zum Anfassen. Ich beziehe das Publikum charmant mit ein – ein Erlebnis, das verbindet."
@@ -44,8 +41,7 @@ const TESTIMONIALS = [
     name: "Patrick",
     event: "Hochzeit",
     text: "Eine Wahnsinns-Feuershow als Überraschung! Wir kamen aus dem Staunen nicht heraus. Max gestaltet die Show so amüsant, dass Klein und Groß viel gelacht haben. Ein tolles Highlight und eine große Empfehlung!",
-    // Updated Logo for Patrick
-    logo: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_8v3p158v3p158v3p_2-removebg-preview.png"
+    customIcon: <span className="font-serif font-bold text-xl">P</span>
   },
   {
     name: "Julia B.",
@@ -58,7 +54,7 @@ const TESTIMONIALS = [
     event: "Weihnachtsfeier",
     text: "Herr Boy hat unsere Weihnachtsfeier mit einer gigantischen Feuershow zum Highlight gemacht. Wir waren begeistert von der Mischung aus Witz und Kunst. Für zukünftige Veranstaltungen ist er fest vorgemerkt.",
     // Updated Logo
-    logo: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_1r15d91r15d91r15-removebg-preview.png"
+    logo: `${import.meta.env.BASE_URL}images/goldi.png`
   },
   {
     name: "Hochzeitspaar",
@@ -73,10 +69,10 @@ const TESTIMONIALS = [
     customIcon: <span className="font-serif font-bold text-xl">F</span>
   },
   {
-    name: "Ute (Solarfirma)",
-    event: "Firmensommerfest",
+    name: "Wust Wind Sonne",
+    event: "Firmenfest",
     text: "Alles lief reibungslos! Seine Akrobatikshow hat Jung und Alt begeistert. Eine gute Mischung aus Spannung und Humor machte die Show sehr kurzweilig. Beim nächsten Mal buchen wir definitiv die Feuershow!",
-    logo: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/12/Gemini_Generated_Image_sr6wecsr6wecsr6w_2-removebg-preview.png",
+    logo: `${import.meta.env.BASE_URL}images/wustwindsonne.png`,
   },
   {
     name: "Private Feier",
@@ -84,13 +80,20 @@ const TESTIMONIALS = [
     text: "Originelle Show der etwas anderen Art; sehr netter Künstler; absolut weiterzuempfehlen; Preis-/ Leistungsverhältnis ist angemessen und nicht überzogen.",
     customIcon: <span className="font-serif font-bold text-xl">P</span>
   }
+  ,
+  {
+    name: "Nele A.",
+    event: "Öffentlicher Auftritt",
+    text: "Ich war bei der Show von Maximilian bei der Museumsnacht in Bad Windsheim und bin echt begeistert. Die Rola-Bola-Nummer in der Artistik-Show war für mich das absolute Highlight!🌟 Und die Feuershow am Abend war der perfekte Abschluss. Wir überlegen ihn auch mal für ein privates Event zu buchen. Vielen Dank! ☺️",
+    customIcon: <span className="font-serif font-bold text-xl">N</span>
+  }
 ];
 
 // Updated Data for Showformate Section with Position Tweaks
 const SHOW_PREVIEWS = [
   {
     title: "Feuershow",
-    img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/cropped-Z62_3654-46.jpg",
+    img: `${import.meta.env.BASE_URL}images/heroslider1.jpg`,
     features: [
       "Humorvolles Familienprogramm",
       "Feuerjonglage & Artistik",
@@ -103,7 +106,7 @@ const SHOW_PREVIEWS = [
   },
   {
     title: "Artistikshow",
-    img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-039-scaled.jpg",
+    img: `${import.meta.env.BASE_URL}images/showformate.artistik.jpg`,
     features: [
       "Handstand-Acts & Balance",
       "Rola-Rola Show",
@@ -116,7 +119,7 @@ const SHOW_PREVIEWS = [
   },
   {
     title: "Walk Act / Stelzen",
-    img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2023/08/20230805_181721-scaled.jpg",
+    img: `${import.meta.env.BASE_URL}images/showformate.walkact.jpg`,
     features: [
       "Interaktive Begrüßung",
       "Mit oder ohne Stelzen",
@@ -129,7 +132,7 @@ const SHOW_PREVIEWS = [
   },
   {
     title: "Duo Limäx",
-    img: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-124.jpg",
+    img: `${import.meta.env.BASE_URL}images/showformate.limaex.jpg`,
     features: [
       "2 Künstler = Doppelte Power",
       "Großillusionen & Comedy",
@@ -138,7 +141,7 @@ const SHOW_PREVIEWS = [
     ctaText: "Hex hex",
     ctaEmoji: "✨",
     link: "/duolimax",
-    imgPos: "object-top"
+    imgPos: "object-[80%_0]"
   }
 ];
 
@@ -412,7 +415,7 @@ const Home: React.FC = () => {
                 {/* Left Card: Image */}
                 <div className="w-full aspect-square border-2 border-[#ebd29780] rounded-2xl overflow-hidden shadow-2xl relative group bg-black/40 backdrop-blur-md">
                   <img
-                    src="https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6.jpg"
+                    src="/images/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6-2.jpg"
                     alt="Maximilian Boy Portrait"
                     className="w-full h-full object-cover object-[center_20%] transition-transform duration-[800ms] group-hover:scale-105"
                   />
@@ -453,19 +456,11 @@ const Home: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
                 {USPS.map((usp, idx) => (
                   <div key={idx} className="flex flex-col items-center text-center p-6 bg-black/40 backdrop-blur-sm rounded-xl border border-[#ebd297]/10 hover:border-[#ebd297]/40 transition-colors shadow-lg group">
-                    {/* UPDATED: Removed circle background, unified size */}
+                    {/* Nur interne Icons anzeigen */}
                     <div className="mb-6 h-32 w-full flex items-center justify-center shrink-0">
-                      {usp.imgSrc ? (
-                        <img
-                          src={usp.imgSrc}
-                          alt={usp.title}
-                          className="h-full w-auto object-contain max-h-[120px] filter drop-shadow-[0_0_15px_rgba(235,210,151,0.2)] group-hover:scale-110 transition-transform duration-300"
-                        />
-                      ) : (
-                        <div className="h-28 w-28 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_15px_rgba(235,210,151,0.2)]">
-                          {usp.icon}
-                        </div>
-                      )}
+                      <div className="h-28 w-28 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_15px_rgba(235,210,151,0.2)]">
+                        {usp.icon}
+                      </div>
                     </div>
                     <h3 className="text-xl font-bold text-[#ebd297] mb-3">{usp.title}</h3>
                     <p className="text-stone-400 leading-relaxed">{usp.desc}</p>
@@ -487,8 +482,8 @@ const Home: React.FC = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1600px] mx-auto">
                 {SHOW_PREVIEWS.map((show, i) => (
                   <div key={i} className="bg-black/40 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ebd29780] hover:border-gold-300 transition-all hover:-translate-y-2 show-card group shadow-lg flex flex-col w-full">
-                    {/* Significantly increased height to h-[600px] to show full image */}
-                    <div className="h-[600px] overflow-hidden relative">
+                    {/* Reduced height to h-[450px] */}
+                    <div className="h-[450px] overflow-hidden relative">
                       <img
                         src={show.img}
                         alt={show.title}

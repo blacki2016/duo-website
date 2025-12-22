@@ -45,8 +45,8 @@ const Navbar: React.FC = () => {
         setMobileExpanded(mobileExpanded === label ? null : label);
     };
 
-    // Logo URL
-    const LOGO_URL = "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/10/cropped-cropped-cropped-cropped-cropped-cropped-659aa219-a326-43d5-b6bb-5b02d64a3c40_2-removebg-preview.png";
+    // Logo URL (local asset)
+    const LOGO_URL = `${import.meta.env.BASE_URL}images/logo.png`;
 
     const navItems: NavItem[] = [
         { label: 'Startseite', path: '/' },

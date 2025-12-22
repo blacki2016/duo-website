@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Flame, Star, Tent, Sparkles, ArrowRight, RefreshCcw, HelpCircle } from 'lucide-react';
 
 const SLIDES = [
-  'https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/955a3bed-be2e-449c-9372-4383e58d3eb7.jpg'
+  `${import.meta.env.BASE_URL}images/showformate.hintergrund.jpg`
 ];
 
 const SHOW_CARDS = [
@@ -11,7 +11,7 @@ const SHOW_CARDS = [
     id: 'feuershow',
     title: "Feuershow",
     description: "Spektakuläre Flammen, Funken und pure Energie. Das Highlight für Hochzeiten und Firmenevents bei Nacht.",
-    image: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/cropped-Z62_3654-46.jpg",
+    image: `${import.meta.env.BASE_URL}images/heroslider1.jpg`,
     link: "/feuershow",
     icon: <Flame className="w-6 h-6" />,
     tags: ['Outdoor', 'Action', 'Nacht']
@@ -20,7 +20,7 @@ const SHOW_CARDS = [
     id: 'artistikshow',
     title: "Artistikshow",
     description: "Moderne Jonglage, Lichteffekte und Akrobatik. Perfekt für Indoor-Events und Galas.",
-    image: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/Bild-039-scaled.jpg",
+    image: `${import.meta.env.BASE_URL}images/showformate.artistik.jpg`,
     link: "/artistikshow",
     icon: <Star className="w-6 h-6" />,
     tags: ['Indoor', 'Gala', 'Licht']
@@ -29,7 +29,7 @@ const SHOW_CARDS = [
     id: 'walkact',
     title: "Walk Act",
     description: "Interaktive Unterhaltung auf Stelzen oder am Boden. Charmant, humorvoll und nah am Publikum.",
-    image: "https://maximilianboy.de/mystaging02/wp-content/uploads/2023/08/20230805_181721-scaled.jpg",
+    image: `${import.meta.env.BASE_URL}images/showformate.walkact.jpg`,
     link: "/walkact",
     icon: <Tent className="w-6 h-6" />,
     tags: ['Indoor', 'Outdoor', 'Interaktion']
@@ -38,7 +38,7 @@ const SHOW_CARDS = [
     id: 'duolimax',
     title: "Duo Limäx",
     description: "Die doppelte Portion Entertainment. Großillusionen, Comedy und Magie mit Leo Wieseckel.",
-    image: "https://maximilianboy.de/mystaging02/wp-content/uploads/2025/01/20241123-limaex-ukongu-124.jpg",
+    image: `${import.meta.env.BASE_URL}images/showformate.limaex.jpg`,
     link: "/duolimax",
     icon: <Sparkles className="w-6 h-6" />,
     tags: ['Indoor', 'Magie', 'Comedy']
