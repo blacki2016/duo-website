@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Maximize2 } from 'lucide-react';
+import SmartImage from '../components/SmartImage';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
@@ -422,29 +423,22 @@ const ArtistryShow: React.FC = () => {
             flex-shrink: 0;
             background: #000; border: 1px solid rgba(235, 210, 151, 0.15);
             border-radius: 12px; overflow: hidden; position: relative;
-            height: 400px;
+            display: inline-flex; align-items: center; justify-content: center;
+            /* no fixed height/width: card sizes to image */
         }
-        .as-carousel-item.portrait {
-            width: 280px;
-        }
-        .as-carousel-item.landscape {
-            width: 550px;
-        }
+        .as-carousel-item.portrait {}
+        .as-carousel-item.landscape {}
         @media (max-width: 768px) {
-            .as-carousel-item {
-                height: 350px;
-            }
-            .as-carousel-item.portrait {
-                width: 240px;
-            }
-            .as-carousel-item.landscape {
-                width: 450px;
-            }
+            .as-carousel-item { }
         }
         .as-carousel-item img {
-            width: 100%; height: 100%; object-fit: cover; cursor: zoom-in;
+            width: auto; height: auto; max-height: 400px; max-width: 100%; object-fit: contain; cursor: zoom-in;
             user-select: none;
+            position: relative;
+            z-index: 1;
         }
+        @media (max-width: 768px) { .as-carousel-item img { max-height: 350px; } }
+        /* removed blurred background layer for exact image sizing */
 
         /* FAQ */
         .as-faq-container { max-width: 800px; margin: 0 auto; }
@@ -617,7 +611,7 @@ const ArtistryShow: React.FC = () => {
                                 { src: `${import.meta.env.BASE_URL}images/artistk.9.jpg`, format: 'portrait' }
                             ].map((item, i) => (
                                 <div className={`as-carousel-item ${item.format}`} key={i} onClick={() => handleImageClick(item.src)}>
-                                    <img src={item.src} alt={`Gallery ${i}`} loading="lazy" />
+                                    <SmartImage src={item.src} alt={`Gallery ${i}`} loading="lazy" />
                                 </div>
                             ))}
                         </div>

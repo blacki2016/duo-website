@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import SmartImage from '../components/SmartImage';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
@@ -429,27 +430,24 @@ const WalkAct: React.FC = () => {
         .wa-carousel-track::-webkit-scrollbar { display: none; }
 
         .wa-carousel-item {
-            flex: 0 0 70%; 
-            background: #000;
-            border: 1px solid rgba(235, 210, 151, 0.15);
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 9/16; 
-            position: relative;
-            user-select: none;
-        }
-        @media (min-width: 600px) {
-            .wa-carousel-item { 
-                flex: 0 0 300px; 
-            }
+          flex-shrink: 0; 
+          background: #000;
+          border: 1px solid rgba(235, 210, 151, 0.15);
+          border-radius: 12px;
+          overflow: hidden;
+          position: relative;
+          user-select: none;
+          display: inline-flex; align-items: center; justify-content: center;
         }
         .wa-carousel-item img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            display: block;
-            pointer-events: none;
+          width: auto !important;
+          height: auto !important;
+          max-height: 400px; max-width: 100%;
+          object-fit: contain !important;
+          display: block;
+          pointer-events: none;
         }
+        @media (max-width: 768px) { .wa-carousel-item img { max-height: 350px; } }
 
         .wa-carousel-btn {
             position: absolute;
@@ -615,7 +613,7 @@ const WalkAct: React.FC = () => {
                 "https://i2.wp.com/maximilianboy.de/wp-content/uploads/2023/08/IMG-20230805-WA0037-576x1024.jpg?strip=info&w=900&ssl=1"
               ].map((src, i) => (
                 <div className="wa-carousel-item" key={i}>
-                  <img src={src} alt={`Walkact Impression ${i + 1}`} loading="lazy" />
+                  <SmartImage src={src} alt={`Walkact Impression ${i + 1}`} loading="lazy" />
                 </div>
               ))}
             </div>

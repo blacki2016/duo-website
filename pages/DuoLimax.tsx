@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
+import SmartImage from '../components/SmartImage';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
@@ -467,19 +468,19 @@ const DuoLimax: React.FC = () => {
         .carousel-track::-webkit-scrollbar { display: none; }
         
         .carousel-item {
-            flex: 0 0 350px;
-            aspect-ratio: 2/3;
+            flex-shrink: 0;
+            display: inline-flex; align-items: center; justify-content: center;
             border-radius: 8px;
             overflow: hidden;
             position: relative;
             border: 1px solid rgba(255,255,255,0.1);
             transition: transform 0.3s;
             cursor: pointer;
+            background: #000;
         }
-        @media(max-width: 600px) { .carousel-item { flex: 0 0 280px; } }
-
         .carousel-item:hover { transform: scale(1.03); border-color: #EBD297; }
-        .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
+        .carousel-item img { width: auto; height: auto; max-height: 400px; max-width: 100%; object-fit: contain; }
+        @media(max-width: 600px) { .carousel-item img { max-height: 350px; } }
 
         .carousel-nav-btn {
             position: absolute;
@@ -681,7 +682,7 @@ const DuoLimax: React.FC = () => {
                                 "https://i0.wp.com/limaex.de/wp-content/uploads/2025/01/02_IMG-20241124-WA0007-689x1024.jpg?strip=info&w=1723&ssl=1"
                             ].map((src, idx) => (
                                 <div key={idx} className="carousel-item" onClick={() => setLightboxSrc(src)}>
-                                    <img src={src} alt={`Galerie ${idx}`} loading="lazy" />
+                                    <SmartImage src={src} alt={`Galerie ${idx}`} loading="lazy" />
                                 </div>
                             ))}
                         </div>

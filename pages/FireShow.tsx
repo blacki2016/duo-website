@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Maximize2 } from 'lucide-react';
+import SmartImage from '../components/SmartImage';
 
 // Hero Background Slides (mit weichem Crossfade)
 const SLIDES = [
@@ -504,31 +505,23 @@ const FireShow: React.FC = () => {
             border: 1px solid rgba(235, 210, 151, 0.3);
             border-radius: 12px; overflow: hidden; 
             position: relative;
-            height: 400px;
+            display: inline-flex; align-items: center; justify-content: center;
         }
-        .fs-carousel-item.portrait {
-            width: 280px;
-        }
-        .fs-carousel-item.landscape {
-            width: 550px;
-        }
+        .fs-carousel-item.portrait {}
+        .fs-carousel-item.landscape {}
         @media (max-width: 768px) {
-            .fs-carousel-item {
-                height: 350px;
-            }
-            .fs-carousel-item.portrait {
-                width: 240px;
-            }
-            .fs-carousel-item.landscape {
-                width: 450px;
-            }
+            .fs-carousel-item { }
         }
         .fs-carousel-item img {
-            width: 100%; height: 100%; 
-            object-fit: cover; 
+            width: auto; height: auto; max-height: 400px; max-width: 100%;
+            object-fit: contain; 
             cursor: zoom-in;
             user-select: none;
+            position: relative;
+            z-index: 1;
         }
+        @media (max-width: 768px) { .fs-carousel-item img { max-height: 350px; } }
+        /* removed blurred background layer for exact image sizing */
 
         /* FAQ */
         .fs-faq details {
@@ -725,7 +718,7 @@ const FireShow: React.FC = () => {
                                 { src: `${import.meta.env.BASE_URL}images/feuer.impression5.jpg`, format: 'landscape' }
                             ].map((item, i) => (
                                 <div className={`fs-carousel-item ${item.format}`} key={i} onClick={() => handleImageClick(item.src)}>
-                                    <img src={item.src} alt={`Gallery ${i}`} loading="lazy" />
+                                    <SmartImage src={item.src} alt={`Gallery ${i}`} loading="lazy" />
                                 </div>
                             ))}
                         </div>
