@@ -34,8 +34,11 @@ const BookingRequest: React.FC = () => {
     }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+        const target = e.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+        const { name, value } = target;
+        const isCheckbox = target instanceof HTMLInputElement && target.type === 'checkbox';
+        const nextValue = isCheckbox ? target.checked : value;
+        setFormData(prev => ({ ...prev, [name]: nextValue }));
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
