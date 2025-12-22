@@ -87,7 +87,7 @@ const DuoLimax: React.FC = () => {
         let rafId = 0;
         let paused = false;
         let scrollPos = track.scrollLeft;
-        const speed = 0.5; // px per frame
+        const speed = 0.65; // px per frame for clearer motion
 
         const step = () => {
             if (!paused) {
@@ -433,8 +433,6 @@ const DuoLimax: React.FC = () => {
             padding: 1rem 0 3rem;
             overflow-x: auto;
             scrollbar-width: none;
-            scroll-snap-type: x mandatory;
-            scroll-padding: 1rem;
             -webkit-overflow-scrolling: touch;
             touch-action: pan-y;
         }
@@ -449,7 +447,6 @@ const DuoLimax: React.FC = () => {
             border: 1px solid rgba(255,255,255,0.1);
             transition: transform 0.3s;
             cursor: pointer;
-            scroll-snap-align: start;
         }
         @media(max-width: 600px) { .carousel-item { flex: 0 0 280px; } }
 

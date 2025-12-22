@@ -55,7 +55,7 @@ const ArtistryShow: React.FC = () => {
         let rafId = 0;
         let paused = false;
         let scrollPos = track.scrollLeft;
-        const speed = 0.5; // px per frame
+        const speed = 0.65; // px per frame for clearer motion
 
         const step = () => {
             if (!paused) {
@@ -381,14 +381,12 @@ const ArtistryShow: React.FC = () => {
         .as-carousel-track {
             display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem;
             width: 100%; scrollbar-width: none; cursor: grab;
-            scroll-snap-type: x mandatory; scroll-padding: 1rem;
             -webkit-overflow-scrolling: touch; touch-action: pan-y;
         }
         .as-carousel-track::-webkit-scrollbar { display: none; }
         .as-carousel-item {
             flex: 0 0 70%; background: #000; border: 1px solid rgba(235, 210, 151, 0.15);
             border-radius: 12px; overflow: hidden; aspect-ratio: 2/3; position: relative;
-            scroll-snap-align: start;
         }
         @media (min-width: 600px) { .as-carousel-item { flex: 0 0 300px; } }
         .as-carousel-item img {

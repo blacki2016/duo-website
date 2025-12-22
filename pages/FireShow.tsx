@@ -54,7 +54,7 @@ const FireShow: React.FC = () => {
         let rafId = 0;
         let paused = false;
         let scrollPos = track.scrollLeft;
-        const speed = 0.5; // px per frame
+        const speed = 0.65; // px per frame for clearer motion
 
         const step = () => {
             if (!paused) {
@@ -466,7 +466,6 @@ const FireShow: React.FC = () => {
         .fs-carousel-track {
             display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem;
             width: 100%; scrollbar-width: none; cursor: grab;
-            scroll-snap-type: x mandatory; scroll-padding: 1rem;
             -webkit-overflow-scrolling: touch; touch-action: pan-y;
         }
         .fs-carousel-track::-webkit-scrollbar { display: none; }
@@ -477,7 +476,6 @@ const FireShow: React.FC = () => {
             border-radius: 12px; overflow: hidden; 
             aspect-ratio: 2/3;
             position: relative;
-            scroll-snap-align: start;
         }
         @media (min-width: 600px) { 
             .fs-carousel-item { 

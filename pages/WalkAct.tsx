@@ -51,7 +51,7 @@ const WalkAct: React.FC = () => {
     let rafId = 0;
     let paused = false;
     let scrollPos = track.scrollLeft;
-    const speed = 0.5; // px per frame
+    const speed = 0.65; // px per frame for clearer motion
 
     const step = () => {
       if (!paused) {
@@ -395,8 +395,6 @@ const WalkAct: React.FC = () => {
             width: 100%;
             scrollbar-width: none;
           cursor: grab;
-          scroll-snap-type: x mandatory;
-          scroll-padding: 1rem;
           -webkit-overflow-scrolling: touch;
           touch-action: pan-y;
         }
@@ -411,7 +409,6 @@ const WalkAct: React.FC = () => {
             aspect-ratio: 9/16; 
             position: relative;
             user-select: none;
-          scroll-snap-align: start;
         }
         @media (min-width: 600px) {
             .wa-carousel-item { 
