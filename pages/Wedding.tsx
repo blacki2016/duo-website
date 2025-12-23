@@ -75,48 +75,8 @@ const Wedding: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-black/50"></div>
             </div>
-
-            {/* Hero Section - Hochzeit */}
-            <header className="relative w-full h-screen overflow-hidden flex items-center justify-center mt-[50px] z-10">
-                <div className="relative text-center px-4 max-w-6xl mx-auto">
-                    <span className="block text-gold-400 font-bold tracking-wider uppercase mb-6 animate-fade-in-up text-lg md:text-xl lg:text-2xl drop-shadow-md">
-                        Das perfekte Highlight für deinen großen Tag
-                    </span>
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-extrabold mb-8 leading-tight drop-shadow-2xl uppercase text-white">
-                        FEUER, LIEBE <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-pink-400 to-gold-300 filter drop-shadow-lg">
-                            UND EIN BRENNENDES HERZ!
-                        </span>
-                    </h1>
-
-                    {/* Animated Heart */}
-                    <div className="flex justify-center mb-12">
-                        <Heart className="w-20 h-20 text-red-500 fill-red-500 animate-heartbeat" />
-                    </div>
-
-                    <p className="text-xl md:text-2xl text-stone-100 mb-12 max-w-3xl mx-auto leading-relaxed font-medium drop-shadow-lg">
-                        Eine spektakuläre Feuershow als emotionales Highlight für eure Hochzeit. Romantisch, sicher und unvergesslich.
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                        <Link
-                            to="/booking-request"
-                            className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3"
-                        >
-                            Unverbindlich anfragen <span className="text-xl">💕</span>
-                        </Link>
-                        <Link
-                            to="/feuershow"
-                            className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3"
-                        >
-                            Feuershow Details <span className="text-xl">🔥</span>
-                        </Link>
-                    </div>
-                </div>
-            </header>
-
-            {/* Wrapper for content */}
-            <div className="relative w-full bg-stone-950">
+            {/* Wrapper for content (ohne Hero) */}
+            <div className="relative w-full bg-stone-950 pt-28">
                 <div className="relative z-10">
 
                     {/* USPs für Hochzeiten */}
