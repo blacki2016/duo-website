@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import ScrollToTop from '../components/ScrollToTop';
 
 const Pricing: React.FC = () => {
+    const [email, setEmail] = useState('');
+    const [privacyAccepted, setPrivacyAccepted] = useState(false);
+    const [isUnlocked, setIsUnlocked] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+
     const [selections, setSelections] = useState({
         feuershow: false,
         artistikshow: false,
@@ -44,6 +50,57 @@ const Pricing: React.FC = () => {
 
     const travelCost = kilometers * costPerKm;
     const totalPrice = basePrice + travelCost;
+
+    // E-Mail-Validierung
+    const isValidEmail = (email: string) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+
+    // Unlock-Handler
+    const handleUnlock = () => {
+        if (!isValidEmail(email)) {
+            setSubmitError('Bitte gib eine gültige E-Mail-Adresse ein.');
+            return;
+        }
+        if (!privacyAccepted) {
+            setSubmitError('Bitte akzeptiere die Datenschutzerklärung.');
+            return;
+        }
+        setSubmitError('');
+        setIsUnlocked(true);
+    };
+
+    // Angebot senden
+    const handleSendOffer = async () => {
+        setIsSubmitting(true);
+        setSubmitError('');
+
+        try {
+            const response = await fetch('/api/send-pricing', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    selections,
+                    duolimaxVariant,
+                    kilometers,
+                    basePrice,
+                    travelCost,
+                    totalPrice
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Fehler beim Senden');
+            }
+
+            alert('✅ Dein Angebot wurde erfolgreich an uns gesendet! Wir melden uns bald bei dir.');
+        } catch (error) {
+            setSubmitError('Fehler beim Senden. Bitte versuche es später erneut.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-stone-950 pt-32 pb-20 font-sans relative">
@@ -88,156 +145,229 @@ const Pricing: React.FC = () => {
                 </div>
 
                 <div className="container mx-auto px-4 max-w-5xl">
-                    <div className="grid md:grid-cols-2 gap-12">
-                        {/* LEFT: Leistungsauswahl */}
-                        <div className="bg-[#141415] p-8 rounded-3xl shadow-2xl border border-[#ebd297]/20">
-                            <h2 className="text-2xl font-serif font-bold text-[#ebd297] mb-8">Leistungen</h2>
-
-                            <div className="space-y-4">
-                                {[
-                                    { key: 'feuershow', label: 'Feuershow' },
-                                    { key: 'artistikshow', label: 'Artistikshow' },
-                                    { key: 'walkact', label: 'Walk Act (3 x 30 min oder am Stück)' }
-                                ].map(item => (
-                                    <label key={item.key} className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all border border-white/5 hover:border-[#ebd297]/20">
-                                        <input
-                                            type="checkbox"
-                                            checked={selections[item.key as keyof typeof selections]}
-                                            onChange={() => handleToggle(item.key as keyof typeof selections)}
-                                            className="flex-shrink-0"
-                                        />
-                                        <div className="flex-grow">
-                                            <div className="font-semibold text-white">{item.label}</div>
-                                        </div>
-                                    </label>
-                                ))}
-
-                                {/* Duo Limäx mit Varianten-Auswahl */}
-                                <div className="space-y-3">
-                                    <label className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all border border-white/5 hover:border-[#ebd297]/20">
-                                        <input
-                                            type="checkbox"
-                                            checked={selections.duolimax}
-                                            onChange={() => handleToggle('duolimax')}
-                                            className="flex-shrink-0"
-                                        />
-                                        <div className="flex-grow">
-                                            <div className="font-semibold text-white">Duo Limäx (Magie & Illusion)</div>
-                                        </div>
-                                    </label>
-
-                                    {/* Varianten-Auswahl (nur wenn Duo Limäx aktiviert) */}
-                                    {selections.duolimax && (
-                                        <div className="ml-8 p-4 bg-purple-500/10 rounded-xl border border-purple-400/30">
-                                            <label className="block text-sm text-stone-300 mb-2 font-semibold">Wähle eine Variante:</label>
-                                            <select
-                                                value={duolimaxVariant}
-                                                onChange={(e) => setDuolimaxVariant(e.target.value as 'mini' | 'abend')}
-                                                className="w-full bg-[#0a0a0a] border border-stone-700 text-white p-3 rounded-lg focus:border-[#ebd297] focus:outline-none cursor-pointer"
-                                            >
-                                                <option value="mini">🎭 UKONGU Mini (20 Minuten) - 1.400€</option>
-                                                <option value="abend">🌟 UKONGU Abendprogramm (90 Minuten) - 2.500€</option>
-                                            </select>
-                                        </div>
-                                    )}
+                    {/* E-MAIL GATE (nur wenn noch nicht entsperrt) */}
+                    {!isUnlocked ? (
+                        <div className="max-w-2xl mx-auto">
+                            <div className="bg-[#141415] p-10 rounded-3xl shadow-2xl border border-[#ebd297]/20">
+                                <div className="text-center mb-8">
+                                    <div className="text-6xl mb-4">🔒</div>
+                                    <h2 className="text-2xl font-serif font-bold text-[#ebd297] mb-3">Zugang zum Preisrechner</h2>
+                                    <p className="text-stone-400">
+                                        Um den Preisrechner nutzen zu können, benötigen wir deine E-Mail-Adresse.
+                                        Dein errechnetes Angebot wird dir und uns per E-Mail zugeschickt.
+                                    </p>
                                 </div>
 
-                                {/* Romantische Feuerherz-Deko (nur bei Feuershow) */}
-                                {selections.feuershow && (
-                                    <label className="flex items-center gap-4 p-4 bg-pink-500/10 rounded-xl hover:bg-pink-500/20 cursor-pointer transition-all border border-pink-400/20 hover:border-pink-400/40 ml-8">
-                                        <input
-                                            type="checkbox"
-                                            checked={selections.fireHeart}
-                                            onChange={() => handleToggle('fireHeart')}
-                                            className="flex-shrink-0"
-                                        />
-                                        <div className="flex-grow">
-                                            <div className="font-semibold text-white">❤️‍🔥 Romantische Feuerherz - Deko <span className="text-pink-300">(+50€)</span></div>
-                                        </div>
-                                    </label>
-                                )}
-                            </div>
-
-                            {/* Fahrtkosten */}
-                            <div className="mt-8 pt-8 border-t border-stone-700">
-                                <h3 className="text-lg font-semibold text-[#ebd297] mb-4">Fahrtkosten</h3>
-                                <div className="flex items-end gap-4">
-                                    <div className="flex-grow">
-                                        <label className="block text-sm text-stone-300 mb-2">Entfernung (km)</label>
-                                        <input
-                                            type="number"
-                                            value={kilometers}
-                                            onChange={(e) => setKilometers(Math.max(0, Number(e.target.value)))}
-                                            placeholder="z.B. 50"
-                                            className="w-full"
-                                        />
-                                    </div>
+                                <div className="space-y-6">
+                                    {/* E-Mail Input */}
                                     <div>
-                                        <div className="text-sm text-stone-400 mb-2">à 0,50€/km</div>
-                                        <div className="text-[#ebd297] font-bold text-xl">{travelCost.toFixed(2)}€</div>
+                                        <label className="block text-sm text-stone-300 mb-2 font-semibold">
+                                            E-Mail-Adresse *
+                                        </label>
+                                        <input
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            placeholder="deine@email.de"
+                                            className="w-full bg-[#0a0a0a] border border-stone-700 text-white p-4 rounded-lg focus:border-[#ebd297] focus:outline-none"
+                                            required
+                                        />
+                                    </div>
+
+                                    {/* Datenschutz Checkbox */}
+                                    <label className="flex items-start gap-3 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={privacyAccepted}
+                                            onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                                            className="mt-1 flex-shrink-0"
+                                        />
+                                        <span className="text-sm text-stone-300">
+                                            Ich habe die <a href="/#/privacy" className="text-[#ebd297] hover:underline" target="_blank">Datenschutzerklärung</a> zur Kenntnis genommen.
+                                            Ich stimme zu, dass meine Angaben zur Kontaktaufnahme und für die Angebotserstellung erhoben und verarbeitet werden.
+                                            Die Daten werden nach abgeschlossener Bearbeitung deiner Anfrage gelöscht.
+                                            Hinweis: Du kannst deine Einwilligung jederzeit für die Zukunft per E-Mail widerrufen. *
+                                        </span>
+                                    </label>
+
+                                    {/* Fehler Anzeige */}
+                                    {submitError && (
+                                        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-red-300 text-sm">
+                                            ⚠️ {submitError}
+                                        </div>
+                                    )}
+
+                                    {/* Unlock Button */}
+                                    <button
+                                        onClick={handleUnlock}
+                                        disabled={!email || !privacyAccepted}
+                                        className="w-full bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-6 py-4 font-bold rounded-full hover:from-[#fffebb] hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-[#ebd297] disabled:hover:to-[#d4af37]"
+                                    >
+                                        Preisrechner entsperren 🔓
+                                    </button>
+
+                                    <p className="text-xs text-stone-500 text-center mt-4">
+                                        🔒 Deine Daten sind sicher und werden gemäß DSGVO verarbeitet.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <>
+                            {/* PREISRECHNER (nur wenn entsperrt) */}
+                            <div className="grid md:grid-cols-2 gap-12">
+                                {/* LEFT: Leistungsauswahl */}
+                                <div className="bg-[#141415] p-8 rounded-3xl shadow-2xl border border-[#ebd297]/20">
+                                    <h2 className="text-2xl font-serif font-bold text-[#ebd297] mb-8">Leistungen</h2>
+
+                                    <div className="space-y-4">
+                                        {[
+                                            { key: 'feuershow', label: 'Feuershow' },
+                                            { key: 'artistikshow', label: 'Artistikshow' },
+                                            { key: 'walkact', label: 'Walk Act (3 x 30 min oder am Stück)' }
+                                        ].map(item => (
+                                            <label key={item.key} className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all border border-white/5 hover:border-[#ebd297]/20">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selections[item.key as keyof typeof selections]}
+                                                    onChange={() => handleToggle(item.key as keyof typeof selections)}
+                                                    className="flex-shrink-0"
+                                                />
+                                                <div className="flex-grow">
+                                                    <div className="font-semibold text-white">{item.label}</div>
+                                                </div>
+                                            </label>
+                                        ))}
+
+                                        {/* Duo Limäx mit Varianten-Auswahl */}
+                                        <div className="space-y-3">
+                                            <label className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all border border-white/5 hover:border-[#ebd297]/20">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selections.duolimax}
+                                                    onChange={() => handleToggle('duolimax')}
+                                                    className="flex-shrink-0"
+                                                />
+                                                <div className="flex-grow">
+                                                    <div className="font-semibold text-white">Duo Limäx (Magie & Illusion)</div>
+                                                </div>
+                                            </label>
+
+                                            {/* Varianten-Auswahl (nur wenn Duo Limäx aktiviert) */}
+                                            {selections.duolimax && (
+                                                <div className="ml-8 p-4 bg-purple-500/10 rounded-xl border border-purple-400/30">
+                                                    <label className="block text-sm text-stone-300 mb-2 font-semibold">Wähle eine Variante:</label>
+                                                    <select
+                                                        value={duolimaxVariant}
+                                                        onChange={(e) => setDuolimaxVariant(e.target.value as 'mini' | 'abend')}
+                                                        className="w-full bg-[#0a0a0a] border border-stone-700 text-white p-3 rounded-lg focus:border-[#ebd297] focus:outline-none cursor-pointer"
+                                                    >
+                                                        <option value="mini">🎭 UKONGU Mini (20 Minuten) - 1.400€</option>
+                                                        <option value="abend">🌟 UKONGU Abendprogramm (90 Minuten) - 2.500€</option>
+                                                    </select>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* Romantische Feuerherz-Deko (nur bei Feuershow) */}
+                                        {selections.feuershow && (
+                                            <label className="flex items-center gap-4 p-4 bg-pink-500/10 rounded-xl hover:bg-pink-500/20 cursor-pointer transition-all border border-pink-400/20 hover:border-pink-400/40 ml-8">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selections.fireHeart}
+                                                    onChange={() => handleToggle('fireHeart')}
+                                                    className="flex-shrink-0"
+                                                />
+                                                <div className="flex-grow">
+                                                    <div className="font-semibold text-white">❤️‍🔥 Romantische Feuerherz - Deko <span className="text-pink-300">(+50€)</span></div>
+                                                </div>
+                                            </label>
+                                        )}
+                                    </div>
+
+                                    {/* Fahrtkosten */}
+                                    <div className="mt-8 pt-8 border-t border-stone-700">
+                                        <h3 className="text-lg font-semibold text-[#ebd297] mb-4">Fahrtkosten</h3>
+                                        <div className="flex items-end gap-4">
+                                            <div className="flex-grow">
+                                                <label className="block text-sm text-stone-300 mb-2">Entfernung (km)</label>
+                                                <input
+                                                    type="number"
+                                                    value={kilometers}
+                                                    onChange={(e) => setKilometers(Math.max(0, Number(e.target.value)))}
+                                                    placeholder="z.B. 50"
+                                                    className="w-full"
+                                                />
+                                            </div>
+                                            <div>
+                                                <div className="text-sm text-stone-400 mb-2">à 0,50€/km</div>
+                                                <div className="text-[#ebd297] font-bold text-xl">{travelCost.toFixed(2)}€</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* RIGHT: Preisanzeige */}
+                                <div className="flex flex-col justify-between">
+                                    <div className="bg-gradient-to-br from-[#ebd297]/20 to-[#d4af37]/10 border-2 border-[#ebd297]/40 rounded-3xl p-12 shadow-[0_0_40px_rgba(235,210,151,0.15)]">
+                                        <h2 className="text-xl text-stone-300 mb-2">Gesamtpreis</h2>
+                                        <div className="text-6xl md:text-7xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#ebd297] to-[#fffebb] mb-6">
+                                            {totalPrice.toFixed(2)}€
+                                        </div>
+
+                                        <div className="space-y-3 mb-8 text-stone-300">
+                                            {basePrice > 0 && (
+                                                <div className="flex justify-between pb-3 border-b border-stone-600">
+                                                    <span>Leistungen</span>
+                                                    <span className="font-semibold">{basePrice.toFixed(2)}€</span>
+                                                </div>
+                                            )}
+                                            {kilometers > 0 && (
+                                                <div className="flex justify-between pb-3 border-b border-stone-600">
+                                                    <span>Fahrtkosten</span>
+                                                    <span className="font-semibold">{travelCost.toFixed(2)}€</span>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {kilometers === 0 ? (
+                                            <p className="text-sm text-stone-400 italic">
+                                                Bitte gib die Entfernung in Kilometern ein, um den Gesamtpreis zu sehen.
+                                            </p>
+                                        ) : totalPrice === 0 ? (
+                                            <p className="text-sm text-stone-400 italic">
+                                                Wähle mindestens eine Leistung aus, um einen Preis zu sehen.
+                                            </p>
+                                        ) : (
+                                            <>
+                                                <p className="text-sm text-stone-400 mb-6">
+                                                    💡 Dies ist eine Schätzung. Der endgültige Preis hängt von deinen spezifischen Wünschen und Anforderungen ab. Kontaktiere mich gerne für ein individuelles Angebot!
+                                                </p>
+                                                <button
+                                                    onClick={handleSendOffer}
+                                                    disabled={isSubmitting}
+                                                    className="block w-full text-center bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-6 py-4 font-bold rounded-full hover:from-[#fffebb] hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] disabled:opacity-50 disabled:cursor-not-allowed"
+                                                >
+                                                    {isSubmitting ? 'Wird gesendet...' : 'Angebot per E-Mail senden 📧'}
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
+
+                                    {/* Info Box */}
+                                    <div className="mt-8 bg-blue-500/10 border border-blue-400/30 rounded-2xl p-6">
+                                        <h3 className="text-lg font-semibold text-blue-300 mb-3">ℹ️ Wichtige Info</h3>
+                                        <ul className="space-y-2 text-sm text-stone-300">
+                                            <li>✓ Preise sind Brutto-Schätzungen und können immer variieren</li>
+                                            <li>✓ Fahrtkosten: 0,50€ pro Kilometer (Hin- und Rückfahrt)</li>
+                                            <li>✓ Am besten ist es immer einfach mal direkt anzufragen</li>
+                                            <li>✓ Individuelle Pakete auf Anfrage möglich</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* RIGHT: Preisanzeige */}
-                        <div className="flex flex-col justify-between">
-                            <div className="bg-gradient-to-br from-[#ebd297]/20 to-[#d4af37]/10 border-2 border-[#ebd297]/40 rounded-3xl p-12 shadow-[0_0_40px_rgba(235,210,151,0.15)]">
-                                <h2 className="text-xl text-stone-300 mb-2">Gesamtpreis</h2>
-                                <div className="text-6xl md:text-7xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#ebd297] to-[#fffebb] mb-6">
-                                    {totalPrice.toFixed(2)}€
-                                </div>
-
-                                <div className="space-y-3 mb-8 text-stone-300">
-                                    {basePrice > 0 && (
-                                        <div className="flex justify-between pb-3 border-b border-stone-600">
-                                            <span>Leistungen</span>
-                                            <span className="font-semibold">{basePrice.toFixed(2)}€</span>
-                                        </div>
-                                    )}
-                                    {kilometers > 0 && (
-                                        <div className="flex justify-between pb-3 border-b border-stone-600">
-                                            <span>Fahrtkosten</span>
-                                            <span className="font-semibold">{travelCost.toFixed(2)}€</span>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {kilometers === 0 ? (
-                                    <p className="text-sm text-stone-400 italic">
-                                        Bitte gib die Entfernung in Kilometern ein, um den Gesamtpreis zu sehen.
-                                    </p>
-                                ) : totalPrice === 0 ? (
-                                    <p className="text-sm text-stone-400 italic">
-                                        Wähle mindestens eine Leistung aus, um einen Preis zu sehen.
-                                    </p>
-                                ) : (
-                                    <>
-                                        <p className="text-sm text-stone-400 mb-6">
-                                            💡 Dies ist eine Schätzung. Der endgültige Preis hängt von deinen spezifischen Wünschen und Anforderungen ab. Kontaktiere mich gerne für ein individuelles Angebot!
-                                        </p>
-                                        <a
-                                            href="/#/booking-request"
-                                            className="block w-full text-center bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-6 py-4 font-bold rounded-full hover:from-[#fffebb] hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)]"
-                                        >
-                                            Jetzt Anfrage stellen 🔥
-                                        </a>
-                                    </>
-                                )}
-                            </div>
-
-                            {/* Info Box */}
-                            <div className="mt-8 bg-blue-500/10 border border-blue-400/30 rounded-2xl p-6">
-                                <h3 className="text-lg font-semibold text-blue-300 mb-3">ℹ️ Wichtige Info</h3>
-                                <ul className="space-y-2 text-sm text-stone-300">
-                                    <li>✓ Preise sind Brutto-Schätzungen und können immer variieren</li>
-                                    <li>✓ Fahrtkosten: 0,50€ pro Kilometer (Hin- und Rückfahrt)</li>
-                                    <li>✓ Am besten ist es immer einfach mal direkt anzufragen</li>
-                                    <li>✓ Individuelle Pakete auf Anfrage möglich</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                        </>
+                    )}
                 </div>
             </div>
             <ScrollToTop />
