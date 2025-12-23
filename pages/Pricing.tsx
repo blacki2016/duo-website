@@ -6,7 +6,6 @@ const Pricing: React.FC = () => {
         feuershow: false,
         artistikshow: false,
         walkact: false,
-        moderation: false,
         duolimax: false
     });
     const [kilometers, setKilometers] = useState(0);
@@ -14,10 +13,9 @@ const Pricing: React.FC = () => {
     // Preise pro Leistung in EUR
     const prices = {
         feuershow: 600,
-        artistikshow: 500,
-        walkact: 300,
-        moderation: 200,
-        duolimax: 550
+        artistikshow: 600,
+        walkact: 500,
+        duolimax: 1400
     };
 
     // Fahrtkosten: 0,50 EUR pro km
@@ -89,11 +87,10 @@ const Pricing: React.FC = () => {
 
                             <div className="space-y-4">
                                 {[
-                                    { key: 'feuershow', label: 'Feuershow', price: 600 },
-                                    { key: 'artistikshow', label: 'Artistikshow', price: 500 },
-                                    { key: 'walkact', label: 'Walk Act', price: 300 },
-                                    { key: 'moderation', label: 'Moderation & Entertainment', price: 200 },
-                                    { key: 'duolimax', label: 'Duo Limäx (Magie & Illusion)', price: 550 }
+                                    { key: 'feuershow', label: 'Feuershow' },
+                                    { key: 'artistikshow', label: 'Artistikshow' },
+                                    { key: 'walkact', label: 'Walk Act (3 x 30 min oder am Stück)' },
+                                    { key: 'duolimax', label: 'Duo Limäx (Magie & Illusion)' }
                                 ].map(item => (
                                     <label key={item.key} className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all border border-white/5 hover:border-[#ebd297]/20">
                                         <input
@@ -104,9 +101,7 @@ const Pricing: React.FC = () => {
                                         />
                                         <div className="flex-grow">
                                             <div className="font-semibold text-white">{item.label}</div>
-                                            <div className="text-sm text-stone-400">ab {item.price}€</div>
                                         </div>
-                                        <div className="text-[#ebd297] font-bold text-lg">{item.price}€</div>
                                     </label>
                                 ))}
                             </div>
@@ -181,7 +176,7 @@ const Pricing: React.FC = () => {
                                 <ul className="space-y-2 text-sm text-stone-300">
                                     <li>✓ Preise sind Brutto-Schätzungen</li>
                                     <li>✓ Fahrtkosten: 0,50€ pro Kilometer (Hin- und Rückfahrt)</li>
-                                    <li>✓ Genehmigungen & Versicherung inklusive</li>
+                                    <li>✓ Am besten ist es immer einfach mal direkt anzufragen</li>
                                     <li>✓ Individuelle Pakete auf Anfrage möglich</li>
                                 </ul>
                             </div>
