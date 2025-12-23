@@ -360,7 +360,7 @@ const Pricing: React.FC = () => {
                                             <div className="space-y-3 mb-8 text-stone-300">
                                                 {basePrice > 0 && (
                                                     <div className="flex justify-between pb-3 border-b border-stone-600">
-                                                        <span>Leistungen</span>
+                                                        <span>Showpreis</span>
                                                         <span className="font-semibold">{basePrice.toFixed(2)}€</span>
                                                     </div>
                                                 )}
