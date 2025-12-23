@@ -6,8 +6,10 @@ const Pricing: React.FC = () => {
         feuershow: false,
         artistikshow: false,
         walkact: false,
-        duolimax: false
+        duolimax: false,
+        fireHeart: false
     });
+    const [duolimaxVariant, setDuolimaxVariant] = useState<'mini' | 'abend'>('mini');
     const [kilometers, setKilometers] = useState(0);
 
     // Preise pro Leistung in EUR
@@ -15,7 +17,9 @@ const Pricing: React.FC = () => {
         feuershow: 600,
         artistikshow: 600,
         walkact: 500,
-        duolimax: 1400
+        duolimaxMini: 1400,
+        duolimaxAbend: 2500,
+        fireHeart: 50
     };
 
     // Fahrtkosten: 0,50 EUR pro km
@@ -29,6 +33,10 @@ const Pricing: React.FC = () => {
     // Berechne Gesamtpreis
     const basePrice = Object.entries(selections).reduce((sum, [key, checked]) => {
         if (checked) {
+            // Duo Limäx hat Varianten
+            if (key === 'duolimax') {
+                return sum + (duolimaxVariant === 'mini' ? prices.duolimaxMini : prices.duolimaxAbend);
+            }
             return sum + prices[key as keyof typeof prices];
         }
         return sum;
@@ -89,8 +97,7 @@ const Pricing: React.FC = () => {
                                 {[
                                     { key: 'feuershow', label: 'Feuershow' },
                                     { key: 'artistikshow', label: 'Artistikshow' },
-                                    { key: 'walkact', label: 'Walk Act (3 x 30 min oder am Stück)' },
-                                    { key: 'duolimax', label: 'Duo Limäx (Magie & Illusion)' }
+                                    { key: 'walkact', label: 'Walk Act (3 x 30 min oder am Stück)' }
                                 ].map(item => (
                                     <label key={item.key} className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all border border-white/5 hover:border-[#ebd297]/20">
                                         <input
@@ -104,6 +111,51 @@ const Pricing: React.FC = () => {
                                         </div>
                                     </label>
                                 ))}
+
+                                {/* Duo Limäx mit Varianten-Auswahl */}
+                                <div className="space-y-3">
+                                    <label className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all border border-white/5 hover:border-[#ebd297]/20">
+                                        <input
+                                            type="checkbox"
+                                            checked={selections.duolimax}
+                                            onChange={() => handleToggle('duolimax')}
+                                            className="flex-shrink-0"
+                                        />
+                                        <div className="flex-grow">
+                                            <div className="font-semibold text-white">Duo Limäx (Magie & Illusion)</div>
+                                        </div>
+                                    </label>
+
+                                    {/* Varianten-Auswahl (nur wenn Duo Limäx aktiviert) */}
+                                    {selections.duolimax && (
+                                        <div className="ml-8 p-4 bg-purple-500/10 rounded-xl border border-purple-400/30">
+                                            <label className="block text-sm text-stone-300 mb-2 font-semibold">Wähle eine Variante:</label>
+                                            <select
+                                                value={duolimaxVariant}
+                                                onChange={(e) => setDuolimaxVariant(e.target.value as 'mini' | 'abend')}
+                                                className="w-full bg-[#0a0a0a] border border-stone-700 text-white p-3 rounded-lg focus:border-[#ebd297] focus:outline-none cursor-pointer"
+                                            >
+                                                <option value="mini">🎭 UKONGU Mini (20 Minuten) - 1.400€</option>
+                                                <option value="abend">🌟 UKONGU Abendprogramm (90 Minuten) - 2.500€</option>
+                                            </select>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Romantische Feuerherz-Deko (nur bei Feuershow) */}
+                                {selections.feuershow && (
+                                    <label className="flex items-center gap-4 p-4 bg-pink-500/10 rounded-xl hover:bg-pink-500/20 cursor-pointer transition-all border border-pink-400/20 hover:border-pink-400/40 ml-8">
+                                        <input
+                                            type="checkbox"
+                                            checked={selections.fireHeart}
+                                            onChange={() => handleToggle('fireHeart')}
+                                            className="flex-shrink-0"
+                                        />
+                                        <div className="flex-grow">
+                                            <div className="font-semibold text-white">❤️‍🔥 Romantische Feuerherz - Deko <span className="text-pink-300">(+50€)</span></div>
+                                        </div>
+                                    </label>
+                                )}
                             </div>
 
                             {/* Fahrtkosten */}
@@ -151,7 +203,11 @@ const Pricing: React.FC = () => {
                                     )}
                                 </div>
 
-                                {totalPrice === 0 ? (
+                                {kilometers === 0 ? (
+                                    <p className="text-sm text-stone-400 italic">
+                                        Bitte gib die Entfernung in Kilometern ein, um den Gesamtpreis zu sehen.
+                                    </p>
+                                ) : totalPrice === 0 ? (
                                     <p className="text-sm text-stone-400 italic">
                                         Wähle mindestens eine Leistung aus, um einen Preis zu sehen.
                                     </p>
@@ -174,7 +230,7 @@ const Pricing: React.FC = () => {
                             <div className="mt-8 bg-blue-500/10 border border-blue-400/30 rounded-2xl p-6">
                                 <h3 className="text-lg font-semibold text-blue-300 mb-3">ℹ️ Wichtige Info</h3>
                                 <ul className="space-y-2 text-sm text-stone-300">
-                                    <li>✓ Preise sind Brutto-Schätzungen</li>
+                                    <li>✓ Preise sind Brutto-Schätzungen und können immer variieren</li>
                                     <li>✓ Fahrtkosten: 0,50€ pro Kilometer (Hin- und Rückfahrt)</li>
                                     <li>✓ Am besten ist es immer einfach mal direkt anzufragen</li>
                                     <li>✓ Individuelle Pakete auf Anfrage möglich</li>
