@@ -262,8 +262,8 @@ const Pricing: React.FC = () => {
                                                         onChange={(e) => setDuolimaxVariant(e.target.value as 'mini' | 'abend')}
                                                         className="w-full bg-[#0a0a0a] border border-stone-700 text-white p-3 rounded-lg focus:border-[#ebd297] focus:outline-none cursor-pointer"
                                                     >
-                                                        <option value="mini">🎭 UKONGU Mini (20 Minuten) - 1.400€</option>
-                                                        <option value="abend">🌟 UKONGU Abendprogramm (90 Minuten) - 2.500€</option>
+                                                        <option value="mini">🎭 UKONGU Mini (20 Minuten)</option>
+                                                        <option value="abend">🌟 UKONGU Abendprogramm (90 Minuten)</option>
                                                     </select>
                                                 </div>
                                             )}
@@ -279,7 +279,7 @@ const Pricing: React.FC = () => {
                                                     className="flex-shrink-0"
                                                 />
                                                 <div className="flex-grow">
-                                                    <div className="font-semibold text-white">❤️‍🔥 Romantische Feuerherz - Deko <span className="text-pink-300">(+50€)</span></div>
+                                                    <div className="font-semibold text-white">❤️‍🔥 Romantische Feuerherz - Deko</div>
                                                 </div>
                                             </label>
                                         )}
