@@ -8,7 +8,7 @@ const FireShowWedding: React.FC = () => {
             {/* Custom Wedding Hero */}
             <section className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-black mt-24">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/55 to-black/70 z-10"></div>
-                <div className="absolute inset-0 bg-[url('/images/hochzeit.test.png')] bg-cover bg-center scale-105"></div>
+                <div className="absolute inset-0 bg-[url('/images/hochzeit.hintergrund.jpg')] bg-cover bg-center scale-105"></div>
 
                 {/* Dekorative Wedding-Visuals */}
                 <div className="absolute inset-0 flex items-end justify-between px-4 sm:px-10 pb-8 sm:pb-12 gap-4 sm:gap-8 z-10 pointer-events-none">
