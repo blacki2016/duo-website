@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Music, Star } from 'lucide-react';
 import ScrollToTop from '../components/ScrollToTop';
@@ -31,18 +31,7 @@ const TESTIMONIALS_WEDDING = [
 ];
 
 const Wedding: React.FC = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-
-    const SLIDES = [
-        `${import.meta.env.BASE_URL}images/hochzeit.hintergrund.jpg`
-    ];
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
-        }, 8000);
-        return () => clearInterval(interval);
-    }, []);
+    const BG_IMAGE = '/images/hochzeit.test.png';
 
     return (
         <div className="relative min-h-screen flex flex-col text-stone-200 overflow-hidden">
@@ -78,17 +67,12 @@ const Wedding: React.FC = () => {
         }
       `}</style>
 
-            {/* Global Background */}
+            {/* Global Background (static image, no slider) */}
             <div className="fixed inset-0 w-full h-full z-0 bg-black pointer-events-none">
-                {SLIDES.map((slide, index) => (
-                    <div
-                        key={index}
-                        className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-                        style={{
-                            backgroundImage: `url('${slide}')`,
-                        }}
-                    />
-                ))}
+                <div
+                    className="absolute inset-0 w-full h-full bg-cover bg-center"
+                    style={{ backgroundImage: `url('${BG_IMAGE}')` }}
+                />
                 <div className="absolute inset-0 bg-black/50"></div>
             </div>
 
