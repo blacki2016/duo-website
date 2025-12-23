@@ -622,9 +622,6 @@ const FireShow: React.FC = () => {
                     </div>
 
                     <div className="fs-hero-content z-10">
-                        <h1 className="fs-hero-title">Feuershow – spektakuläre Momente, sicher inszeniert</h1>
-                        <p className="fs-hero-sub">Intensive Effekte, sichere Abläufe und choreografierte Musik – ideal bei Dämmerung & Nacht.<br />Der krönende Abschluss einer jeden Veranstaltung!</p>
-
                         <Link className="fs-cta-button" to="/booking-request">
                             Jetzt anfragen 🔥
                         </Link>
