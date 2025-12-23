@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Shows from './pages/Shows';
 import Booking from './pages/Booking';
 import BookingRequest from './pages/BookingRequest';
+import Pricing from './pages/Pricing';
 import Imprint from './pages/Imprint';
 import Privacy from './pages/Privacy';
 import FireShow from './pages/FireShow';
@@ -81,6 +82,7 @@ const App: React.FC = () => {
             <Route path="/about" element={<About />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/booking-request" element={<BookingRequest />} />
+            <Route path="/pricing" element={<Pricing />} />
             <Route path="/termine" element={<PublicEvents />} />
             <Route path="/socials" element={<Socials />} />
             <Route path="/partner" element={<Partner />} />
@@ -110,7 +112,7 @@ const App: React.FC = () => {
         )}
 
         {/* Sticky Mobile CTA Button */}
-        {location.pathname !== '/booking-request' && (
+        {location.pathname !== '/booking-request' && location.pathname !== '/pricing' && (
           <a
             href="/#/booking-request"
             className="fixed bottom-0 left-0 right-0 md:hidden z-[9999] bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-4 py-4 font-bold flex items-center justify-center gap-3 shadow-[0_-4px_20px_rgba(235,210,151,0.4)] hover:from-[#fffebb] hover:to-[#ebd297] transition-all active:scale-95"
