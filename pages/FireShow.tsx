@@ -551,6 +551,30 @@ const FireShow: React.FC = () => {
         .fs-carousel-prev { left: 10px; }
         .fs-carousel-next { right: 10px; }
 
+        /* Schlechtwetter-Garantie Section */
+        .fs-weather-guarantee { max-width: 900px; margin: 0 auto; }
+        .fs-weather-detail {
+            background: rgba(255, 255, 255, 0.03); border-radius: 8px; margin-bottom: 1rem;
+            border: 1px solid rgba(235, 210, 151, 0.1); transition: background 0.3s;
+        }
+        .fs-weather-detail[open] { background: rgba(235, 210, 151, 0.08); border-color: rgba(235, 210, 151, 0.3); }
+        .fs-weather-detail summary {
+            padding: 1.2rem; cursor: pointer; font-weight: 700; color: #EBD297;
+            list-style: none; position: relative; padding-right: 40px;
+        }
+        .fs-weather-detail summary::-webkit-details-marker { display: none; }
+        .fs-weather-detail summary::after {
+            content: '+'; position: absolute; right: 1.2rem; top: 1.2rem;
+            font-weight: bold; font-size: 1.4rem; line-height: 1;
+        }
+        .fs-weather-detail[open] summary::after { content: '−'; }
+        .fs-weather-content { padding: 0 1.2rem 1.2rem; margin: 0; line-height: 1.6; color: #e0e0e0; }
+        .fs-weather-content p { margin-bottom: 1rem; }
+        .fs-weather-content h4 { color: #EBD297 !important; }
+        .fs-alternatives-list { list-style: none; padding: 0; }
+        .fs-alternatives-list li { padding-left: 1.5rem; position: relative; margin-bottom: 1rem; }
+        .fs-alternatives-list li::before { content: '→'; position: absolute; left: 0; color: #EBD297; font-weight: bold; }
+
         /* FAQ */
         .fs-faq details {
             background: rgba(255, 255, 255, 0.03); border-radius: 8px; margin-bottom: 1rem;
@@ -745,6 +769,44 @@ const FireShow: React.FC = () => {
                             ))}
                         </div>
                         <button className="fs-carousel-btn fs-carousel-next" onClick={handleNext} aria-label="Weiter">❯</button>
+                    </div>
+                </section>
+
+                <div className="fs-divider"></div>
+
+                {/* =================== SCHLECHTWETTER-GARANTIE =================== */}
+                <section className="fs-section fs-reveal">
+                    <h2>Schlechtwetter-Garantie</h2>
+                    <div className="fs-weather-guarantee">
+                        <details className="fs-weather-detail">
+                            <summary>Was passiert bei Regen oder schlechtem Wetter?</summary>
+                            <div className="fs-weather-content">
+                                <p className="mb-4">
+                                    Eine Feuershow ist auf freier Fläche am sichersten und eindrucksvollsten – und deshalb auch wetterabhängig. Regen, Sturm oder extrem schlechte Sicht beeinflussen sowohl die Sicherheit als auch das Erlebnis.
+                                </p>
+                                <p className="mb-6">
+                                    <strong>Daher gilt:</strong> Falls das Wetter am geplanten Tag nicht passt, verschieben wir die Show einfach auf einen besseren Termin. <strong>Ohne Zusatzkosten.</strong> Das ist meine Schlechtwetter-Garantie für euch.
+                                </p>
+                                <h4 className="text-lg font-semibold text-[#ebd297] mb-4">Alternativen bei kurzfristigem Wetterumschwung:</h4>
+                                <ul className="space-y-3 mb-6">
+                                    <li className="text-stone-300">
+                                        <strong className="text-white">Artistikshow (Akrobatik & Jonglage):</strong> Indoor möglich, gleichzeitig spektakulär und lustig. Perfekt als Überraschung, wenn die Feuershow wackelt.
+                                    </li>
+                                    <li className="text-stone-300">
+                                        <strong className="text-white">Walk Act mit Comedy:</strong> Lustig, flexibel und wetterunabhängig – ideale Abkürzung, um die Show nicht ganz zu streichen.
+                                    </li>
+                                    <li className="text-stone-300">
+                                        <strong className="text-white">Duo Limäx (Magie & Illusion):</strong> Faszinierende Momente für Jung und Alt, auch in geschlossenen Räumen möglich.
+                                    </li>
+                                    <li className="text-stone-300">
+                                        <strong className="text-white">Moderation & Entertainment:</strong> Wenn's mal schnell gehen muss – immer eine gute Überbrückung.
+                                    </li>
+                                </ul>
+                                <p className="text-sm text-stone-400 italic">
+                                    Zusammen planen wir vorab bereits eine „Plan-B"-Option, damit dein Event in jedem Fall ein voller Erfolg wird!
+                                </p>
+                            </div>
+                        </details>
                     </div>
                 </section>
 
