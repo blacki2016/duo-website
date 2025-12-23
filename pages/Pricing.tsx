@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ScrollToTop from '../components/ScrollToTop';
 
 const Pricing: React.FC = () => {
@@ -16,7 +16,9 @@ const Pricing: React.FC = () => {
         fireHeart: false
     });
     const [duolimaxVariant, setDuolimaxVariant] = useState<'mini' | 'abend'>('mini');
+    const [postalCode, setPostalCode] = useState('');
     const [kilometers, setKilometers] = useState(0);
+    const [hasCalculated, setHasCalculated] = useState(false);
 
     // Preise pro Leistung in EUR
     const prices = {
@@ -51,13 +53,18 @@ const Pricing: React.FC = () => {
     const travelCost = kilometers * costPerKm;
     const totalPrice = basePrice + travelCost;
 
+    // Reset calculated state when inputs change
+    useEffect(() => {
+        setHasCalculated(false);
+    }, [kilometers, duolimaxVariant, selections]);
+
     // E-Mail-Validierung
     const isValidEmail = (email: string) => {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     };
 
     // Unlock-Handler
-    const handleUnlock = () => {
+    const handleUnlock = async () => {
         if (!isValidEmail(email)) {
             setSubmitError('Bitte gib eine gültige E-Mail-Adresse ein.');
             return;
@@ -68,15 +75,24 @@ const Pricing: React.FC = () => {
         }
         setSubmitError('');
         setIsUnlocked(true);
+        try {
+            await fetch('/collect-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+        } catch (e) {
+            console.warn('E-Mail konnte nicht geloggt werden');
+        }
     };
 
-    // Angebot senden
+    // Angebot senden (automatisch beim Berechnen)
     const handleSendOffer = async () => {
         setIsSubmitting(true);
         setSubmitError('');
 
         try {
-            const response = await fetch('/api/send-pricing', {
+            const response = await fetch('/send-pricing', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -93,12 +109,37 @@ const Pricing: React.FC = () => {
             if (!response.ok) {
                 throw new Error('Fehler beim Senden');
             }
-
-            alert('✅ Dein Angebot wurde erfolgreich an uns gesendet! Wir melden uns bald bei dir.');
+            // Hinweis optional still halten
         } catch (error) {
             setSubmitError('Fehler beim Senden. Bitte versuche es später erneut.');
         } finally {
             setIsSubmitting(false);
+        }
+    };
+
+    // Preis berechnen und automatisch senden
+    const handleCalculate = async () => {
+        // Leistungen müssen gesetzt sein
+        if (basePrice <= 0) return;
+        // PLZ validieren
+        if (!/^\d{5}$/.test(postalCode)) {
+            setSubmitError('Bitte gib eine gültige deutsche PLZ ein (5-stellig).');
+            return;
+        }
+        try {
+            const resp = await fetch('/calc-distance', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ postalCode })
+            });
+            if (!resp.ok) throw new Error('Distanzberechnung fehlgeschlagen');
+            const data = await resp.json();
+            const km = Number(data.kilometers) || 0;
+            setKilometers(km);
+            setHasCalculated(true);
+            await handleSendOffer();
+        } catch (e) {
+            setSubmitError('Distanzberechnung fehlgeschlagen. Bitte versuche es später erneut.');
         }
     };
 
@@ -290,18 +331,18 @@ const Pricing: React.FC = () => {
                                         <h3 className="text-lg font-semibold text-[#ebd297] mb-4">Fahrtkosten</h3>
                                         <div className="flex items-end gap-4">
                                             <div className="flex-grow">
-                                                <label className="block text-sm text-stone-300 mb-2">Entfernung (km)</label>
+                                                <label className="block text-sm text-stone-300 mb-2">Postleitzahl (PLZ)</label>
                                                 <input
-                                                    type="number"
-                                                    value={kilometers}
-                                                    onChange={(e) => setKilometers(Math.max(0, Number(e.target.value)))}
-                                                    placeholder="z.B. 50"
+                                                    type="text"
+                                                    value={postalCode}
+                                                    onChange={(e) => setPostalCode(e.target.value.trim())}
+                                                    placeholder="z.B. 80331"
                                                     className="w-full"
                                                 />
                                             </div>
                                             <div>
-                                                <div className="text-sm text-stone-400 mb-2">à 0,50€/km</div>
-                                                <div className="text-[#ebd297] font-bold text-xl">{travelCost.toFixed(2)}€</div>
+                                                <div className="text-sm text-stone-400 mb-2">à 0,50€/km (ab 90616)</div>
+                                                <div className="text-[#ebd297] font-bold text-xl">{hasCalculated ? travelCost.toFixed(2) + '€' : '—'}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -312,45 +353,46 @@ const Pricing: React.FC = () => {
                                     <div className="bg-gradient-to-br from-[#ebd297]/20 to-[#d4af37]/10 border-2 border-[#ebd297]/40 rounded-3xl p-12 shadow-[0_0_40px_rgba(235,210,151,0.15)]">
                                         <h2 className="text-xl text-stone-300 mb-2">Gesamtpreis</h2>
                                         <div className="text-6xl md:text-7xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#ebd297] to-[#fffebb] mb-6">
-                                            {totalPrice.toFixed(2)}€
+                                            {hasCalculated ? `${totalPrice.toFixed(2)}€` : '—'}
                                         </div>
 
-                                        <div className="space-y-3 mb-8 text-stone-300">
-                                            {basePrice > 0 && (
-                                                <div className="flex justify-between pb-3 border-b border-stone-600">
-                                                    <span>Leistungen</span>
-                                                    <span className="font-semibold">{basePrice.toFixed(2)}€</span>
-                                                </div>
-                                            )}
-                                            {kilometers > 0 && (
-                                                <div className="flex justify-between pb-3 border-b border-stone-600">
-                                                    <span>Fahrtkosten</span>
-                                                    <span className="font-semibold">{travelCost.toFixed(2)}€</span>
-                                                </div>
-                                            )}
-                                        </div>
+                                        {hasCalculated && (
+                                            <div className="space-y-3 mb-8 text-stone-300">
+                                                {basePrice > 0 && (
+                                                    <div className="flex justify-between pb-3 border-b border-stone-600">
+                                                        <span>Leistungen</span>
+                                                        <span className="font-semibold">{basePrice.toFixed(2)}€</span>
+                                                    </div>
+                                                )}
+                                                {kilometers > 0 && (
+                                                    <div className="flex justify-between pb-3 border-b border-stone-600">
+                                                        <span>Fahrtkosten</span>
+                                                        <span className="font-semibold">{travelCost.toFixed(2)}€</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
 
-                                        {kilometers === 0 ? (
+                                        {!/^\d{5}$/.test(postalCode) ? (
                                             <p className="text-sm text-stone-400 italic">
-                                                Bitte gib die Entfernung in Kilometern ein, um den Gesamtpreis zu sehen.
+                                                Bitte gib eine gültige Postleitzahl ein.
                                             </p>
-                                        ) : totalPrice === 0 ? (
+                                        ) : basePrice === 0 ? (
                                             <p className="text-sm text-stone-400 italic">
-                                                Wähle mindestens eine Leistung aus, um einen Preis zu sehen.
+                                                Wähle mindestens eine Leistung aus.
                                             </p>
+                                        ) : !hasCalculated ? (
+                                            <button
+                                                onClick={handleCalculate}
+                                                disabled={isSubmitting}
+                                                className="block w-full text-center bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-6 py-4 font-bold rounded-full hover:from-[#fffebb] hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                {isSubmitting ? 'Wird gesendet...' : 'Preis errechnen'}
+                                            </button>
                                         ) : (
-                                            <>
-                                                <p className="text-sm text-stone-400 mb-6">
-                                                    💡 Dies ist eine Schätzung. Der endgültige Preis hängt von deinen spezifischen Wünschen und Anforderungen ab. Kontaktiere mich gerne für ein individuelles Angebot!
-                                                </p>
-                                                <button
-                                                    onClick={handleSendOffer}
-                                                    disabled={isSubmitting}
-                                                    className="block w-full text-center bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-6 py-4 font-bold rounded-full hover:from-[#fffebb] hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] disabled:opacity-50 disabled:cursor-not-allowed"
-                                                >
-                                                    {isSubmitting ? 'Wird gesendet...' : 'Angebot per E-Mail senden 📧'}
-                                                </button>
-                                            </>
+                                            <p className="text-sm text-stone-400 mb-2">
+                                                💡 Dies ist eine Schätzung. Der endgültige Preis hängt von deinen spezifischen Wünschen und Anforderungen ab.
+                                            </p>
                                         )}
                                     </div>
 
@@ -368,6 +410,18 @@ const Pricing: React.FC = () => {
                             </div>
                         </>
                     )}
+                </div>
+            </div>
+            {/* Disclaimer: Unverbindlicher Preisrechner */}
+            <div className="container mx-auto px-4 max-w-5xl">
+                <div className="mt-10 text-[11px] leading-relaxed text-stone-500 text-center">
+                    <div className="mb-1 font-semibold tracking-wide">Unverbindlicher Preisrechner *</div>
+                    <p>
+                        * Die hier bereitgestellte Preisermittlung dient ausschließlich der ersten, unverbindlichen Orientierung.
+                        Weder für dich als Interessent noch für uns als Anbieter entsteht dadurch eine rechtliche Bindung.
+                        Ein rechtsverbindliches Angebot kommt erst durch unsere schriftliche Bestätigung zustande und kann je nach
+                        Veranstaltungsort, Rahmenbedingungen, Sicherheitsanforderungen sowie individueller Leistungsgestaltung abweichen.
+                    </p>
                 </div>
             </div>
             <ScrollToTop />
