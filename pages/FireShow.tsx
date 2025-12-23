@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Maximize2 } from 'lucide-react';
 import SmartImage from '../components/SmartImage';
 import ScrollToTop from '../components/ScrollToTop';
