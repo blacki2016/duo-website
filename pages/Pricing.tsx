@@ -76,7 +76,7 @@ const Pricing: React.FC = () => {
         setSubmitError('');
         setIsUnlocked(true);
         try {
-            await fetch('/collect-email', {
+            await fetch('/api/collect-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
@@ -92,7 +92,7 @@ const Pricing: React.FC = () => {
         setSubmitError('');
 
         try {
-            const response = await fetch('/send-pricing', {
+            const response = await fetch('/api/send-pricing', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -127,7 +127,7 @@ const Pricing: React.FC = () => {
             return;
         }
         try {
-            const resp = await fetch('/calc-distance', {
+            const resp = await fetch('/api/calc-distance', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ postalCode })
@@ -337,7 +337,7 @@ const Pricing: React.FC = () => {
                                                     value={postalCode}
                                                     onChange={(e) => setPostalCode(e.target.value.trim())}
                                                     placeholder="z.B. 80331"
-                                                    className="w-full"
+                                                    className="w-full bg-white text-black placeholder-stone-500 border border-stone-300 p-3 rounded-lg focus:border-[#ebd297] focus:outline-none"
                                                 />
                                             </div>
                                             <div>
