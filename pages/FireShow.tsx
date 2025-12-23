@@ -694,6 +694,46 @@ const FireShow: React.FC = () => {
                     </div>
                 </section>
 
+                {/* =================== SCHLECHTWETTER-GARANTIE (AUFFÄLLIGE CARD) =================== */}
+                <section className="fs-section fs-reveal">
+                    <div className="max-w-4xl mx-auto bg-gradient-to-r from-blue-500/10 via-blue-400/5 to-blue-500/10 border-2 border-blue-400/40 rounded-2xl p-8 md:p-12 shadow-[0_0_30px_rgba(96,165,250,0.2)] backdrop-blur-sm">
+                        <div className="flex items-start gap-6">
+                            <div className="text-5xl flex-shrink-0">☔</div>
+                            <div>
+                                <h3 className="text-2xl md:text-3xl font-serif font-bold text-white mb-3">Schlechtwetter-Garantie</h3>
+                                <p className="text-stone-200 mb-4 leading-relaxed">
+                                    Eine Feuershow ist auf freier Fläche am sichersten und eindrucksvollsten – und deshalb auch wetterabhängig. Regen, Sturm oder extrem schlechte Sicht beeinflussen sowohl Sicherheit als auch Erlebnis.
+                                </p>
+                                <p className="text-stone-200 mb-6 leading-relaxed">
+                                    <strong className="text-blue-300">Daher gilt:</strong> Falls das Wetter am geplanten Tag nicht passt, verschieben wir die Show <strong>kostenlos</strong> auf einen besseren Termin. Das ist meine Schlechtwetter-Garantie für dich!
+                                </p>
+                                <h4 className="text-lg font-semibold text-blue-300 mb-3">Alternative Showformate bei Wetter-Notfall:</h4>
+                                <ul className="space-y-2">
+                                    <li className="flex gap-3">
+                                        <span className="text-blue-400 flex-shrink-0">🎪</span>
+                                        <span className="text-stone-300"><strong>Artistikshow:</strong> Indoor, spektakulär & lustig</span>
+                                    </li>
+                                    <li className="flex gap-3">
+                                        <span className="text-blue-400 flex-shrink-0">🚶</span>
+                                        <span className="text-stone-300"><strong>Walk Act + Comedy:</strong> Flexibel & jederzeit einsatzbereit</span>
+                                    </li>
+                                    <li className="flex gap-3">
+                                        <span className="text-blue-400 flex-shrink-0">✨</span>
+                                        <span className="text-stone-300"><strong>Duo Limäx:</strong> Magie & Illusion für Jung und Alt</span>
+                                    </li>
+                                    <li className="flex gap-3">
+                                        <span className="text-blue-400 flex-shrink-0">🎤</span>
+                                        <span className="text-stone-300"><strong>Entertainment & Moderation:</strong> Immer eine gute Lösung</span>
+                                    </li>
+                                </ul>
+                                <p className="text-sm text-stone-400 italic mt-4">
+                                    💡 Zusammen planen wir vorab eine „Plan-B"-Option, damit dein Event in jedem Fall erfolgreich wird!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 {/* =================== TESTIMONIAL =================== */}
                 <section className="fs-section fs-reveal">
                     <div className="bg-[#141415]/80 p-8 md:p-12 rounded-2xl border border-[#ebd297]/20 text-center max-w-4xl mx-auto relative backdrop-blur-md shadow-2xl">
