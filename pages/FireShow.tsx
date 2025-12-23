@@ -621,11 +621,7 @@ const FireShow: React.FC = () => {
                         ))}
                     </div>
 
-                    <div className="fs-hero-content z-10">
-                        <Link className="fs-cta-button" to="/booking-request">
-                            Jetzt anfragen 🔥
-                        </Link>
-                    </div>
+                    <div className="fs-hero-content z-10"></div>
                 </header>
 
                 {/* =================== MÖGLICHKEITEN =================== */}
