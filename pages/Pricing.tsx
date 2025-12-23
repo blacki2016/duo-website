@@ -126,6 +126,7 @@ const Pricing: React.FC = () => {
             setSubmitError('Bitte gib eine gültige deutsche PLZ ein (5-stellig).');
             return;
         }
+        setIsSubmitting(true);
         try {
             const resp = await fetch('/api/calc-distance', {
                 method: 'POST',
@@ -138,8 +139,12 @@ const Pricing: React.FC = () => {
             setKilometers(km);
             setHasCalculated(true);
             await handleSendOffer();
+            setSubmitError('');
         } catch (e) {
+            console.error(e);
             setSubmitError('Distanzberechnung fehlgeschlagen. Bitte versuche es später erneut.');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -387,12 +392,17 @@ const Pricing: React.FC = () => {
                                                 disabled={isSubmitting}
                                                 className="block w-full text-center bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-6 py-4 font-bold rounded-full hover:from-[#fffebb] hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
-                                                {isSubmitting ? 'Wird gesendet...' : 'Preis errechnen'}
+                                                {isSubmitting ? 'Preis wird berechnet…' : 'Preis errechnen'}
                                             </button>
                                         ) : (
                                             <p className="text-sm text-stone-400 mb-2">
                                                 💡 Dies ist eine Schätzung. Der endgültige Preis hängt von deinen spezifischen Wünschen und Anforderungen ab.
                                             </p>
+                                        )}
+                                        {submitError && (
+                                            <div className="mt-3 bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-red-300 text-sm">
+                                                ⚠️ {submitError}
+                                            </div>
                                         )}
                                     </div>
 
