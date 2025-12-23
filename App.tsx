@@ -21,6 +21,7 @@ import Socials from './pages/Socials';
 import Partner from './pages/Partner';
 import GlobalFX from './components/GlobalFX';
 import NotFound from './pages/NotFound';
+import { Phone } from 'lucide-react';
 
 // Scroll to top wrapper
 // Stellt sicher, dass man bei Navigation wieder oben auf der Seite landet
@@ -34,6 +35,7 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const location = useLocation();
 
   // Global Lightbox Click Listener
   useEffect(() => {
@@ -105,6 +107,17 @@ const App: React.FC = () => {
               onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
             />
           </div>
+        )}
+
+        {/* Sticky Mobile CTA Button */}
+        {location.pathname !== '/booking-request' && (
+          <a
+            href="/#/booking-request"
+            className="fixed bottom-0 left-0 right-0 md:hidden z-[9999] bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-4 py-4 font-bold flex items-center justify-center gap-3 shadow-[0_-4px_20px_rgba(235,210,151,0.4)] hover:from-[#fffebb] hover:to-[#ebd297] transition-all active:scale-95"
+          >
+            <Phone size={20} />
+            Termin prüfen
+          </a>
         )}
       </div>
     </HashRouter>
