@@ -681,7 +681,7 @@ const FireShow: React.FC = () => {
                                     Eine Feuershow ist auf freier Fläche am sichersten und eindrucksvollsten – und deshalb auch wetterabhängig. Regen, Sturm oder extrem schlechte Sicht beeinflussen sowohl Sicherheit als auch Erlebnis.
                                 </p>
                                 <p className="text-stone-200 mb-6 leading-relaxed">
-                                    <strong className="text-blue-300">Daher gilt:</strong> Falls das Wetter am geplanten Tag nicht passt, verschieben wir die Show <strong>kostenlos</strong> auf einen besseren Termin. Das ist meine Schlechtwetter-Garantie für dich!
+                                    <strong className="text-blue-300">Daher gilt:</strong> Falls das Wetter am geplanten Tag nicht mitspielt, können wir nach Absprache  einfach zu einer Artistikshow oder einem Walk Act nach innen wechseln !
                                 </p>
                                 <h4 className="text-lg font-semibold text-blue-300 mb-3">Alternative Showformate bei Wetter-Notfall:</h4>
                                 <ul className="space-y-2">
@@ -693,18 +693,7 @@ const FireShow: React.FC = () => {
                                         <span className="text-blue-400 flex-shrink-0">🚶</span>
                                         <span className="text-stone-300"><strong>Walk Act + Comedy:</strong> Flexibel & jederzeit einsatzbereit</span>
                                     </li>
-                                    <li className="flex gap-3">
-                                        <span className="text-blue-400 flex-shrink-0">✨</span>
-                                        <span className="text-stone-300"><strong>Duo Limäx:</strong> Magie & Illusion für Jung und Alt</span>
-                                    </li>
-                                    <li className="flex gap-3">
-                                        <span className="text-blue-400 flex-shrink-0">🎤</span>
-                                        <span className="text-stone-300"><strong>Entertainment & Moderation:</strong> Immer eine gute Lösung</span>
-                                    </li>
                                 </ul>
-                                <p className="text-sm text-stone-400 italic mt-4">
-                                    💡 Zusammen planen wir vorab eine „Plan-B"-Option, damit dein Event in jedem Fall erfolgreich wird!
-                                </p>
                             </div>
                         </div>
                     </div>
