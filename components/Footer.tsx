@@ -94,10 +94,15 @@ const Footer: React.FC = () => {
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <h3 className="text-white font-serif font-bold text-lg mb-6 uppercase tracking-wider border-b-2 border-[#ebd297] pb-2 inline-block">Shows</h3>
                         <ul className="space-y-3 w-full">
-                            {['Feuershow', 'Artistikshow', 'Walk Act', 'Duo Limäx'].map((item) => (
-                                <li key={item} className="border-b border-white/5 pb-2 last:border-0">
-                                    <Link to={`/${item.toLowerCase().replace(' ', '-').replace('ä', 'a')}`} className="text-stone-300 hover:text-[#ebd297] hover:pl-2 transition-all flex items-center justify-center md:justify-start gap-2">
-                                        <span className="text-[#ebd297] text-xs">●</span> {item}
+                            {[
+                                { label: 'Feuershow', slug: 'feuershow' },
+                                { label: 'Artistikshow', slug: 'artistikshow' },
+                                { label: 'Walk Act', slug: 'walkact' },
+                                { label: 'Duo Limäx', slug: 'duolimax' },
+                            ].map(({ label, slug }) => (
+                                <li key={label} className="border-b border-white/5 pb-2 last:border-0">
+                                    <Link to={`/${slug}`} className="text-stone-300 hover:text-[#ebd297] hover:pl-2 transition-all flex items-center justify-center md:justify-start gap-2">
+                                        <span className="text-[#ebd297] text-xs">●</span> {label}
                                     </Link>
                                 </li>
                             ))}
