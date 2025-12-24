@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
                         <ul className="space-y-3 w-full">
                             {['Feuershow', 'Artistikshow', 'Walk Act', 'Duo Limäx'].map((item) => (
                                 <li key={item} className="border-b border-white/5 pb-2 last:border-0">
-                                    <Link to={`/${item.toLowerCase().replace(' ', '')}`} className="text-stone-300 hover:text-[#ebd297] hover:pl-2 transition-all flex items-center justify-center md:justify-start gap-2">
+                                    <Link to={`/${item.toLowerCase().replace(' ', '-').replace('ä', 'a')}`} className="text-stone-300 hover:text-[#ebd297] hover:pl-2 transition-all flex items-center justify-center md:justify-start gap-2">
                                         <span className="text-[#ebd297] text-xs">●</span> {item}
                                     </Link>
                                 </li>
