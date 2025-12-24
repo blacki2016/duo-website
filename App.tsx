@@ -49,17 +49,17 @@ const AppContent: React.FC<{
       <main className="flex-grow pt-24">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/shows" element={<Shows />} />
+          <Route path="/showformate" element={<Shows />} />
           <Route path="/feuershow" element={<FireShow />} />
           <Route path="/hochzeit" element={<FireShowWedding />} />
           <Route path="/firmen" element={<FireShowCorporate />} />
           <Route path="/feuershow-nuernberg" element={<FireShowNuernberg />} />
           <Route path="/artistikshow" element={<ArtistryShow />} />
           <Route path="/walkact" element={<WalkAct />} />
-          <Route path="/duolimax" element={<DuoLimax />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/booking" element={<Booking />} />
-          <Route path="/booking-request" element={<BookingRequest />} />
+          <Route path="/duolimaex" element={<DuoLimax />} />
+          <Route path="/uebermich" element={<About />} />
+          <Route path="/kontakt" element={<Booking />} />
+          <Route path="/buchung-anfragen" element={<BookingRequest />} />
           <Route path="/preisrechner" element={<Pricing />} />
           <Route path="/termine" element={<PublicEvents />} />
           <Route path="/socials" element={<Socials />} />
@@ -91,9 +91,9 @@ const AppContent: React.FC<{
       )}
 
       {/* Sticky Mobile CTA Button - versteckt auf Buchungs- und Preisseite */}
-      {location.pathname !== '/booking-request' && location.pathname !== '/preisrechner' && (
+      {location.pathname !== '/buchung-anfragen' && location.pathname !== '/preisrechner' && (
         <a
-          href="/#/booking-request"
+          href="/#/buchung-anfragen"
           className="fixed bottom-0 left-0 right-0 md:hidden z-[9999] bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-4 py-4 font-bold flex items-center justify-center gap-3 shadow-[0_-4px_20px_rgba(235,210,151,0.4)] hover:from-[#fffebb] hover:to-[#ebd297] transition-all active:scale-95"
         >
           <Phone size={20} />

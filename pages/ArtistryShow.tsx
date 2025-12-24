@@ -523,7 +523,7 @@ const ArtistryShow: React.FC = () => {
                         <div className="z-10">
                             <h1 className="as-hero-title">Magie, Artistik & Licht</h1>
                             <p className="as-hero-sub">Eine faszinierende Show aus Bewegung, Lichteffekten und magischen Momenten. Perfekt für Galas, Innenbereiche und anspruchsvolle Events.</p>
-                            <Link className="as-btn-magic" to="/booking-request">
+                            <Link className="as-btn-magic" to="/buchung-anfragen">
                                 <span className="text-xl">✨</span> Show anfragen
                             </Link>
                         </div>

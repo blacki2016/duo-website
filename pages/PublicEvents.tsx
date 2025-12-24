@@ -479,7 +479,7 @@ const PublicEvents: React.FC = () => {
                 <div className="fs-footer-note fs-reveal">
                     <h3>Kein passender Termin?</h3>
                     <p>Buchen Sie uns exklusiv für Ihre eigene Veranstaltung, Hochzeit oder Firmenfeier.</p>
-                    <Link className="fs-cta-button" to="/booking-request">Verfügbarkeit prüfen</Link>
+                    <Link className="fs-cta-button" to="/buchung-anfragen">Verfügbarkeit prüfen</Link>
                 </div>
 
             </div>

@@ -109,13 +109,13 @@ const Corporate: React.FC = () => {
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
                         <Link
-                            to="/booking-request"
+                            to="/buchung-anfragen"
                             className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3"
                         >
                             Unverbindlich anfragen <span className="text-xl">📊</span>
                         </Link>
                         <Link
-                            to="/shows"
+                            to="/showformate"
                             className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3"
                         >
                             Alle Shows <span className="text-xl">🎭</span>
@@ -244,7 +244,7 @@ const Corporate: React.FC = () => {
                             <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-6">Lass dein Event knallen</h2>
                             <p className="text-stone-300 mb-8 text-lg">Kontaktiere mich für ein unverbindliches Angebot.</p>
                             <Link
-                                to="/booking-request"
+                                to="/buchung-anfragen"
                                 className="btn-lively inline-block px-10 py-4 text-black font-bold rounded-full hover:scale-105 transition-transform"
                             >
                                 Jetzt anfragen

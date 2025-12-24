@@ -36,11 +36,11 @@ const SHOW_CARDS = [
     tags: ['Indoor', 'Outdoor', 'Interaktion']
   },
   {
-    id: 'duolimax',
+    id: 'duolimaex',
     title: "Duo Limäx",
     description: "Die doppelte Portion Entertainment. Großillusionen, Comedy und Magie mit Leo Wieseckel.",
     image: `${import.meta.env.BASE_URL}images/showformate.limaex.jpg`,
-    link: "/duolimax",
+    link: "/duolimaex",
     icon: <Sparkles className="w-6 h-6" />,
     tags: ['Indoor', 'Magie', 'Comedy']
   }
@@ -81,7 +81,7 @@ const ShowBerater: React.FC = () => {
     } else {
       // Indoor
       if (v === 'action') recommendedId = 'artistikshow';
-      else if (v === 'magic') recommendedId = 'duolimax';
+      else if (v === 'magic') recommendedId = 'duolimaex';
       else recommendedId = 'walkact';
     }
 
@@ -289,7 +289,7 @@ const Shows: React.FC = () => {
         <div className="mt-24 text-center show-reveal pb-12">
           <p className="text-stone-400 mb-6 uppercase tracking-widest text-sm">Nichts passendes dabei?</p>
           <Link
-            to="/booking-request"
+            to="/buchung-anfragen"
             className="inline-block px-10 py-4 bg-transparent border-2 border-[#ebd297] text-[#ebd297] font-bold rounded-full hover:bg-[#ebd297] hover:text-black transition-all hover:scale-105"
           >
             Individuelle Anfrage stellen

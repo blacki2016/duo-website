@@ -601,7 +601,7 @@ const FireShow: React.FC = () => {
                         <h1 className="fs-hero-title">Feuershow – spektakuläre Momente, sicher inszeniert</h1>
                         <p className="fs-hero-sub">Intensive Effekte, sichere Abläufe und choreografierte Musik – ideal bei Dämmerung & Nacht.<br />Der krönende Abschluss einer jeden Veranstaltung!</p>
 
-                        <a className="fs-cta-button" href="/#/booking-request">
+                        <a className="fs-cta-button" href="/#/buchung-anfragen">
                             Jetzt anfragen 🔥
                         </a>
                     </div>

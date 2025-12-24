@@ -141,7 +141,7 @@ const SHOW_PREVIEWS = [
     ],
     ctaText: "Hex hex",
     ctaEmoji: "✨",
-    link: "/duolimax",
+    link: "/duolimaex",
     imgPos: "object-[80%_0]"
   }
 ];
@@ -381,13 +381,13 @@ const Home: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
-              to="/booking-request"
+              to="/buchung-anfragen"
               className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3"
             >
               Buchung anfragen <span className="text-xl">🗒️</span>
             </Link>
             <Link
-              to="/shows"
+              to="/showformate"
               className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3"
             >
               Showformate <span className="text-xl">🎪</span>
@@ -490,7 +490,7 @@ const Home: React.FC = () => {
                   </p>
 
                   <div className="mt-8">
-                    <Link to="/about" className="text-[#ebd297] border-b border-[#ebd297] hover:text-white hover:border-white transition-colors uppercase text-sm tracking-widest pb-1">
+                    <Link to="/uebermich" className="text-[#ebd297] border-b border-[#ebd297] hover:text-white hover:border-white transition-colors uppercase text-sm tracking-widest pb-1">
                       Mehr über mich
                     </Link>
                   </div>
@@ -620,7 +620,7 @@ const Home: React.FC = () => {
               <div className="mx-auto w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl px-6 sm:p-10 md:p-16 rounded-3xl bg-black/50 border border-[#ebd297]/20 backdrop-blur-sm shadow-[0_0_40px_rgba(0,0,0,0.5)]">
                 <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-6 break-words">Bereit für das Außergewöhnliche?</h2>
                 <Link
-                  to="/booking-request"
+                  to="/buchung-anfragen"
                   className="btn-lively inline-block mx-auto px-8 sm:px-10 py-4 text-black font-bold rounded-full hover:scale-105 transition-transform"
                 >
                   Jetzt Termin anfragen

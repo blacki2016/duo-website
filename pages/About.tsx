@@ -252,7 +252,7 @@ const About: React.FC = () => {
         <div className="py-16 bg-stone-900/80 border-t border-stone-800 text-center px-4">
           <h2 className="text-3xl font-serif font-bold text-white mb-6">Lernen wir uns kennen!</h2>
           <Link
-            to="/booking-request"
+            to="/buchung-anfragen"
             className="inline-block px-10 py-4 bg-gradient-to-r from-[#ebd297] to-[#d4b56a] text-black font-bold rounded-full hover:scale-105 transition-transform"
           >
             Kontakt aufnehmen

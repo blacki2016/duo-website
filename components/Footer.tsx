@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
                                 { label: 'Feuershow', slug: 'feuershow' },
                                 { label: 'Artistikshow', slug: 'artistikshow' },
                                 { label: 'Walk Act', slug: 'walkact' },
-                                { label: 'Duo Limäx', slug: 'duolimax' },
+                                { label: 'Duo Limäx', slug: 'duolimaex' },
                             ].map(({ label, slug }) => (
                                 <li key={label} className="border-b border-white/5 pb-2 last:border-0">
                                     <Link to={`/${slug}`} className="text-stone-300 hover:text-[#ebd297] hover:pl-2 transition-all flex items-center justify-center md:justify-start gap-2">
@@ -107,10 +107,10 @@ const Footer: React.FC = () => {
                                 </li>
                             ))}
                             <li className="mt-4">
-                                <Link to="/shows" className="inline-flex items-center gap-2 text-[#ebd297] font-bold text-sm uppercase tracking-widest hover:text-white transition-colors">
+                                <li><Link to="/showformate" className="inline-flex items-center gap-2 text-[#ebd297] font-bold text-sm uppercase tracking-widest hover:text-white transition-colors">
                                     Alle Formate <ArrowRight size={14} />
                                 </Link>
-                            </li>
+                                </li>
                         </ul>
                     </div>
 
@@ -120,7 +120,7 @@ const Footer: React.FC = () => {
 
                         {/* General Links */}
                         <ul className="space-y-3 mb-6">
-                            <li><Link to="/about" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Über Mich</Link></li>
+                            <li><Link to="/uebermich" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Über Mich</Link></li>
                             <li><Link to="/termine" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Öffentliche Termine</Link></li>
                         </ul>
 
@@ -131,7 +131,7 @@ const Footer: React.FC = () => {
                         </ul>
 
                         <div className="mt-8">
-                            <Link to="/booking-request" className="inline-block border border-[#ebd297] text-[#ebd297] px-6 py-3 font-bold uppercase tracking-wider hover:bg-[#ebd297] hover:text-black transition-all">
+                            <Link to="/buchung-anfragen" className="inline-block border border-[#ebd297] text-[#ebd297] px-6 py-3 font-bold uppercase tracking-wider hover:bg-[#ebd297] hover:text-black transition-all">
                                 Jetzt Buchen
                             </Link>
                         </div>

@@ -53,20 +53,20 @@ const Navbar: React.FC = () => {
         {
             label: 'Showformate',
             children: [
-                { label: 'Alle Showformate ⚡️', path: '/shows' },
+                { label: 'Alle Showformate ⚡️', path: '/showformate' },
                 { label: 'Feuershow 🔥', path: '/feuershow' },
                 { label: 'Artistikshow 🤹‍♂️', path: '/artistikshow' },
                 { label: 'Walk Act 🎪', path: '/walkact' },
-                { label: 'Duo Limäx 🪄', path: '/duolimax' }
+                { label: 'Duo Limäx 🪄', path: '/duolimaex' }
             ]
         },
         { label: 'Öffentliche Termine', path: '/termine' },
-        { label: 'Über mich', path: '/about' },
+        { label: 'Über mich', path: '/uebermich' },
         {
             label: 'Kontakt',
             children: [
-                { label: 'Kontakt 📲', path: '/booking' },
-                { label: 'Buchung anfragen 🗒️', path: '/booking-request' }
+                { label: 'Kontakt 📲', path: '/kontakt' },
+                { label: 'Buchung anfragen 🗒️', path: '/buchung-anfragen' }
             ]
         },
         {
@@ -293,7 +293,7 @@ const Navbar: React.FC = () => {
 
                         <div className="pt-6">
                             <Link
-                                to="/booking-request"
+                                to="/buchung-anfragen"
                                 className="booking-button block w-full text-center py-4 bg-gradient-to-br from-[#ebd297] to-[#b38728] text-black font-button font-bold text-base rounded-xl hover:from-white hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.8)] touch-manipulation"
                             >
                                 Buchung anfragen
@@ -412,7 +412,7 @@ const Navbar: React.FC = () => {
                         {/* Rechts: Ghost-Button CTA */}
                         <div className="flex justify-end">
                             <Link
-                                to="/booking-request"
+                                to="/buchung-anfragen"
                                 className={`cta-animated text-black rounded-full font-button font-bold shadow-[0_0_20px_rgba(235,210,151,0.35)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] transition-transform duration-300 hover:scale-110 transform -translate-y-1 md:-translate-y-2 flex items-center justify-center text-center ${scrolled ? 'px-6 py-3 text-sm' : 'px-9 py-4 text-base'}`}
                             >
                                 Buchung anfragen

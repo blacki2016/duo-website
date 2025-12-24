@@ -108,7 +108,7 @@ const Pyrotechnics: React.FC = () => {
                         <p className="text-xl md:text-2xl text-stone-300 max-w-2xl mx-auto font-light leading-relaxed">
                             Sichere Bühnenpyrotechnik und emotionale Lichterbilder für den perfekten "Wow"-Moment.
                         </p>
-                        <Link to="/booking-request" className="pyro-btn">Jetzt Zünden</Link>
+                        <Link to="/buchung-anfragen" className="pyro-btn">Jetzt Zünden</Link>
                     </div>
                 </header>
 
@@ -205,7 +205,7 @@ const Pyrotechnics: React.FC = () => {
                     {/* CTA */}
                     <div className="text-center mt-20 pyro-reveal">
                         <p className="text-stone-400 mb-4">Noch Fragen zu Ihrem speziellen Vorhaben?</p>
-                        <Link to="/booking-request" className="text-[#EBD297] border-b border-[#EBD297] hover:text-white pb-1 transition-colors uppercase tracking-widest font-bold">
+                        <Link to="/buchung-anfragen" className="text-[#EBD297] border-b border-[#EBD297] hover:text-white pb-1 transition-colors uppercase tracking-widest font-bold">
                             Kontakt aufnehmen
                         </Link>
                     </div>

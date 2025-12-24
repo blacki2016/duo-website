@@ -33,7 +33,7 @@ const FireShowWedding: React.FC = () => {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
-                            to="/booking-request"
+                            to="/buchung-anfragen"
                             className="px-8 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-full hover:scale-105 transition-transform"
                         >
                             Anfragen 💕

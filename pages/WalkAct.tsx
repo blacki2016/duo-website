@@ -588,7 +588,7 @@ const WalkAct: React.FC = () => {
           <div className="wa-hero-content">
             <h1 className="wa-hero-title">Fantasievolle Walkacts – Interaktive Performance</h1>
             <p className="wa-hero-sub">Lebendige Charaktere, interaktives Entertainment und unvergessliche Momente.<br />Ideal für Events, Messen & Empfänge, die begeistern.</p>
-            <Link className="wa-cta-button" to="/booking-request">Jetzt anfragen</Link>
+            <Link className="wa-cta-button" to="/buchung-anfragen">Jetzt anfragen</Link>
           </div>
         </header>
 
@@ -687,7 +687,7 @@ const WalkAct: React.FC = () => {
           <h2>Bereit für Entertainment?</h2>
           <p>Teilen Sie uns Ihr Datum und die Art des Events mit – wir schicken Ihnen passende Kostümvorschläge.</p>
           <br />
-          <Link className="wa-cta-button" to="/booking-request">Walk Act anfragen</Link>
+          <Link className="wa-cta-button" to="/buchung-anfragen">Walk Act anfragen</Link>
         </section>
 
       </div>
