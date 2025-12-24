@@ -107,10 +107,10 @@ const Footer: React.FC = () => {
                                 </li>
                             ))}
                             <li className="mt-4">
-                                <li><Link to="/showformate" className="inline-flex items-center gap-2 text-[#ebd297] font-bold text-sm uppercase tracking-widest hover:text-white transition-colors">
+                                <Link to="/showformate" className="inline-flex items-center gap-2 text-[#ebd297] font-bold text-sm uppercase tracking-widest hover:text-white transition-colors">
                                     Alle Formate <ArrowRight size={14} />
                                 </Link>
-                                </li>
+                            </li>
                         </ul>
                     </div>
 
