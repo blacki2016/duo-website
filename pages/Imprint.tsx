@@ -150,10 +150,7 @@ const Imprint: React.FC = () => {
 
                     <hr />
 
-                    <h2>Umsatzsteuer</h2>
-                    <p>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).</p>
 
-                    <hr />
 
                     <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
                     <p>

@@ -617,11 +617,11 @@ const Home: React.FC = () => {
           {/* 4. Call to Action (Semi-Transparent Background) */}
           <section className="py-24 relative overflow-hidden bg-transparent">
             <div className="relative container mx-auto px-4 text-center z-10">
-              <div className="inline-block p-10 md:p-16 rounded-3xl max-w-4xl mx-auto bg-black/50 border border-[#ebd297]/20 backdrop-blur-sm shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-                <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-6">Bereit für das Außergewöhnliche?</h2>
+              <div className="mx-auto w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl px-6 sm:p-10 md:p-16 rounded-3xl bg-black/50 border border-[#ebd297]/20 backdrop-blur-sm shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+                <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-6 break-words">Bereit für das Außergewöhnliche?</h2>
                 <Link
                   to="/booking-request"
-                  className="btn-lively inline-block px-10 py-4 text-black font-bold rounded-full hover:scale-105 transition-transform"
+                  className="btn-lively inline-block mx-auto px-8 sm:px-10 py-4 text-black font-bold rounded-full hover:scale-105 transition-transform"
                 >
                   Jetzt Termin anfragen
                 </Link>
