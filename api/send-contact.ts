@@ -27,7 +27,7 @@ ${message}
         try {
             response = await resend.emails.send({
                 from: 'noreply@resend.dev',
-                to: 'leonard@wieseckel.com',
+                to: 'info@limaex.de',
                 replyTo: email,
                 subject: `Neue Nachricht von ${name} (Website Kontakt)`,
                 text: emailBody,

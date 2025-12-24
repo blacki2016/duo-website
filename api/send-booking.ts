@@ -33,7 +33,7 @@ ${message}
         try {
             response = await resend.emails.send({
                 from: 'noreply@resend.dev',
-                to: 'leonard@wieseckel.com',
+                to: 'info@limaex.de',
                 replyTo: email,
                 subject: `Buchungsanfrage: ${eventType} am ${date} - ${name}`,
                 text: emailBody,
