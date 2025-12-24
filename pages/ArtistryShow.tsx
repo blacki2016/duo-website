@@ -570,7 +570,7 @@ const ArtistryShow: React.FC = () => {
                             {/* 1. Main Video: Jonglage */}
                             <div className="as-main-video-card">
                                 <div className="as-video-wrapper">
-                                    <iframe src="https://www.youtube.com/embed/CpNsX5JBlRM" title="Jonglage Showreel" allowFullScreen loading="lazy"></iframe>
+                                    <iframe src="https://www.youtube-nocookie.com/embed/CpNsX5JBlRM" title="Jonglage Showreel" allowFullScreen loading="lazy"></iframe>
                                 </div>
                                 <div className="as-video-caption text-center">
                                     <h3 className="text-2xl font-serif text-[#EBD297] mb-2">Jonglage</h3>
@@ -583,7 +583,7 @@ const ArtistryShow: React.FC = () => {
                                 {/* Handstand */}
                                 <div className="as-short-card">
                                     <div className="as-short-wrapper">
-                                        <iframe src="https://www.youtube.com/embed/DReI5yQfBHI" title="Handstand" allowFullScreen loading="lazy"></iframe>
+                                        <iframe src="https://www.youtube-nocookie.com/embed/DReI5yQfBHI" title="Handstand" allowFullScreen loading="lazy"></iframe>
                                     </div>
                                     <div className="as-short-content text-center">
                                         <h3 className="text-lg font-bold text-[#EBD297] mb-1">Handstand</h3>
@@ -594,7 +594,7 @@ const ArtistryShow: React.FC = () => {
                                 {/* Magie */}
                                 <div className="as-short-card">
                                     <div className="as-short-wrapper">
-                                        <iframe src="https://www.youtube.com/embed/f6hCSr0qQJw" title="Magie" allowFullScreen loading="lazy"></iframe>
+                                        <iframe src="https://www.youtube-nocookie.com/embed/f6hCSr0qQJw" title="Magie" allowFullScreen loading="lazy"></iframe>
                                     </div>
                                     <div className="as-short-content text-center">
                                         <h3 className="text-lg font-bold text-[#EBD297] mb-1">Magie</h3>
@@ -605,7 +605,7 @@ const ArtistryShow: React.FC = () => {
                                 {/* Rola Rola */}
                                 <div className="as-short-card">
                                     <div className="as-short-wrapper">
-                                        <iframe src="https://www.youtube.com/embed/qzy-T_ti2wY" title="Rola Rola" allowFullScreen loading="lazy"></iframe>
+                                        <iframe src="https://www.youtube-nocookie.com/embed/qzy-T_ti2wY" title="Rola Rola" allowFullScreen loading="lazy"></iframe>
                                     </div>
                                     <div className="as-short-content text-center">
                                         <h3 className="text-lg font-bold text-[#EBD297] mb-1">Rola Rola</h3>

@@ -219,60 +219,62 @@ const Privacy: React.FC = () => {
 
                     <hr />
 
-                    <h2>7. Kontaktformulare & Buchungsanfragen (Forminator)</h2>
-                    <p>Wenn Sie uns per Formular Anfragen zukommen lassen (z. B. Kontakt- oder Buchungsanfragen), werden Ihre Angaben inklusive der von Ihnen angegebenen Kontaktdaten gespeichert, um Ihre Anfrage zu bearbeiten.</p>
-                    <p>Die Daten verbleiben bei uns, bis der Zweck der Speicherung entfällt oder Sie deren Löschung verlangen.</p>
+                    <h2>7. Kontakt- und Buchungsanfragen</h2>
+                    <p>Bei Kontakt- und Buchungsanfragen verarbeiten wir die von Ihnen eingegebenen Daten (z. B. Name, E-Mail, Telefonnummer, Veranstaltungsdatum, Ort, Eventtyp, Nachricht), um Ihre Anfrage zu beantworten und Angebote zu erstellen.</p>
+                    <p>Die Formularübermittlung erfolgt an unseren Server und wird per E-Mail über den Dienst <strong>Resend</strong> (Resend, 2261 Market Street #4486, San Francisco, CA 94114, USA) an uns weitergeleitet. Dabei werden Ihre Angaben an Resend in die USA übermittelt.</p>
                     <p><strong>Rechtsgrundlagen:</strong></p>
                     <ul>
-                        <li>Art. 6 Abs. 1 lit. b DSGVO (Vertrag / Vertragsanbahnung)</li>
-                        <li>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung Ihrer Anfrage)</li>
+                        <li>Art. 6 Abs. 1 lit. b DSGVO (Vertrag/Vertragsanbahnung)</li>
+                        <li>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der effizienten Bearbeitung von Anfragen)</li>
                     </ul>
+                    <p><strong>Speicherdauer:</strong> bis zur abschließenden Bearbeitung und nachfolgend nach gesetzlichen Aufbewahrungsfristen (z. B. Handels- und Steuerrecht) oder bis zum Widerruf/Widerspruch.</p>
 
                     <hr />
 
-                    <h2>8. WordPress Jetpack</h2>
-                    <p>Diese Website nutzt Funktionen des Plugins <strong>Jetpack</strong>, bereitgestellt von Automattic Inc., USA. Jetpack kann technische Informationen über Seitenaufrufe erfassen.</p>
-                    <p>Dabei können Cookies gesetzt und Daten an Server von Automattic übertragen werden.</p>
-                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br />
-                        Datenschutzerklärung: <a href="https://automattic.com/privacy/" target="_blank" rel="noopener noreferrer">https://automattic.com/privacy/</a></p>
+                    <h2>8. Preisrechner & Distanzberechnung</h2>
+                    <p>Der Preisrechner verarbeitet Ihre E-Mail-Adresse, gewählte Leistungen und die eingegebene Location, um eine unverbindliche Preisschätzung zu berechnen.</p>
+                    <ul>
+                        <li><strong>Geocoding:</strong> Zur Distanzberechnung wird die eingegebene Adresse an den Dienst <strong>Nominatim</strong> (OpenStreetMap) gesendet. Dabei wird ein User-Agent übertragen; IP-Adresse und eingegebene Adresse werden serverseitig verarbeitet.</li>
+                        <li><strong>E-Mail-Versand:</strong> Das Ergebnis wird per E-Mail über <strong>Resend</strong> an uns weitergeleitet (USA-Transfer).</li>
+                    </ul>
+                    <p><strong>Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) und Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an schneller Angebotserstellung).</p>
 
                     <hr />
 
-                    <h2>9. Live-Chat (Tawk.to)</h2>
-                    <p>Diese Website nutzt den Live-Chat-Dienst <strong>Tawk.to</strong>, bereitgestellt von tawk.to Inc., USA. Über den Chat können personenbezogene Daten wie Name, E-Mail-Adresse oder Chatverläufe verarbeitet werden.</p>
-                    <p>Die Nutzung erfolgt freiwillig.</p>
-                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br />
-                        Datenschutzerklärung: <a href="https://www.tawk.to/privacy-policy/" target="_blank" rel="noopener noreferrer">https://www.tawk.to/privacy-policy/</a></p>
+                    <h2>9. E-Mail-Speicherung (Lead-Formular)</h2>
+                    <p>Sofern Sie freiwillig Ihre E-Mail-Adresse hinterlassen (z. B. für Rückruf/Follow-up), wird diese serverseitig gespeichert. Es erfolgt keine Weitergabe an Dritte.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Kommunikation).</p>
+                    <p><strong>Speicherdauer:</strong> bis Widerruf/Widerspruch oder Wegfall des Zwecks.</p>
 
                     <hr />
 
-                    <h2>10. Instagram Feed (Smash Balloon)</h2>
-                    <p>Diese Website nutzt das Plugin <strong>Smash Balloon Instagram Feed</strong>, um Inhalte von Instagram darzustellen. Beim Aufruf entsprechender Seiten können personenbezogene Daten (z. B. IP-Adresse) an Meta Platforms Inc. übermittelt werden.</p>
-                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br />
-                        Datenschutzerklärung Instagram: <a href="https://privacycenter.instagram.com/" target="_blank" rel="noopener noreferrer">https://privacycenter.instagram.com/</a></p>
+                    <h2>10. Eingebettete Videos (YouTube)</h2>
+                    <p>Wir binden Videos von YouTube im <strong>„erweiterten Datenschutzmodus“</strong> über die Domain <strong>youtube-nocookie.com</strong> ein. Erst beim Abspielen kann YouTube Nutzungsdaten verarbeiten (z. B. IP-Adresse, Geräteinformationen) und ggf. Cookies setzen.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an attraktiver Darstellung). Wenn Sie einwilligen, erfolgt die Verarbeitung auf Art. 6 Abs. 1 lit. a DSGVO.</p>
+                    <p>Datenschutzerklärung YouTube/Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></p>
 
                     <hr />
 
-                    <h2>11. Pop and Convert</h2>
-                    <p>Diese Website nutzt <strong>Pop and Convert</strong>, um interaktive Pop-ups und Hinweise darzustellen. Dabei können technische Informationen wie Gerätetyp oder IP-Adresse verarbeitet werden.</p>
-                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO</p>
+                    <h2>11. Externe Ressourcen & Schriftarten</h2>
+                    <p>Zur Darstellung und Funktionalität werden externe Ressourcen nachgeladen:</p>
+                    <ul>
+                        <li><strong>Google Fonts</strong> (Cinzel, Montserrat) von fonts.googleapis.com / fonts.gstatic.com</li>
+                        <li><strong>Font Awesome</strong> Icons von cdnjs.cloudflare.com</li>
+                        <li><strong>Tailwind CSS</strong> von cdn.tailwindcss.com</li>
+                        <li>JavaScript-Bundles über <strong>esm.sh</strong> (u. a. React, Router)</li>
+                        <li>Vorgeladene Bilder von <strong>maximilianboy.de</strong> (WordPress-Medien)</li>
+                    </ul>
+                    <p>Hierbei werden technische Nutzungsdaten (z. B. IP-Adresse, Timestamp, User-Agent) an die jeweiligen Anbieter übertragen. Es kann zu einer Übermittlung in Drittländer (insbesondere USA) kommen.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einheitlicher Darstellung und Performance). Bei Einbindung mit Einwilligung: Art. 6 Abs. 1 lit. a DSGVO.</p>
 
                     <hr />
 
-                    <h2>12. YouTube (eingebettete Videos)</h2>
-                    <p>Diese Website bindet Videos der Plattform <strong>YouTube</strong> ein, betrieben von Google Ireland Limited. Beim Aufruf einer Seite mit eingebettetem YouTube-Video wird eine Verbindung zu den Servern von YouTube hergestellt.</p>
-                    <p>Dabei können Cookies gesetzt und Nutzungsdaten verarbeitet werden.</p>
-                    <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO<br />
-                        Datenschutzerklärung: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></p>
-
-                    <hr />
-
-                    <h2>13. Widerruf Ihrer Einwilligung</h2>
+                    <h2>12. Widerruf Ihrer Einwilligung</h2>
                     <p>Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt unberührt.</p>
 
                     <hr />
 
-                    <h2>14. Aktualität und Änderung dieser Datenschutzerklärung</h2>
+                    <h2>13. Aktualität und Änderung dieser Datenschutzerklärung</h2>
                     <p>Diese Datenschutzerklärung ist aktuell gültig und hat den Stand <strong>Dezember 2025</strong>. Durch Weiterentwicklung der Website oder gesetzliche Änderungen kann eine Anpassung erforderlich werden.</p>
 
                 </div>

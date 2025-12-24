@@ -624,7 +624,7 @@ const DuoLimax: React.FC = () => {
                     <div className="video-container">
                         <div className="video-ratio">
                             <iframe
-                                src="https://www.youtube.com/embed/fLi4wht1iwI"
+                                src="https://www.youtube-nocookie.com/embed/fLi4wht1iwI"
                                 title="Duo Limäx UKONGU Trailer"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen>
