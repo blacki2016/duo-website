@@ -57,7 +57,11 @@ GESAMTPREIS: ${totalPrice.toFixed(2)}€
 
 Dies ist eine automatische Schätzung. Bitte kontaktiere den Kunden für ein individuelles Angebot.
     `.trim();
-
+        // Entwicklungsmodus: Wenn kein API-Key, simuliere erfolgreichen Versand
+        if (!process.env.RESEND_API_KEY) {
+            console.log('📧 [DEV MODE] Preisanfrage (nicht versendet):', { email, selections, totalPrice });
+            return res.status(200).json({ success: true, dev: true, message: 'Dev-Modus: E-Mail wurde nicht versendet' });
+        }
         let response;
         try {
             response = await resend.emails.send({

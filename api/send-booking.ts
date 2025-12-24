@@ -29,6 +29,12 @@ Individuelle Details:
 ${message}
     `.trim();
 
+        // Entwicklungsmodus: Wenn kein API-Key, simuliere erfolgreichen Versand
+        if (!process.env.RESEND_API_KEY) {
+            console.log('📧 [DEV MODE] Buchungsanfrage (nicht versendet):', { name, email, phone, date, location, showFormat, eventType });
+            return res.status(200).json({ success: true, dev: true, message: 'Dev-Modus: E-Mail wurde nicht versendet' });
+        }
+
         let response;
         try {
             response = await resend.emails.send({
