@@ -150,13 +150,7 @@ const DuoLimax: React.FC = () => {
         };
     }, []);
 
-    const handlePrev = () => {
-        if (trackRef.current) trackRef.current.scrollBy({ left: -350, behavior: 'smooth' });
-    };
 
-    const handleNext = () => {
-        if (trackRef.current) trackRef.current.scrollBy({ left: 350, behavior: 'smooth' });
-    };
 
     const handleImageClick = (src: string) => {
         setLightboxSrc(src);
@@ -488,23 +482,7 @@ const DuoLimax: React.FC = () => {
         .carousel-item img { width: auto; height: auto; max-height: 400px; max-width: 100%; object-fit: contain; }
         @media(max-width: 600px) { .carousel-item img { max-height: 350px; } }
 
-        .carousel-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.6);
-            border: 1px solid #EBD297;
-            color: #EBD297;
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s;
-        }
-        .carousel-nav-btn:hover { background: #EBD297; color: #000; }
-        .nav-prev { left: 20px; }
-        .nav-next { right: 20px; }
+
 
         /* BUTTONS */
         .limax-btn {
@@ -676,7 +654,6 @@ const DuoLimax: React.FC = () => {
                 <section className="limax-section limax-reveal">
                     <h2>Impressionen</h2>
                     <div style={{ position: 'relative' }}>
-                        <div className="carousel-nav-btn nav-prev" onClick={handlePrev}>❮</div>
                         <div className="carousel-track" ref={trackRef}>
                             {[
                                 "/images/limaex.slider1.jpg",
@@ -693,7 +670,6 @@ const DuoLimax: React.FC = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="carousel-nav-btn nav-next" onClick={handleNext}>❯</div>
                     </div>
                 </section>
 

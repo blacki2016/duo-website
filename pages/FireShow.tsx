@@ -121,13 +121,7 @@ const FireShow: React.FC = () => {
         setLightboxSrc(src);
     };
 
-    const handlePrev = () => {
-        if (trackRef.current) trackRef.current.scrollBy({ left: -350, behavior: 'smooth' });
-    };
 
-    const handleNext = () => {
-        if (trackRef.current) trackRef.current.scrollBy({ left: 350, behavior: 'smooth' });
-    };
 
     // Generate Sparks for Hero
     const sparks = Array.from({ length: 20 }).map(() => ({
@@ -532,24 +526,7 @@ const FireShow: React.FC = () => {
         /* removed blurred background layer for exact image sizing */
 
         /* Carousel Navigation Buttons */
-        .fs-carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
-            color: #EBD297;
-            border: 1px solid #EBD297;
-            border-radius: 50%;
-            width: 40px; height: 40px;
-            cursor: pointer;
-            z-index: 10;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-        .fs-carousel-btn:hover { background: #EBD297; color: #000; }
-        .fs-carousel-prev { left: 10px; }
-        .fs-carousel-next { right: 10px; }
+
 
         /* FAQ */
         .fs-faq details {
@@ -760,7 +737,6 @@ const FireShow: React.FC = () => {
                 <section className="fs-section fs-reveal">
                     <h2>Weitere Impressionen</h2>
                     <div className="fs-carousel-wrapper">
-                        <button className="fs-carousel-btn fs-carousel-prev" onClick={handlePrev} aria-label="Zurück">❮</button>
                         <div className="fs-carousel-track" ref={trackRef}>
                             {[
                                 { src: `${import.meta.env.BASE_URL}images/flammenmeer.jpg`, format: 'landscape' },
@@ -780,7 +756,6 @@ const FireShow: React.FC = () => {
                                 </div>
                             ))}
                         </div>
-                        <button className="fs-carousel-btn fs-carousel-next" onClick={handleNext} aria-label="Weiter">❯</button>
                     </div>
                 </section>
 

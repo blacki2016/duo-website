@@ -66,8 +66,7 @@ const Navbar: React.FC = () => {
             label: 'Kontakt',
             children: [
                 { label: 'Kontakt 📲', path: '/booking' },
-                { label: 'Buchung anfragen 🗒️', path: '/booking-request' },
-                { label: 'Preisrechner 💰', path: '/pricing' }
+                { label: 'Buchung anfragen 🗒️', path: '/booking-request' }
             ]
         },
         {

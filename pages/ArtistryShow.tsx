@@ -137,13 +137,7 @@ const ArtistryShow: React.FC = () => {
         setLightboxSrc(src);
     };
 
-    const handlePrev = () => {
-        if (trackRef.current) trackRef.current.scrollBy({ left: -350, behavior: 'smooth' });
-    };
 
-    const handleNext = () => {
-        if (trackRef.current) trackRef.current.scrollBy({ left: 350, behavior: 'smooth' });
-    };
 
     return (
         <>
@@ -467,24 +461,7 @@ const ArtistryShow: React.FC = () => {
         /* removed blurred background layer for exact image sizing */
 
         /* Carousel Navigation Buttons */
-        .as-carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
-            color: #EBD297;
-            border: 1px solid #EBD297;
-            border-radius: 50%;
-            width: 40px; height: 40px;
-            cursor: pointer;
-            z-index: 10;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-        .as-carousel-btn:hover { background: #EBD297; color: #000; }
-        .as-carousel-prev { left: 10px; }
-        .as-carousel-next { right: 10px; }
+
 
         /* FAQ */
         .as-faq-container { max-width: 800px; margin: 0 auto; }
@@ -644,7 +621,6 @@ const ArtistryShow: React.FC = () => {
                     <section className="as-section as-reveal">
                         <h2>Impressionen</h2>
                         <div className="as-carousel-wrapper">
-                            <button className="as-carousel-btn as-carousel-prev" onClick={handlePrev} aria-label="Zurück">❮</button>
                             <div className="as-carousel-track" ref={trackRef}>
                                 {[
                                     { src: `${import.meta.env.BASE_URL}images/artistk.1.jpg`, format: 'portrait' },
@@ -662,7 +638,6 @@ const ArtistryShow: React.FC = () => {
                                     </div>
                                 ))}
                             </div>
-                            <button className="as-carousel-btn as-carousel-next" onClick={handleNext} aria-label="Weiter">❯</button>
                         </div>
                     </section>
 
