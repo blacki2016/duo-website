@@ -340,6 +340,47 @@ const Home: React.FC = () => {
           -ms-overflow-style: none;  /* IE and Edge */
           scrollbar-width: none;  /* Firefox */
         }
+
+        /* Timeline Styles */
+        .timeline {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 1rem;
+          align-items: start;
+        }
+        .timeline-item {
+          position: relative;
+          text-align: center;
+          padding-top: 1.25rem;
+        }
+        .timeline-dot {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 16px;
+          height: 16px;
+          border-radius: 9999px;
+          background: #ebd297;
+          box-shadow: 0 0 12px rgba(235,210,151,0.6);
+        }
+        .timeline-line {
+          position: absolute;
+          top: 7px;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #ebd297, transparent);
+          z-index: -1;
+        }
+        .timeline-title { color: #ffffff; font-weight: 700; }
+        .timeline-sub { color: #b0b0b0; font-size: 0.9rem; }
+        @media (max-width: 900px) {
+          .timeline { grid-template-columns: 1fr; }
+          .timeline-item { text-align: left; padding-left: 2.25rem; }
+          .timeline-dot { left: 0; transform: none; }
+          .timeline-line { display: none; }
+        }
       `}</style>
 
       {/* 0. GLOBAL BACKGROUND LAYER (Fixed) */}
@@ -573,6 +614,37 @@ const Home: React.FC = () => {
                     <p className="text-stone-400 leading-relaxed">{usp.desc}</p>
                   </div>
                 ))}
+              </div>
+
+              {/* Ablauf-Zeitleiste */}
+              <div className="mt-16 max-w-6xl mx-auto">
+                <h3 className="text-center text-2xl font-serif font-bold text-[#ebd297] mb-6">So läuft Ihre Buchung ab</h3>
+                <div className="relative">
+                  <div className="timeline-line"></div>
+                  <div className="timeline">
+                    <div className="timeline-item">
+                      <div className="timeline-dot"></div>
+                      <div className="timeline-title">Buchungsanfrage</div>
+                      <div className="timeline-sub">Formular kurz ausfüllen – Eckdaten & Wünsche.</div>
+                    </div>
+                    <div className="timeline-item">
+                      <div className="timeline-dot"></div>
+                      <div className="timeline-title">Rückmeldung</div>
+                      <div className="timeline-sub">Konkretes Angebot oder kurze Rückfragen.</div>
+                    </div>
+                    <div className="timeline-item">
+                      <div className="timeline-dot"></div>
+                      <div className="timeline-title">Buchung & Rückgespräche</div>
+                      <div className="timeline-sub">Bestätigung, Details & organisatorische Feinheiten.</div>
+                    </div>
+                    <div className="timeline-item">
+                      <div className="timeline-dot"></div>
+                      <div className="timeline-title">Der große Tag</div>
+                      <div className="timeline-sub">Pünktliche Ankunft, diskreter Aufbau, starke Show.</div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </section>
