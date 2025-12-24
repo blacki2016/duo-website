@@ -32,7 +32,7 @@ ${message}
         let response;
         try {
             response = await resend.emails.send({
-                from: 'noreply@resend.dev',
+                from: 'noreply@limaex.de',
                 to: 'info@limaex.de',
                 replyTo: email,
                 subject: `Neue Nachricht von ${name} (Website Kontakt)`,

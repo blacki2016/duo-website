@@ -65,8 +65,8 @@ Dies ist eine automatische Schätzung. Bitte kontaktiere den Kunden für ein ind
         let response;
         try {
             response = await resend.emails.send({
-                from: 'noreply@resend.dev',
-                to: 'leonard@wieseckel.com',
+                from: 'noreply@limaex.de',
+                to: 'info@limaex.de',
                 replyTo: email,
                 subject: `💰 Preisanfrage: ${totalPrice.toFixed(2)}€ - ${email}`,
                 text: emailBody,
