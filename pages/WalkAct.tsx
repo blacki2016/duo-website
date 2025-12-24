@@ -162,11 +162,17 @@ const WalkAct: React.FC = () => {
             position: absolute;
             inset: 0;
             background-size: cover;
-            background-position: center -150px;
+            background-position: center top;
             background-repeat: no-repeat;
             transition: opacity 2000ms ease-in-out;
             filter: blur(5px) brightness(0.3);
             transform: scale(1.05);
+        }
+
+        @media (min-width: 1024px) {
+            .wa-slide {
+                background-position: center -150px;
+            }
         }
 
         /* === WRAPPER === */
