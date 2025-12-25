@@ -18,7 +18,7 @@ const MOBILE_SLIDES = [
   `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
   `${import.meta.env.BASE_URL}images/mobile.slider2.1.png`,
   // HINWEIS: Wenn dieses Bild nicht angezeigt wird, prüfe ob es vielleicht eine .jpg Datei ist
-  `${import.meta.env.BASE_URL}images/nebel.png`, 
+  `${import.meta.env.BASE_URL}images/nebel.png`,
   `${import.meta.env.BASE_URL}images/mobile.slider4.png`
 ];
 
@@ -108,13 +108,13 @@ const Home: React.FC = () => {
   // Erkenne Mobile vs. Desktop
   useEffect(() => {
     const handleResize = () => {
-        const mobile = window.innerWidth < 768;
-        setIsMobile(mobile);
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
     };
-    
+
     // Initial call
     handleResize();
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -143,16 +143,22 @@ const Home: React.FC = () => {
       <style>{`
         .font-cinzel { font-family: 'Cinzel', serif; }
         
-        /* Button Glow */
+        /* Button Glow + Shimmer */
+        @keyframes shimmer {
+          0% { background-position: 0% 50%; }
+          100% { background-position: 200% 50%; }
+        }
         .btn-gold {
-            background: linear-gradient(135deg, #8E6F34 0%, #C8A663 50%, #8E6F34 100%);
-            background-size: 200% auto;
-            transition: all 0.5s ease;
+          background: linear-gradient(135deg, #8E6F34 0%, #C8A663 50%, #F9EFAF 75%, #8E6F34 100%);
+          background-size: 200% 200%;
+          transition: all 0.5s ease;
+          box-shadow: 0 0 18px rgba(200, 166, 99, 0.35), 0 0 32px rgba(200, 166, 99, 0.2);
+          animation: shimmer 4s linear infinite;
         }
         .btn-gold:hover {
-            background-position: right center;
-            box-shadow: 0 0 25px rgba(200, 166, 99, 0.7);
-            transform: translateY(-2px);
+          background-position: 120% 50%;
+          box-shadow: 0 0 26px rgba(200, 166, 99, 0.65), 0 0 48px rgba(200, 166, 99, 0.4);
+          transform: translateY(-2px);
         }
 
         /* Hero Animationen */
