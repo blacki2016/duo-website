@@ -153,6 +153,7 @@ const Navbar: React.FC = () => {
         .main-nav a {
             font-family: var(--font-title);
             white-space: nowrap; /* prevent label wrapping */
+            text-transform: none; /* Override uppercase from gold-button */
         }
 
         /* Override: use dropdown font for items inside dropdown panel */
@@ -538,7 +539,7 @@ const Navbar: React.FC = () => {
                                     <div key={index} className="relative group px-2 py-1 transition-all duration-300">
                                         {item.children ? (
                                             <>
-                                                <button className={`nav-button flex items-center gap-2 font-title font-black text-base text-[#C8A663] hover:text-[#FFFACD] transition-all duration-300 nav-link-hover uppercase tracking-wider hover:drop-shadow-lg`}>
+                                                <button className={`nav-button flex items-center gap-2 font-title font-black text-lg text-[#C8A663] hover:text-[#FFFACD] transition-all duration-300 nav-link-hover tracking-wider hover:drop-shadow-lg`}>
                                                     {item.label} <ChevronDown size={18} className="group-hover:rotate-180 transition-transform duration-300" />
                                                 </button>
                                                 {/* Dropdown */}
@@ -569,14 +570,14 @@ const Navbar: React.FC = () => {
                                                     href={item.path}
                                                     target="_blank"
                                                     rel="noreferrer"
-                                                    className={`font-title font-black text-base text-[#C8A663] hover:text-[#F9EFAF] transition-all duration-300 nav-link-hover uppercase tracking-wider px-2 hover:drop-shadow-lg`}
+                                                    className={`font-title font-black text-lg text-[#C8A663] hover:text-[#F9EFAF] transition-all duration-300 nav-link-hover tracking-wider px-2 hover:drop-shadow-lg`}
                                                 >
                                                     {item.label}
                                                 </a>
                                             ) : (
                                                 <Link
                                                     to={item.path!}
-                                                    className={`font-title font-black text-base text-[#C8A663] hover:text-[#F9EFAF] transition-all duration-300 nav-link-hover uppercase tracking-wider px-2 hover:drop-shadow-lg`}
+                                                    className={`font-title font-black text-lg text-[#C8A663] hover:text-[#F9EFAF] transition-all duration-300 nav-link-hover tracking-wider px-2 hover:drop-shadow-lg`}
                                                 >
                                                     {item.label}
                                                 </Link>
