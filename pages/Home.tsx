@@ -7,16 +7,16 @@ import ScrollToTop from '../components/ScrollToTop';
 
 // Hero Background Bilder (Desktop)
 const DESKTOP_SLIDES = [
-  `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
-  `${import.meta.env.BASE_URL}images/mobile.slider2.1.png`,
-  `${import.meta.env.BASE_URL}images/mobile.slider3.png`
+  `${import.meta.env.BASE_URL}images/schatten3.png`,
+  `${import.meta.env.BASE_URL}images/slider4.jpeg.jpg`,
+  `${import.meta.env.BASE_URL}images/limaex.slider7.jpg`
 ];
 
 // Hero Background Bilder (Mobile)
 const MOBILE_SLIDES = [
-  `${import.meta.env.BASE_URL}images/mobile.slider1.png`,
-  `${import.meta.env.BASE_URL}images/limaex.slider5.jpg`,
-  `${import.meta.env.BASE_URL}images/limaex.rola.jpg.webp`
+  `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
+  `${import.meta.env.BASE_URL}images/mobile.slider2.1.png`,
+  `${import.meta.env.BASE_URL}images/mobile.slider3.png`
 ];
 
 // USP Data
@@ -105,7 +105,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % DESKTOP_SLIDES.length);
-    }, 5000); 
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -162,18 +162,18 @@ const Home: React.FC = () => {
       <div className="fixed inset-0 z-0 pointer-events-none">
         {DESKTOP_SLIDES.map((slide, index) => (
           <React.Fragment key={index}>
-             {/* Desktop Bild */}
+            {/* Desktop Bild */}
             <div
-                className={`hidden md:block absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-                style={{ backgroundImage: `url('${slide}')` }}
+              className={`hidden md:block absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+              style={{ backgroundImage: `url('${slide}')` }}
             />
             {/* Mobile Bild */}
             <div
-                className={`block md:hidden absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-                style={{ 
-                    backgroundImage: `url('${MOBILE_SLIDES[index] || slide}')`,
-                    backgroundPosition: 'center'
-                }}
+              className={`block md:hidden absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+              style={{
+                backgroundImage: `url('${MOBILE_SLIDES[index] || slide}')`,
+                backgroundPosition: 'center'
+              }}
             />
           </React.Fragment>
         ))}
@@ -188,12 +188,12 @@ const Home: React.FC = () => {
           - pt-28 (Mobile): Fixer Abstand von oben, schiebt es in die obere Hälfte
       */}
       <header className="relative z-20 min-h-screen flex flex-col items-center justify-start md:justify-center pt-28 md:pt-32 pb-20 px-4 text-center">
-        
+
         {/* Haupttitel Block */}
         <div className="mb-8 mt-4 animate-fade-up">
-            <h1 className="py-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-cinzel font-black text-transparent bg-clip-text bg-gradient-to-r from-[#C8A663] via-[#F9EFAF] to-[#C8A663] drop-shadow-2xl leading-tight">
-              DUO LIMÄX
-            </h1>
+          <h1 className="py-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-cinzel font-black text-transparent bg-clip-text bg-gradient-to-r from-[#C8A663] via-[#F9EFAF] to-[#C8A663] drop-shadow-2xl leading-tight">
+            DUO LIMÄX
+          </h1>
         </div>
 
         {/* Trenner */}
@@ -201,43 +201,43 @@ const Home: React.FC = () => {
 
         {/* Aktuelles Programm: UKONGU */}
         <div className="relative mb-12 animate-fade-up delay-100 opacity-0 group cursor-default">
-            
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#ebd297]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
 
-            {/* Badge */}
-            <div className="inline-flex items-center justify-center gap-2 border border-[#ebd297] px-4 py-1 rounded-full text-[#ebd297] text-xs font-bold tracking-widest uppercase mb-4 animate-subtle-pulse bg-black/40 backdrop-blur-sm">
-                <Sparkles size={12} /> Aktuelle Produktion
-            </div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#ebd297]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
 
-            {/* Der Titel */}
-            <h2 className="text-5xl md:text-7xl font-black text-white tracking-widest ukongu-text mb-2 scale-y-110">
-                UKONGU
-            </h2>
-            <p className="text-[#ebd297] font-serif italic text-xl md:text-2xl opacity-90">
-                Eine Show der Superlative
-            </p>
+          {/* Badge */}
+          <div className="inline-flex items-center justify-center gap-2 border border-[#ebd297] px-4 py-1 rounded-full text-[#ebd297] text-xs font-bold tracking-widest uppercase mb-4 animate-subtle-pulse bg-black/40 backdrop-blur-sm">
+            <Sparkles size={12} /> Aktuelle Produktion
+          </div>
+
+          {/* Der Titel */}
+          <h2 className="text-5xl md:text-7xl font-black text-white tracking-widest ukongu-text mb-2 scale-y-110">
+            UKONGU
+          </h2>
+          <p className="text-[#ebd297] font-serif italic text-xl md:text-2xl opacity-90">
+            Eine Show der Superlative
+          </p>
         </div>
 
         {/* Button */}
         <div className="animate-fade-up delay-200 opacity-0 z-10">
-            <Link 
-              to="/buchung-anfragen" 
-              className="btn-gold inline-flex items-center gap-3 px-10 py-5 rounded-sm text-black font-bold uppercase tracking-wider text-base md:text-lg"
-            >
-              Show Anfragen <Flame className="w-5 h-5" />
-            </Link>
+          <Link
+            to="/buchung-anfragen"
+            className="btn-gold inline-flex items-center gap-3 px-10 py-5 rounded-sm text-black font-bold uppercase tracking-wider text-base md:text-lg"
+          >
+            Show Anfragen <Flame className="w-5 h-5" />
+          </Link>
         </div>
 
         {/* Scroll Indikator */}
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-[#ebd297] opacity-80 z-20 flex flex-col items-center gap-2">
-            <span className="text-[10px] uppercase tracking-[0.2em]">Entdecken</span>
-            <ChevronDown size={36} strokeWidth={1.5} />
+          <span className="text-[10px] uppercase tracking-[0.2em]">Entdecken</span>
+          <ChevronDown size={36} strokeWidth={1.5} />
         </div>
       </header>
 
       {/* --- MAIN CONTENT --- */}
       <div className="relative z-20 bg-stone-900/80 backdrop-blur-sm border-t border-[#ebd297]/20 shadow-[0_-20px_60px_rgba(0,0,0,0.8)]">
-        
+
         {/* 1. KERNKOMPETENZEN */}
         <section className="py-24 container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -256,15 +256,15 @@ const Home: React.FC = () => {
           <div className="container mx-auto px-6 text-center">
             <span className="text-[#ebd297] text-sm font-bold tracking-widest uppercase">Erlebe uns Live</span>
             <h2 className="text-3xl md:text-4xl font-cinzel font-bold text-white mt-2 mb-12">Showreel</h2>
-            
+
             <div className="max-w-5xl mx-auto relative rounded-xl overflow-hidden border border-[#ebd297]/30 shadow-2xl bg-black">
               <div className="aspect-video w-full">
                 <iframe
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" 
-                    title="Duo Limäx Showreel"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+                  title="Duo Limäx Showreel"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
                 ></iframe>
               </div>
             </div>
@@ -274,10 +274,10 @@ const Home: React.FC = () => {
         {/* 3. SHOW FORMATE */}
         <section className="py-24 container mx-auto px-6">
           <div className="text-center mb-16">
-             <h2 className="text-3xl md:text-5xl font-cinzel font-bold text-white mb-4">Showformate</h2>
-             <div className="w-24 h-1 bg-[#ebd297] mx-auto rounded-full shadow-[0_0_10px_#ebd297]"></div>
+            <h2 className="text-3xl md:text-5xl font-cinzel font-bold text-white mb-4">Showformate</h2>
+            <div className="w-24 h-1 bg-[#ebd297] mx-auto rounded-full shadow-[0_0_10px_#ebd297]"></div>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {SHOW_PREVIEWS.map((show, i) => (
               <div key={i} className="group bg-[#1a1a1a] rounded-xl overflow-hidden border border-white/5 hover:border-[#ebd297] transition-all flex flex-col shadow-lg">
@@ -286,7 +286,7 @@ const Home: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                   <h3 className="absolute bottom-4 left-4 text-2xl font-cinzel font-bold text-[#ebd297] drop-shadow-md">{show.title}</h3>
                 </div>
-                
+
                 <div className="p-6 flex-grow flex flex-col">
                   <ul className="space-y-2 mb-6 flex-grow">
                     {show.features.map((feat, idx) => (
@@ -306,73 +306,73 @@ const Home: React.FC = () => {
 
         {/* 4. USP */}
         <section className="py-24 bg-[#ebd297]/5 border-y border-[#ebd297]/10">
-            <div className="container mx-auto px-6">
-                <div className="grid md:grid-cols-3 gap-12 text-center">
-                    {USPS.map((usp, idx) => (
-                        <div key={idx} className="flex flex-col items-center group">
-                            <div className="mb-6 p-5 rounded-full bg-black/50 border border-[#ebd297]/30 group-hover:border-[#ebd297] group-hover:shadow-[0_0_20px_rgba(235,210,151,0.2)] transition-all duration-300">
-                                {usp.icon}
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-2">{usp.title}</h3>
-                            <p className="text-stone-400 leading-relaxed max-w-xs">{usp.desc}</p>
-                        </div>
-                    ))}
+          <div className="container mx-auto px-6">
+            <div className="grid md:grid-cols-3 gap-12 text-center">
+              {USPS.map((usp, idx) => (
+                <div key={idx} className="flex flex-col items-center group">
+                  <div className="mb-6 p-5 rounded-full bg-black/50 border border-[#ebd297]/30 group-hover:border-[#ebd297] group-hover:shadow-[0_0_20px_rgba(235,210,151,0.2)] transition-all duration-300">
+                    {usp.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">{usp.title}</h3>
+                  <p className="text-stone-400 leading-relaxed max-w-xs">{usp.desc}</p>
                 </div>
+              ))}
             </div>
+          </div>
         </section>
 
         {/* 5. PROFIL */}
         <section className="py-24 container mx-auto px-6">
-            <div className="flex flex-col md:flex-row gap-12 items-center max-w-6xl mx-auto bg-black/40 p-8 md:p-12 rounded-2xl border border-white/5">
-                <div className="w-full md:w-1/2 aspect-square md:aspect-[4/5] relative rounded-lg overflow-hidden shadow-xl border border-white/10">
-                    <img 
-                        src="/images/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6-2.jpg" 
-                        alt="Das Duo" 
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                    />
-                </div>
-                <div className="w-full md:w-1/2 text-left space-y-6">
-                    <h2 className="text-3xl md:text-4xl font-cinzel font-bold text-[#ebd297]">
-                        Zwei Künstler.<br/>Ein Feuertraum.
-                    </h2>
-                    <p className="text-stone-300 leading-relaxed">
-                        Das ist <strong>Duo Limäx</strong>. Zwei Artists verbinden Feuer, Partnerakrobatik und Musik zu einer Show, die Publikum und Veranstalter gleichermaßen fesselt.
-                    </p>
-                    <p className="text-stone-300 leading-relaxed">
-                        Wir stehen nicht nur für spektakuläre Bilder, sondern für Zuverlässigkeit. Von der ersten Absprache bis zum Applaus sind wir euer Partner.
-                    </p>
-                    <Link to="/allgemein/ueber-uns/" className="inline-block border-b-2 border-[#ebd297] text-white hover:text-[#ebd297] pb-1 transition-colors uppercase tracking-widest text-sm mt-4">
-                        Mehr über uns erfahren
-                    </Link>
-                </div>
+          <div className="flex flex-col md:flex-row gap-12 items-center max-w-6xl mx-auto bg-black/40 p-8 md:p-12 rounded-2xl border border-white/5">
+            <div className="w-full md:w-1/2 aspect-square md:aspect-[4/5] relative rounded-lg overflow-hidden shadow-xl border border-white/10">
+              <img
+                src="/images/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6-2.jpg"
+                alt="Das Duo"
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              />
             </div>
+            <div className="w-full md:w-1/2 text-left space-y-6">
+              <h2 className="text-3xl md:text-4xl font-cinzel font-bold text-[#ebd297]">
+                Zwei Künstler.<br />Ein Feuertraum.
+              </h2>
+              <p className="text-stone-300 leading-relaxed">
+                Das ist <strong>Duo Limäx</strong>. Zwei Artists verbinden Feuer, Partnerakrobatik und Musik zu einer Show, die Publikum und Veranstalter gleichermaßen fesselt.
+              </p>
+              <p className="text-stone-300 leading-relaxed">
+                Wir stehen nicht nur für spektakuläre Bilder, sondern für Zuverlässigkeit. Von der ersten Absprache bis zum Applaus sind wir euer Partner.
+              </p>
+              <Link to="/allgemein/ueber-uns/" className="inline-block border-b-2 border-[#ebd297] text-white hover:text-[#ebd297] pb-1 transition-colors uppercase tracking-widest text-sm mt-4">
+                Mehr über uns erfahren
+              </Link>
+            </div>
+          </div>
         </section>
 
         {/* 6. KONTAKT */}
         <section className="py-24 text-center">
-            <div className="container mx-auto px-6">
-                <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#1a1a1a] to-black border border-[#ebd297]/30 p-10 md:p-20 rounded-3xl relative overflow-hidden shadow-2xl">
-                    <div className="absolute top-0 left-0 w-full h-full bg-[#ebd297]/5 pointer-events-none"></div>
-                    
-                    <h2 className="text-3xl md:text-5xl font-cinzel font-bold text-white mb-6 relative z-10">
-                        Euer Event.<br/>Unser Highlight.
-                    </h2>
-                    <p className="text-stone-400 text-lg mb-10 max-w-xl mx-auto relative z-10">
-                        Ob Hochzeit, Gala oder Stadtfest – wir haben das passende Format. Sichert euch jetzt euren Wunschtermin.
-                    </p>
-                    
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center relative z-10">
-                        <Link to="/buchung-anfragen" className="btn-gold px-10 py-4 text-black font-bold rounded-sm uppercase tracking-wider shadow-lg">
-                            Termin Anfragen
-                        </Link>
-                        <a href="tel:015785585713" className="px-10 py-4 border border-stone-600 hover:border-[#ebd297] text-stone-300 hover:text-[#ebd297] transition-all rounded-sm uppercase tracking-wider font-bold">
-                            0157 - 85585713
-                        </a>
-                    </div>
-                </div>
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#1a1a1a] to-black border border-[#ebd297]/30 p-10 md:p-20 rounded-3xl relative overflow-hidden shadow-2xl">
+              <div className="absolute top-0 left-0 w-full h-full bg-[#ebd297]/5 pointer-events-none"></div>
+
+              <h2 className="text-3xl md:text-5xl font-cinzel font-bold text-white mb-6 relative z-10">
+                Euer Event.<br />Unser Highlight.
+              </h2>
+              <p className="text-stone-400 text-lg mb-10 max-w-xl mx-auto relative z-10">
+                Ob Hochzeit, Gala oder Stadtfest – wir haben das passende Format. Sichert euch jetzt euren Wunschtermin.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-6 justify-center relative z-10">
+                <Link to="/buchung-anfragen" className="btn-gold px-10 py-4 text-black font-bold rounded-sm uppercase tracking-wider shadow-lg">
+                  Termin Anfragen
+                </Link>
+                <a href="tel:015785585713" className="px-10 py-4 border border-stone-600 hover:border-[#ebd297] text-stone-300 hover:text-[#ebd297] transition-all rounded-sm uppercase tracking-wider font-bold">
+                  0157 - 85585713
+                </a>
+              </div>
             </div>
+          </div>
         </section>
-        
+
       </div>
 
       <ScrollToTop />
