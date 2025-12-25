@@ -18,7 +18,7 @@ const MOBILE_SLIDES = [
   `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
   `${import.meta.env.BASE_URL}images/mobile.slider2.1.png`,
   // HINWEIS: Wenn dieses Bild nicht angezeigt wird, prüfe ob es vielleicht eine .jpg Datei ist
-  `${import.meta.env.BASE_URL}images/test1.1.png`, 
+  `${import.meta.env.BASE_URL}images/test1.2.jpg`, 
   `${import.meta.env.BASE_URL}images/mobile.slider4.png`
 ];
 
