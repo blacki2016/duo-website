@@ -63,6 +63,88 @@ const LEISTUNGEN = [
   }
 ];
 
+// Show Highlights / Show Data
+const SHOW_DATA = [
+  {
+    title: "Magie",
+    img: `${import.meta.env.BASE_URL}images/limaex.magie.jpg`,
+    features: [
+      "Verblüffende Zauberkunst",
+      "Close-Up & Bühne",
+      "Magische Momente"
+    ],
+    ctaText: "Verzaubert",
+    ctaEmoji: "✨",
+    link: "/magie",
+    imgPos: "object-top"
+  },
+  {
+    title: "Jonglage",
+    img: `${import.meta.env.BASE_URL}images/limaex.jonglage.jpg`,
+    features: [
+      "Hohes Tempo",
+      "Bälle, Keulen & mehr",
+      "Präzision pur"
+    ],
+    ctaText: "Wirbelwind",
+    ctaEmoji: "🤹",
+    link: "/jonglage",
+    imgPos: "object-center"
+  },
+  {
+    title: "Akrobatik",
+    img: `${import.meta.env.BASE_URL}images/limaex.rola.jpg.webp`,
+    features: [
+      "Rola-Rola Show",
+      "Körperbeherrschung",
+      "Balanceakte"
+    ],
+    ctaText: "Balance",
+    ctaEmoji: "🤸",
+    link: "/akrobatik",
+    imgPos: "object-center"
+  },
+  {
+    title: "Comedy",
+    img: `${import.meta.env.BASE_URL}images/limaex.slider2.jpg`,
+    features: [
+      "Lachen garantiert",
+      "Interaktiver Spaß",
+      "Humorvolle Einlagen"
+    ],
+    ctaText: "Lachmuskeln",
+    ctaEmoji: "😂",
+    link: "/comedy",
+    imgPos: "object-top"
+  },
+  {
+    title: "Großillusionen",
+    img: `${import.meta.env.BASE_URL}images/limaex.illusion.jpg`,
+    features: [
+      "Spektakuläre Effekte",
+      "Las Vegas Flair",
+      "Große Bühne"
+    ],
+    ctaText: "Staunen",
+    ctaEmoji: "🎩",
+    link: "/grossillusionen",
+    imgPos: "object-center"
+  },
+  {
+    title: "Musik",
+    img: `${import.meta.env.BASE_URL}images/showformate.limaex.jpg`,
+    features: [
+      "Live Entertainment",
+      "Rhythmische Begleitung",
+      "Atmosphäre"
+    ],
+    ctaText: "Klangvoll",
+    ctaEmoji: "🎵",
+    link: "/musik",
+    imgPos: "object-top"
+  }
+];
+
 // Show Previews
 const SHOW_PREVIEWS = [
   {
@@ -249,7 +331,77 @@ const Home: React.FC = () => {
       {/* --- MAIN CONTENT --- */}
       <div className="relative z-20 bg-stone-900/80 backdrop-blur-sm border-t border-[#ebd297]/20 shadow-[0_-20px_60px_rgba(0,0,0,0.8)]">
 
-        {/* 1. KERNKOMPETENZEN */}
+        {/* 1. SHOWHIGHLIGHTS */}
+        <section className="py-24 bg-transparent border-t border-white/5 relative z-10">
+          {/* Lokales Styling für die Hover-Effekte */}
+          <style>{`
+            .show-card:hover .show-card-img {
+                transform: scale(1.03);
+            }
+          `}</style>
+
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-4">
+                Show Highlights
+              </h2>
+              <p className="text-white max-w-xl mx-auto uppercase tracking-widest text-sm">
+                Entdecken Sie unsere Vielfalt
+              </p>
+            </div>
+
+            {/* Grid angepasst für 6 Items: 1 spaltig (Mobile), 2 spaltig (Tablet), 3 spaltig (Desktop) */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1600px] mx-auto">
+              {SHOW_DATA.map((show, i) => (
+                <div
+                  key={i}
+                  className="bg-black/40 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ebd29780] hover:border-gold-300 transition-all hover:-translate-y-2 show-card group shadow-lg flex flex-col w-full"
+                >
+                  {/* Image Container */}
+                  <div className="h-[400px] overflow-hidden relative">
+                    <img
+                      src={show.img}
+                      alt={show.title}
+                      className={`w-full h-full object-cover show-card-img transition-transform duration-700 ${show.imgPos}`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+
+                    {/* Title Overlay */}
+                    <h3 className="absolute bottom-4 left-5 text-3xl font-serif font-bold text-[#ebd297] z-10 drop-shadow-md leading-tight">
+                      {show.title}
+                    </h3>
+                  </div>
+
+                  {/* Content Container */}
+                  <div className="p-5 flex-grow flex flex-col justify-between">
+                    {/* Features List */}
+                    <div className="mb-4 flex-grow space-y-2">
+                      {show.features.map((feature, idx) => (
+                        <p key={idx} className="text-stone-200 text-base font-bold leading-snug flex items-start gap-2">
+                          <span className="text-[#ebd297] mt-[4px] text-[10px]">●</span> {feature}
+                        </p>
+                      ))}
+                    </div>
+
+                    {/* CTA Button */}
+                    <div className="mt-auto pt-4 border-t border-white/10">
+                      <Link
+                        to={show.link}
+                        className="inline-flex items-center gap-3 text-xl font-extrabold text-[#ebd297] hover:text-white transition-colors uppercase tracking-widest w-fit"
+                      >
+                        {show.ctaText}
+                        <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                        <span className="text-3xl filter drop-shadow-md">{show.ctaEmoji}</span>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 2. KERNKOMPETENZEN */}
         <section className="py-24 container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {LEISTUNGEN.map((leistung, idx) => (
@@ -262,7 +414,7 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 2. SHOWREEL VIDEO */}
+        {/* 3. SHOWREEL VIDEO */}
         <section className="py-20 bg-black/30">
           <div className="container mx-auto px-6 text-center">
             <span className="text-[#ebd297] text-sm font-bold tracking-widest uppercase">Erlebe uns Live</span>
@@ -282,7 +434,7 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 3. SHOW FORMATE */}
+        {/* 4. SHOW FORMATE */}
         <section className="py-24 container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-cinzel font-bold text-white mb-4">Showformate</h2>
@@ -315,7 +467,7 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 4. USP */}
+        {/* 5. USP */}
         <section className="py-24 bg-[#ebd297]/5 border-y border-[#ebd297]/10">
           <div className="container mx-auto px-6">
             <div className="grid md:grid-cols-3 gap-12 text-center">
@@ -332,7 +484,7 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 5. PROFIL */}
+        {/* 6. PROFIL */}
         <section className="py-24 container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-12 items-center max-w-6xl mx-auto bg-black/40 p-8 md:p-12 rounded-2xl border border-white/5">
             <div className="w-full md:w-1/2 aspect-square md:aspect-[4/5] relative rounded-lg overflow-hidden shadow-xl border border-white/10">
@@ -359,7 +511,7 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 6. KONTAKT */}
+        {/* 7. KONTAKT */}
         <section className="py-24 text-center">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#1a1a1a] to-black border border-[#ebd297]/30 p-10 md:p-20 rounded-3xl relative overflow-hidden shadow-2xl">
