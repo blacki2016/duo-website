@@ -79,7 +79,7 @@ const Footer: React.FC = () => {
                                     href="#"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-md border border-white/10 text-[#ebd297] font-bold rounded-full text-sm hover:bg-[#ebd297] hover:text-black transition-all shadow-lg hover:shadow-[0_0_20px_rgba(235,210,151,0.4)]"
+                                    className="gold-button inline-flex items-center gap-2 text-sm"
                                 >
                                     <i className="fa-brands fa-whatsapp text-xl"></i>
                                     <span>WhatsApp schreiben</span>
@@ -122,7 +122,7 @@ const Footer: React.FC = () => {
                         </ul>
 
                         <div className="mt-8">
-                            <Link to="/buchung-anfragen" className="inline-block border border-[#ebd297] text-[#ebd297] px-6 py-3 font-bold uppercase tracking-wider hover:bg-[#ebd297] hover:text-black transition-all">
+                            <Link to="/buchung-anfragen" className="gold-button">
                                 Jetzt Buchen
                             </Link>
                         </div>

@@ -373,13 +373,10 @@ const Home: React.FC = () => {
 
       {/* Hero Header */}
       <header className="relative w-full h-screen overflow-hidden flex items-center justify-center mt-[50px] z-10">
-        <div className="relative text-center px-4 max-w-6xl mx-auto">
-          <span className="block text-gold-400 font-bold tracking-wider uppercase mb-6 text-lg md:text-xl lg:text-2xl drop-shadow-md">
-            Maximilian Boy & Leo Wieseckel
-          </span>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-extrabold mb-8 leading-tight drop-shadow-2xl uppercase text-white">
-            DUO <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-gold-300">Limäx</span>
+        <div className="relative text-center px-4 max-w-6xl mx-auto -mt-32">
+          <h1 className="text-6xl md:text-10xl lg:text-10xl font-serif font-extrabold mb-12 leading-tight drop-shadow-2xl uppercase">
+            <span className="text-[#ebd297]">DUO</span> <br />
+            <span className="bg-gradient-to-r from-[#8E6F34] via-[#F9EFAF] to-[#8E6F34] text-transparent bg-clip-text drop-shadow-lg">Limäx</span>
           </h1>
           <p className="text-xl md:text-2xl text-stone-100 mb-12 max-w-3xl mx-auto leading-relaxed font-medium drop-shadow-lg">
             "UKONGU" – Die Show der Superlative. Großillusionen, Comedy und Artistik in einer explosiven Mischung.
@@ -387,9 +384,6 @@ const Home: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link to="/buchung-anfragen" className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3">
               Buchung anfragen <span className="text-xl">🗒️</span>
-            </Link>
-            <Link to="/showformate" className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3">
-              Showformate <span className="text-xl">🎪</span>
             </Link>
           </div>
         </div>

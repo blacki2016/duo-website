@@ -377,7 +377,7 @@ const Navbar: React.FC = () => {
                 <div className="h-full w-full flex flex-col overflow-y-auto overscroll-contain safe-top safe-bottom">
                     {/* Mobile Menu Header */}
                     <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 shrink-0">
-                        <span className="text-[#ebd297] font-serif font-bold text-lg">Menü</span>
+                        <span className="text-[#C8A663] font-serif font-bold text-lg">Menü</span>
                         <button
                             onClick={toggleMobile}
                             aria-label="Menü schließen"
@@ -396,7 +396,7 @@ const Navbar: React.FC = () => {
                                         <button
                                             onClick={() => toggleMobileSubmenu(item.label)}
                                             type="button"
-                                            className="flex items-center justify-between w-full py-4 text-xl font-title font-bold text-[#ebd297] touch-manipulation"
+                                            className="flex items-center justify-between w-full py-4 text-xl font-title font-bold text-[#C8A663] touch-manipulation"
                                         >
                                             {item.label}
                                             {mobileExpanded === item.label ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
@@ -411,7 +411,7 @@ const Navbar: React.FC = () => {
                                                     to={child.path}
                                                     className="font-bold text-[#C8A663] hover:text-[#F9EFAF] py-3 flex items-center gap-4 text-lg min-h-[48px] touch-manipulation"
                                                 >
-                                                    <span className="w-2 h-2 bg-[#ebd297] rounded-full shrink-0"></span>
+                                                    <span className="w-2 h-2 bg-[#C8A663] rounded-full shrink-0"></span>
                                                     <span>{child.label}</span>
                                                 </Link>
                                             ))}
@@ -448,7 +448,7 @@ const Navbar: React.FC = () => {
                             </Link>
 
                             {/* Socials Mobile */}
-                            <div className="mt-8 flex justify-center gap-8 text-[#ebd297]">
+                            <div className="mt-8 flex justify-center gap-8 text-[#C8A663]">
                                 <a href="https://www.instagram.com/maximilian.boy" target="_blank" rel="noreferrer" className="touch-manipulation"><i className="fa-brands fa-instagram text-3xl"></i></a>
                                 <a href="https://www.facebook.com/maximilian.h.boy" target="_blank" rel="noreferrer" className="touch-manipulation"><i className="fa-brands fa-facebook text-3xl"></i></a>
                                 <a href="https://wa.me/4015785585713" target="_blank" rel="noreferrer" className="touch-manipulation"><i className="fa-brands fa-whatsapp text-3xl"></i></a>
@@ -467,7 +467,7 @@ const Navbar: React.FC = () => {
                 <div className="header-container header-scale container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6">
 
                     {/* MOBILE: 3 Spalten (Logo | Titel | Menü) */}
-                    <div className="lg:hidden grid grid-cols-3 items-center px-3 py-3 gap-2 border-b border-[#ebd297]/10">
+                    <div className="lg:hidden grid grid-cols-3 items-center px-3 py-3 gap-2 border-b border-[#C8A663]/10">
                         {/* Spalte 1: neues Logo */}
                         <Link to="/" className="flex items-center group flex-shrink-0">
                             <img
@@ -500,7 +500,7 @@ const Navbar: React.FC = () => {
                     </div>
 
                     {/* DESKTOP: Zweireihig (Logo/CTA oben, Menü unten) */}
-                    <div className="hidden lg:flex flex-col gap-2 py-4 border-b border-[#ebd297]/10">
+                    <div className="hidden lg:flex flex-col gap-2 py-4 border-b border-[#C8A663]/10">
                         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6">
                             {/* Links: neues Logo */}
                             <Link to="/" className="flex flex-col items-start group justify-self-start mt-8 ml-6">
@@ -538,12 +538,12 @@ const Navbar: React.FC = () => {
                                     <div key={index} className="relative group px-2 py-1 transition-all duration-300">
                                         {item.children ? (
                                             <>
-                                                <button className={`nav-button flex items-center gap-2 font-title font-black text-base text-[#C8A663] hover:text-[#F9EFAF] transition-all duration-300 nav-link-hover uppercase tracking-wider hover:drop-shadow-lg`}>
+                                                <button className={`nav-button flex items-center gap-2 font-title font-black text-base text-[#C8A663] hover:text-[#FFFACD] transition-all duration-300 nav-link-hover uppercase tracking-wider hover:drop-shadow-lg`}>
                                                     {item.label} <ChevronDown size={18} className="group-hover:rotate-180 transition-transform duration-300" />
                                                 </button>
                                                 {/* Dropdown */}
                                                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-1">
-                                                    <div className="dropdown-panel bg-[#1f1f20]/90 border border-[#ebd297]/30 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden min-w-[300px] backdrop-blur-xl p-3">
+                                                    <div className="dropdown-panel bg-[#1f1f20]/90 border border-[#C8A663]/30 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden min-w-[300px] backdrop-blur-xl p-3">
                                                         {item.children.map((child, cIdx) => {
                                                             const parts = child.label.split(' ');
                                                             const emoji = parts.length > 1 ? parts.pop() : '';
@@ -553,7 +553,7 @@ const Navbar: React.FC = () => {
                                                                 <Link
                                                                     key={cIdx}
                                                                     to={child.path}
-                                                                    className="block px-5 py-3 text-base font-bold text-[#ebd297] hover:text-white hover:bg-[#ebd297]/15 rounded-xl transition-all duration-300 flex items-center justify-between group/item hover:translate-x-1"
+                                                                    className="block px-5 py-3 text-base font-bold text-[#C8A663] hover:text-[#F9EFAF] hover:bg-[#C8A663]/15 rounded-xl transition-all duration-300 flex items-center justify-between group/item hover:translate-x-1"
                                                                 >
                                                                     <span>{text}</span>
                                                                     <span className="text-2xl opacity-90 leading-none transform group-hover/item:scale-125 transition-transform">{emoji}</span>
