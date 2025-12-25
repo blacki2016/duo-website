@@ -8,6 +8,7 @@ import ScrollToTop from '../components/ScrollToTop';
 // Hero Background Bilder (Desktop)
 const DESKTOP_SLIDES = [
   `${import.meta.env.BASE_URL}images/schatten3.png`,
+  // HINWEIS: Prüfe hier, ob die Datei wirklich 'slider4.jpeg.jpg' heißt oder nur 'slider4.jpg'
   `${import.meta.env.BASE_URL}images/slider4.jpeg.jpg`,
   `${import.meta.env.BASE_URL}images/limaex.slider7.jpg`
 ];
@@ -16,7 +17,8 @@ const DESKTOP_SLIDES = [
 const MOBILE_SLIDES = [
   `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
   `${import.meta.env.BASE_URL}images/mobile.slider2.1.png`,
-  `${import.meta.env.BASE_URL}images/mobile.slider3.png`,
+  // HINWEIS: Wenn dieses Bild nicht angezeigt wird, prüfe ob es vielleicht eine .jpg Datei ist
+  `${import.meta.env.BASE_URL}images/mobile.slider3.png`, 
   `${import.meta.env.BASE_URL}images/mobile.slider4.png`
 ];
 
@@ -103,17 +105,30 @@ const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Erkenne Mobile vs. Desktop (bei Resize aktualisieren)
+  // Erkenne Mobile vs. Desktop
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => {
+        const mobile = window.innerWidth < 768;
+        setIsMobile(mobile);
+    };
+    
+    // Initial call
     handleResize();
+    
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Wähle das richtige Array basierend auf der Bildschirmgröße
   const slides = isMobile ? MOBILE_SLIDES : DESKTOP_SLIDES;
 
-  // Hero Slider Logic
+  // Reset Slide Index wenn sich die Anzahl der Slides ändert (z.B. Wechsel Mobile -> Desktop)
+  // Dies verhindert, dass der Slider versucht ein Bild anzuzeigen, das es im anderen Modus nicht gibt
+  useEffect(() => {
+    setCurrentSlide(0);
+  }, [isMobile]);
+
+  // Hero Slider Interval Logic
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -171,11 +186,11 @@ const Home: React.FC = () => {
       `}</style>
 
       {/* --- BACKGROUND SLIDER (FIXED) --- */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <div className="fixed inset-0 z-0 pointer-events-none bg-stone-900">
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 bg-cover transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 bg-cover bg-no-repeat transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
             style={{
               backgroundImage: `url('${slide}')`,
               backgroundPosition: isMobile ? 'center' : 'center 85%'
@@ -187,11 +202,6 @@ const Home: React.FC = () => {
       </div>
 
       {/* --- HERO SECTION --- */}
-      {/* ÄNDERUNGEN:
-          - justify-start (Mobile): Richtet Inhalt am Start (oben) aus
-          - md:justify-center (Desktop): Richtet Inhalt mittig aus
-          - pt-28 (Mobile): Fixer Abstand von oben, schiebt es in die obere Hälfte
-      */}
       <header className="relative z-20 min-h-screen flex flex-col items-center justify-start md:justify-center pt-28 md:pt-32 pb-20 px-4 text-center">
 
         {/* Haupttitel Block */}
@@ -331,7 +341,7 @@ const Home: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-12 items-center max-w-6xl mx-auto bg-black/40 p-8 md:p-12 rounded-2xl border border-white/5">
             <div className="w-full md:w-1/2 aspect-square md:aspect-[4/5] relative rounded-lg overflow-hidden shadow-xl border border-white/10">
               <img
-                src="/images/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6-2.jpg"
+                src={`${import.meta.env.BASE_URL}images/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6-2.jpg`}
                 alt="Das Duo"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
               />
@@ -386,4 +396,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
