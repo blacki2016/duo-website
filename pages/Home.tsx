@@ -5,9 +5,8 @@ import ScrollToTop from '../components/ScrollToTop';
 
 // Hero Background: Einzelnes Bild (keine Rotation)
 const SLIDES = [
-  `${import.meta.env.BASE_URL}images/slider2.jpg.webp`,
-  `${import.meta.env.BASE_URL}images/slider3.jpg.webp`,
-  `${import.meta.env.BASE_URL}images/slider4.jpeg.webp`
+  `${import.meta.env.BASE_URL}images/slider4.jpeg.jpg`,
+  `${import.meta.env.BASE_URL}images/limaex.slider7.jpg`
 ];
 
 // USP Data - UPDATED
@@ -268,26 +267,26 @@ const Home: React.FC = () => {
 
       <style>{`
         /* Lively Gold Button Style */
-        @keyframes btnGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        /* Gold Button Unified Style */
         .btn-lively {
-            background: linear-gradient(45deg, #d4af37, #ebd297, #fffebb, #b38728, #ebd297);
-            background-size: 300% 300%;
-            animation: btnGradient 3s ease infinite;
-            color: #000 !important;
-            font-weight: 800;
-            box-shadow: 0 0 20px rgba(235, 210, 151, 0.5);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
+            padding: 15px 30px;
             border: none;
-            font-family: 'Montserrat', sans-serif;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-title, 'Cinzel', serif);
+            font-weight: 900;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #8E6F34 0%, #C8A663 25%, #F9EFAF 50%, #C8A663 75%, #8E6F34 100%);
+            background-size: 200% auto;
+            color: #111;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
         }
         .btn-lively:hover {
-            box-shadow: 0 0 30px rgba(235, 210, 151, 1);
-            transform: scale(1.05) translateY(-2px);
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
         }
 
         /* Card Hover Effect */
@@ -376,14 +375,14 @@ const Home: React.FC = () => {
       <header className="relative w-full h-screen overflow-hidden flex items-center justify-center mt-[50px] z-10">
         <div className="relative text-center px-4 max-w-6xl mx-auto">
           <span className="block text-gold-400 font-bold tracking-wider uppercase mb-6 text-lg md:text-xl lg:text-2xl drop-shadow-md">
-            Maximilian Boy & MB Feuerentertainment
+            Maximilian Boy & Leo Wieseckel
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-extrabold mb-8 leading-tight drop-shadow-2xl uppercase text-white">
-            FEUER, <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-gold-300">ARTISTIK UND EIN HAUCH VON MAGIE!</span>
+            DUO <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-gold-300">Limäx</span>
           </h1>
           <p className="text-xl md:text-2xl text-stone-100 mb-12 max-w-3xl mx-auto leading-relaxed font-medium drop-shadow-lg">
-            Maximilian Boy & MB Feuerentertainment bringen spektakuläres Live-Entertainment mit einem Funken Wahnsinn auf jede Bühne.
+            "UKONGU" – Die Show der Superlative. Großillusionen, Comedy und Artistik in einer explosiven Mischung.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link to="/buchung-anfragen" className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3">

@@ -219,7 +219,7 @@ const Booking: React.FC = () => {
                                 className="w-full bg-stone-900 border border-[#ebd297]/30 rounded-lg px-3 py-2 text-white focus:border-[#ebd297] focus:outline-none"
                                 placeholder="Event, Ort, Gästezahl, Wünsche"
                             />
-                            <button className="btn-lively w-full py-3 rounded-xl font-bold">Verfügbarkeit anfragen</button>
+                            <button className="gold-button w-full py-3">Verfügbarkeit anfragen</button>
                         </div>
                     </div>
 

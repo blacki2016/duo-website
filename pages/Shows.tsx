@@ -291,7 +291,7 @@ const Shows: React.FC = () => {
           <p className="text-stone-400 mb-6 uppercase tracking-widest text-sm">Nichts passendes dabei?</p>
           <Link
             to="/buchung-anfragen"
-            className="inline-block px-10 py-4 bg-transparent border-2 border-[#ebd297] text-[#ebd297] font-bold rounded-full hover:bg-[#ebd297] hover:text-black transition-all hover:scale-105"
+            className="gold-button"
           >
             Individuelle Anfrage stellen
           </Link>

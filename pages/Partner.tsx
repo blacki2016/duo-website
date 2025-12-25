@@ -171,7 +171,7 @@ const Partner: React.FC = () => {
                         </h2>
                         <Link
                             to="/buchung-anfragen"
-                            className="inline-block px-10 py-4 bg-gradient-to-r from-[#ebd297] to-[#d4b56a] text-black font-bold rounded-full hover:scale-105 transition-transform"
+                            className="gold-button"
                         >
                             Kontakt aufnehmen
                         </Link>

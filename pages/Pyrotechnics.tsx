@@ -205,7 +205,7 @@ const Pyrotechnics: React.FC = () => {
                     {/* CTA */}
                     <div className="text-center mt-20 pyro-reveal">
                         <p className="text-stone-400 mb-4">Noch Fragen zu Ihrem speziellen Vorhaben?</p>
-                        <Link to="/buchung-anfragen" className="text-[#EBD297] border-b border-[#EBD297] hover:text-white pb-1 transition-colors uppercase tracking-widest font-bold">
+                        <Link to="/buchung-anfragen" className="gold-button">
                             Kontakt aufnehmen
                         </Link>
                     </div>

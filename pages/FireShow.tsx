@@ -256,41 +256,31 @@ const FireShow: React.FC = () => {
             100% { transform: scale(1) rotate(-1deg); }
         }
 
-        /* CTA Button */
+        /* CTA Button - Gold Button Unified Style */
         .fs-cta-button {
-            position: relative;
-            display: inline-block !important;
-            padding: 18px 40px !important;
-            background: linear-gradient(0deg, #ff2200 0%, #ff8800 50%, #ffdd00 100%) !important;
-            color: #000000 !important; 
-            border-radius: 50px !important;
-            font-weight: 800 !important;
-            transition: all .3s ease !important;
-            font-size: 1.3rem !important;
+            display: inline-block;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-title, 'Cinzel', serif);
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            background: linear-gradient(135deg, #8E6F34 0%, #C8A663 25%, #F9EFAF 50%, #C8A663 75%, #8E6F34 100%);
+            background-size: 200% auto;
+            color: #111;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
             text-decoration: none;
-            overflow: visible !important;
-            z-index: 1;
-            animation: fire-pulse 2s infinite, flame-movement 3s infinite ease-in-out;
-            border: 2px solid #fff3cd;
         }
-        /* Inner Glow */
         .fs-cta-button::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            background: radial-gradient(circle, rgba(255,200,0,0.4) 0%, transparent 70%);
-            border-radius: 50px;
-            z-index: -1;
-            filter: blur(10px);
-            animation: fire-pulse 1.5s infinite reverse;
+            display: none;
         }
-
         .fs-cta-button:hover {
-            transform: translateY(-3px) scale(1.05) !important;
-            background: linear-gradient(0deg, #ff4400 0%, #ffaa00 50%, #ffee00 100%) !important;
-            box-shadow: 0 0 40px rgba(255, 100, 0, 0.9) !important;
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
         }
 
         /* Sections */

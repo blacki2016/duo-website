@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
     };
 
     // Logo URL
-    const LOGO_URL = `/images/logo.limaex.png`;
+    const LOGO_URL = `/images/text.logo.png`;
 
     const navItems: NavItem[] = [
         { label: 'Startseite', path: '/' },
@@ -189,6 +189,90 @@ const Navbar: React.FC = () => {
             animation: shineGradient 6s linear infinite, pulseGlow 3s ease-in-out infinite, floatUp 4s ease-in-out infinite;
         }
 
+        /* Brushed Gold CTA (angepasst an Limäx-Logo: warmes Gold/Messing, vertikale Bürsten, Top-Rim-Licht, Bronze-Schatten) */
+        .cta-brushed-gold {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.75rem 1.5rem; /* Header-Größe beibehalten */
+            border-radius: 9999px;
+            font-family: var(--font-button);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #1a1a1a;
+            /* Basis: warmes Gold mit oben hellem Licht und unten Bronze-Falloff */
+            background-image:
+                /* 1: Warmgold-Gradient (präzise Limäx-Farben) */
+                linear-gradient(to bottom, #fff5d6 0%, #f6dfad 8%, #e7c371 16%, #d5a846 38%, #c08e2d 58%, #ab7a25 76%, #8d6521 91%, #6f511c 100%),
+                /* 2: Vertikale Bürstung (fein, kontrastreich) */
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.14) 0px, rgba(255,255,255,0.08) 1px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.0) 3px),
+                /* 3: Glanzband mittig (specular streak) */
+                linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.22) 42%, rgba(255,255,255,0.28) 48%, rgba(255,255,255,0.22) 54%, rgba(255,255,255,0) 100%),
+                /* 4: Oberer Licht-Spot */
+                radial-gradient(120% 100% at 50% 0%, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.0) 45%),
+                /* 5: Subtile metallische Schattierung */
+                linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.0));
+            background-blend-mode: normal, overlay, screen, screen, normal;
+            box-shadow:
+                inset 0 2px 0 rgba(255,255,255,0.95), /* obere fast-weiße Kante */
+                inset 0 -7px 16px rgba(90, 60, 20, 0.62), /* unten Bronze-Falloff */
+                inset -4px 0 10px rgba(70, 50, 20, 0.40), /* rechte Seitenkante */
+                inset 4px 0 10px rgba(70, 50, 20, 0.40),  /* linke Seitenkante */
+                0 14px 32px rgba(0,0,0,0.42); /* Lift */
+            filter: contrast(1.12) saturate(1.12);
+            transition: transform 200ms ease, box-shadow 200ms ease;
+        }
+        .cta-brushed-gold::before {
+            content: '';
+            position: absolute; inset: 0; pointer-events: none;
+            /* Top-Rim-Licht (nahe Weiß) + feine obere Kante */
+            background: linear-gradient(to bottom, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.18) 10%, rgba(255,255,255,0) 22%);
+            border-radius: inherit;
+        }
+        .cta-brushed-gold::after {
+            content: '';
+            position: absolute; inset: 0; pointer-events: none;
+            /* Untere/seitliche Bronze-Schatten */
+            background:
+                linear-gradient(to top, rgba(90, 60, 20, 0.50) 0%, rgba(90, 60, 20, 0.0) 34%),
+                radial-gradient(120% 100% at 100% 100%, rgba(70, 50, 20, 0.40) 0%, rgba(70, 50, 20, 0) 62%),
+                radial-gradient(120% 100% at 0% 100%, rgba(70, 50, 20, 0.40) 0%, rgba(70, 50, 20, 0) 62%);
+            border-radius: inherit;
+        }
+        .cta-brushed-gold:hover {
+            transform: translateY(-1px);
+            box-shadow:
+                inset 0 2px 0 rgba(255,255,255,0.92),
+                inset 0 -7px 16px rgba(90, 60, 20, 0.65),
+                0 16px 36px rgba(0,0,0,0.46);
+        }
+
+                /* CSS: User-specified Gold Button */
+                .gold-button {
+                    padding: 15px 30px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-family: var(--font-title);
+                      font-weight: 900;
+                    text-transform: uppercase;
+                    background: linear-gradient(135deg, #8E6F34 0%, #C8A663 25%, #F9EFAF 50%, #C8A663 75%, #8E6F34 100%);
+                      background-size: 200% auto;
+                      color: #111;
+                      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35);
+                    text-shadow: 0px 1px 1px rgba(255,255,255,0.5);
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+                    transition: all 0.3s ease;
+                }
+                .gold-button:hover {
+                    background-position: right center;
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+                }
+
         /* Logo Shimmer - Subtle */
         @keyframes logoShimmer {
             0%, 100% { filter: drop-shadow(0 0 2px rgba(235, 210, 151, 0.2)) brightness(1); }
@@ -201,6 +285,29 @@ const Navbar: React.FC = () => {
 
         /* Balanced wrapping for long mobile titles */
         .title-balance { text-wrap: balance; }
+
+        /* Gold Icon Button (mobile hamburger/close) */
+        .gold-icon-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 44px;
+            width: 44px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #8E6F34 0%, #C8A663 25%, #F9EFAF 50%, #C8A663 75%, #8E6F34 100%);
+            background-size: 200% auto;
+            color: #111;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        .gold-icon-button:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+        }
 
         /* Glassmorphism Header when scrolled */
         .glass-header {
@@ -224,6 +331,16 @@ const Navbar: React.FC = () => {
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        /* Vertical-only scaling for entire header content (keeps side edges) */
+        .header-scale {
+            transform: scaleY(0.75);
+            transform-origin: top center;
+        }
+        /* Mobile: a bit less vertical scaling to avoid cramped layout */
+        @media (max-width: 1024px) {
+            .header-scale { transform: scaleY(0.90); }
         }
 
         /* Menu Link Hover Underline */
@@ -264,9 +381,9 @@ const Navbar: React.FC = () => {
                         <button
                             onClick={toggleMobile}
                             aria-label="Menü schließen"
-                            className="text-[#ebd297] h-11 w-11 flex items-center justify-center hover:bg-[#ebd297]/10 rounded-lg transition-colors touch-manipulation"
+                            className="gold-icon-button touch-manipulation"
                         >
-                            <X size={28} />
+                            <X size={28} strokeWidth={2.5} />
                         </button>
                     </div>
 
@@ -292,7 +409,7 @@ const Navbar: React.FC = () => {
                                                 <Link
                                                     key={cIdx}
                                                     to={child.path}
-                                                    className="font-bold text-[#ebd297] hover:text-white py-3 flex items-center gap-4 text-lg min-h-[48px] touch-manipulation"
+                                                    className="font-bold text-[#C8A663] hover:text-[#F9EFAF] py-3 flex items-center gap-4 text-lg min-h-[48px] touch-manipulation"
                                                 >
                                                     <span className="w-2 h-2 bg-[#ebd297] rounded-full shrink-0"></span>
                                                     <span>{child.label}</span>
@@ -306,14 +423,14 @@ const Navbar: React.FC = () => {
                                             href={item.path}
                                             target="_blank"
                                             rel="noreferrer"
-                                            className="block py-4 text-xl font-title font-bold text-[#ebd297] hover:text-white min-h-[48px] touch-manipulation"
+                                            className="block py-4 text-xl font-title font-bold text-[#C8A663] hover:text-[#F9EFAF] min-h-[48px] touch-manipulation"
                                         >
                                             {item.label}
                                         </a>
                                     ) : (
                                         <Link
                                             to={item.path!}
-                                            className="block py-4 text-xl font-title font-bold text-[#ebd297] hover:text-white min-h-[48px] touch-manipulation"
+                                            className="block py-4 text-xl font-title font-bold text-[#C8A663] hover:text-[#F9EFAF] min-h-[48px] touch-manipulation"
                                         >
                                             {item.label}
                                         </Link>
@@ -325,7 +442,7 @@ const Navbar: React.FC = () => {
                         <div className="pt-6">
                             <Link
                                 to="/buchung-anfragen"
-                                className="booking-button block w-full text-center py-4 bg-gradient-to-br from-[#ebd297] to-[#b38728] text-black font-button font-bold text-base rounded-xl hover:from-white hover:to-[#ebd297] transition-all shadow-[0_0_20px_rgba(235,210,151,0.4)] hover:shadow-[0_0_30px_rgba(235,210,151,0.8)] touch-manipulation"
+                                className="gold-button block w-full text-center touch-manipulation"
                             >
                                 Buchung anfragen
                             </Link>
@@ -347,14 +464,14 @@ const Navbar: React.FC = () => {
                     : 'header-blend'
                     }`}
             >
-                <div className="header-container container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6">
+                <div className="header-container header-scale container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6">
 
                     {/* MOBILE: 3 Spalten (Logo | Titel | Menü) */}
-                    <div className="lg:hidden grid grid-cols-3 items-center px-3 py-1 gap-2 border-b border-[#ebd297]/10">
+                    <div className="lg:hidden grid grid-cols-3 items-center px-3 py-3 gap-2 border-b border-[#ebd297]/10">
                         {/* Spalte 1: neues Logo */}
                         <Link to="/" className="flex items-center group flex-shrink-0">
                             <img
-                                src="/images/logo2.png"
+                                src="/images/bild.logo.png"
                                 alt="Duo Limäx Logo 2"
                                 className="h-12 w-auto object-contain transition-all duration-300 drop-shadow-lg"
                             />
@@ -375,9 +492,9 @@ const Navbar: React.FC = () => {
                                 onClick={toggleMobile}
                                 aria-expanded={isOpen}
                                 aria-label="Menü öffnen"
-                                className="text-[#ebd297] h-11 w-11 flex items-center justify-center focus:outline-none hover:bg-[#ebd297]/20 rounded-lg transition-all duration-300 active:scale-95"
+                                className="gold-icon-button focus:outline-none active:scale-95"
                             >
-                                <Menu size={28} className="drop-shadow-lg" />
+                                <Menu size={28} strokeWidth={2.5} className="drop-shadow-lg" />
                             </button>
                         </div>
                     </div>
@@ -399,7 +516,7 @@ const Navbar: React.FC = () => {
                                 <img
                                     src={LOGO_URL}
                                     alt="Duo Limäx Logo"
-                                    className={`header-logo h-48 w-auto object-contain logo-hover transition-all duration-500 filter drop-shadow-xl group-hover:drop-shadow-2xl`}
+                                    className={`header-logo h-36 w-auto object-contain logo-hover transition-all duration-500 filter drop-shadow-xl group-hover:drop-shadow-2xl`}
                                 />
                             </Link>
 
@@ -407,7 +524,7 @@ const Navbar: React.FC = () => {
                             <div className="justify-self-end">
                                 <Link
                                     to="/kontakt"
-                                    className={`cta-animated text-black rounded-full font-button font-bold shadow-[0_0_20px_rgba(235,210,151,0.35)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] transition-transform duration-300 hover:scale-110 transform -translate-y-1 md:-translate-y-2 flex items-center justify-center text-center ${scrolled ? 'px-6 py-3 text-sm' : 'px-9 py-4 text-base'}`}
+                                    className={`gold-button ${scrolled ? 'text-sm' : 'text-base'}`}
                                 >
                                     Buchung anfragen
                                 </Link>
@@ -421,7 +538,7 @@ const Navbar: React.FC = () => {
                                     <div key={index} className="relative group px-2 py-1 transition-all duration-300">
                                         {item.children ? (
                                             <>
-                                                <button className={`nav-button flex items-center gap-2 font-title font-extrabold text-sm text-[#ebd297] hover:text-white transition-all duration-300 nav-link-hover uppercase tracking-wider hover:drop-shadow-lg`}>
+                                                <button className={`nav-button flex items-center gap-2 font-title font-black text-base text-[#C8A663] hover:text-[#F9EFAF] transition-all duration-300 nav-link-hover uppercase tracking-wider hover:drop-shadow-lg`}>
                                                     {item.label} <ChevronDown size={18} className="group-hover:rotate-180 transition-transform duration-300" />
                                                 </button>
                                                 {/* Dropdown */}
@@ -452,14 +569,14 @@ const Navbar: React.FC = () => {
                                                     href={item.path}
                                                     target="_blank"
                                                     rel="noreferrer"
-                                                    className={`font-title font-bold text-base text-[#ebd297] hover:text-white transition-all duration-300 nav-link-hover uppercase tracking-wider px-2 hover:drop-shadow-lg`}
+                                                    className={`font-title font-black text-base text-[#C8A663] hover:text-[#F9EFAF] transition-all duration-300 nav-link-hover uppercase tracking-wider px-2 hover:drop-shadow-lg`}
                                                 >
                                                     {item.label}
                                                 </a>
                                             ) : (
                                                 <Link
                                                     to={item.path!}
-                                                    className={`font-title font-bold text-base text-[#ebd297] hover:text-white transition-all duration-300 nav-link-hover uppercase tracking-wider px-2 hover:drop-shadow-lg`}
+                                                    className={`font-title font-black text-base text-[#C8A663] hover:text-[#F9EFAF] transition-all duration-300 nav-link-hover uppercase tracking-wider px-2 hover:drop-shadow-lg`}
                                                 >
                                                     {item.label}
                                                 </Link>

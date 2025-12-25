@@ -376,25 +376,28 @@ const PublicEvents: React.FC = () => {
             }
         }
 
-        /* Footer & Buttons */
+        /* Footer & Buttons - Gold Button Unified Style */
         .fs-cta-button {
-            display: inline-block !important;
-            padding: 12px 28px !important;
-            background: linear-gradient(135deg, #EBD297 0%, #d4b56a 100%) !important;
-            color: #000000 !important; 
-            border-radius: 50px !important;
-            font-weight: 700 !important;
-            border: none !important;
-            text-decoration: none !important;
-            transition: all .3s ease !important;
-            font-size: 1.1rem !important;
+            display: inline-block;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-title, 'Cinzel', serif);
+            font-weight: 900;
             text-transform: uppercase;
-            margin-top: 1.5rem;
-            font-family: 'Montserrat', sans-serif !important;
+            background: linear-gradient(135deg, #8E6F34 0%, #C8A663 25%, #F9EFAF 50%, #C8A663 75%, #8E6F34 100%);
+            background-size: 200% auto;
+            color: #111;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
         .fs-cta-button:hover {
+            background-position: right center;
             transform: translateY(-2px);
-            background: linear-gradient(135deg, #fcebbb 0%, #EBD297 100%) !important;
+            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
         }
         
         .fs-footer-note {

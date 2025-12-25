@@ -50,20 +50,24 @@ const Wedding: React.FC = () => {
           100% { background-position: 0% 50%; }
         }
         .btn-lively {
-          background: linear-gradient(45deg, #d4af37, #ebd297, #fffebb, #b38728, #ebd297);
-          background-size: 300% 300%;
-          animation: btnGradient 3s ease infinite;
-          color: #000 !important;
-          font-weight: 800;
-          box-shadow: 0 0 20px rgba(235, 210, 151, 0.5);
-          transition: all 0.3s ease;
-          text-transform: uppercase;
+          padding: 15px 30px;
           border: none;
-          font-family: 'Montserrat', sans-serif;
+          border-radius: 5px;
+          cursor: pointer;
+          font-family: var(--font-title, 'Cinzel', serif);
+          font-weight: 900;
+          text-transform: uppercase;
+          background: linear-gradient(135deg, #8E6F34 0%, #C8A663 25%, #F9EFAF 50%, #C8A663 75%, #8E6F34 100%);
+          background-size: 200% auto;
+          color: #111;
+          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+          transition: all 0.3s ease;
         }
         .btn-lively:hover {
-          box-shadow: 0 0 30px rgba(235, 210, 151, 1);
-          transform: scale(1.05) translateY(-2px);
+          background-position: right center;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 8px rgba(0,0,0,0.4);
         }
       `}</style>
 

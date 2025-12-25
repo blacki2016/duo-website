@@ -18,6 +18,32 @@ import GlobalFX from './components/GlobalFX';
 import NotFound from './pages/NotFound';
 import { Phone } from 'lucide-react';
 
+// Global Gold Button CSS
+const GLOBAL_STYLES = `
+  .gold-button {
+    display: inline-block;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-title, 'Cinzel', serif);
+    font-weight: 900;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #8E6F34 0%, #C8A663 25%, #F9EFAF 50%, #C8A663 75%, #8E6F34 100%);
+    background-size: 200% auto;
+    color: #111;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  .gold-button:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+  }
+`;
+
 // Scroll to top wrapper - stellt sicher, dass man bei Navigation wieder oben auf der Seite landet
 const ScrollToTopComponent = () => {
   const { pathname } = useLocation();
@@ -126,6 +152,7 @@ const App: React.FC = () => {
 
   return (
     <HashRouter>
+      <style>{GLOBAL_STYLES}</style>
       <AppContent lightboxSrc={lightboxSrc} setLightboxSrc={setLightboxSrc} />
     </HashRouter>
   );
