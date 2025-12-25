@@ -162,13 +162,6 @@ const Home: React.FC = () => {
         .delay-200 { animation-delay: 0.4s; }
         .delay-300 { animation-delay: 0.6s; }
 
-        /* Divider Animation */
-        @keyframes expandWidth {
-            0% { width: 0; opacity: 0; }
-            100% { width: 100px; opacity: 1; }
-        }
-        .animate-divider { animation: expandWidth 1.5s ease-out forwards; }
-
         /* UKONGU Glow */
         .ukongu-text {
           text-shadow: 0 0 20px rgba(235, 210, 151, 0.3), 0 0 40px rgba(142, 111, 52, 0.2);
@@ -199,23 +192,20 @@ const Home: React.FC = () => {
       </div>
 
       {/* --- HERO SECTION --- */}
-      {/* UPDATE: padding-top von pt-14 auf pt-4 reduziert für Mobile, damit es höher rutscht */}
       <header className="relative z-20 min-h-screen flex flex-col items-center justify-start md:justify-center pt-4 md:pt-32 pb-20 px-4 text-center">
 
         {/* Haupttitel Block */}
-        {/* UPDATE: mb-6 auf mb-2 reduziert für Mobile (enger zusammen) */}
         <div className="mb-2 md:mb-8 mt-0 md:mt-4 animate-fade-up">
           <h1 className="py-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-cinzel font-black text-transparent bg-clip-text bg-gradient-to-r from-[#C8A663] via-[#F9EFAF] to-[#C8A663] drop-shadow-2xl leading-tight">
             DUO LIMÄX
           </h1>
         </div>
 
-        {/* Trenner */}
-        {/* UPDATE: mb-10 auf mb-6 reduziert für Mobile */}
-        <div className="h-[2px] bg-[#ebd297] mx-auto mb-6 md:mb-10 animate-divider shadow-[0_0_15px_#ebd297]"></div>
+        {/* UPDATE: Trenner entfernt, um Platz zu sparen.
+           Die Lücke zwischen Titel und UKONGU wird dadurch deutlich kleiner.
+        */}
 
         {/* Aktuelles Programm: UKONGU */}
-        {/* UPDATE: mb-12 auf mb-8 reduziert für Mobile */}
         <div className="relative mb-8 md:mb-12 animate-fade-up delay-100 opacity-0 group cursor-default">
 
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#ebd297]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
