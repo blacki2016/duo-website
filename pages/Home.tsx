@@ -31,6 +31,30 @@ const USPS = [
 // Testimonials Data - DUO
 // (TESTIMONIALS array removed because it is unused)
 
+// 4 Säulen - Leistungsbeschreibung
+const LEISTUNGEN = [
+  {
+    title: "Magie",
+    desc: "Der bunte Mix aus Bühnenmagie, Großillusion und Close Up, ist das, was unsere Magie und Zauberei prägt und einzigartig macht.",
+    icon: "✨"
+  },
+  {
+    title: "Artistik",
+    desc: "Artistik ist ein großer Begriff. Dazu zählt bei uns mehr als nur der Handstand. Von Jonglage bis Bowling Rola Bola ist alles dabei!",
+    icon: "🤸"
+  },
+  {
+    title: "Comedy",
+    desc: "Ganz nach dem Motto, 'Ist eine Show nicht lustig, ist sie wohl nicht von uns!'",
+    icon: "😄"
+  },
+  {
+    title: "Musik",
+    desc: "Auch die Musik ist ein treuer Showbegleiter geworden, sei es das magische Klavier, die witzige Ukulele oder eine westafrikanische Rappelkiste, kurz (U-)Conga.",
+    icon: "🎵"
+  }
+];
+
 // Show Previews - DUO
 const SHOW_PREVIEWS = [
   {
@@ -339,6 +363,48 @@ const Home: React.FC = () => {
         </div>
         <div className="relative z-10">
 
+          {/* 4 Säulen - Leistungsbeschreibung */}
+          <section className="py-24 bg-transparent border-t border-white/5">
+            <div className="container mx-auto px-4">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-4">Unsere Kernkompetenzen</h2>
+                <p className="text-white max-w-xl mx-auto uppercase tracking-widest text-sm">Die vier Säulen unserer Shows</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                {LEISTUNGEN.map((leistung, idx) => (
+                  <div key={idx} className="bg-black/40 backdrop-blur-sm rounded-xl p-6 border-2 border-[#ebd29780] hover:border-[#ebd297] transition-all hover:-translate-y-2 shadow-lg flex flex-col group">
+                    <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">{leistung.icon}</div>
+                    <h3 className="text-2xl font-serif font-bold text-[#ebd297] mb-4">{leistung.title}</h3>
+                    <p className="text-stone-300 leading-relaxed text-sm">{leistung.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Video-Bereich */}
+          <section className="py-24 bg-transparent border-t border-white/5">
+            <div className="container mx-auto px-4">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-4">Showreel</h2>
+                <p className="text-white max-w-xl mx-auto uppercase tracking-widest text-sm">Schau dir einen Ausschnitt unserer Shows an</p>
+              </div>
+              <div className="max-w-4xl mx-auto">
+                <div className="relative w-full bg-black rounded-2xl overflow-hidden border-2 border-[#ebd29780] shadow-2xl" style={{ paddingBottom: '56.25%' }}>
+                  <iframe
+                    className="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+                    title="Duo Limäx Showreel"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <p className="text-center text-stone-400 text-sm mt-6">YouTube-Trailer (Platzhalter - bitte mit echtem Link ersetzen)</p>
+              </div>
+            </div>
+          </section>
+
           {/* Profile */}
           <section className="py-24 bg-transparent">
             <div className="container mx-auto px-4">
@@ -449,8 +515,49 @@ const Home: React.FC = () => {
             </div>
           </section>
 
+          {/* Call-to-Action / Buchungstext */}
+          <section className="py-24 bg-transparent border-t border-white/5">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto text-center bg-black/40 backdrop-blur-sm rounded-2xl p-10 md:p-16 border-2 border-[#ebd29780]">
+                <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-8">Euer Event braucht den passenden Showact?</h2>
+                <p className="text-white text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+                  Dann seid ihr bei uns richtig! Durch unsere große Programmvielfalt haben wir für fast jedes Event genau das Richtige!
+                  <br />
+                  <span className="text-[#ebd297] font-bold">Wir freuen uns!</span>
+                </p>
+                <Link to="/buchung-anfragen" className="btn-lively inline-block px-10 py-4 text-base md:text-lg tracking-widest rounded-full">
+                  Jetzt anfragen
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* News-Ticker / Aktuelles */}
+          <section className="py-24 bg-transparent border-t border-white/5">
+            <div className="container mx-auto px-4">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-4">Aktuelles</h2>
+                <p className="text-white max-w-xl mx-auto uppercase tracking-widest text-sm">Unsere letzten Highlights</p>
+              </div>
+              <div className="max-w-2xl mx-auto space-y-6">
+                <div className="bg-black/40 backdrop-blur-sm rounded-xl p-6 md:p-8 border-2 border-[#ebd29780] hover:border-[#ebd297] transition-all hover:-translate-y-1 shadow-lg">
+                  <h3 className="text-xl md:text-2xl font-bold text-[#ebd297] mb-3">🌟 23. November 2024</h3>
+                  <p className="text-stone-300 leading-relaxed">
+                    Premiere unseres Duo Programms <strong>"UKONGU"</strong> im Forchheimer Theater stattgefunden!
+                  </p>
+                </div>
+                <div className="bg-black/40 backdrop-blur-sm rounded-xl p-6 md:p-8 border-2 border-[#ebd29780] hover:border-[#ebd297] transition-all hover:-translate-y-1 shadow-lg">
+                  <h3 className="text-xl md:text-2xl font-bold text-[#ebd297] mb-3">🎉 2. Oktober 2024</h3>
+                  <p className="text-stone-300 leading-relaxed">
+                    Das Jubiläum von Wallhausen – artistisch sowie magisch gerockt!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Contact */}
-          <section className="py-12 px-4 bg-transparent border-t border-white/5">
+          <section className="py-24 bg-transparent border-t border-white/5">
             <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-2xl bg-black/50 border border-[#ebd297]/20 backdrop-blur-sm shadow-[0_0_40px_rgba(0,0,0,0.5)]">
               <h3 className="text-center text-2xl md:text-3xl text-[#ebd297] font-bold mb-8 uppercase tracking-wide">Direkt beim Duo anfragen</h3>
               <div className="grid md:grid-cols-3 gap-8 items-center justify-center text-center">
@@ -490,7 +597,7 @@ const Home: React.FC = () => {
         </div>
       </div>
       <ScrollToTop />
-    </div>
+    </div >
   );
 };
 

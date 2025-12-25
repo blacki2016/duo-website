@@ -123,9 +123,9 @@ const Navbar: React.FC = () => {
                     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
                 }
 
-                /* Mobile Menu Overlay */
+                /* Mobile Menu Overlay - von rechts ausklappbar */
                 .mobile-overlay {
-                    background: rgba(10, 10, 10, 0.98);
+                    background: rgba(10, 10, 10, 0.70);
                     backdrop-filter: blur(20px);
                 }
 
@@ -191,18 +191,19 @@ const Navbar: React.FC = () => {
 
                 /* Dropdowns */
                 .dropdown-panel {
-                    background: rgba(25, 25, 25, 0.95);
-                    border: 1px solid rgba(200, 166, 99, 0.3);
+                    background: rgba(25, 25, 25, 0.70);
+                    border: 1px solid rgba(200, 166, 99, 0.4);
                     backdrop-filter: blur(10px);
-                    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
                 }
             `}</style>
 
             {/* --- MOBILE MENU OVERLAY --- */}
             <div className={`fixed inset-0 z-[100] mobile-overlay transition-all duration-300 lg:hidden ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-                <div className="flex flex-col h-full overflow-y-auto">
+                <div className="absolute inset-0" onClick={toggleMobile}></div>
+                <div className={`absolute right-0 top-0 h-full w-4/5 max-w-sm bg-black/60 backdrop-blur-sm border-l border-[#C8A663]/30 flex flex-col overflow-y-auto transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                     {/* Header inside Overlay */}
-                    <div className="flex items-center justify-between px-6 py-4 border-b border-[#C8A663]/20">
+                    <div className="flex items-center justify-between px-6 py-4 border-b border-[#C8A663]/20 bg-black/40">
                         <span className="font-title text-xl text-[#C8A663]">Menü</span>
                         <button onClick={toggleMobile} className="gold-icon-button">
                             <X size={24} />
@@ -277,14 +278,14 @@ const Navbar: React.FC = () => {
             {/* --- MAIN HEADER --- */}
             <nav className={`site-header ${scrolled ? 'header-scrolled py-2' : 'header-transparent py-4'}`}>
                 <div className="container mx-auto px-4 max-w-screen-2xl">
-                    
+
                     {/* MOBILE VIEW (< 1024px) */}
                     <div className="lg:hidden flex items-center justify-between">
                         {/* Logo Left */}
                         <Link to="/" className="flex-shrink-0">
                             <img src={LOGO_MOBILE_URL} alt="Logo Small" className="h-10 w-auto object-contain" />
                         </Link>
-                        
+
                         {/* Logo Center */}
                         <Link to="/" className="absolute left-1/2 -translate-x-1/2">
                             <img src={LOGO_TEXT_URL} alt="Duo Limäx" className="h-12 w-auto object-contain drop-shadow-md" />
@@ -298,17 +299,17 @@ const Navbar: React.FC = () => {
 
                     {/* DESKTOP VIEW (>= 1024px) */}
                     <div className="hidden lg:flex flex-col w-full">
-                        
+
                         {/* TOP ROW: Logos & Action */}
                         <div className="grid grid-cols-3 items-center w-full mb-4">
-                            
+
                             {/* Left Column: Visual Logo */}
                             <div className="justify-self-start pl-4">
                                 <Link to="/">
-                                    <img 
-                                        src={LOGO_ICON_URL} 
-                                        alt="Logo Icon" 
-                                        className={`object-contain transition-all duration-500 ${scrolled ? 'h-20' : 'h-28'}`} 
+                                    <img
+                                        src={LOGO_ICON_URL}
+                                        alt="Logo Icon"
+                                        className={`object-contain transition-all duration-500 ${scrolled ? 'h-20' : 'h-28'}`}
                                     />
                                 </Link>
                             </div>
@@ -316,10 +317,10 @@ const Navbar: React.FC = () => {
                             {/* Center Column: Text Logo */}
                             <div className="justify-self-center">
                                 <Link to="/">
-                                    <img 
-                                        src={LOGO_TEXT_URL} 
-                                        alt="Duo Limäx Text" 
-                                        className={`object-contain transition-all duration-500 ${scrolled ? 'h-24' : 'h-32'}`} 
+                                    <img
+                                        src={LOGO_TEXT_URL}
+                                        alt="Duo Limäx Text"
+                                        className={`object-contain transition-all duration-500 ${scrolled ? 'h-24' : 'h-32'}`}
                                     />
                                 </Link>
                             </div>
@@ -347,8 +348,8 @@ const Navbar: React.FC = () => {
                                                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                                                     <div className="dropdown-panel rounded-lg min-w-[260px] p-2 flex flex-col gap-1">
                                                         {item.children.map((child, cIdx) => (
-                                                            <Link 
-                                                                key={cIdx} 
+                                                            <Link
+                                                                key={cIdx}
                                                                 to={child.path}
                                                                 className="block px-4 py-3 text-[#C8A663] hover:text-[#F9EFAF] hover:bg-[#C8A663]/10 rounded transition-colors font-bold text-sm"
                                                             >
