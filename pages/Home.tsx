@@ -16,7 +16,7 @@ const DESKTOP_SLIDES = [
 const MOBILE_SLIDES = [
   `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
   `${import.meta.env.BASE_URL}images/mobile.slider2.1.png`,
-  `${import.meta.env.BASE_URL}images/nebel.png`, 
+  `${import.meta.env.BASE_URL}images/nebel.png`,
   `${import.meta.env.BASE_URL}images/mobile.slider4.png`
 ];
 
@@ -106,13 +106,13 @@ const Home: React.FC = () => {
   // Erkenne Mobile vs. Desktop
   useEffect(() => {
     const handleResize = () => {
-        const mobile = window.innerWidth < 768;
-        setIsMobile(mobile);
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
     };
-    
+
     // Initial call
     handleResize();
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -164,7 +164,15 @@ const Home: React.FC = () => {
 
         /* UKONGU Glow */
         .ukongu-text {
-          text-shadow: 0 0 20px rgba(235, 210, 151, 0.3), 0 0 40px rgba(142, 111, 52, 0.2);
+          /* Saubere Kanten: Smoothing + moderater Glow */
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
+          text-shadow:
+            0 0 8px rgba(249, 239, 175, 0.85),
+            0 0 18px rgba(200, 166, 99, 0.6),
+            0 2px 8px rgba(0, 0, 0, 0.55);
+          filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
         }
         
         /* Pulse Animation für Badge */
@@ -213,7 +221,7 @@ const Home: React.FC = () => {
           </div>
 
           {/* Der Titel */}
-          <h2 className="text-5xl md:text-7xl font-black text-white tracking-widest ukongu-text mb-2 scale-y-110">
+          <h2 className="text-5xl md:text-7xl font-black tracking-wide ukongu-text mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[#8E6F34] via-[#F9EFAF] to-[#8E6F34]">
             UKONGU
           </h2>
           <p className="text-[#ebd297] font-serif italic text-xl md:text-2xl opacity-90">
