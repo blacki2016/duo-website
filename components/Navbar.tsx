@@ -218,6 +218,14 @@ const Navbar: React.FC = () => {
             background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0));
         }
 
+        /* Subtle transparent blend for hero overlap */
+        .header-blend {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.14) 35%, rgba(0, 0, 0, 0) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
         /* Menu Link Hover Underline */
         .nav-link-hover {
             position: relative;
@@ -336,79 +344,89 @@ const Navbar: React.FC = () => {
             <nav
                 className={`site-header fixed top-0 left-0 w-full z-[90] transition-all duration-500 ease-in-out ${scrolled
                     ? 'glass-header scrolled'
-                    : 'bg-gradient-to-b from-black via-black/80 to-transparent'
+                    : 'header-blend'
                     }`}
             >
                 <div className="header-container container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6">
 
                     {/* MOBILE: 3 Spalten (Logo | Titel | Menü) */}
-                    <div className="lg:hidden flex items-center justify-between px-4 py-3">
-                        {/* Logo links */}
-                        <Link to="/" className="flex items-center group">
+                    <div className="lg:hidden grid grid-cols-3 items-center px-3 py-1 gap-2 border-b border-[#ebd297]/10">
+                        {/* Spalte 1: neues Logo */}
+                        <Link to="/" className="flex items-center group flex-shrink-0">
                             <img
-                                src={LOGO_URL}
-                                alt="Maximilian Boy Logo"
-                                className={`header-logo h-14 sm:h-16 md:h-16 w-auto object-contain logo-hover transition-all duration-500`}
+                                src="/images/logo2.png"
+                                alt="Duo Limäx Logo 2"
+                                className="h-12 w-auto object-contain transition-all duration-300 drop-shadow-lg"
                             />
                         </Link>
 
-                        {/* Titel mittig */}
-                        <div className="flex-1 px-3 text-center">
-                            <span className={`header-title title-gold title-gold-animated text-sm sm:text-base md:text-lg font-serif font-bold tracking-wide leading-snug title-balance break-words`}>
-                                Duo Limäx
-                            </span>
-                        </div>
+                        {/* Spalte 2: Hauptlogo mittig */}
+                        <Link to="/" className="flex items-center justify-center group">
+                            <img
+                                src={LOGO_URL}
+                                alt="Duo Limäx Logo"
+                                className={`header-logo h-14 w-auto object-contain logo-hover transition-all duration-500 filter drop-shadow-lg`}
+                            />
+                        </Link>
 
-                        {/* Menü-Icon rechts */}
-                        <div className="flex items-center gap-2">
-                            <button
-                                onClick={() => setSearchOpen(true)}
-                                aria-label="Suche öffnen"
-                                className="text-[#ebd297] h-11 w-11 flex items-center justify-center focus:outline-none hover:bg-[#ebd297]/10 rounded-lg transition-colors touch-manipulation"
-                            >
-                                <span className="text-lg">🔍</span>
-                            </button>
+                        {/* Spalte 3: Menü-Button rechts */}
+                        <div className="flex items-center justify-end flex-shrink-0">
                             <button
                                 onClick={toggleMobile}
                                 aria-expanded={isOpen}
                                 aria-label="Menü öffnen"
-                                className="text-[#ebd297] h-11 w-11 flex items-center justify-center focus:outline-none hover:bg-[#ebd297]/10 rounded-lg transition-colors touch-manipulation"
+                                className="text-[#ebd297] h-11 w-11 flex items-center justify-center focus:outline-none hover:bg-[#ebd297]/20 rounded-lg transition-all duration-300 active:scale-95"
                             >
-                                <Menu size={28} />
+                                <Menu size={28} className="drop-shadow-lg" />
                             </button>
                         </div>
                     </div>
 
-                    {/* DESKTOP: Drei Bereiche (Links/Mitte/Rechts) */}
-                    <div className="hidden lg:grid grid-cols-3 items-center gap-12">
-                        {/* Links: Logo (Unterzeile entfernt) */}
-                        <div className="flex items-center justify-start">
-                            <Link to="/" className="flex flex-col items-start group">
+                    {/* DESKTOP: Zweireihig (Logo/CTA oben, Menü unten) */}
+                    <div className="hidden lg:flex flex-col gap-2 py-4 border-b border-[#ebd297]/10">
+                        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6">
+                            {/* Links: neues Logo */}
+                            <Link to="/" className="flex flex-col items-start group justify-self-start mt-8 ml-6">
                                 <img
-                                    src={LOGO_URL}
-                                    alt="Maximilian Boy Logo"
-                                    className={`header-logo h-28 w-auto object-contain logo-hover transition-all duration-500`}
+                                    src="/images/logo2.png"
+                                    alt="Duo Limäx Logo 2"
+                                    className="h-40 w-auto object-contain transition-all duration-300 drop-shadow-lg"
                                 />
                             </Link>
+
+                            {/* Mitte: Hauptlogo als Titelersatz - exakt zentriert */}
+                            <Link to="/" className="flex flex-col items-center group justify-self-center -mt-16">
+                                <img
+                                    src={LOGO_URL}
+                                    alt="Duo Limäx Logo"
+                                    className={`header-logo h-48 w-auto object-contain logo-hover transition-all duration-500 filter drop-shadow-xl group-hover:drop-shadow-2xl`}
+                                />
+                            </Link>
+
+                            {/* Rechts: CTA */}
+                            <div className="justify-self-end">
+                                <Link
+                                    to="/kontakt"
+                                    className={`cta-animated text-black rounded-full font-button font-bold shadow-[0_0_20px_rgba(235,210,151,0.35)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] transition-transform duration-300 hover:scale-110 transform -translate-y-1 md:-translate-y-2 flex items-center justify-center text-center ${scrolled ? 'px-6 py-3 text-sm' : 'px-9 py-4 text-base'}`}
+                                >
+                                    Buchung anfragen
+                                </Link>
+                            </div>
                         </div>
 
-                        {/* Mitte: Titel (Zeile 1) + Navigation (Zeile 2) */}
-                        <div className="flex flex-col items-center justify-center text-center space-y-4">
-                            <span className={`header-title title-gold title-gold-animated text-3xl font-serif font-bold tracking-widest whitespace-nowrap leading-tight transition-all duration-500`}>
-                                MAXIMILIAN BOY & MB FEUERENTERTAINMENT
-                            </span>
-
-                            <div className="main-nav py-3 flex items-center justify-center gap-4 xl:gap-8">
-                                {navItems.filter(i => i.label !== 'Home').map((item, index) => (
-                                    <div key={index} className="relative group px-2 py-2">
+                        {/* Menüzeile */}
+                        <div className="flex items-center justify-center text-center -mt-14">
+                            <div className="main-nav py-2 flex flex-wrap items-center justify-center gap-3 xl:gap-4">
+                                {navItems.filter(i => i.label !== 'Startseite').map((item, index) => (
+                                    <div key={index} className="relative group px-2 py-1 transition-all duration-300">
                                         {item.children ? (
                                             <>
-                                                <button className={`nav-button flex items-center gap-2 font-title font-extrabold text-[#ebd297] hover:text-white transition-colors nav-link-hover uppercase tracking-wider`}>
+                                                <button className={`nav-button flex items-center gap-2 font-title font-extrabold text-sm text-[#ebd297] hover:text-white transition-all duration-300 nav-link-hover uppercase tracking-wider hover:drop-shadow-lg`}>
                                                     {item.label} <ChevronDown size={18} className="group-hover:rotate-180 transition-transform duration-300" />
                                                 </button>
                                                 {/* Dropdown */}
-                                                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-1">
-                                                    <div className="dropdown-panel bg-[#1f1f20]/60 border border-[#ebd297]/20 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] overflow-hidden min-w-[280px] backdrop-blur-lg p-2">
+                                                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-1">
+                                                    <div className="dropdown-panel bg-[#1f1f20]/90 border border-[#ebd297]/30 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden min-w-[300px] backdrop-blur-xl p-3">
                                                         {item.children.map((child, cIdx) => {
                                                             const parts = child.label.split(' ');
                                                             const emoji = parts.length > 1 ? parts.pop() : '';
@@ -418,10 +436,10 @@ const Navbar: React.FC = () => {
                                                                 <Link
                                                                     key={cIdx}
                                                                     to={child.path}
-                                                                    className="block px-4 py-3 text-base font-bold text-[#ebd297] hover:text-white hover:bg-[#ebd297]/10 rounded-lg transition-colors flex items-center justify-between group/item"
+                                                                    className="block px-5 py-3 text-base font-bold text-[#ebd297] hover:text-white hover:bg-[#ebd297]/15 rounded-xl transition-all duration-300 flex items-center justify-between group/item hover:translate-x-1"
                                                                 >
                                                                     <span>{text}</span>
-                                                                    <span className="text-2xl opacity-90 leading-none transform group-hover/item:scale-110 transition-transform">{emoji}</span>
+                                                                    <span className="text-2xl opacity-90 leading-none transform group-hover/item:scale-125 transition-transform">{emoji}</span>
                                                                 </Link>
                                                             );
                                                         })}
@@ -434,14 +452,14 @@ const Navbar: React.FC = () => {
                                                     href={item.path}
                                                     target="_blank"
                                                     rel="noreferrer"
-                                                    className={`font-title font-extrabold text-[#ebd297] hover:text-white transition-colors nav-link-hover uppercase tracking-wider px-1`}
+                                                    className={`font-title font-bold text-base text-[#ebd297] hover:text-white transition-all duration-300 nav-link-hover uppercase tracking-wider px-2 hover:drop-shadow-lg`}
                                                 >
                                                     {item.label}
                                                 </a>
                                             ) : (
                                                 <Link
                                                     to={item.path!}
-                                                    className={`font-title font-extrabold text-[#ebd297] hover:text-white transition-colors nav-link-hover uppercase tracking-wider px-1`}
+                                                    className={`font-title font-bold text-base text-[#ebd297] hover:text-white transition-all duration-300 nav-link-hover uppercase tracking-wider px-2 hover:drop-shadow-lg`}
                                                 >
                                                     {item.label}
                                                 </Link>
@@ -451,21 +469,8 @@ const Navbar: React.FC = () => {
                                 ))}
                             </div>
                         </div>
-
-                        {/* Rechts: Ghost-Button CTA */}
-                        <div className="flex justify-end">
-                            <Link
-                                to="/kontakt"
-                                className={`cta-animated text-black rounded-full font-button font-bold shadow-[0_0_20px_rgba(235,210,151,0.35)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] transition-transform duration-300 hover:scale-110 transform -translate-y-1 md:-translate-y-2 flex items-center justify-center text-center ${scrolled ? 'px-6 py-3 text-sm' : 'px-9 py-4 text-base'}`}
-                            >
-                                Buchung anfragen
-                            </Link>
-                        </div>
                     </div>
-
-                    {/* (Button oben entfernt, da im 3-Spalten-Header integriert) */}
                 </div>
-
             </nav>
 
             {searchOpen && (

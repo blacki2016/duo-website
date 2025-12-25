@@ -238,6 +238,7 @@ const Shows: React.FC = () => {
                   src={show.image}
                   alt={show.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-60"
+                  style={show.id === 'duolimaex' ? { objectPosition: 'center 20%' } : undefined}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
               </div>

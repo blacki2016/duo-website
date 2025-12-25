@@ -1,89 +1,160 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, HeartHandshake, ShieldCheck, Megaphone } from 'lucide-react';
 import ScrollToTop from '../components/ScrollToTop';
 
-const SLIDER_IMAGES = [
+// Hero Background: Einzelnes Bild (keine Rotation)
+const SLIDES = [
   `${import.meta.env.BASE_URL}images/slider2.jpg.webp`,
   `${import.meta.env.BASE_URL}images/slider3.jpg.webp`,
-  `${import.meta.env.BASE_URL}images/slider4.jpeg.webp`,
-  `${import.meta.env.BASE_URL}images/limaex.slider7.jpg`,
+  `${import.meta.env.BASE_URL}images/slider4.jpeg.webp`
 ];
 
+// USP Data - UPDATED
 const USPS = [
   {
+    // Internes Icon für "Geprüfte Sicherheit"
     icon: <ShieldCheck className="w-full h-full text-[#ebd297]" />,
-    title: "Magie & Illusion",
-    desc: "Großillusionen und magische Momente, die Ihre Gäste in Staunen versetzen."
+    title: "Geprüfte Sicherheit",
+    desc: "Sicherheit geht vor Showeffekt. Als ausgebildeter Bühnenpyrotechniker garantiere ich einen sicheren Ablauf für Location und Gäste."
   },
   {
+    // Internes Icon für "All In"
     icon: <Megaphone className="w-full h-full text-[#ebd297]" />,
-    title: "Jonglage & Akrobatik",
-    desc: "Spektakuläre Performances mit atemberaubender Geschicklichkeit und Athletik."
+    title: "All In",
+    desc: "Kein LKW, aber volles Equipment: Ich bringe meine professionelle Ton- und Lichttechnik direkt mit. Sie können entspannt die Füße hochlegen."
   },
   {
+    // Internes Icon für "Hautnah & Interaktiv"
     icon: <HeartHandshake className="w-full h-full text-[#ebd297]" />,
-    title: "Comedy & Entertainment",
-    desc: "Lachgaranten und musikalische Einlagen für vollständiges Entertainment."
+    title: "Hautnah & Interaktiv",
+    desc: "Kein steriler Programmpunkt, sondern Entertainment zum Anfassen. Ich beziehe das Publikum charmant mit ein – ein Erlebnis, das verbindet."
   }
 ];
 
-const TESTIMONIALS: any[] = [];
-
-const STATS = [
-  { label: 'Shows', value: 500, suffix: '+', desc: 'Auftritte in Theater, Galas & Events' },
-  { label: 'Jahre Erfahrung', value: 15, suffix: '+', desc: 'Leidenschaft, die man spürt' },
-  { label: 'Kundenzufriedenheit', value: 98, suffix: '%', desc: 'Weiterempfehlungen & Stammkunden' },
-  { label: 'Events pro Jahr', value: 80, suffix: '+', desc: 'Von Hochzeiten bis Corporate' },
+// Testimonials Data - EXPANDED & UPDATED
+const TESTIMONIALS = [
+  {
+    name: "Martin Henke",
+    event: "Geburtstag",
+    text: "Coole Feuershow Max!!! War echt beeindruckend was du alles kannst! Voll krasses Finale mit den Funken am Schluss!",
+    customIcon: <span className="font-serif font-bold text-xl">M</span>
+  },
+  {
+    name: "Patrick",
+    event: "Hochzeit",
+    text: "Eine Wahnsinns-Feuershow als Überraschung! Wir kamen aus dem Staunen nicht heraus. Max gestaltet die Show so amüsant, dass Klein und Groß viel gelacht haben. Ein tolles Highlight und eine große Empfehlung!",
+    customIcon: <span className="font-serif font-bold text-xl">P</span>
+  },
+  {
+    name: "Julia B.",
+    event: "Hochzeit / Event",
+    text: "Super Entertainer! Musik und Show auf Wunsch, gutes Preis/Leistungsverhältnis. Freunde und ich waren absolut begeistert. Zudem super freundlich und super beraten. Kann ich nur weiter empfehlen!",
+    customIcon: <span className="font-serif font-bold text-xl">J</span>
+  },
+  {
+    name: "Natalie W.",
+    event: "Corporate Event",
+    text: "Ein absoluter Highlight auf unserem Event! Maximilian Boy hat mit seiner Show das ganze Publikum in seinen Bann gezogen. Freundlich, professionell und kreativ. Danke!",
+    customIcon: <span className="font-serif font-bold text-xl">N</span>
+  },
+  {
+    name: "Sylvia & Timo",
+    event: "Hochzeit",
+    text: "Max hat uns die Hochzeit unvergesslich gemacht. Die Feuershow war atemberaubend, und seine Art, das Publikum einzubeziehen, war einfach fantastisch!",
+    customIcon: <span className="font-serif font-bold text-xl">S</span>
+  },
+  {
+    name: "Kevin E.",
+    event: "Firmenfeier",
+    text: "Absolut professionell und begeisternd! Die Show war ein voller Erfolg. Max versteht sein Handwerk und bringt jedes Publikum zum Strahlen.",
+    customIcon: <span className="font-serif font-bold text-xl">K</span>
+  },
+  {
+    name: "Petra L.",
+    event: "Geburtstag",
+    text: "Die Überraschungsfeuershow war der Knaller! Alle Gäste waren sprachlos – das war echte Magie auf der Bühne. Vielen Dank, Max!",
+    customIcon: <span className="font-serif font-bold text-xl">P</span>
+  },
+  {
+    name: "Marco & Jenny",
+    event: "Hochzeit",
+    text: "Maximilian Boy hat unsere Hochzeit gekrönt! Eine unforgettable Performance – Professionalität, Leidenschaft und Entertainment pur.",
+    customIcon: <span className="font-serif font-bold text-xl">M</span>
+  },
+  {
+    name: "Rainer",
+    event: "Private Feier",
+    text: "Spektakulär, kreativ und unterhaltsam – genau das, was man sich wünscht. Max ist ein echter Profi. Jederzeit wieder!",
+    customIcon: <span className="font-serif font-bold text-xl">R</span>
+  }
 ];
 
+// Show Previews - UPDATED mit features statt text
 const SHOW_PREVIEWS = [
   {
-    title: "Magie",
-    img: `${import.meta.env.BASE_URL}images/limaex.magie.jpg`,
-    text: "Der bunte Mix aus Bühnenmagie, Großillusion und Close Up, ist das, was unsere Magie und Zauberei prägt und einzigartig macht.",
-    ctaText: "Mehr erfahren",
-    ctaEmoji: "✨",
-    link: "/show",
-    imgPos: "object-center"
+    title: "Feuershow",
+    img: `${import.meta.env.BASE_URL}images/fire.jpg`,
+    imgPos: "object-cover object-center",
+    features: [
+      "Jonglage mit brennenden Utensilien",
+      "Feuerspuckerei (Flammentanz)",
+      "Flammeneffekte & Pyrotechnik",
+      "Musikgesinerte Performance"
+    ],
+    link: "/feuershows",
+    ctaText: "Mehr Infos",
+    ctaEmoji: "🔥"
   },
   {
-    title: "Artistik",
-    img: `${import.meta.env.BASE_URL}images/limaex.rola.jpg.webp`,
-    text: "Artistik ist ein großer Begriff. Dazu zählt bei uns mehr als nur der Handstand. Von Jonglage bis Bowling Rola Bola ist alles dabei!",
-    ctaText: "Mehr erfahren",
-    ctaEmoji: "🎪",
-    link: "/show",
-    imgPos: "object-center"
+    title: "Artistik & Akrobatik",
+    img: `${import.meta.env.BASE_URL}images/artistik.jpg`,
+    imgPos: "object-cover object-center",
+    features: [
+      "Luftakrobatik & Seilarbeit",
+      "Bodentechniken",
+      "Kontakt-Jonglage",
+      "Bühnen-Choreografie"
+    ],
+    link: "/artistik",
+    ctaText: "Mehr Infos",
+    ctaEmoji: "🤸"
   },
   {
-    title: "Comedy",
-    img: `${import.meta.env.BASE_URL}images/limaex.comedy.jpg`,
-    text: "Ganz nach dem Motto, ‚Ist eine Show nicht lustig, ist sie wohl nicht von uns!'",
-    ctaText: "Mehr erfahren",
-    ctaEmoji: "😄",
-    link: "/show",
-    imgPos: "object-center"
+    title: "Showprogramme",
+    img: `${import.meta.env.BASE_URL}images/show.jpg`,
+    imgPos: "object-cover object-center",
+    features: [
+      "Theater & Comedy",
+      "Live-Musik-Einbindung",
+      "Interaktive Showblöcke",
+      "Anpassbar auf dein Event"
+    ],
+    link: "/showformate",
+    ctaText: "Mehr Infos",
+    ctaEmoji: "🎪"
   },
   {
-    title: "Musik",
-    img: `${import.meta.env.BASE_URL}images/showformate.limaex.jpg`,
-    text: "Auch die Musik ist ein treuer Showbegleiter geworden, sei es das magische Klavier, die witzige Ukulele oder eine westafrikanische Rappelkiste, kurz (U-)Conga.",
-    ctaText: "Mehr erfahren",
-    ctaEmoji: "🎵",
-    link: "/show",
-    imgPos: "object-center"
+    title: "Events & Bookings",
+    img: `${import.meta.env.BASE_URL}images/events.jpg`,
+    imgPos: "object-cover object-center",
+    features: [
+      "Hochzeiten & Galas",
+      "Privatfeiern",
+      "Betriebsfeste",
+      "Öffentliche Events"
+    ],
+    link: "/buchung-anfragen",
+    ctaText: "Anfragen",
+    ctaEmoji: "📅"
   }
 ];
 
 const Home: React.FC = () => {
-  const testimonialRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const [statsVisible, setStatsVisible] = useState(false);
-  const [statValues, setStatValues] = useState<number[]>(STATS.map(() => 0));
   const [currentSlide, setCurrentSlide] = useState(0);
-  const sliderRef = useRef<NodeJS.Timeout>();
 
+  // Carousel Logic
+  const testimonialRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const track = testimonialRef.current;
     if (!track) return;
@@ -184,66 +255,19 @@ const Home: React.FC = () => {
     };
   }, []);
 
+  // Hero Slider
   useEffect(() => {
-    sliderRef.current = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % SLIDER_IMAGES.length);
-    }, 4000);
-
-    return () => {
-      if (sliderRef.current) clearInterval(sliderRef.current);
-    };
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+    }, 8000);
+    return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    const node = statsRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setStatsVisible(true);
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0.3 });
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!statsVisible) return;
-    const durations = 1200;
-    const rafIds: number[] = [];
-    STATS.forEach((stat, idx) => {
-      const start = performance.now();
-      const animate = (now: number) => {
-        const progress = Math.min((now - start) / durations, 1);
-        const value = Math.floor(progress * stat.value);
-        setStatValues(prev => {
-          const next = [...prev];
-          next[idx] = value;
-          return next;
-        });
-        if (progress < 1) {
-          rafIds[idx] = requestAnimationFrame(animate);
-        } else {
-          setStatValues(prev => {
-            const next = [...prev];
-            next[idx] = stat.value;
-            return next;
-          });
-        }
-      };
-      rafIds[idx] = requestAnimationFrame(animate);
-    });
-
-    return () => rafIds.forEach(id => cancelAnimationFrame(id));
-  }, [statsVisible]);
 
   return (
     <div className="relative min-h-screen flex flex-col text-stone-200 overflow-hidden">
+
       <style>{`
+        /* Lively Gold Button Style */
         @keyframes btnGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -265,9 +289,13 @@ const Home: React.FC = () => {
             box-shadow: 0 0 30px rgba(235, 210, 151, 1);
             transform: scale(1.05) translateY(-2px);
         }
+
+        /* Card Hover Effect */
         .show-card:hover .show-card-img {
             transform: scale(1.03);
         }
+
+        /* Quote Icon Background */
         .quote-bg {
             position: absolute;
             top: 10px; right: 20px;
@@ -277,11 +305,17 @@ const Home: React.FC = () => {
             line-height: 1;
             pointer-events: none;
         }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* Hide Scrollbar Utility */
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
         .no-scrollbar {
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
+
+        /* Timeline Styles */
         .timeline {
           display: grid;
           grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -323,65 +357,60 @@ const Home: React.FC = () => {
         }
       `}</style>
 
-      <div className="fixed inset-0 w-full h-full z-0 bg-black overflow-hidden">
-        {SLIDER_IMAGES.map((img, idx) => (
-          <img
-            key={idx}
-            src={img}
-            alt={`Slider ${idx + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${idx === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
+      {/* Global Background */}
+      <div className="fixed inset-0 w-full h-full z-0 bg-black pointer-events-none">
+        {SLIDES.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 w-full h-full bg-cover transition-opacity duration-[2000ms] ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+            style={{
+              backgroundImage: `url('${slide}')`,
+              backgroundPosition: 'center 85%'
+            }}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/60 z-10"></div>
-
-        {/* Slider Dots */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
-          {SLIDER_IMAGES.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentSlide
-                ? 'bg-[#ebd297] w-8'
-                : 'bg-white/40 hover:bg-white/60'
-                }`}
-              aria-label={`Slide ${idx + 1}`}
-            />
-          ))}
-        </div>
+        <div className="absolute inset-0 bg-black/40 z-10"></div>
       </div>
 
-      <header className="relative w-full h-screen flex items-center justify-center mt-[50px] z-10">
-        <div className="text-center px-4 max-w-6xl mx-auto">
+      {/* Hero Header */}
+      <header className="relative w-full h-screen overflow-hidden flex items-center justify-center mt-[50px] z-10">
+        <div className="relative text-center px-4 max-w-6xl mx-auto">
           <span className="block text-gold-400 font-bold tracking-wider uppercase mb-6 text-lg md:text-xl lg:text-2xl drop-shadow-md">
-            Magie – Jonglage – Akrobatik – Comedy – Illusionen – Musik
+            Maximilian Boy & MB Feuerentertainment
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-extrabold mb-8 leading-tight drop-shadow-2xl uppercase text-white">
-            Duo Limäx
+            FEUER, <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-gold-300">ARTISTIK UND EIN HAUCH VON MAGIE!</span>
           </h1>
           <p className="text-xl md:text-2xl text-stone-100 mb-12 max-w-3xl mx-auto leading-relaxed font-medium drop-shadow-lg">
-            Ein einzigartiges Künstlerduo mit Magie, Jonglage, Akrobatik, Musik, Großillusion und Comedy – für Events, Hochzeiten und Galas
+            Maximilian Boy & MB Feuerentertainment bringen spektakuläres Live-Entertainment mit einem Funken Wahnsinn auf jede Bühne.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link to="/buchung-anfragen" className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3">
               Buchung anfragen <span className="text-xl">🗒️</span>
             </Link>
+            <Link to="/showformate" className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3">
+              Showformate <span className="text-xl">🎪</span>
+            </Link>
           </div>
         </div>
       </header>
 
+      {/* Testimonials */}
       <section className="py-6 px-4 bg-black/30 overflow-hidden border-b border-white/5 relative z-20">
         <div className="container mx-auto mb-4 text-center">
           <h2 className="text-lg md:text-xl font-serif font-bold text-white mb-0">Gänsehaut garantiert</h2>
           <p className="text-[#ebd297] uppercase tracking-widest text-xs">Das sagen Zuschauer</p>
         </div>
         <div className="w-full overflow-hidden py-2">
-          <div ref={testimonialRef} className="flex gap-4 w-full cursor-grab px-4 no-scrollbar overflow-x-auto">
+          <div ref={testimonialRef} className="flex gap-4 w-full cursor-grab px-4 no-scrollbar overflow-x-auto" style={{ scrollBehavior: 'auto' }}>
             {TESTIMONIALS.map((t: any, i) => (
               <div key={i} className="flex-shrink-0 w-[240px] md:w-[320px] bg-black/40 backdrop-blur-sm p-4 rounded-lg border border-[#ebd297]/10 relative overflow-hidden group hover:border-[#ebd297]/30 transition-colors flex flex-col select-none max-h-[320px] md:max-h-[360px] overflow-y-auto">
                 <div className="quote-bg" style={{ fontSize: '2rem' }}>"</div>
                 <div className="flex gap-0.5 mb-2">
-                  {[...Array(5)].map((_, starI) => (<Star key={starI} className="w-3 h-3 text-[#ebd297] fill-[#ebd297]" />))}
+                  {[...Array(5)].map((_, starI) => (
+                    <Star key={starI} className="w-3 h-3 text-[#ebd297] fill-[#ebd297]" />
+                  ))}
                 </div>
                 <p className="text-stone-300 italic mb-2 relative z-10 leading-tight flex-grow text-xs">"{t.text}"</p>
                 <div className="flex items-center gap-1.5 border-t border-white/10 pt-2 mt-auto">
@@ -405,54 +434,61 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Content Wrapper */}
       <div className="relative w-full">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[url('https://via.placeholder.com/1600x900?text=Section+Background')] bg-fixed bg-cover bg-center opacity-60"></div>
+          <div className="absolute inset-0 bg-[url('https://maximilianboy.de/mystaging02/wp-content/uploads/2025/09/cropped-Z62_3654-46.jpg')] bg-fixed bg-cover bg-center opacity-60"></div>
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
-
         <div className="relative z-10">
-          <section className="py-24 bg-transparent flex justify-center items-center">
+
+          {/* Profile */}
+          <section className="py-24 bg-transparent">
             <div className="container mx-auto px-4">
               <div className="max-w-[1050px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
                 <div className="w-full aspect-square border-2 border-[#ebd29780] rounded-2xl overflow-hidden shadow-2xl relative group bg-black/40 backdrop-blur-md">
-                  <img src={`${import.meta.env.BASE_URL}images/maxleo.jpg`} loading="lazy" className="w-full h-full object-cover object-center transition-transform duration-[800ms] group-hover:scale-105" />
+                  <img src="/images/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6-2.jpg" alt="Maximilian Boy Portrait" className="w-full h-full object-cover object-[center_20%] transition-transform duration-[800ms] group-hover:scale-105" />
                 </div>
                 <div className="w-full aspect-square flex flex-col justify-center items-center p-8 md:p-10 relative text-center bg-black/60 backdrop-blur-lg border-2 border-[#ebd29780] rounded-2xl shadow-2xl">
                   <h2 className="font-serif text-2xl md:text-3xl text-gold-400 mb-6 leading-snug drop-shadow-md">
-                    Atemberaubende <br /> <span className="text-gold-100 font-bold">Entertainment</span> & Magie.
+                    Atemberaubende <br /> <span className="text-gold-100 font-bold">Feuershows</span> & Magie.
                   </h2>
                   <p className="text-stone-300 text-sm md:text-base leading-relaxed mb-4">
-                    Das ist <strong className="text-white">Duo Limäx</strong>. Ein einzigartiges Künstlerduo mit Magie, Jonglage, Akrobatik, Musik und Comedy.
+                    Das ist <strong className="text-white">Maximilian Boy</strong>. Seit Jahren begeistert er mit Auftritten, bei denen Feuer, Bewegung und Musik verschmelzen.
                   </p>
                   <p className="text-stone-300 text-sm md:text-base leading-relaxed">
                     Leidenschaft, Präzision und Emotion für unvergessliche Momente.
                   </p>
                   <div className="mt-8">
-                    <Link to="/uebermich" className="text-[#ebd297] border-b border-[#ebd297] hover:text-white hover:border-white transition-colors uppercase text-sm tracking-widest pb-1">Mehr über uns</Link>
+                    <Link to="/uebermich" className="text-[#ebd297] border-b border-[#ebd297] hover:text-white hover:border-white transition-colors uppercase text-sm tracking-widest pb-1">Mehr über mich</Link>
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
+          {/* Showformate */}
           <section className="py-24 bg-transparent border-t border-white/5">
             <div className="container mx-auto px-4 md:px-6">
               <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-4">Unsere Leistungen</h2>
-                <p className="text-white max-w-xl mx-auto uppercase tracking-widest text-sm">Vier Kernkompetenzen in Perfektion</p>
+                <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#ebd297] mb-4">Showformate</h2>
+                <p className="text-white max-w-xl mx-auto uppercase tracking-widest text-sm">Für jeden Anlass das passende Highlight</p>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1600px] mx-auto">
                 {SHOW_PREVIEWS.map((show, i) => (
                   <div key={i} className="bg-black/40 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ebd29780] hover:border-gold-300 transition-all hover:-translate-y-2 show-card group shadow-lg flex flex-col w-full">
-                    <div className={`aspect-[3/5] overflow-hidden relative bg-black flex items-center justify-center ${i === 3 ? 'justify-center' : ''}`}>
-                      <img src={show.img} alt={show.title} loading="lazy" className={`w-full h-full show-card-img transition-transform duration-700 ${i === 3 ? 'object-cover object-left' : 'object-contain'}`} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-transparent to-transparent pointer-events-none"></div>
+                    <div className="h-[450px] overflow-hidden relative">
+                      <img src={show.img} alt={show.title} className={`w-full h-full object-cover show-card-img transition-transform duration-700 ${show.imgPos}`} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-transparent to-transparent"></div>
                       <h3 className="absolute bottom-4 left-5 text-3xl font-serif font-bold text-[#ebd297] z-10 drop-shadow-md leading-tight">{show.title}</h3>
                     </div>
                     <div className="p-5 flex-grow flex flex-col justify-between">
-                      <div className="mb-4 flex-grow">
-                        <p className="text-stone-200 text-base leading-relaxed">{show.text}</p>
+                      <div className="mb-4 flex-grow space-y-2">
+                        {show.features.map((feature, idx) => (
+                          <p key={idx} className="text-stone-200 text-base font-bold leading-snug flex items-start gap-2">
+                            <span className="text-[#ebd297] mt-[4px] text-[10px]">●</span> {feature}
+                          </p>
+                        ))}
                       </div>
                       <div className="mt-auto pt-4">
                         <Link to={show.link} className="inline-flex items-center gap-3 text-xl font-extrabold text-[#ebd297] hover:text-white transition-colors uppercase tracking-widest w-fit">
@@ -468,50 +504,11 @@ const Home: React.FC = () => {
             </div>
           </section>
 
-          <section ref={statsRef} className="py-16 bg-transparent border-t border-white/5">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#ebd297] mb-3">Duo Limäx in Zahlen</h2>
-                <p className="text-stone-300 max-w-2xl mx-auto">Messbare Performance aus Magie, Artistik, Comedy und Musik – mit Erfahrung quer durch D-A-CH.</p>
-              </div>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-                {STATS.map((stat, idx) => (
-                  <div key={stat.label} className="bg-black/40 backdrop-blur-sm border border-[#ebd297]/20 rounded-2xl p-6 text-center shadow-lg">
-                    <div className="text-4xl md:text-5xl font-extrabold text-[#ebd297] drop-shadow-sm">
-                      {statValues[idx]}{stat.suffix}
-                    </div>
-                    <div className="mt-2 text-white font-semibold tracking-wide uppercase text-sm">{stat.label}</div>
-                    <p className="text-stone-400 mt-2 text-sm leading-relaxed">{stat.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="py-16 bg-transparent border-t border-white/5">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#ebd297] mb-3">UKONGU / Duo Limäx Trailer</h2>
-                <p className="text-stone-300">Schau dir einen Ausschnitt unseres neuesten Programms an.</p>
-              </div>
-              <div className="max-w-5xl mx-auto rounded-2xl overflow-hidden border border-[#ebd297]/30 shadow-2xl">
-                <div className="relative w-full pb-[56.25%]">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube.com/embed/fLi4wht1iwI?rel=0&modestbranding=1"
-                    title="UKONGU / Duo Limäx Trailer"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-
+          {/* USP & Timeline */}
           <section className="py-20 bg-transparent border-t border-white/5">
             <div className="container mx-auto px-4">
               <h2 className="text-center text-3xl font-serif font-bold text-white mb-16">
-                Warum <span className="text-[#ebd297]">Duo Limäx</span> buchen?
+                Warum <span className="text-[#ebd297]">Maximilian Boy</span> buchen?
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
                 {USPS.map((usp, idx) => (
@@ -547,7 +544,7 @@ const Home: React.FC = () => {
                     <div className="timeline-item">
                       <div className="timeline-dot"></div>
                       <div className="timeline-title">Der große Tag</div>
-                      <div className="timeline-sub">Pünktliche Ankunft, Show & beste Performance.</div>
+                      <div className="timeline-sub">Pünktliche Ankunft, diskreter Aufbau, starke Show.</div>
                     </div>
                   </div>
                 </div>
@@ -555,26 +552,7 @@ const Home: React.FC = () => {
             </div>
           </section>
 
-          <section className="py-20 bg-transparent border-t border-white/5">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#ebd297] mb-3">Showreel & Playlist</h2>
-                <p className="text-stone-300">Video-Einblicke in Magie, Artistik und Comedy.</p>
-              </div>
-              <div className="max-w-5xl mx-auto rounded-2xl overflow-hidden border border-[#ebd297]/30 shadow-2xl">
-                <div className="relative w-full pb-[56.25%]">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube.com/embed/ysz5S6PUM-U?rel=0&modestbranding=1"
-                    title="Duo Limäx Showreel"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-
+          {/* Contact */}
           <section className="py-12 px-4 bg-transparent border-t border-white/5">
             <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-2xl bg-black/50 border border-[#ebd297]/20 backdrop-blur-sm shadow-[0_0_40px_rgba(0,0,0,0.5)]">
               <h3 className="text-center text-2xl md:text-3xl text-[#ebd297] font-bold mb-8 uppercase tracking-wide">Direkt Anfragen</h3>
@@ -600,6 +578,7 @@ const Home: React.FC = () => {
             </div>
           </section>
 
+          {/* CTA */}
           <section className="py-24 relative overflow-hidden bg-transparent">
             <div className="relative container mx-auto px-4 text-center z-10">
               <div className="mx-auto w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl px-6 sm:p-10 md:p-16 rounded-3xl bg-black/50 border border-[#ebd297]/20 backdrop-blur-sm shadow-[0_0_40px_rgba(0,0,0,0.5)]">
@@ -610,9 +589,9 @@ const Home: React.FC = () => {
               </div>
             </div>
           </section>
+
         </div>
       </div>
-
       <ScrollToTop />
     </div>
   );

@@ -120,7 +120,13 @@ const Impressions: React.FC = () => {
                                         ▶ Showreel ansehen
                                     </div>
                                 ) : (
-                                    <img src={item.src} alt={item.alt} className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" />
+                                    <img
+                                        src={item.src}
+                                        alt={item.alt}
+                                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                                        loading="lazy"
+                                        style={item.src.includes('showformate.limaex.jpg') ? { objectPosition: 'center 20%' } : undefined}
+                                    />
                                 )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-3 text-xs uppercase tracking-widest">

@@ -544,7 +544,10 @@ const DuoLimax: React.FC = () => {
                     <div
                         key={index}
                         className={`limax-slide ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-                        style={{ backgroundImage: `url('${slide}')` }}
+                        style={{
+                            backgroundImage: `url('${slide}')`,
+                            backgroundPosition: slide.includes('showformate.limaex.jpg') ? 'center 20%' : 'center'
+                        }}
                     />
                 ))}
             </div>
