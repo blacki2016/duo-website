@@ -101,11 +101,13 @@ const SHOW_PREVIEWS = [
 
 const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  // Anzahl der Slides basierend auf Mobile/Desktop Arrays
+  const slidesCount = Math.max(DESKTOP_SLIDES.length, MOBILE_SLIDES.length);
 
   // Hero Slider Logic
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % DESKTOP_SLIDES.length);
+      setCurrentSlide((prev) => (prev + 1) % slidesCount);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -161,23 +163,27 @@ const Home: React.FC = () => {
 
       {/* --- BACKGROUND SLIDER (FIXED) --- */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        {DESKTOP_SLIDES.map((slide, index) => (
-          <React.Fragment key={index}>
-            {/* Desktop Bild */}
-            <div
-              className={`hidden md:block absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-              style={{ backgroundImage: `url('${slide}')` }}
-            />
-            {/* Mobile Bild */}
-            <div
-              className={`block md:hidden absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-              style={{
-                backgroundImage: `url('${MOBILE_SLIDES[index] || slide}')`,
-                backgroundPosition: 'center'
-              }}
-            />
-          </React.Fragment>
-        ))}
+        {Array.from({ length: slidesCount }, (_, index) => {
+          const desktopSlide = DESKTOP_SLIDES[index % DESKTOP_SLIDES.length];
+          const mobileSlide = MOBILE_SLIDES[index % MOBILE_SLIDES.length];
+          return (
+            <React.Fragment key={index}>
+              {/* Desktop Bild */}
+              <div
+                className={`hidden md:block absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                style={{ backgroundImage: `url('${desktopSlide}')` }}
+              />
+              {/* Mobile Bild */}
+              <div
+                className={`block md:hidden absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                style={{
+                  backgroundImage: `url('${mobileSlide}')`,
+                  backgroundPosition: 'center'
+                }}
+              />
+            </React.Fragment>
+          );
+        })}
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-stone-900/95 z-10"></div>
       </div>
