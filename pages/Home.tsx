@@ -202,8 +202,8 @@ const Home: React.FC = () => {
         </div>
 
         {/* Aktuelles Programm: UKONGU */}
-        {/* UPDATE: mt-48 hinzugefügt, um den Block auf Mobile weit nach unten zu schieben. md:mt-10 resettet dies für Desktop. */}
-        <div className="relative mt-48 md:mt-10 mb-8 md:mb-12 animate-fade-up delay-100 opacity-0 group cursor-default">
+        {/* UPDATE: mt-48 auf mt-24 reduziert, damit es wieder höher kommt */}
+        <div className="relative mt-24 md:mt-10 mb-8 md:mb-12 animate-fade-up delay-100 opacity-0 group cursor-default">
 
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#ebd297]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
 
