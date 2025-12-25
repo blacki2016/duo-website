@@ -153,6 +153,21 @@ const Navbar: React.FC = () => {
                     box-shadow: 0 5px 15px rgba(200, 166, 99, 0.4);
                 }
 
+                /* Schimmer-Animation für Button */
+                @keyframes shimmer {
+                    0%, 100% {
+                        background-position: 0% 50%;
+                        box-shadow: 0 5px 15px rgba(200, 166, 99, 0.2);
+                    }
+                    50% {
+                        background-position: 100% 50%;
+                        box-shadow: 0 5px 25px rgba(235, 210, 151, 0.5);
+                    }
+                }
+                .gold-button-shimmer {
+                    animation: shimmer 3s ease-in-out infinite;
+                }
+
                 .gold-icon-button {
                     color: var(--gold-primary);
                     background: rgba(255,255,255,0.05);
@@ -281,14 +296,14 @@ const Navbar: React.FC = () => {
             {/* --- MAIN HEADER --- */}
             <nav className={`site-header ${scrolled ? 'header-scrolled py-2' : 'header-transparent py-4'}`}>
                 <div className="container mx-auto px-4 max-w-screen-2xl">
-                    
+
                     {/* MOBILE VIEW (< 1024px) */}
                     <div className="lg:hidden flex items-center justify-between">
                         {/* Logo Left */}
                         <Link to="/" className="flex-shrink-0">
                             <img src={LOGO_MOBILE_URL} alt="Logo Small" className="h-10 w-auto object-contain" />
                         </Link>
-                        
+
                         {/* Logo Center */}
                         <Link to="/" className="absolute left-1/2 -translate-x-1/2">
                             <img src={LOGO_TEXT_URL} alt="Duo Limäx" className="h-12 w-auto object-contain drop-shadow-md" />
@@ -302,17 +317,17 @@ const Navbar: React.FC = () => {
 
                     {/* DESKTOP VIEW (>= 1024px) */}
                     <div className="hidden lg:flex flex-col w-full">
-                        
+
                         {/* TOP ROW: Logos & Action */}
                         <div className="grid grid-cols-3 items-center w-full mb-4">
-                            
+
                             {/* Left Column: Visual Logo */}
                             <div className="justify-self-start pl-4">
                                 <Link to="/">
-                                    <img 
-                                        src={LOGO_ICON_URL} 
-                                        alt="Logo Icon" 
-                                        className={`object-contain transition-all duration-500 ${scrolled ? 'h-20' : 'h-28'}`} 
+                                    <img
+                                        src={LOGO_ICON_URL}
+                                        alt="Logo Icon"
+                                        className={`object-contain transition-all duration-500 ${scrolled ? 'h-20' : 'h-28'}`}
                                     />
                                 </Link>
                             </div>
@@ -320,17 +335,17 @@ const Navbar: React.FC = () => {
                             {/* Center Column: Text Logo */}
                             <div className="justify-self-center">
                                 <Link to="/">
-                                    <img 
-                                        src={LOGO_TEXT_URL} 
-                                        alt="Duo Limäx Text" 
-                                        className={`object-contain transition-all duration-500 ${scrolled ? 'h-24' : 'h-32'}`} 
+                                    <img
+                                        src={LOGO_TEXT_URL}
+                                        alt="Duo Limäx Text"
+                                        className={`object-contain transition-all duration-500 ${scrolled ? 'h-24' : 'h-32'}`}
                                     />
                                 </Link>
                             </div>
 
                             {/* Right Column: CTA Button */}
                             <div className="justify-self-end pr-4">
-                                <Link to="/buchung-anfragen" className={`gold-button ${scrolled ? 'text-sm px-4 py-2' : 'text-base'}`}>
+                                <Link to="/buchung-anfragen" className={`gold-button gold-button-shimmer ${scrolled ? 'text-sm px-4 py-2' : 'text-base'}`}>
                                     Buchung anfragen
                                 </Link>
                             </div>
@@ -351,8 +366,8 @@ const Navbar: React.FC = () => {
                                                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                                                     <div className="dropdown-panel rounded-lg min-w-[260px] p-2 flex flex-col gap-1">
                                                         {item.children.map((child, cIdx) => (
-                                                            <Link 
-                                                                key={cIdx} 
+                                                            <Link
+                                                                key={cIdx}
                                                                 to={child.path}
                                                                 className="block px-4 py-3 text-[#C8A663] hover:text-[#F9EFAF] hover:bg-[#C8A663]/10 rounded transition-colors font-bold text-sm"
                                                             >
