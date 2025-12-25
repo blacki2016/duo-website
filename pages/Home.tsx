@@ -14,7 +14,7 @@ const DESKTOP_SLIDES = [
 
 // Hero Background Bilder (Mobile)
 const MOBILE_SLIDES = [
-  `${import.meta.env.BASE_URL}images/mobile.slider1.1.png`,
+  `${import.meta.env.BASE_URL}images/mobile.slider1.png`,
   `${import.meta.env.BASE_URL}images/limaex.slider5.jpg`,
   `${import.meta.env.BASE_URL}images/limaex.rola.jpg.webp`
 ];
@@ -186,11 +186,11 @@ const Home: React.FC = () => {
       <header className="relative z-20 min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-4 text-center">
         
         {/* Haupttitel Block */}
-        <div className="mb-8 animate-fade-up">
-            {/* "Das Artistik" entfernt */}
+        {/* mt-4: Etwas mehr Abstand nach oben */}
+        <div className="mb-8 mt-4 animate-fade-up">
             
-            {/* Schriftgröße angepasst: Kleiner als zuvor */}
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-cinzel font-black text-transparent bg-clip-text bg-gradient-to-r from-[#C8A663] via-[#F9EFAF] to-[#C8A663] drop-shadow-2xl leading-tight">
+            {/* py-2: Verhindert, dass bg-clip-text die ä-Punkte abschneidet */}
+            <h1 className="py-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-cinzel font-black text-transparent bg-clip-text bg-gradient-to-r from-[#C8A663] via-[#F9EFAF] to-[#C8A663] drop-shadow-2xl leading-tight">
               DUO LIMÄX
             </h1>
         </div>
