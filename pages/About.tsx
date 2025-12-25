@@ -20,10 +20,9 @@ const timelineEvents = [
   { year: 'Aug 2020', text: <>Erster großer Duo-Auftritt im <strong>E-Werk Erlangen</strong> – offizielle Premiere von <strong>Duo Limäx</strong>.</> },
   { year: '2021', text: 'Ausbau des Showrepertoires: Großillusionen und Feuerinszenierungen.' },
   { year: 'Jan 2022', text: 'Erweiterung der Shows im Bereich Handstandakrobatik und Rola Rola.' },
-  { year: 'Nov/ Dez 2022', text: <>Mitarbeit bei der <strong>Kelly Family Weihnachtstour</strong> – Pyrotechnik und Spezialeffekte.</> },
-  { year: '2023 – 2024', text: <>Mitarbeit bei der <strong>Schlager-Nacht des Jahres Tour</strong> Spezialeffekte sowie weitere Großevents in allen Formaten.</> },
-  { year: 'Nov 2024', text: <>Premiere der neuen Duo Limäx Produktion <strong>„Ukongu“</strong> – Kombination aus Illusion, Artistik und Comedy.</> },
-  { year: 'Heute', text: <>Etablierter Künstler mit einem vielseitigem Portfolio aus <strong>Feuershow, Artistik, Moderation, Musik und Magie</strong>.</> },
+  { year: '[Jahr]', text: <>Ereignis 1 - Platzhalter für Timeline-Eintrag</> },
+  { year: '[Jahr]', text: 'Ereignis 2 - Platzhalter für Timeline-Eintrag' },
+  { year: '[Jahr]', text: <>Ereignis 3 - Platzhalter für Timeline-Eintrag</> },
 ];
 
 const About: React.FC = () => {
@@ -224,9 +223,9 @@ const About: React.FC = () => {
       <div className="about-wrapper">
         {/* Header */}
         <div className="pt-32 pb-16 px-4 text-center text-stone-200">
-          <h1 className="text-4xl md:text-6xl font-serif font-bold text-[#ebd297] mb-6">Über Mich</h1>
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-[#ebd297] mb-6">Über uns</h1>
           <p className="text-xl text-stone-400 max-width-2xl mx-auto">
-            Vom Zootierpfleger zum Feuerkünstler – eine Reise voller Leidenschaft, Funken und Magie.
+            [Platzhalter für Beschreibungstext - Geschichte und Werdegang des Künstlerduos]
           </p>
         </div>
 

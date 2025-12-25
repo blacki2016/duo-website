@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
                         <Link to="/" className="inline-block mb-6">
                             <img
                                 src={`${import.meta.env.BASE_URL}images/logo.png`}
-                                alt="Maximilian Boy Logo"
+                                alt="Logo"
                                 className="h-24 w-auto object-contain no-zoom"
                             />
                         </Link>
@@ -26,21 +26,21 @@ const Footer: React.FC = () => {
                         {/* QUOTE STYLE INTRO - BOLDER */}
                         <div className="relative mb-8 pl-4 border-l-2 border-[#ebd297]/50 py-1">
                             <p className="text-stone-100 text-base font-semibold leading-relaxed italic font-serif">
-                                "Professionelle Feuershows, Artistik und Entertainment auf höchstem Niveau. Ein Act wie dieser könnte ihr Event komplett machen."
+                                "[Platzhalter für Zitat/Slogan - Kurzbeschreibung des Künstlerduos]"
                             </p>
                         </div>
 
                         <div className="flex gap-4">
-                            <a href="https://www.instagram.com/maximilian.boy?igsh=dGNvd25ldGRxeHUy" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] hover:bg-[#ebd297] hover:text-black transition-all">
+                            <a href="#" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] hover:bg-[#ebd297] hover:text-black transition-all">
                                 <Instagram size={18} />
                             </a>
-                            <a href="https://www.tiktok.com/@maximilian.boy.show?_r=1&_t=ZN-917wgGx3A3S" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] hover:bg-[#ebd297] hover:text-black transition-all">
+                            <a href="#" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] hover:bg-[#ebd297] hover:text-black transition-all">
                                 <i className="fa-brands fa-tiktok text-sm"></i>
                             </a>
-                            <a href="https://www.facebook.com/maximilian.h.boy/?mibextid=wwXIfr&rdid=SKlWa1j0yKQBb20K&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1KFyJVoPPk%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] hover:bg-[#ebd297] hover:text-black transition-all">
+                            <a href="#" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] hover:bg-[#ebd297] hover:text-black transition-all">
                                 <Facebook size={18} />
                             </a>
-                            <a href="https://www.youtube.com/@maxboyjongleur-feuershow7633" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] hover:bg-[#ebd297] hover:text-black transition-all">
+                            <a href="#" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] hover:bg-[#ebd297] hover:text-black transition-all">
                                 <Youtube size={18} />
                             </a>
                         </div>
@@ -51,19 +51,19 @@ const Footer: React.FC = () => {
                         <h3 className="text-white font-serif font-bold text-lg mb-6 uppercase tracking-wider border-b-2 border-[#ebd297] pb-2 inline-block">Kontakt</h3>
                         <ul className="space-y-4">
                             <li>
-                                <a href="tel:015785585713" className="group flex items-center gap-3 text-stone-300 hover:text-[#ebd297] transition-colors">
+                                <a href="tel:[TELEFON]" className="group flex items-center gap-3 text-stone-300 hover:text-[#ebd297] transition-colors">
                                     <div className="w-8 h-8 rounded bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] group-hover:scale-110 transition-transform">
                                         <Phone size={16} />
                                     </div>
-                                    <span className="font-bold">0157 - 85585713</span>
+                                    <span className="font-bold">[Telefonnummer]</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="mailto:info@maximilianboy.de" className="group flex items-center gap-3 text-stone-300 hover:text-[#ebd297] transition-colors">
+                                <a href="mailto:[EMAIL]" className="group flex items-center gap-3 text-stone-300 hover:text-[#ebd297] transition-colors">
                                     <div className="w-8 h-8 rounded bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] group-hover:scale-110 transition-transform">
                                         <Mail size={16} />
                                     </div>
-                                    <span className="font-bold">info@maximilianboy.de</span>
+                                    <span className="font-bold">[E-Mail]</span>
                                 </a>
                             </li>
                             <li>
@@ -71,14 +71,12 @@ const Footer: React.FC = () => {
                                     <div className="w-8 h-8 rounded bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] shrink-0">
                                         <MapPin size={16} />
                                     </div>
-                                    {/* Basis bei Nürnberg SAME FONT WEIGHT AS MAIL */}
-                                    <span className="font-bold pt-1">Basis bei Nürnberg</span>
+                                    <span className="font-bold pt-1">[Einsatzgebiet]</span>
                                 </div>
                             </li>
                             <li className="pt-4">
-                                {/* GLASS LOOK WHATSAPP BUTTON */}
                                 <a
-                                    href="https://api.whatsapp.com/send/?phone=4915785585713&text&type=phone_number&app_absent=0"
+                                    href="#"
                                     target="_blank"
                                     rel="noreferrer"
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-md border border-white/10 text-[#ebd297] font-bold rounded-full text-sm hover:bg-[#ebd297] hover:text-black transition-all shadow-lg hover:shadow-[0_0_20px_rgba(235,210,151,0.4)]"
@@ -95,10 +93,7 @@ const Footer: React.FC = () => {
                         <h3 className="text-white font-serif font-bold text-lg mb-6 uppercase tracking-wider border-b-2 border-[#ebd297] pb-2 inline-block">Shows</h3>
                         <ul className="space-y-3 w-full">
                             {[
-                                { label: 'Feuershow', slug: 'feuershow' },
-                                { label: 'Artistikshow', slug: 'artistikshow' },
-                                { label: 'Walk Act', slug: 'walkact' },
-                                { label: 'Duo Limäx', slug: 'duolimaex' },
+                                { label: 'Die Show', slug: 'show' },
                             ].map(({ label, slug }) => (
                                 <li key={label} className="border-b border-white/5 pb-2 last:border-0">
                                     <Link to={`/${slug}`} className="text-stone-300 hover:text-[#ebd297] hover:pl-2 transition-all flex items-center justify-center md:justify-start gap-2">
@@ -106,11 +101,6 @@ const Footer: React.FC = () => {
                                     </Link>
                                 </li>
                             ))}
-                            <li className="mt-4">
-                                <Link to="/showformate" className="inline-flex items-center gap-2 text-[#ebd297] font-bold text-sm uppercase tracking-widest hover:text-white transition-colors">
-                                    Alle Formate <ArrowRight size={14} />
-                                </Link>
-                            </li>
                         </ul>
                     </div>
 
@@ -120,7 +110,7 @@ const Footer: React.FC = () => {
 
                         {/* General Links */}
                         <ul className="space-y-3 mb-6">
-                            <li><Link to="/uebermich" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Über Mich</Link></li>
+                            <li><Link to="/ueber-uns" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Über uns</Link></li>
                             <li><Link to="/termine" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Öffentliche Termine</Link></li>
                         </ul>
 
@@ -140,7 +130,7 @@ const Footer: React.FC = () => {
 
                 {/* BOTTOM BAR */}
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-stone-500">
-                    <p>&copy; {currentYear} Maximilian Boy. Alle Rechte vorbehalten.</p>
+                    <p>&copy; {currentYear} [Künstlername]. Alle Rechte vorbehalten.</p>
                     <p className="flex gap-4">
                         Designed by WieseWeb2025
                     </p>

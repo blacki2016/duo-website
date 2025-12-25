@@ -8,141 +8,42 @@ const SLIDES = [
   `${import.meta.env.BASE_URL}images/heroslider1.jpg`
 ];
 
-// USP Data - UPDATED
+// USP Data - PLATZHALTER
 const USPS = [
   {
-    // Internes Icon für "Geprüfte Sicherheit"
     icon: <ShieldCheck className="w-full h-full text-[#ebd297]" />,
-    title: "Geprüfte Sicherheit",
-    desc: "Sicherheit geht vor Showeffekt. Als ausgebildeter Bühnenpyrotechniker garantiere ich einen sicheren Ablauf für Location und Gäste."
+    title: "USP 1",
+    desc: "Beschreibung für USP 1 - hier kann der spezifische Vorteil für das Duo beschrieben werden."
   },
   {
-    // Internes Icon für "All In"
     icon: <Megaphone className="w-full h-full text-[#ebd297]" />,
-    title: "All In",
-    desc: "Kein LKW, aber volles Equipment: Ich bringe meine professionelle Ton- und Lichttechnik direkt mit. Sie können entspannt die Füße hochlegen."
+    title: "USP 2",
+    desc: "Beschreibung für USP 2 - hier kann ein weiterer Vorteil beschrieben werden."
   },
   {
-    // Internes Icon für "Hautnah & Interaktiv"
     icon: <HeartHandshake className="w-full h-full text-[#ebd297]" />,
-    title: "Hautnah & Interaktiv",
-    desc: "Kein steriler Programmpunkt, sondern Entertainment zum Anfassen. Ich beziehe das Publikum charmant mit ein – ein Erlebnis, das verbindet."
+    title: "USP 3",
+    desc: "Beschreibung für USP 3 - hier kann noch ein Vorteil beschrieben werden."
   }
 ];
 
-// Testimonials Data - EXPANDED & UPDATED
-const TESTIMONIALS = [
-  {
-    name: "Martin Henke",
-    event: "Geburtstag",
-    text: "Coole Feuershow Max!!! War echt beeindruckend was du alles kannst! Voll krasses Finale mit den Funken am Schluss!",
-    customIcon: <span className="font-serif font-bold text-xl">M</span>
-  },
-  {
-    name: "Patrick",
-    event: "Hochzeit",
-    text: "Eine Wahnsinns-Feuershow als Überraschung! Wir kamen aus dem Staunen nicht heraus. Max gestaltet die Show so amüsant, dass Klein und Groß viel gelacht haben. Ein tolles Highlight und eine große Empfehlung!",
-    customIcon: <span className="font-serif font-bold text-xl">P</span>
-  },
-  {
-    name: "Julia B.",
-    event: "Hochzeit / Event",
-    text: "Super Entertainer! Musik und Show auf Wunsch, gutes Preis/Leistungsverhältnis. Freunde und ich waren absolut begeistert. Zudem super freundlich und super beraten. Kann ich nur weiter empfehlen!",
-    customIcon: <span className="font-serif font-bold text-xl">J</span>
-  },
-  {
-    name: "Vertres GmbH",
-    event: "Weihnachtsfeier",
-    text: "Herr Boy hat unsere Weihnachtsfeier mit einer gigantischen Feuershow zum Highlight gemacht. Wir waren begeistert von der Mischung aus Witz und Kunst. Für zukünftige Veranstaltungen ist er fest vorgemerkt.",
-    // Updated Logo
-    logo: `${import.meta.env.BASE_URL}images/goldi.png`
-  },
-  {
-    name: "Hochzeitspaar",
-    event: "Bayreuth / Thurnau",
-    text: "Ein Feuerwerk mit Witz und Kunst! Geduldig, professionell und zuvorkommend in der Planung. Man muss sich um nichts kümmern, inkl. Sicherheit. Absolut empfehlenswert!",
-    customIcon: <span className="font-serif font-bold text-xl">H</span>
-  },
-  {
-    name: "Firma aus Crailsheim",
-    event: "Firmenfeier",
-    text: "Super netter Kontakt! Pünktlich und Zuverlässig. Der Auftritt war sehr gut und auch sehr unterhaltsam.",
-    customIcon: <span className="font-serif font-bold text-xl">F</span>
-  },
-  {
-    name: "Wust Wind Sonne",
-    event: "Firmenfest",
-    text: "Alles lief reibungslos! Seine Akrobatikshow hat Jung und Alt begeistert. Eine gute Mischung aus Spannung und Humor machte die Show sehr kurzweilig. Beim nächsten Mal buchen wir definitiv die Feuershow!",
-    logo: `${import.meta.env.BASE_URL}images/wustwindsonne.png`,
-  },
-  {
-    name: "Private Feier",
-    event: "Hochzeit",
-    text: "Originelle Show der etwas anderen Art; sehr netter Künstler; absolut weiterzuempfehlen; Preis-/ Leistungsverhältnis ist angemessen und nicht überzogen.",
-    customIcon: <span className="font-serif font-bold text-xl">P</span>
-  }
-  ,
-  {
-    name: "Nele A.",
-    event: "Öffentlicher Auftritt",
-    text: "Ich war bei der Show von Maximilian bei der Museumsnacht in Bad Windsheim und bin echt begeistert. Die Rola-Bola-Nummer in der Artistik-Show war für mich das absolute Highlight!🌟 Und die Feuershow am Abend war der perfekte Abschluss. Wir überlegen ihn auch mal für ein privates Event zu buchen. Vielen Dank! ☺️",
-    customIcon: <span className="font-serif font-bold text-xl">N</span>
-  }
-];
+// Testimonials Data - PLATZHALTER (leer für Duo-Website)
+const TESTIMONIALS: any[] = [];
 
-// Updated Data for Showformate Section with Position Tweaks
+// Show Preview - Nur Duo
 const SHOW_PREVIEWS = [
   {
-    title: "Feuershow",
-    img: `${import.meta.env.BASE_URL}images/heroslider1.jpg`,
-    features: [
-      "Humorvolles Familienprogramm",
-      "Feuerjonglage & Artistik",
-      "Großes Flammen-Finale"
-    ],
-    ctaText: "HEIẞE DETAILS", // Updated Text
-    ctaEmoji: "🔥",
-    link: "/feuershow",
-    imgPos: "object-top"
-  },
-  {
-    title: "Artistikshow",
-    img: `${import.meta.env.BASE_URL}images/showformate.artistik.jpg`,
-    features: [
-      "Handstand-Acts & Balance",
-      "Rola-Rola Show",
-      "Ideal für Indoor/Gala"
-    ],
-    ctaText: "Brauchst du ein \"Rad\"?",
-    ctaEmoji: "🤸",
-    link: "/artistikshow",
-    imgPos: "object-[center_25%]" // Slightly pulled up (focus lower down the image)
-  },
-  {
-    title: "Walk Act / Stelzen",
-    img: `${import.meta.env.BASE_URL}images/showformate.walkact.jpg`,
-    features: [
-      "Interaktive Begrüßung",
-      "Mit oder ohne Stelzen",
-      "Ballonmodellage & Spaß"
-    ],
-    ctaText: "Hereinspaziert",
-    ctaEmoji: "🚶",
-    link: "/walkact",
-    imgPos: "object-top"
-  },
-  {
-    title: "Duo Limäx",
+    title: "Die Show",
     img: `${import.meta.env.BASE_URL}images/showformate.limaex.jpg`,
     features: [
-      "2 Künstler = Doppelte Power",
-      "Großillusionen & Comedy",
-      "Wilder Mix aus Magie & Musik"
+      "Feature 1",
+      "Feature 2",
+      "Feature 3"
     ],
-    ctaText: "Hex hex",
+    ctaText: "Mehr erfahren",
     ctaEmoji: "✨",
-    link: "/duolimaex",
-    imgPos: "object-[80%_0]"
+    link: "/show",
+    imgPos: "object-center"
   }
 ];
 
@@ -408,16 +309,16 @@ const Home: React.FC = () => {
       <header className="relative w-full h-screen overflow-hidden flex items-center justify-center mt-[50px] z-10">
         <div className="relative text-center px-4 max-w-6xl mx-auto">
           <span className="block text-gold-400 font-bold tracking-wider uppercase mb-6 animate-fade-in-up text-lg md:text-xl lg:text-2xl drop-shadow-md">
-            Maximilian Boy & MB Feuerentertainment
+            [Künstlername/Band-Name]
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-extrabold mb-8 leading-tight drop-shadow-2xl uppercase text-white">
-            FEUER, <br />
+            [TITEL] <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-gold-300 filter drop-shadow-lg">
-              ARTISTIK UND EIN HAUCH VON MAGIE!
+              [UNTERTITEL]
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-stone-100 mb-12 max-w-3xl mx-auto leading-relaxed font-medium drop-shadow-lg">
-            Maximilian Boy & MB Feuerentertainment bringen spektakuläres Live-Entertainment mit einem Funken Wahnsinn auf jede Bühne.
+            [Beschreibungstext für die Künstler/Show - Platzhalter für individuelle Beschreibung]
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -428,10 +329,10 @@ const Home: React.FC = () => {
               Buchung anfragen <span className="text-xl">🗒️</span>
             </Link>
             <Link
-              to="/showformate"
+              to="/show"
               className="btn-lively px-10 py-4 text-base md:text-lg tracking-widest rounded-full flex items-center justify-center gap-3"
             >
-              Showformate <span className="text-xl">🎪</span>
+              Die Show <span className="text-xl">✨</span>
             </Link>
           </div>
         </div>

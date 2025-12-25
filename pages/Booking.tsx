@@ -103,7 +103,7 @@ const Booking: React.FC = () => {
                     </h1>
                     <div className="w-24 h-1 bg-[#ebd297] mx-auto rounded-full mb-4"></div>
                     <p className="text-stone-400 max-w-2xl mx-auto text-lg font-light">
-                        Ich freue mich auf deine Nachricht oder deinen Anruf! 🔥
+                        [Platzhalter für Kontakt-Intro-Text]
                     </p>
                 </div>
 
@@ -119,8 +119,8 @@ const Booking: React.FC = () => {
                             {/* Box 1: Image - Full height cover (now below text) */}
                             <div className="relative h-[400px] md:h-full min-h-[400px] overflow-hidden group order-2 md:order-2 mt-40 md:mt-24">
                                 <img
-                                    src="https://maximilianboy.de/mystaging02/wp-content/uploads/2025/11/cropped-cropped-schauspiel-maximilian-boy-17.jpg"
-                                    alt="Maximilian Boy"
+                                    src="/images/kontakt.jpg"
+                                    alt="[Künstler]"
                                     className="w-full h-full object-cover object-top transition-transform duration-[1.5s] group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#141415] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#141415]/80"></div>
@@ -131,18 +131,18 @@ const Booking: React.FC = () => {
                                 <h3 className="text-4xl font-serif font-bold text-[#ebd297] mb-6">Hallo!</h3>
                                 <div className="text-stone-300 space-y-5 font-sans leading-relaxed text-lg font-light">
                                     <p>
-                                        Ich freue mich sehr über dein Interesse an meiner Arbeit. Ob konkrete Buchungsanfrage oder eine erste unverbindliche Beratung – ich bin für dich da.
+                                        [Platzhalter für persönliche Begrüßung und Kontakttext]
                                     </p>
                                     <p>
-                                        Jede Nachricht lese ich persönlich und antworte in der Regel innerhalb von 24 Stunden.
+                                        [Weiterer Text zur Kontaktaufnahme]
                                     </p>
                                     <p>
-                                        Du kannst mir direkt über das Formular schreiben, mich anrufen oder ganz unkompliziert per WhatsApp kontaktieren.
+                                        [Informationen zu Antwortzeiten und Kontaktmöglichkeiten]
                                     </p>
                                     <div className="pt-4 border-t border-[#ebd297]/20 mt-4">
                                         <p className="text-white font-bold text-xl font-serif">
                                             Bis bald, <br />
-                                            <span className="text-[#ebd297] italic">Maximilian Boy</span>
+                                            <span className="text-[#ebd297] italic">[Künstlername]</span>
                                         </p>
                                     </div>
                                 </div>
@@ -164,8 +164,8 @@ const Booking: React.FC = () => {
                                     </div>
                                     <div>
                                         <h3 className="text-stone-400 text-sm font-medium uppercase tracking-wide mb-1 font-sans">Telefon</h3>
-                                        <a href="tel:015785585713" className="text-white hover:text-[#ebd297] transition-colors text-xl font-bold font-sans">
-                                            0157 - 85585713
+                                        <a href="tel:[TELEFON]" className="text-white hover:text-[#ebd297] transition-colors text-xl font-bold font-sans">
+                                            [Telefonnummer]
                                         </a>
                                     </div>
                                 </div>
@@ -176,8 +176,8 @@ const Booking: React.FC = () => {
                                     </div>
                                     <div>
                                         <h3 className="text-stone-400 text-sm font-medium uppercase tracking-wide mb-1 font-sans">E-Mail</h3>
-                                        <a href="mailto:info@maximilianboy.de" className="text-white hover:text-[#ebd297] transition-colors text-xl font-bold break-all font-sans">
-                                            info@maximilianboy.de
+                                        <a href="mailto:[EMAIL]" className="text-white hover:text-[#ebd297] transition-colors text-xl font-bold break-all font-sans">
+                                            [E-Mail-Adresse]
                                         </a>
                                     </div>
                                 </div>
@@ -185,7 +185,7 @@ const Booking: React.FC = () => {
                                 {/* WhatsApp Button */}
                                 <div className="pt-2 pl-2">
                                     <a
-                                        href="https://api.whatsapp.com/send/?phone=4915785585713&text&type=phone_number&app_absent=0"
+                                        href="#"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center gap-3 bg-[#ebd297] text-black px-8 py-4 rounded-full font-bold hover:bg-[#b38728] hover:text-white transition-all shadow-[0_0_20px_rgba(235,210,151,0.3)] hover:shadow-[0_0_30px_rgba(235,210,151,0.5)] transform hover:scale-105 duration-200 font-sans"
@@ -202,8 +202,8 @@ const Booking: React.FC = () => {
                                     <div>
                                         <h3 className="text-white font-medium text-lg mb-1 font-serif">Einsatzgebiet</h3>
                                         <p className="text-stone-400 leading-relaxed font-sans font-light">
-                                            Basis bei Nürnberg<br />
-                                            <span className="text-[#ebd297] font-semibold">Deutschlandweit & Mehr</span>
+                                            [Basis/Standort]<br />
+                                            <span className="text-[#ebd297] font-semibold">[Einsatzgebiet]</span>
                                         </p>
                                     </div>
                                 </div>

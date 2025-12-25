@@ -49,19 +49,10 @@ const Navbar: React.FC = () => {
     const LOGO_URL = `${import.meta.env.BASE_URL}images/logo.png`;
 
     const navItems: NavItem[] = [
-        { label: 'Startseite', path: '/' },
-        {
-            label: 'Showformate',
-            children: [
-                { label: 'Alle Showformate ⚡️', path: '/showformate' },
-                { label: 'Feuershow 🔥', path: '/feuershow' },
-                { label: 'Artistikshow 🤹‍♂️', path: '/artistikshow' },
-                { label: 'Walk Act 🎪', path: '/walkact' },
-                { label: 'Duo Limäx 🪄', path: '/duolimaex' }
-            ]
-        },
-        { label: 'Öffentliche Termine', path: '/termine' },
-        { label: 'Über mich', path: '/uebermich' },
+        { label: 'Home', path: '/' },
+        { label: 'Die Show', path: '/show' },
+        { label: 'Termine', path: '/termine' },
+        { label: 'Über uns', path: '/ueber-uns' },
         {
             label: 'Kontakt',
             children: [
@@ -72,7 +63,6 @@ const Navbar: React.FC = () => {
         {
             label: 'Mehr',
             children: [
-                // { label: 'Pyrotechnik 💥', path: '/pyrotechnik' },
                 { label: 'Socials 📸', path: '/socials' },
                 { label: 'Partner 🤝', path: '/partner' },
                 { label: 'Impressum 📝', path: '/impressum' },

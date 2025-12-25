@@ -3,18 +3,10 @@ import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import Shows from './pages/Shows';
 import Booking from './pages/Booking';
 import BookingRequest from './pages/BookingRequest';
-import Pricing from './pages/Pricing';
 import Imprint from './pages/Imprint';
 import Privacy from './pages/Privacy';
-import FireShow from './pages/FireShow';
-import FireShowWedding from './pages/FireShowWedding';
-import FireShowCorporate from './pages/FireShowCorporate';
-import FireShowNuernberg from './pages/FireShowNuernberg';
-import ArtistryShow from './pages/ArtistryShow';
-import WalkAct from './pages/WalkAct';
 import DuoLimax from './pages/DuoLimax';
 import About from './pages/About';
 import PublicEvents from './pages/PublicEvents';
@@ -49,18 +41,10 @@ const AppContent: React.FC<{
       <main className="flex-grow pt-24">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/showformate" element={<Shows />} />
-          <Route path="/feuershow" element={<FireShow />} />
-          <Route path="/hochzeit" element={<FireShowWedding />} />
-          <Route path="/firmen" element={<FireShowCorporate />} />
-          <Route path="/feuershow-nuernberg" element={<FireShowNuernberg />} />
-          <Route path="/artistikshow" element={<ArtistryShow />} />
-          <Route path="/walkact" element={<WalkAct />} />
-          <Route path="/duolimaex" element={<DuoLimax />} />
-          <Route path="/uebermich" element={<About />} />
+          <Route path="/show" element={<DuoLimax />} />
+          <Route path="/ueber-uns" element={<About />} />
           <Route path="/kontakt" element={<Booking />} />
           <Route path="/buchung-anfragen" element={<BookingRequest />} />
-          <Route path="/preisrechner" element={<Pricing />} />
           <Route path="/termine" element={<PublicEvents />} />
           <Route path="/socials" element={<Socials />} />
           <Route path="/partner" element={<Partner />} />
@@ -90,8 +74,8 @@ const AppContent: React.FC<{
         </div>
       )}
 
-      {/* Sticky Mobile CTA Button - versteckt auf Buchungs- und Preisseite */}
-      {location.pathname !== '/buchung-anfragen' && location.pathname !== '/preisrechner' && (
+      {/* Sticky Mobile CTA Button - versteckt auf Buchungsseite */}
+      {location.pathname !== '/buchung-anfragen' && (
         <a
           href="/#/buchung-anfragen"
           className="fixed bottom-0 left-0 right-0 md:hidden z-[9999] bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-4 py-4 font-bold flex items-center justify-center gap-3 shadow-[0_-4px_20px_rgba(235,210,151,0.4)] hover:from-[#fffebb] hover:to-[#ebd297] transition-all active:scale-95"

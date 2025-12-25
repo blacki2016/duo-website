@@ -175,8 +175,7 @@ const BookingRequest: React.FC = () => {
                     </h1>
                     <div className="w-24 h-1 bg-[#ebd297] mx-auto rounded-full mb-6"></div>
                     <p className="text-stone-400 max-w-2xl mx-auto text-xl">
-                        Sichern Sie sich Ihren Wunschtermin! <br />
-                        Füllen Sie das Formular aus und ich melde mich schnellstmöglich bei Ihnen.
+                        [Platzhalter für Buchungsanfrage-Intro-Text]
                     </p>
                 </div>
 
