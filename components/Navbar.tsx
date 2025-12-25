@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronUp, Search } from 'lucide-react';
 
 interface NavItem {
     label: string;
@@ -17,26 +17,26 @@ const Navbar: React.FC = () => {
 
     const location = useLocation();
 
+    // Scroll Detection
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            setScrolled(window.scrollY > 20);
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Prevent body scroll when mobile menu is open
+    // Lock Body Scroll on Mobile Menu
     useEffect(() => {
         if (isOpen) {
-            const prev = document.body.style.overflow;
             document.body.style.overflow = 'hidden';
-            return () => { document.body.style.overflow = prev; };
         } else {
             document.body.style.overflow = '';
         }
+        return () => { document.body.style.overflow = ''; };
     }, [isOpen]);
 
-    // Close mobile menu on route change
+    // Close Menu on Route Change
     useEffect(() => {
         setIsOpen(false);
         setMobileExpanded(null);
@@ -47,8 +47,10 @@ const Navbar: React.FC = () => {
         setMobileExpanded(mobileExpanded === label ? null : label);
     };
 
-    // Logo URL
-    const LOGO_URL = `/images/text.logo.png`;
+    // Asset URLs
+    const LOGO_TEXT_URL = `/images/text.logo.png`;
+    const LOGO_ICON_URL = `/images/logo2.png`; // Das linke Bild im Desktop
+    const LOGO_MOBILE_URL = `/images/bild.logo.png`; // Das linke Bild im Mobile
 
     const navItems: NavItem[] = [
         { label: 'Startseite', path: '/' },
@@ -84,550 +86,301 @@ const Navbar: React.FC = () => {
     return (
         <>
             <style>{`
-        :root {
-            --font-title: 'Cinzel', serif;
-            --font-button: 'Montserrat', sans-serif;
-            --font-dropdown: 'Montserrat', sans-serif;
-        }
+                :root {
+                    --font-title: 'Cinzel', serif;
+                    --font-button: 'Montserrat', sans-serif;
+                    --gold-primary: #C8A663;
+                    --gold-light: #F9EFAF;
+                    --gold-dark: #8E6F34;
+                }
 
-        /* Ensure header stays fixed on scroll */
-        .site-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            transform: translateZ(0); /* avoid flicker on mobile */
-        }
+                /* Font Utilities */
+                .font-title { font-family: var(--font-title); }
+                .font-button { font-family: var(--font-button); }
 
-        /* Utility: explicit title font class */
-        .font-title { font-family: var(--font-title); }
-        .font-button { font-family: var(--font-button); }
+                /* Header Base Styles */
+                .site-header {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    z-index: 50;
+                    transition: all 0.4s ease-in-out;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                }
 
-        /* Title Gradient - Gold Shine per spec */
-        .title-gold {
-            background: linear-gradient(
-                to right,
-                #bf953f,
-                #fffebb,
-                #b38728,
-                #fbf5b7,
-                #aa771c,
-                #bf953f
-            );
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(235, 210, 151, 0.4);
-        }
+                /* Initial State (Transparent/Blend) */
+                .header-transparent {
+                    background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+                    backdrop-filter: blur(2px);
+                }
 
-        .search-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(8px);
-            z-index: 999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
+                /* Scrolled State (Glassmorphism) */
+                .header-scrolled {
+                    background: rgba(18, 18, 18, 0.85);
+                    backdrop-filter: blur(16px) saturate(140%);
+                    border-bottom: 1px solid rgba(200, 166, 99, 0.3);
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                }
 
-        /* Gold Shimmer Animation */
-        @keyframes goldShimmer {
-            0%, 100% {
-                box-shadow: 0 0 15px rgba(235, 210, 151, 0.3), inset 0 0 15px rgba(235, 210, 151, 0.1);
-            }
-            50% {
-                box-shadow: 0 0 30px rgba(235, 210, 151, 0.6), inset 0 0 20px rgba(235, 210, 151, 0.3);
-            }
-        }
+                /* Mobile Menu Overlay */
+                .mobile-overlay {
+                    background: rgba(10, 10, 10, 0.98);
+                    backdrop-filter: blur(20px);
+                }
 
-        .booking-button {
-            font-family: var(--font-button);
-            animation: goldShimmer 3s ease-in-out infinite;
-        }
-
-        /* Set menu + dropdown font to title font */
-        .main-nav .nav-button,
-        .main-nav a {
-            font-family: var(--font-title);
-            white-space: nowrap; /* prevent label wrapping */
-            text-transform: none; /* Override uppercase from gold-button */
-        }
-
-        /* Override: use dropdown font for items inside dropdown panel */
-        .main-nav .dropdown-panel a {
-            font-family: var(--font-dropdown);
-            font-weight: 700; /* bold */
-        }
-
-        /* Shine animation (6s linear infinite) */
-        @keyframes shine {
-            from { background-position: 0% 50%; }
-            to   { background-position: 200% 50%; }
-        }
-        .title-gold-animated {
-            animation: shine 6s linear infinite;
-        }
-
-        /* CTA Shine / Pulse / Float */
-        @keyframes shineGradient {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 18px rgba(235, 210, 151, 0.35); }
-            50% { box-shadow: 0 0 34px rgba(235, 210, 151, 0.65); }
-        }
-        @keyframes floatUp {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-2px); }
-        }
-        .cta-animated {
-            background-image: linear-gradient(90deg, #ebd297, #b38728, #fffebb, #b38728, #ebd297);
-            background-size: 300% 100%;
-            animation: shineGradient 6s linear infinite, pulseGlow 3s ease-in-out infinite, floatUp 4s ease-in-out infinite;
-        }
-
-        /* Brushed Gold CTA (angepasst an Limäx-Logo: warmes Gold/Messing, vertikale Bürsten, Top-Rim-Licht, Bronze-Schatten) */
-        .cta-brushed-gold {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 0.75rem 1.5rem; /* Header-Größe beibehalten */
-            border-radius: 9999px;
-            font-family: var(--font-button);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: #1a1a1a;
-            /* Basis: warmes Gold mit oben hellem Licht und unten Bronze-Falloff */
-            background-image:
-                /* 1: Warmgold-Gradient (präzise Limäx-Farben) */
-                linear-gradient(to bottom, #fff5d6 0%, #f6dfad 8%, #e7c371 16%, #d5a846 38%, #c08e2d 58%, #ab7a25 76%, #8d6521 91%, #6f511c 100%),
-                /* 2: Vertikale Bürstung (fein, kontrastreich) */
-                repeating-linear-gradient(90deg, rgba(255,255,255,0.14) 0px, rgba(255,255,255,0.08) 1px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.0) 3px),
-                /* 3: Glanzband mittig (specular streak) */
-                linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.22) 42%, rgba(255,255,255,0.28) 48%, rgba(255,255,255,0.22) 54%, rgba(255,255,255,0) 100%),
-                /* 4: Oberer Licht-Spot */
-                radial-gradient(120% 100% at 50% 0%, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.0) 45%),
-                /* 5: Subtile metallische Schattierung */
-                linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.0));
-            background-blend-mode: normal, overlay, screen, screen, normal;
-            box-shadow:
-                inset 0 2px 0 rgba(255,255,255,0.95), /* obere fast-weiße Kante */
-                inset 0 -7px 16px rgba(90, 60, 20, 0.62), /* unten Bronze-Falloff */
-                inset -4px 0 10px rgba(70, 50, 20, 0.40), /* rechte Seitenkante */
-                inset 4px 0 10px rgba(70, 50, 20, 0.40),  /* linke Seitenkante */
-                0 14px 32px rgba(0,0,0,0.42); /* Lift */
-            filter: contrast(1.12) saturate(1.12);
-            transition: transform 200ms ease, box-shadow 200ms ease;
-        }
-        .cta-brushed-gold::before {
-            content: '';
-            position: absolute; inset: 0; pointer-events: none;
-            /* Top-Rim-Licht (nahe Weiß) + feine obere Kante */
-            background: linear-gradient(to bottom, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.18) 10%, rgba(255,255,255,0) 22%);
-            border-radius: inherit;
-        }
-        .cta-brushed-gold::after {
-            content: '';
-            position: absolute; inset: 0; pointer-events: none;
-            /* Untere/seitliche Bronze-Schatten */
-            background:
-                linear-gradient(to top, rgba(90, 60, 20, 0.50) 0%, rgba(90, 60, 20, 0.0) 34%),
-                radial-gradient(120% 100% at 100% 100%, rgba(70, 50, 20, 0.40) 0%, rgba(70, 50, 20, 0) 62%),
-                radial-gradient(120% 100% at 0% 100%, rgba(70, 50, 20, 0.40) 0%, rgba(70, 50, 20, 0) 62%);
-            border-radius: inherit;
-        }
-        .cta-brushed-gold:hover {
-            transform: translateY(-1px);
-            box-shadow:
-                inset 0 2px 0 rgba(255,255,255,0.92),
-                inset 0 -7px 16px rgba(90, 60, 20, 0.65),
-                0 16px 36px rgba(0,0,0,0.46);
-        }
-
-                /* CSS: User-specified Gold Button */
+                /* Buttons */
                 .gold-button {
-                    padding: 15px 30px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    font-family: var(--font-title);
-                      font-weight: 900;
+                    display: inline-block;
+                    padding: 0.75rem 1.5rem;
+                    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+                    background-size: 200% auto;
+                    color: #1f1f20; /* Farbe geändert */
+                    font-family: var(--font-button);
+                    font-weight: 700;
                     text-transform: uppercase;
-                    background: linear-gradient(135deg, #8E6F34 0%, #C8A663 25%, #F9EFAF 50%, #C8A663 75%, #8E6F34 100%);
-                      background-size: 200% auto;
-                      color: #111;
-                      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35);
-                    text-shadow: 0px 1px 1px rgba(255,255,255,0.5);
-                    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+                    letter-spacing: 1px;
+                    border-radius: 4px;
                     transition: all 0.3s ease;
+                    text-align: center;
+                    border: 1px solid rgba(255,255,255,0.2);
                 }
                 .gold-button:hover {
                     background-position: right center;
                     transform: translateY(-2px);
-                    box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+                    box-shadow: 0 5px 15px rgba(200, 166, 99, 0.4);
                 }
 
-        /* Logo Shimmer - Subtle */
-        @keyframes logoShimmer {
-            0%, 100% { filter: drop-shadow(0 0 2px rgba(235, 210, 151, 0.2)) brightness(1); }
-            50% { filter: drop-shadow(0 0 8px rgba(235, 210, 151, 0.6)) brightness(1.1); }
-        }
-        
-        .logo-hover:hover {
-            animation: logoShimmer 2s infinite;
-        }
-
-        /* Balanced wrapping for long mobile titles */
-        .title-balance { text-wrap: balance; }
-
-        /* Gold Icon Button (mobile hamburger/close) */
-        .gold-icon-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            height: 44px;
-            width: 44px;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            background: linear-gradient(135deg, #8E6F34 0%, #C8A663 25%, #F9EFAF 50%, #C8A663 75%, #8E6F34 100%);
-            background-size: 200% auto;
-            color: #111;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
-        .gold-icon-button:hover {
-            background-position: right center;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
-        }
-
-        /* Glassmorphism Header when scrolled */
-        .glass-header {
-            background: rgba(18, 18, 18, 0.45);
-            backdrop-filter: blur(16px) saturate(140%);
-            -webkit-backdrop-filter: blur(16px) saturate(140%);
-            border-bottom: 1px solid rgba(235, 210, 151, 0.12);
-            box-shadow: 0 8px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
-        }
-        .glass-header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0));
-        }
-
-        /* Subtle transparent blend for hero overlap */
-        .header-blend {
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.14) 35%, rgba(0, 0, 0, 0) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        /* Vertical-only scaling for entire header content (keeps side edges) */
-        .header-scale {
-            transform: scaleY(0.75);
-            transform-origin: top center;
-        }
-        /* Mobile: a bit less vertical scaling to avoid cramped layout */
-        @media (max-width: 1024px) {
-            .header-scale { transform: scaleY(0.90); }
-        }
-
-        /* Menu Link Hover Underline */
-        .nav-link-hover {
-            position: relative;
-        }
-        .nav-link-hover::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: #ebd297;
-            transition: width 0.3s ease-in-out;
-        }
-        .nav-link-hover:hover::after {
-            width: 100%;
-        }
-
-                /* Safe-Area Support for Mobile (Notch) */
-                @supports (padding: max(0px)) {
-                    .site-header { padding-top: max(env(safe-area-inset-top), 0px); }
-                    .mobile-menu { padding-bottom: max(env(safe-area-inset-bottom), 0px); }
+                .gold-icon-button {
+                    color: var(--gold-primary);
+                    background: rgba(255,255,255,0.05);
+                    padding: 8px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(200,166,99,0.3);
+                    transition: all 0.3s ease;
                 }
-      `}</style>
+                .gold-icon-button:hover {
+                    background: var(--gold-primary);
+                    color: #000;
+                }
 
-            {/* MOBILE MENU OVERLAY - Outside nav for proper layering */}
-            <div
-                className={`fixed inset-0 bg-black/98 backdrop-blur-xl z-[100] lg:hidden transition-all duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-                    }`}
-                style={{ WebkitOverflowScrolling: 'touch' }}
-            >
-                <div className="h-full w-full flex flex-col overflow-y-auto overscroll-contain safe-top safe-bottom">
-                    {/* Mobile Menu Header */}
-                    <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 shrink-0">
-                        <span className="text-[#C8A663] font-serif font-bold text-lg">Menü</span>
-                        <button
-                            onClick={toggleMobile}
-                            aria-label="Menü schließen"
-                            className="gold-icon-button touch-manipulation"
-                        >
-                            <X size={28} strokeWidth={2.5} />
+                /* Nav Links */
+                .nav-link {
+                    position: relative;
+                    font-family: var(--font-title);
+                    font-weight: 700;
+                    color: var(--gold-primary);
+                    transition: color 0.3s;
+                }
+                .nav-link:hover {
+                    color: var(--gold-light);
+                }
+                .nav-link::after {
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 2px;
+                    bottom: -4px;
+                    left: 0;
+                    background-color: var(--gold-primary);
+                    transition: width 0.3s ease;
+                }
+                .nav-link:hover::after {
+                    width: 100%;
+                }
+
+                /* Dropdowns */
+                .dropdown-panel {
+                    background: rgba(25, 25, 25, 0.95);
+                    border: 1px solid rgba(200, 166, 99, 0.3);
+                    backdrop-filter: blur(10px);
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+                }
+            `}</style>
+
+            {/* --- MOBILE MENU OVERLAY --- */}
+            <div className={`fixed inset-0 z-[100] mobile-overlay transition-all duration-300 lg:hidden ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+                <div className="flex flex-col h-full overflow-y-auto">
+                    {/* Header inside Overlay */}
+                    <div className="flex items-center justify-between px-6 py-4 border-b border-[#C8A663]/20">
+                        <span className="font-title text-xl text-[#C8A663]">Menü</span>
+                        <button onClick={toggleMobile} className="gold-icon-button">
+                            <X size={24} />
                         </button>
                     </div>
 
-                    {/* Menu Content */}
-                    <div className="flex-1 px-6 py-6 space-y-2">
-                        {navItems.map((item, index) => (
-                            <div key={index} className="border-b border-white/10 last:border-0 pb-2">
+                    {/* Links */}
+                    <div className="flex-1 px-6 py-6 space-y-4">
+                        {navItems.map((item, idx) => (
+                            <div key={idx} className="border-b border-[#C8A663]/10 last:border-0 pb-4">
                                 {item.children ? (
                                     <div>
                                         <button
                                             onClick={() => toggleMobileSubmenu(item.label)}
-                                            type="button"
-                                            className="flex items-center justify-between w-full py-4 text-xl font-title font-bold text-[#C8A663] touch-manipulation"
+                                            className="flex items-center justify-between w-full text-lg font-title font-bold text-[#C8A663]"
                                         >
                                             {item.label}
-                                            {mobileExpanded === item.label ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
+                                            {mobileExpanded === item.label ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                                         </button>
-                                        <div
-                                            className={`pl-4 flex flex-col gap-2 overflow-hidden transition-all duration-300 ${mobileExpanded === item.label ? 'max-h-[700px] mt-2 mb-3 opacity-100' : 'max-h-0 opacity-0'
-                                                }`}
-                                        >
+                                        <div className={`pl-4 overflow-hidden transition-all duration-300 ${mobileExpanded === item.label ? 'max-h-[500px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
                                             {item.children.map((child, cIdx) => (
-                                                <Link
-                                                    key={cIdx}
-                                                    to={child.path}
-                                                    className="font-bold text-[#C8A663] hover:text-[#F9EFAF] py-3 flex items-center gap-4 text-lg min-h-[48px] touch-manipulation"
-                                                >
-                                                    <span className="w-2 h-2 bg-[#C8A663] rounded-full shrink-0"></span>
-                                                    <span>{child.label}</span>
+                                                <Link key={cIdx} to={child.path} onClick={toggleMobile} className="block py-2 text-[#F9EFAF] font-medium hover:text-[#C8A663]">
+                                                    • {child.label}
                                                 </Link>
                                             ))}
                                         </div>
                                     </div>
                                 ) : (
                                     item.path?.startsWith('http') ? (
-                                        <a
-                                            href={item.path}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="block py-4 text-xl font-title font-bold text-[#C8A663] hover:text-[#F9EFAF] min-h-[48px] touch-manipulation"
-                                        >
+                                        <a href={item.path} target="_blank" rel="noreferrer" className="block text-lg font-title font-bold text-[#C8A663]">
                                             {item.label}
                                         </a>
                                     ) : (
-                                        <Link
-                                            to={item.path!}
-                                            className="block py-4 text-xl font-title font-bold text-[#C8A663] hover:text-[#F9EFAF] min-h-[48px] touch-manipulation"
-                                        >
+                                        <Link to={item.path!} onClick={toggleMobile} className="block text-lg font-title font-bold text-[#C8A663]">
                                             {item.label}
                                         </Link>
                                     )
                                 )}
                             </div>
                         ))}
-
                         <div className="pt-6">
-                            <Link
-                                to="/buchung-anfragen"
-                                className="gold-button block w-full text-center touch-manipulation"
-                            >
+                            <Link to="/buchung-anfragen" onClick={toggleMobile} className="gold-button w-full block">
                                 Buchung anfragen
                             </Link>
-
-                            {/* Socials Mobile */}
-                            <div className="mt-8 flex justify-center gap-8 text-[#C8A663]">
-                                <a href="https://www.instagram.com/maximilian.boy" target="_blank" rel="noreferrer" className="touch-manipulation"><i className="fa-brands fa-instagram text-3xl"></i></a>
-                                <a href="https://www.facebook.com/maximilian.h.boy" target="_blank" rel="noreferrer" className="touch-manipulation"><i className="fa-brands fa-facebook text-3xl"></i></a>
-                                <a href="https://wa.me/4015785585713" target="_blank" rel="noreferrer" className="touch-manipulation"><i className="fa-brands fa-whatsapp text-3xl"></i></a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <nav
-                className={`site-header fixed top-0 left-0 w-full z-[90] transition-all duration-500 ease-in-out ${scrolled
-                    ? 'glass-header scrolled'
-                    : 'header-blend'
-                    }`}
-            >
-                <div className="header-container header-scale container max-w-screen-2xl mx-auto pl-6 md:pl-8 xl:pl-10 pr-3 md:pr-4 xl:pr-6">
-
-                    {/* MOBILE: 3 Spalten (Logo | Titel | Menü) */}
-                    <div className="lg:hidden grid grid-cols-3 items-center px-3 py-3 gap-2 border-b border-[#C8A663]/10">
-                        {/* Spalte 1: neues Logo */}
-                        <Link to="/" className="flex items-center group flex-shrink-0">
-                            <img
-                                src="/images/bild.logo.png"
-                                alt="Duo Limäx Logo 2"
-                                className="h-12 w-auto object-contain transition-all duration-300 drop-shadow-lg"
+            {/* --- SEARCH OVERLAY --- */}
+            {searchOpen && (
+                <div className="fixed inset-0 z-[110] bg-black/80 backdrop-blur-md flex items-center justify-center p-4" onClick={() => setSearchOpen(false)}>
+                    <div className="w-full max-w-2xl bg-[#1a1a1a] border border-[#C8A663]/40 rounded-xl p-6 shadow-2xl" onClick={e => e.stopPropagation()}>
+                        <div className="flex items-center gap-4">
+                            <Search className="text-[#C8A663]" size={24} />
+                            <input
+                                autoFocus
+                                type="text"
+                                value={searchQuery}
+                                onChange={e => setSearchQuery(e.target.value)}
+                                placeholder="Suche..."
+                                className="flex-1 bg-transparent border-none outline-none text-xl text-white placeholder-gray-500 font-title"
                             />
-                        </Link>
-
-                        {/* Spalte 2: Hauptlogo mittig */}
-                        <Link to="/" className="flex items-center justify-center group">
-                            <img
-                                src={LOGO_URL}
-                                alt="Duo Limäx Logo"
-                                className={`header-logo h-14 w-auto object-contain logo-hover transition-all duration-500 filter drop-shadow-lg`}
-                            />
-                        </Link>
-
-                        {/* Spalte 3: Menü-Button rechts */}
-                        <div className="flex items-center justify-end flex-shrink-0">
-                            <button
-                                onClick={toggleMobile}
-                                aria-expanded={isOpen}
-                                aria-label="Menü öffnen"
-                                className="gold-icon-button focus:outline-none active:scale-95"
-                            >
-                                <Menu size={28} strokeWidth={2.5} className="drop-shadow-lg" />
+                            <button onClick={() => setSearchOpen(false)} className="text-gray-400 hover:text-white">
+                                <X size={24} />
                             </button>
                         </div>
                     </div>
+                </div>
+            )}
 
-                    {/* DESKTOP: Zweireihig (Logo/CTA oben, Menü unten) */}
-                    <div className="hidden lg:flex flex-col gap-2 py-4 border-b border-[#C8A663]/10">
-                        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6">
-                            {/* Links: neues Logo */}
-                            <Link to="/" className="flex flex-col items-start group justify-self-start mt-8 ml-6">
-                                <img
-                                    src="/images/logo2.png"
-                                    alt="Duo Limäx Logo 2"
-                                    className="h-40 w-auto object-contain transition-all duration-300 drop-shadow-lg"
-                                />
-                            </Link>
+            {/* --- MAIN HEADER --- */}
+            <nav className={`site-header ${scrolled ? 'header-scrolled py-2' : 'header-transparent py-4'}`}>
+                <div className="container mx-auto px-4 max-w-screen-2xl">
+                    
+                    {/* MOBILE VIEW (< 1024px) */}
+                    <div className="lg:hidden flex items-center justify-between">
+                        {/* Logo Left */}
+                        <Link to="/" className="flex-shrink-0">
+                            <img src={LOGO_MOBILE_URL} alt="Logo Small" className="h-10 w-auto object-contain" />
+                        </Link>
+                        
+                        {/* Logo Center */}
+                        <Link to="/" className="absolute left-1/2 -translate-x-1/2">
+                            <img src={LOGO_TEXT_URL} alt="Duo Limäx" className="h-12 w-auto object-contain drop-shadow-md" />
+                        </Link>
 
-                            {/* Mitte: Hauptlogo als Titelersatz - exakt zentriert */}
-                            <Link to="/" className="flex flex-col items-center group justify-self-center -mt-16">
-                                <img
-                                    src={LOGO_URL}
-                                    alt="Duo Limäx Logo"
-                                    className={`header-logo h-36 w-auto object-contain logo-hover transition-all duration-500 filter drop-shadow-xl group-hover:drop-shadow-2xl`}
-                                />
-                            </Link>
+                        {/* Menu Trigger Right */}
+                        <button onClick={toggleMobile} className="gold-icon-button">
+                            <Menu size={24} />
+                        </button>
+                    </div>
 
-                            {/* Rechts: CTA */}
-                            <div className="justify-self-end">
-                                <Link
-                                    to="/kontakt"
-                                    className={`gold-button ${scrolled ? 'text-sm' : 'text-base'}`}
-                                >
+                    {/* DESKTOP VIEW (>= 1024px) */}
+                    <div className="hidden lg:flex flex-col w-full">
+                        
+                        {/* TOP ROW: Logos & Action */}
+                        <div className="grid grid-cols-3 items-center w-full mb-4">
+                            
+                            {/* Left Column: Visual Logo */}
+                            <div className="justify-self-start pl-4">
+                                <Link to="/">
+                                    <img 
+                                        src={LOGO_ICON_URL} 
+                                        alt="Logo Icon" 
+                                        className={`object-contain transition-all duration-500 ${scrolled ? 'h-20' : 'h-28'}`} 
+                                    />
+                                </Link>
+                            </div>
+
+                            {/* Center Column: Text Logo */}
+                            <div className="justify-self-center">
+                                <Link to="/">
+                                    <img 
+                                        src={LOGO_TEXT_URL} 
+                                        alt="Duo Limäx Text" 
+                                        className={`object-contain transition-all duration-500 ${scrolled ? 'h-24' : 'h-32'}`} 
+                                    />
+                                </Link>
+                            </div>
+
+                            {/* Right Column: CTA Button */}
+                            <div className="justify-self-end pr-4">
+                                <Link to="/buchung-anfragen" className={`gold-button ${scrolled ? 'text-sm px-4 py-2' : 'text-base'}`}>
                                     Buchung anfragen
                                 </Link>
                             </div>
                         </div>
 
-                        {/* Menüzeile */}
-                        <div className="flex items-center justify-center text-center -mt-14">
-                            <div className="main-nav py-2 flex flex-wrap items-center justify-center gap-3 xl:gap-4">
+                        {/* BOTTOM ROW: Navigation */}
+                        <div className="flex justify-center border-t border-[#C8A663]/20 pt-2">
+                            <ul className="flex items-center gap-8">
                                 {navItems.filter(i => i.label !== 'Startseite').map((item, index) => (
-                                    <div key={index} className="relative group px-2 py-1 transition-all duration-300">
+                                    <li key={index} className="relative group py-2">
                                         {item.children ? (
                                             <>
-                                                <button className={`nav-button flex items-center gap-2 font-title font-black text-lg text-[#C8A663] hover:text-[#FFFACD] transition-all duration-300 nav-link-hover tracking-wider hover:drop-shadow-lg`}>
-                                                    {item.label} <ChevronDown size={18} className="group-hover:rotate-180 transition-transform duration-300" />
+                                                <button className="flex items-center gap-1 nav-link text-base uppercase tracking-wider">
+                                                    {item.label}
+                                                    <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
                                                 </button>
                                                 {/* Dropdown */}
-                                                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-1">
-                                                    <div className="dropdown-panel bg-[#1f1f20]/90 border border-[#C8A663]/30 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden min-w-[300px] backdrop-blur-xl p-3">
-                                                        {item.children.map((child, cIdx) => {
-                                                            const parts = child.label.split(' ');
-                                                            const emoji = parts.length > 1 ? parts.pop() : '';
-                                                            const text = parts.join(' ');
-
-                                                            return (
-                                                                <Link
-                                                                    key={cIdx}
-                                                                    to={child.path}
-                                                                    className="block px-5 py-3 text-base font-bold text-[#C8A663] hover:text-[#F9EFAF] hover:bg-[#C8A663]/15 rounded-xl transition-all duration-300 flex items-center justify-between group/item hover:translate-x-1"
-                                                                >
-                                                                    <span>{text}</span>
-                                                                    <span className="text-2xl opacity-90 leading-none transform group-hover/item:scale-125 transition-transform">{emoji}</span>
-                                                                </Link>
-                                                            );
-                                                        })}
+                                                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                                                    <div className="dropdown-panel rounded-lg min-w-[260px] p-2 flex flex-col gap-1">
+                                                        {item.children.map((child, cIdx) => (
+                                                            <Link 
+                                                                key={cIdx} 
+                                                                to={child.path}
+                                                                className="block px-4 py-3 text-[#C8A663] hover:text-[#F9EFAF] hover:bg-[#C8A663]/10 rounded transition-colors font-bold text-sm"
+                                                            >
+                                                                {child.label}
+                                                            </Link>
+                                                        ))}
                                                     </div>
                                                 </div>
                                             </>
                                         ) : (
                                             item.path?.startsWith('http') ? (
-                                                <a
-                                                    href={item.path}
-                                                    target="_blank"
-                                                    rel="noreferrer"
-                                                    className={`font-title font-black text-lg text-[#C8A663] hover:text-[#F9EFAF] transition-all duration-300 nav-link-hover tracking-wider px-2 hover:drop-shadow-lg`}
-                                                >
+                                                <a href={item.path} target="_blank" rel="noreferrer" className="nav-link text-base uppercase tracking-wider">
                                                     {item.label}
                                                 </a>
                                             ) : (
-                                                <Link
-                                                    to={item.path!}
-                                                    className={`font-title font-black text-lg text-[#C8A663] hover:text-[#F9EFAF] transition-all duration-300 nav-link-hover tracking-wider px-2 hover:drop-shadow-lg`}
-                                                >
+                                                <Link to={item.path!} className="nav-link text-base uppercase tracking-wider">
                                                     {item.label}
                                                 </Link>
                                             )
                                         )}
-                                    </div>
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                         </div>
+
                     </div>
                 </div>
             </nav>
-
-            {searchOpen && (
-                <div className="search-overlay" onClick={() => setSearchOpen(false)}>
-                    <div className="w-full max-w-2xl bg-stone-950 border border-[#ebd297]/30 rounded-2xl p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-                        <div className="flex items-center gap-3 mb-4">
-                            <span className="text-2xl">🔍</span>
-                            <input
-                                autoFocus
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Seiten durchsuchen..."
-                                className="w-full bg-stone-900 border border-[#ebd297]/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ebd297]"
-                            />
-                            <button onClick={() => setSearchOpen(false)} className="text-[#ebd297] text-xl">✕</button>
-                        </div>
-                        <div className="space-y-2 max-h-[50vh] overflow-y-auto">
-                            {navItems
-                                .filter(item => (item.label.toLowerCase().includes(searchQuery.toLowerCase()) || (item.path ?? '').toLowerCase().includes(searchQuery.toLowerCase())))
-                                .map(item => (
-                                    item.path?.startsWith('http') ? (
-                                        <a key={item.label} href={item.path} target="_blank" rel="noreferrer" className="block px-4 py-3 rounded-lg bg-black/40 border border-[#ebd297]/20 text-[#ebd297] hover:bg-black/60">
-                                            {item.label} →
-                                        </a>
-                                    ) : (
-                                        <Link key={item.label} to={item.path!} className="block px-4 py-3 rounded-lg bg-black/40 border border-[#ebd297]/20 text-[#ebd297] hover:bg-black/60" onClick={() => setSearchOpen(false)}>
-                                            {item.label}
-                                        </Link>
-                                    )
-                                ))}
-                            {navItems.filter(item => (item.label.toLowerCase().includes(searchQuery.toLowerCase()) || (item.path ?? '').toLowerCase().includes(searchQuery.toLowerCase()))).length === 0 && (
-                                <div className="text-stone-400 text-sm px-2">Keine Ergebnisse.</div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            )}
         </>
     );
 };
 
 export default Navbar;
+
+

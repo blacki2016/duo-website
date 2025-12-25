@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, HeartHandshake, ShieldCheck, Megaphone } from 'lucide-react';
+import { HeartHandshake, ShieldCheck, Megaphone } from 'lucide-react';
 import ScrollToTop from '../components/ScrollToTop';
 
 // Hero Background: Einzelnes Bild (keine Rotation)
@@ -9,143 +9,85 @@ const SLIDES = [
   `${import.meta.env.BASE_URL}images/limaex.slider7.jpg`
 ];
 
-// USP Data - UPDATED
+// USP Data - DUO
 const USPS = [
   {
-    // Internes Icon für "Geprüfte Sicherheit"
     icon: <ShieldCheck className="w-full h-full text-[#ebd297]" />,
-    title: "Geprüfte Sicherheit",
-    desc: "Sicherheit geht vor Showeffekt. Als ausgebildeter Bühnenpyrotechniker garantiere ich einen sicheren Ablauf für Location und Gäste."
+    title: "Pyro-Sicherheit & TÜV",
+    desc: "Zwei Artists, ein Sicherheitskonzept: geprüfte Pyro, klare Abläufe und Abstimmungen mit Location und Feuerwehr."
   },
   {
-    // Internes Icon für "All In"
     icon: <Megaphone className="w-full h-full text-[#ebd297]" />,
-    title: "All In",
-    desc: "Kein LKW, aber volles Equipment: Ich bringe meine professionelle Ton- und Lichttechnik direkt mit. Sie können entspannt die Füße hochlegen."
+    title: "Rundum betreut",
+    desc: "Musik, Moderation, Licht und Technik kommen mit – wir planen den Ablauf mit euch und eurem DJ oder Eventteam."
   },
   {
-    // Internes Icon für "Hautnah & Interaktiv"
     icon: <HeartHandshake className="w-full h-full text-[#ebd297]" />,
-    title: "Hautnah & Interaktiv",
-    desc: "Kein steriler Programmpunkt, sondern Entertainment zum Anfassen. Ich beziehe das Publikum charmant mit ein – ein Erlebnis, das verbindet."
+    title: "Duo-Energie",
+    desc: "Synchrones Feuer, Partnerakrobatik und direkte Publikumsnähe. Doppelter Wow-Faktor für Hochzeit, Gala oder Stadtfest."
   }
 ];
 
-// Testimonials Data - EXPANDED & UPDATED
-const TESTIMONIALS = [
-  {
-    name: "Martin Henke",
-    event: "Geburtstag",
-    text: "Coole Feuershow Max!!! War echt beeindruckend was du alles kannst! Voll krasses Finale mit den Funken am Schluss!",
-    customIcon: <span className="font-serif font-bold text-xl">M</span>
-  },
-  {
-    name: "Patrick",
-    event: "Hochzeit",
-    text: "Eine Wahnsinns-Feuershow als Überraschung! Wir kamen aus dem Staunen nicht heraus. Max gestaltet die Show so amüsant, dass Klein und Groß viel gelacht haben. Ein tolles Highlight und eine große Empfehlung!",
-    customIcon: <span className="font-serif font-bold text-xl">P</span>
-  },
-  {
-    name: "Julia B.",
-    event: "Hochzeit / Event",
-    text: "Super Entertainer! Musik und Show auf Wunsch, gutes Preis/Leistungsverhältnis. Freunde und ich waren absolut begeistert. Zudem super freundlich und super beraten. Kann ich nur weiter empfehlen!",
-    customIcon: <span className="font-serif font-bold text-xl">J</span>
-  },
-  {
-    name: "Natalie W.",
-    event: "Corporate Event",
-    text: "Ein absoluter Highlight auf unserem Event! Maximilian Boy hat mit seiner Show das ganze Publikum in seinen Bann gezogen. Freundlich, professionell und kreativ. Danke!",
-    customIcon: <span className="font-serif font-bold text-xl">N</span>
-  },
-  {
-    name: "Sylvia & Timo",
-    event: "Hochzeit",
-    text: "Max hat uns die Hochzeit unvergesslich gemacht. Die Feuershow war atemberaubend, und seine Art, das Publikum einzubeziehen, war einfach fantastisch!",
-    customIcon: <span className="font-serif font-bold text-xl">S</span>
-  },
-  {
-    name: "Kevin E.",
-    event: "Firmenfeier",
-    text: "Absolut professionell und begeisternd! Die Show war ein voller Erfolg. Max versteht sein Handwerk und bringt jedes Publikum zum Strahlen.",
-    customIcon: <span className="font-serif font-bold text-xl">K</span>
-  },
-  {
-    name: "Petra L.",
-    event: "Geburtstag",
-    text: "Die Überraschungsfeuershow war der Knaller! Alle Gäste waren sprachlos – das war echte Magie auf der Bühne. Vielen Dank, Max!",
-    customIcon: <span className="font-serif font-bold text-xl">P</span>
-  },
-  {
-    name: "Marco & Jenny",
-    event: "Hochzeit",
-    text: "Maximilian Boy hat unsere Hochzeit gekrönt! Eine unforgettable Performance – Professionalität, Leidenschaft und Entertainment pur.",
-    customIcon: <span className="font-serif font-bold text-xl">M</span>
-  },
-  {
-    name: "Rainer",
-    event: "Private Feier",
-    text: "Spektakulär, kreativ und unterhaltsam – genau das, was man sich wünscht. Max ist ein echter Profi. Jederzeit wieder!",
-    customIcon: <span className="font-serif font-bold text-xl">R</span>
-  }
-];
+// Testimonials Data - DUO
+// (TESTIMONIALS array removed because it is unused)
 
-// Show Previews - UPDATED mit features statt text
+// Show Previews - DUO
 const SHOW_PREVIEWS = [
   {
-    title: "Feuershow",
+    title: "Duo Feuershow",
     img: `${import.meta.env.BASE_URL}images/fire.jpg`,
     imgPos: "object-cover object-center",
     features: [
-      "Jonglage mit brennenden Utensilien",
-      "Feuerspuckerei (Flammentanz)",
-      "Flammeneffekte & Pyrotechnik",
-      "Musikgesinerte Performance"
+      "Synchrones Feuer & Pyro-Finale",
+      "Zweifaches Feuerspucken",
+      "Choreos zu eurer Wunschmusik",
+      "Outdoor & indoor adaptierbar"
     ],
-    link: "/feuershows",
-    ctaText: "Mehr Infos",
+    link: "/shows",
+    ctaText: "Show ansehen",
     ctaEmoji: "🔥"
   },
   {
-    title: "Artistik & Akrobatik",
+    title: "Partnerakrobatik & LED",
     img: `${import.meta.env.BASE_URL}images/artistik.jpg`,
     imgPos: "object-cover object-center",
     features: [
-      "Luftakrobatik & Seilarbeit",
-      "Bodentechniken",
-      "Kontakt-Jonglage",
-      "Bühnen-Choreografie"
+      "Partnerlifting & Equilibristik",
+      "LED-Poi mit Logo/Schriftzug",
+      "Elegante Duochoreo",
+      "Ideal für Galas & Bühnen"
     ],
-    link: "/artistik",
-    ctaText: "Mehr Infos",
+    link: "/shows",
+    ctaText: "Mehr erleben",
     ctaEmoji: "🤸"
   },
   {
-    title: "Showprogramme",
+    title: "Hochzeiten & Private Events",
     img: `${import.meta.env.BASE_URL}images/show.jpg`,
     imgPos: "object-cover object-center",
     features: [
-      "Theater & Comedy",
-      "Live-Musik-Einbindung",
-      "Interaktive Showblöcke",
-      "Anpassbar auf dein Event"
+      "Individuelle First-Dance-Inszenierung",
+      "Romantische Feuerbilder & Herzen",
+      "Persönliche Moderation",
+      "Flexible Spielflächen"
     ],
-    link: "/showformate",
-    ctaText: "Mehr Infos",
-    ctaEmoji: "🎪"
+    link: "/buchung-anfragen",
+    ctaText: "Termin anfragen",
+    ctaEmoji: "💍"
   },
   {
-    title: "Events & Bookings",
+    title: "Corporate & Public Events",
     img: `${import.meta.env.BASE_URL}images/events.jpg`,
     imgPos: "object-cover object-center",
     features: [
-      "Hochzeiten & Galas",
-      "Privatfeiern",
-      "Betriebsfeste",
-      "Öffentliche Events"
+      "Branding-Elemente in der Show",
+      "Festival- & Stadtfest-Bühnen",
+      "Moderation zweisprachig auf Wunsch",
+      "Abgestimmte Sicherheitskonzepte"
     ],
-    link: "/buchung-anfragen",
-    ctaText: "Anfragen",
-    ctaEmoji: "📅"
+    link: "/shows",
+    ctaText: "Formate sehen",
+    ctaEmoji: "🎪"
   }
 ];
 
@@ -389,44 +331,6 @@ const Home: React.FC = () => {
         </div>
       </header>
 
-      {/* Testimonials */}
-      <section className="py-6 px-4 bg-black/30 overflow-hidden border-b border-white/5 relative z-20">
-        <div className="container mx-auto mb-4 text-center">
-          <h2 className="text-lg md:text-xl font-serif font-bold text-white mb-0">Gänsehaut garantiert</h2>
-          <p className="text-[#ebd297] uppercase tracking-widest text-xs">Das sagen Zuschauer</p>
-        </div>
-        <div className="w-full overflow-hidden py-2">
-          <div ref={testimonialRef} className="flex gap-4 w-full cursor-grab px-4 no-scrollbar overflow-x-auto" style={{ scrollBehavior: 'auto' }}>
-            {TESTIMONIALS.map((t: any, i) => (
-              <div key={i} className="flex-shrink-0 w-[240px] md:w-[320px] bg-black/40 backdrop-blur-sm p-4 rounded-lg border border-[#ebd297]/10 relative overflow-hidden group hover:border-[#ebd297]/30 transition-colors flex flex-col select-none max-h-[320px] md:max-h-[360px] overflow-y-auto">
-                <div className="quote-bg" style={{ fontSize: '2rem' }}>"</div>
-                <div className="flex gap-0.5 mb-2">
-                  {[...Array(5)].map((_, starI) => (
-                    <Star key={starI} className="w-3 h-3 text-[#ebd297] fill-[#ebd297]" />
-                  ))}
-                </div>
-                <p className="text-stone-300 italic mb-2 relative z-10 leading-tight flex-grow text-xs">"{t.text}"</p>
-                <div className="flex items-center gap-1.5 border-t border-white/10 pt-2 mt-auto">
-                  <div className="w-10 h-10 flex items-center justify-center shrink-0">
-                    {t.logo ? (
-                      <img src={t.logo} alt="Partner Logo" className="max-w-full max-h-full object-contain pointer-events-none" />
-                    ) : t.customIcon ? (
-                      <div className="w-8 h-8 rounded-full bg-[#ebd297]/10 flex items-center justify-center border border-[#ebd297]/20 text-[#ebd297] text-[10px]">{t.customIcon}</div>
-                    ) : (
-                      <div className="w-8 h-8 rounded-full bg-[#ebd297]/20 flex items-center justify-center text-[#ebd297] font-bold font-serif text-[9px]">{t.name.charAt(0)}</div>
-                    )}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white text-xs">{t.name}</h4>
-                    <span className="text-[10px] text-[#ebd297] uppercase tracking-wider">{t.event}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Content Wrapper */}
       <div className="relative w-full">
         <div className="absolute inset-0 z-0">
@@ -440,20 +344,20 @@ const Home: React.FC = () => {
             <div className="container mx-auto px-4">
               <div className="max-w-[1050px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
                 <div className="w-full aspect-square border-2 border-[#ebd29780] rounded-2xl overflow-hidden shadow-2xl relative group bg-black/40 backdrop-blur-md">
-                  <img src="/images/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6-2.jpg" alt="Maximilian Boy Portrait" className="w-full h-full object-cover object-[center_20%] transition-transform duration-[800ms] group-hover:scale-105" />
+                  <img src="/images/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6-2.jpg" alt="Duo Limäx" className="w-full h-full object-cover object-[center_20%] transition-transform duration-[800ms] group-hover:scale-105" />
                 </div>
                 <div className="w-full aspect-square flex flex-col justify-center items-center p-8 md:p-10 relative text-center bg-black/60 backdrop-blur-lg border-2 border-[#ebd29780] rounded-2xl shadow-2xl">
                   <h2 className="font-serif text-2xl md:text-3xl text-gold-400 mb-6 leading-snug drop-shadow-md">
-                    Atemberaubende <br /> <span className="text-gold-100 font-bold">Feuershows</span> & Magie.
+                    Zwei Künstler. <br /> Ein gemeinsamer <span className="text-gold-100 font-bold">Feuertraum</span>.
                   </h2>
                   <p className="text-stone-300 text-sm md:text-base leading-relaxed mb-4">
-                    Das ist <strong className="text-white">Maximilian Boy</strong>. Seit Jahren begeistert er mit Auftritten, bei denen Feuer, Bewegung und Musik verschmelzen.
+                    Das ist <strong className="text-white">Duo Limäx</strong>. Zwei Artists verbinden Feuer, Partnerakrobatik und Musik zu einer Show, die Publikum und Veranstalter gleichermaßen fesselt.
                   </p>
                   <p className="text-stone-300 text-sm md:text-base leading-relaxed">
-                    Leidenschaft, Präzision und Emotion für unvergessliche Momente.
+                    Doppelter Ausdruck, perfektes Timing und sichere Inszenierungen – von Hochzeiten bis Festivalbühne.
                   </p>
                   <div className="mt-8">
-                    <Link to="/uebermich" className="text-[#ebd297] border-b border-[#ebd297] hover:text-white hover:border-white transition-colors uppercase text-sm tracking-widest pb-1">Mehr über mich</Link>
+                    <Link to="/allgemein/ueber-uns/" className="text-[#ebd297] border-b border-[#ebd297] hover:text-white hover:border-white transition-colors uppercase text-sm tracking-widest pb-1">Mehr über uns</Link>
                   </div>
                 </div>
               </div>
@@ -501,7 +405,7 @@ const Home: React.FC = () => {
           <section className="py-20 bg-transparent border-t border-white/5">
             <div className="container mx-auto px-4">
               <h2 className="text-center text-3xl font-serif font-bold text-white mb-16">
-                Warum <span className="text-[#ebd297]">Maximilian Boy</span> buchen?
+                Warum <span className="text-[#ebd297]">Duo Limäx</span> buchen?
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
                 {USPS.map((usp, idx) => (
@@ -522,22 +426,22 @@ const Home: React.FC = () => {
                     <div className="timeline-item">
                       <div className="timeline-dot"></div>
                       <div className="timeline-title">Buchungsanfrage</div>
-                      <div className="timeline-sub">Formular kurz ausfüllen – Eckdaten & Wünsche.</div>
+                      <div className="timeline-sub">Formular ausfüllen – Infos zu Location, Anlass und Wunschstimmung.</div>
                     </div>
                     <div className="timeline-item">
                       <div className="timeline-dot"></div>
-                      <div className="timeline-title">Rückmeldung</div>
-                      <div className="timeline-sub">Konkretes Angebot oder kurze Rückfragen.</div>
+                      <div className="timeline-title">Abstimmung</div>
+                      <div className="timeline-sub">Musik, Pyro-Aufbau, Moderation – wir planen gemeinsam mit euch und der Location.</div>
                     </div>
                     <div className="timeline-item">
                       <div className="timeline-dot"></div>
-                      <div className="timeline-title">Buchung & Rückgespräche</div>
-                      <div className="timeline-sub">Bestätigung, Details & organisatorische Feinheiten.</div>
+                      <div className="timeline-title">Feinschliff</div>
+                      <div className="timeline-sub">Briefing, Sicherheitscheck und individuelle Showelemente wie Logos oder Feuerherz.</div>
                     </div>
                     <div className="timeline-item">
                       <div className="timeline-dot"></div>
-                      <div className="timeline-title">Der große Tag</div>
-                      <div className="timeline-sub">Pünktliche Ankunft, diskreter Aufbau, starke Show.</div>
+                      <div className="timeline-title">Showtime</div>
+                      <div className="timeline-sub">Diskreter Aufbau, Doppel-Performance mit Finale und optionalem Meet & Greet.</div>
                     </div>
                   </div>
                 </div>
@@ -548,7 +452,7 @@ const Home: React.FC = () => {
           {/* Contact */}
           <section className="py-12 px-4 bg-transparent border-t border-white/5">
             <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-2xl bg-black/50 border border-[#ebd297]/20 backdrop-blur-sm shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-              <h3 className="text-center text-2xl md:text-3xl text-[#ebd297] font-bold mb-8 uppercase tracking-wide">Direkt Anfragen</h3>
+              <h3 className="text-center text-2xl md:text-3xl text-[#ebd297] font-bold mb-8 uppercase tracking-wide">Direkt beim Duo anfragen</h3>
               <div className="grid md:grid-cols-3 gap-8 items-center justify-center text-center">
                 <div className="flex flex-col items-center">
                   <div className="text-4xl mb-4 text-[#ebd297] opacity-80"><i className="fa-solid fa-phone"></i></div>

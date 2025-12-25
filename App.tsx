@@ -31,7 +31,7 @@ const GLOBAL_STYLES = `
     text-transform: uppercase;
     background: linear-gradient(135deg, #8E6F34 0%, #C8A663 25%, #F9EFAF 50%, #C8A663 75%, #8E6F34 100%);
     background-size: 200% auto;
-    color: #111;
+    color: #1f1f20;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 3px rgba(0, 0, 0, 0.35);
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     transition: all 0.3s ease;
