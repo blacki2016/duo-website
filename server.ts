@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import sendBooking from './api/send-booking';
 import sendContact from './api/send-contact';
