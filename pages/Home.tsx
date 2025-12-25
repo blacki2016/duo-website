@@ -8,7 +8,6 @@ import ScrollToTop from '../components/ScrollToTop';
 // Hero Background Bilder (Desktop)
 const DESKTOP_SLIDES = [
   `${import.meta.env.BASE_URL}images/schatten3.png`,
-  // HINWEIS: Prüfe hier, ob die Datei wirklich 'slider4.jpeg.jpg' heißt oder nur 'slider4.jpg'
   `${import.meta.env.BASE_URL}images/slider4.jpeg.jpg`,
   `${import.meta.env.BASE_URL}images/limaex.slider7.jpg`
 ];
@@ -17,8 +16,7 @@ const DESKTOP_SLIDES = [
 const MOBILE_SLIDES = [
   `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
   `${import.meta.env.BASE_URL}images/mobile.slider2.1.png`,
-  // HINWEIS: Wenn dieses Bild nicht angezeigt wird, prüfe ob es vielleicht eine .jpg Datei ist
-  `${import.meta.env.BASE_URL}images/nebel.png`,
+  `${import.meta.env.BASE_URL}images/nebel.png`, 
   `${import.meta.env.BASE_URL}images/mobile.slider4.png`
 ];
 
@@ -108,13 +106,13 @@ const Home: React.FC = () => {
   // Erkenne Mobile vs. Desktop
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
+        const mobile = window.innerWidth < 768;
+        setIsMobile(mobile);
     };
-
+    
     // Initial call
     handleResize();
-
+    
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -122,8 +120,7 @@ const Home: React.FC = () => {
   // Wähle das richtige Array basierend auf der Bildschirmgröße
   const slides = isMobile ? MOBILE_SLIDES : DESKTOP_SLIDES;
 
-  // Reset Slide Index wenn sich die Anzahl der Slides ändert (z.B. Wechsel Mobile -> Desktop)
-  // Dies verhindert, dass der Slider versucht ein Bild anzuzeigen, das es im anderen Modus nicht gibt
+  // Reset Slide Index wenn sich die Anzahl der Slides ändert
   useEffect(() => {
     setCurrentSlide(0);
   }, [isMobile]);
@@ -143,22 +140,16 @@ const Home: React.FC = () => {
       <style>{`
         .font-cinzel { font-family: 'Cinzel', serif; }
         
-        /* Button Glow + Shimmer */
-        @keyframes shimmer {
-          0% { background-position: 0% 50%; }
-          100% { background-position: 200% 50%; }
-        }
+        /* Button Glow */
         .btn-gold {
-          background: linear-gradient(135deg, #8E6F34 0%, #C8A663 50%, #F9EFAF 75%, #8E6F34 100%);
-          background-size: 200% 200%;
-          transition: all 0.5s ease;
-          box-shadow: 0 0 18px rgba(200, 166, 99, 0.35), 0 0 32px rgba(200, 166, 99, 0.2);
-          animation: shimmer 4s linear infinite;
+            background: linear-gradient(135deg, #8E6F34 0%, #C8A663 50%, #8E6F34 100%);
+            background-size: 200% auto;
+            transition: all 0.5s ease;
         }
         .btn-gold:hover {
-          background-position: 120% 50%;
-          box-shadow: 0 0 26px rgba(200, 166, 99, 0.65), 0 0 48px rgba(200, 166, 99, 0.4);
-          transform: translateY(-2px);
+            background-position: right center;
+            box-shadow: 0 0 25px rgba(200, 166, 99, 0.7);
+            transform: translateY(-2px);
         }
 
         /* Hero Animationen */
@@ -208,20 +199,24 @@ const Home: React.FC = () => {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <header className="relative z-20 min-h-screen flex flex-col items-center justify-start md:justify-center pt-28 md:pt-32 pb-20 px-4 text-center">
+      {/* UPDATE: padding-top von pt-14 auf pt-4 reduziert für Mobile, damit es höher rutscht */}
+      <header className="relative z-20 min-h-screen flex flex-col items-center justify-start md:justify-center pt-4 md:pt-32 pb-20 px-4 text-center">
 
         {/* Haupttitel Block */}
-        <div className="mb-8 mt-4 animate-fade-up">
+        {/* UPDATE: mb-6 auf mb-2 reduziert für Mobile (enger zusammen) */}
+        <div className="mb-2 md:mb-8 mt-0 md:mt-4 animate-fade-up">
           <h1 className="py-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-cinzel font-black text-transparent bg-clip-text bg-gradient-to-r from-[#C8A663] via-[#F9EFAF] to-[#C8A663] drop-shadow-2xl leading-tight">
             DUO LIMÄX
           </h1>
         </div>
 
         {/* Trenner */}
-        <div className="h-[2px] bg-[#ebd297] mx-auto mb-10 animate-divider shadow-[0_0_15px_#ebd297]"></div>
+        {/* UPDATE: mb-10 auf mb-6 reduziert für Mobile */}
+        <div className="h-[2px] bg-[#ebd297] mx-auto mb-6 md:mb-10 animate-divider shadow-[0_0_15px_#ebd297]"></div>
 
         {/* Aktuelles Programm: UKONGU */}
-        <div className="relative mb-12 animate-fade-up delay-100 opacity-0 group cursor-default">
+        {/* UPDATE: mb-12 auf mb-8 reduziert für Mobile */}
+        <div className="relative mb-8 md:mb-12 animate-fade-up delay-100 opacity-0 group cursor-default">
 
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#ebd297]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
 
@@ -402,3 +397,5 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+
