@@ -40,7 +40,7 @@ const STATS = [
 const SHOW_PREVIEWS = [
   {
     title: "Magie",
-    img: `${import.meta.env.BASE_URL}images/showformate.limaex.jpg`,
+    img: `${import.meta.env.BASE_URL}images/limaex.magie.jpg`,
     text: "Der bunte Mix aus Bühnenmagie, Großillusion und Close Up, ist das, was unsere Magie und Zauberei prägt und einzigartig macht.",
     ctaText: "Mehr erfahren",
     ctaEmoji: "✨",
@@ -49,7 +49,7 @@ const SHOW_PREVIEWS = [
   },
   {
     title: "Artistik",
-    img: `${import.meta.env.BASE_URL}images/showformate.limaex.jpg`,
+    img: `${import.meta.env.BASE_URL}images/limaex.rola.jpg.webp`,
     text: "Artistik ist ein großer Begriff. Dazu zählt bei uns mehr als nur der Handstand. Von Jonglage bis Bowling Rola Bola ist alles dabei!",
     ctaText: "Mehr erfahren",
     ctaEmoji: "🎪",
@@ -58,7 +58,7 @@ const SHOW_PREVIEWS = [
   },
   {
     title: "Comedy",
-    img: `${import.meta.env.BASE_URL}images/showformate.limaex.jpg`,
+    img: `${import.meta.env.BASE_URL}images/limaex.comedy.jpg`,
     text: "Ganz nach dem Motto, ‚Ist eine Show nicht lustig, ist sie wohl nicht von uns!'",
     ctaText: "Mehr erfahren",
     ctaEmoji: "😄",
@@ -445,9 +445,9 @@ const Home: React.FC = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1600px] mx-auto">
                 {SHOW_PREVIEWS.map((show, i) => (
                   <div key={i} className="bg-black/40 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ebd29780] hover:border-gold-300 transition-all hover:-translate-y-2 show-card group shadow-lg flex flex-col w-full">
-                    <div className="h-[300px] overflow-hidden relative">
-                      <img src={show.img} alt={show.title} loading="lazy" className={`w-full h-full object-cover show-card-img transition-transform duration-700 ${show.imgPos}`} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-transparent to-transparent"></div>
+                    <div className={`aspect-[3/5] overflow-hidden relative bg-black flex items-center justify-center ${i === 3 ? 'justify-center' : ''}`}>
+                      <img src={show.img} alt={show.title} loading="lazy" className={`w-full h-full show-card-img transition-transform duration-700 ${i === 3 ? 'object-cover object-left' : 'object-contain'}`} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-transparent to-transparent pointer-events-none"></div>
                       <h3 className="absolute bottom-4 left-5 text-3xl font-serif font-bold text-[#ebd297] z-10 drop-shadow-md leading-tight">{show.title}</h3>
                     </div>
                     <div className="p-5 flex-grow flex flex-col justify-between">
