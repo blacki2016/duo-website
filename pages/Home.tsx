@@ -15,7 +15,7 @@ const DESKTOP_SLIDES = [
 // Hero Background Bilder (Mobile)
 const MOBILE_SLIDES = [
   `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
-  `${import.meta.env.BASE_URL}images/limaex.slider5.jpg`,
+  `${import.meta.env.BASE_URL}images/mobile.slider2.jpg`,
   `${import.meta.env.BASE_URL}images/limaex.rola.jpg.webp`
 ];
 
