@@ -52,7 +52,13 @@ const Navbar: React.FC = () => {
 
     const navItems: NavItem[] = [
         { label: 'Startseite', path: '/' },
-        { label: 'Shows', path: '/shows' },
+        {
+            label: 'Shows',
+            children: [
+                { label: 'Shows', path: '/shows' },
+                { label: 'Ukongu und vieles mehr', path: '/allgemein/impressionen/' },
+            ]
+        },
         { label: 'Über uns', path: '/allgemein/ueber-uns/' },
         { label: 'Termine', path: '/termine' },
         { label: 'Mehr als nur eine Galerie', path: '/allgemein/impressionen/' },
