@@ -45,30 +45,15 @@ const Navbar: React.FC = () => {
         setMobileExpanded(mobileExpanded === label ? null : label);
     };
 
-    // Logo URL (local asset)
-    const LOGO_URL = `${import.meta.env.BASE_URL}images/logo.png`;
+    // Logo URL
+    const LOGO_URL = `/images/logo.limaex.png`;
 
     const navItems: NavItem[] = [
         { label: 'Home', path: '/' },
-        { label: 'Die Show', path: '/show' },
-        { label: 'Termine', path: '/termine' },
-        { label: 'Über uns', path: '/ueber-uns' },
-        {
-            label: 'Kontakt',
-            children: [
-                { label: 'Kontakt 📲', path: '/kontakt' },
-                { label: 'Buchung anfragen 🗒️', path: '/buchung-anfragen' }
-            ]
-        },
-        {
-            label: 'Mehr',
-            children: [
-                { label: 'Socials 📸', path: '/socials' },
-                { label: 'Partner 🤝', path: '/partner' },
-                { label: 'Impressum 📝', path: '/impressum' },
-                { label: 'Datenschutzerklärung 🦺', path: '/datenschutz' }
-            ]
-        }
+        { label: 'Über uns', path: '/allgemein/ueber-uns/' },
+        { label: 'Impressionen', path: '/allgemein/impressionen/' },
+        { label: 'Kontakt', path: '/kontakt' },
+        { label: 'Feuershow', path: 'https://maximilianboy.de/#/feuershow' },
     ];
 
     return (
@@ -271,12 +256,23 @@ const Navbar: React.FC = () => {
                                         </div>
                                     </div>
                                 ) : (
-                                    <Link
-                                        to={item.path!}
-                                        className="block py-4 text-xl font-title font-bold text-[#ebd297] hover:text-white min-h-[48px] touch-manipulation"
-                                    >
-                                        {item.label}
-                                    </Link>
+                                    item.path?.startsWith('http') ? (
+                                        <a
+                                            href={item.path}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="block py-4 text-xl font-title font-bold text-[#ebd297] hover:text-white min-h-[48px] touch-manipulation"
+                                        >
+                                            {item.label}
+                                        </a>
+                                    ) : (
+                                        <Link
+                                            to={item.path!}
+                                            className="block py-4 text-xl font-title font-bold text-[#ebd297] hover:text-white min-h-[48px] touch-manipulation"
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    )
                                 )}
                             </div>
                         ))}
@@ -315,7 +311,7 @@ const Navbar: React.FC = () => {
                             <img
                                 src={LOGO_URL}
                                 alt="Maximilian Boy Logo"
-                                className={`header-logo h-10 sm:h-11 md:h-12 w-auto object-contain logo-hover transition-all duration-500`}
+                                className={`header-logo h-14 sm:h-16 md:h-16 w-auto object-contain logo-hover transition-all duration-500`}
                             />
                         </Link>
 
@@ -345,7 +341,7 @@ const Navbar: React.FC = () => {
                                 <img
                                     src={LOGO_URL}
                                     alt="Maximilian Boy Logo"
-                                    className={`header-logo w-auto object-contain logo-hover transition-all duration-500`}
+                                    className={`header-logo h-28 w-auto object-contain logo-hover transition-all duration-500`}
                                 />
                             </Link>
                         </div>
@@ -357,7 +353,7 @@ const Navbar: React.FC = () => {
                             </span>
 
                             <div className="main-nav py-3 flex items-center justify-center gap-4 xl:gap-8">
-                                {navItems.filter(i => i.label !== 'Startseite').map((item, index) => (
+                                {navItems.filter(i => i.label !== 'Home').map((item, index) => (
                                     <div key={index} className="relative group px-2 py-2">
                                         {item.children ? (
                                             <>
@@ -387,12 +383,23 @@ const Navbar: React.FC = () => {
                                                 </div>
                                             </>
                                         ) : (
-                                            <Link
-                                                to={item.path!}
-                                                className={`font-title font-extrabold text-[#ebd297] hover:text-white transition-colors nav-link-hover uppercase tracking-wider px-1`}
-                                            >
-                                                {item.label}
-                                            </Link>
+                                            item.path?.startsWith('http') ? (
+                                                <a
+                                                    href={item.path}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className={`font-title font-extrabold text-[#ebd297] hover:text-white transition-colors nav-link-hover uppercase tracking-wider px-1`}
+                                                >
+                                                    {item.label}
+                                                </a>
+                                            ) : (
+                                                <Link
+                                                    to={item.path!}
+                                                    className={`font-title font-extrabold text-[#ebd297] hover:text-white transition-colors nav-link-hover uppercase tracking-wider px-1`}
+                                                >
+                                                    {item.label}
+                                                </Link>
+                                            )
                                         )}
                                     </div>
                                 ))}
@@ -402,7 +409,7 @@ const Navbar: React.FC = () => {
                         {/* Rechts: Ghost-Button CTA */}
                         <div className="flex justify-end">
                             <Link
-                                to="/buchung-anfragen"
+                                to="/kontakt"
                                 className={`cta-animated text-black rounded-full font-button font-bold shadow-[0_0_20px_rgba(235,210,151,0.35)] hover:shadow-[0_0_30px_rgba(235,210,151,0.6)] transition-transform duration-300 hover:scale-110 transform -translate-y-1 md:-translate-y-2 flex items-center justify-center text-center ${scrolled ? 'px-6 py-3 text-sm' : 'px-9 py-4 text-base'}`}
                             >
                                 Buchung anfragen

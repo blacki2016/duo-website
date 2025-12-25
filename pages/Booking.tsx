@@ -49,7 +49,7 @@ const Booking: React.FC = () => {
 
             {/* BACKGROUND IMAGE LAYER */}
             <div className="fixed inset-0 w-full h-full z-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[url('/images/kontakt.jpg')] bg-cover bg-center opacity-20 blur-sm"></div>
+                <div className="absolute inset-0 bg-[url('https://via.placeholder.com/1600x900?text=Kontakt+Background')] bg-cover bg-center opacity-20 blur-sm"></div>
             </div>
 
             <style>{`

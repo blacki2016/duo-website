@@ -17,9 +17,9 @@ const Footer: React.FC = () => {
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <Link to="/" className="inline-block mb-6">
                             <img
-                                src={`${import.meta.env.BASE_URL}images/logo.png`}
+                                src={`/images/logo.limaex.png`}
                                 alt="Logo"
-                                className="h-24 w-auto object-contain no-zoom"
+                                className="h-32 w-auto object-contain no-zoom"
                             />
                         </Link>
 
@@ -110,8 +110,9 @@ const Footer: React.FC = () => {
 
                         {/* General Links */}
                         <ul className="space-y-3 mb-6">
-                            <li><Link to="/ueber-uns" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Über uns</Link></li>
-                            <li><Link to="/termine" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Öffentliche Termine</Link></li>
+                            <li><Link to="/allgemein/ueber-uns/" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Über uns</Link></li>
+                            <li><Link to="/allgemein/impressionen/" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Impressionen</Link></li>
+                            <li><Link to="/kontakt" className="text-stone-300 hover:text-[#ebd297] transition-colors font-medium">Kontakt</Link></li>
                         </ul>
 
                         {/* Legal Links (Subtler) */}

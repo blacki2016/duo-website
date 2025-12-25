@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ScrollToTop from '../components/ScrollToTop';
 
 const SLIDES = [
-  '/images/ubermich.jpg'
+  'https://via.placeholder.com/1600x900?text=About+Background'
 ];
 
 const timelineEvents = [

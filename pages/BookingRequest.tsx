@@ -4,7 +4,7 @@ import { ContactStatus } from '../types';
 import ScrollToTop from '../components/ScrollToTop';
 
 const SLIDES = [
-    '/images/Feuerjonglage.jpg'
+    'https://via.placeholder.com/1600x900?text=Buchung+Background'
 ];
 
 const BookingRequest: React.FC = () => {

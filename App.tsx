@@ -7,11 +7,10 @@ import Booking from './pages/Booking';
 import BookingRequest from './pages/BookingRequest';
 import Imprint from './pages/Imprint';
 import Privacy from './pages/Privacy';
-import DuoLimax from './pages/DuoLimax';
+// import DuoLimax from './pages/DuoLimax';
 import About from './pages/About';
-import PublicEvents from './pages/PublicEvents';
-import Socials from './pages/Socials';
-import Partner from './pages/Partner';
+import Impressions from './pages/Impressions';
+// Removed unused pages from sitemap
 import GlobalFX from './components/GlobalFX';
 import NotFound from './pages/NotFound';
 import { Phone } from 'lucide-react';
@@ -41,13 +40,11 @@ const AppContent: React.FC<{
       <main className="flex-grow pt-24">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/show" element={<DuoLimax />} />
-          <Route path="/ueber-uns" element={<About />} />
+          <Route path="/allgemein/ueber-uns/" element={<About />} />
+          <Route path="/allgemein/impressionen/" element={<Impressions />} />
           <Route path="/kontakt" element={<Booking />} />
           <Route path="/buchung-anfragen" element={<BookingRequest />} />
-          <Route path="/termine" element={<PublicEvents />} />
-          <Route path="/socials" element={<Socials />} />
-          <Route path="/partner" element={<Partner />} />
+          {/* Optional: weitere Seiten deaktiviert gemäß Sitemap */}
           <Route path="/impressum" element={<Imprint />} />
           <Route path="/datenschutz" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
@@ -74,10 +71,10 @@ const AppContent: React.FC<{
         </div>
       )}
 
-      {/* Sticky Mobile CTA Button - versteckt auf Buchungsseite */}
-      {location.pathname !== '/buchung-anfragen' && (
+      {/* Sticky Mobile CTA Button - versteckt auf Kontaktseite */}
+      {location.pathname !== '/kontakt' && (
         <a
-          href="/#/buchung-anfragen"
+          href="/#/kontakt"
           className="fixed bottom-0 left-0 right-0 md:hidden z-[9999] bg-gradient-to-r from-[#ebd297] to-[#d4af37] text-black px-4 py-4 font-bold flex items-center justify-center gap-3 shadow-[0_-4px_20px_rgba(235,210,151,0.4)] hover:from-[#fffebb] hover:to-[#ebd297] transition-all active:scale-95"
         >
           <Phone size={20} />
