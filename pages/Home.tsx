@@ -6,7 +6,7 @@ import ScrollToTop from '../components/ScrollToTop';
 const SLIDER_IMAGES = [
   `${import.meta.env.BASE_URL}images/slider2.jpg.webp`,
   `${import.meta.env.BASE_URL}images/slider3.jpg.webp`,
-  `${import.meta.env.BASE_URL}images/slider4.jpg.webp`,
+  `${import.meta.env.BASE_URL}images/slider4.jpeg.webp`,
   `${import.meta.env.BASE_URL}images/limaex.slider7.jpg`,
 ];
 

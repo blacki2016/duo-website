@@ -51,14 +51,28 @@ const Navbar: React.FC = () => {
     const LOGO_URL = `/images/logo.limaex.png`;
 
     const navItems: NavItem[] = [
-        { label: 'Home', path: '/' },
-        { label: 'Über uns', path: '/allgemein/ueber-uns/' },
-        { label: 'Impressionen', path: '/allgemein/impressionen/' },
-        { label: 'Kontakt', path: '/kontakt' },
-        { label: 'Feuershow', path: 'https://maximilianboy.de/#/feuershow' },
+        { label: 'Startseite', path: '/' },
         { label: 'Shows', path: '/shows' },
-        { label: 'Media', path: '/media' },
+        { label: 'Über uns', path: '/allgemein/ueber-uns/' },
         { label: 'Termine', path: '/termine' },
+        { label: 'Mehr als nur eine Galerie', path: '/allgemein/impressionen/' },
+        {
+            label: 'Kontakt',
+            children: [
+                { label: 'Kontakt', path: '/kontakt' },
+                { label: 'Buchung anfragen', path: '/buchung-anfragen' },
+            ]
+        },
+        {
+            label: 'Mehr',
+            children: [
+                { label: 'Feuershow', path: 'https://maximilianboy.de/#/feuershow' },
+                { label: 'Socials', path: '/allgemein/socials/' },
+                { label: 'Partner', path: '/allgemein/partner/' },
+                { label: 'Impressum', path: '/allgemein/impressum/' },
+                { label: 'Datenschutzerklärung', path: '/allgemein/datenschutz/' },
+            ]
+        },
     ];
 
     return (
