@@ -5,6 +5,7 @@ import ScrollToTop from '../components/ScrollToTop';
 
 // Hero Background: Einzelnes Bild (keine Rotation)
 const SLIDES = [
+  `${import.meta.env.BASE_URL}images/schatten3.png`,
   `${import.meta.env.BASE_URL}images/slider4.jpeg.jpg`,
   `${import.meta.env.BASE_URL}images/limaex.slider7.jpg`
 ];
@@ -224,7 +225,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
-    }, 8000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
