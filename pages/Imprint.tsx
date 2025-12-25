@@ -145,7 +145,7 @@ const Imprint: React.FC = () => {
                     <h2>Kontakt</h2>
                     <p>
                         Telefon: <a href="tel:015785585713">0157-85585713</a><br />
-                        E-Mail: <a href="mailto:info@maximilianboy.de">info@maximilianboy.de</a>
+                        E-Mail: <a href="mailto:info@limaex.de">info@limaex.de</a>
                     </p>
 
                     <hr />

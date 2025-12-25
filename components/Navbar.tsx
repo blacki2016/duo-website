@@ -12,6 +12,8 @@ const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const location = useLocation();
 
@@ -54,6 +56,9 @@ const Navbar: React.FC = () => {
         { label: 'Impressionen', path: '/allgemein/impressionen/' },
         { label: 'Kontakt', path: '/kontakt' },
         { label: 'Feuershow', path: 'https://maximilianboy.de/#/feuershow' },
+        { label: 'Shows', path: '/shows' },
+        { label: 'Media', path: '/media' },
+        { label: 'Termine', path: '/termine' },
     ];
 
     return (
@@ -94,6 +99,18 @@ const Navbar: React.FC = () => {
             background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 15px rgba(235, 210, 151, 0.4);
+        }
+
+        .search-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
         }
 
         /* Gold Shimmer Animation */
@@ -318,19 +335,28 @@ const Navbar: React.FC = () => {
                         {/* Titel mittig */}
                         <div className="flex-1 px-3 text-center">
                             <span className={`header-title title-gold title-gold-animated text-sm sm:text-base md:text-lg font-serif font-bold tracking-wide leading-snug title-balance break-words`}>
-                                MAXIMILIAN BOY & MB FEUERENTERTAINMENT
+                                Duo Limäx
                             </span>
                         </div>
 
                         {/* Menü-Icon rechts */}
-                        <button
-                            onClick={toggleMobile}
-                            aria-expanded={isOpen}
-                            aria-label="Menü öffnen"
-                            className="text-[#ebd297] h-11 w-11 flex items-center justify-center focus:outline-none hover:bg-[#ebd297]/10 rounded-lg transition-colors touch-manipulation"
-                        >
-                            <Menu size={28} />
-                        </button>
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => setSearchOpen(true)}
+                                aria-label="Suche öffnen"
+                                className="text-[#ebd297] h-11 w-11 flex items-center justify-center focus:outline-none hover:bg-[#ebd297]/10 rounded-lg transition-colors touch-manipulation"
+                            >
+                                <span className="text-lg">🔍</span>
+                            </button>
+                            <button
+                                onClick={toggleMobile}
+                                aria-expanded={isOpen}
+                                aria-label="Menü öffnen"
+                                className="text-[#ebd297] h-11 w-11 flex items-center justify-center focus:outline-none hover:bg-[#ebd297]/10 rounded-lg transition-colors touch-manipulation"
+                            >
+                                <Menu size={28} />
+                            </button>
+                        </div>
                     </div>
 
                     {/* DESKTOP: Drei Bereiche (Links/Mitte/Rechts) */}
@@ -421,6 +447,42 @@ const Navbar: React.FC = () => {
                 </div>
 
             </nav>
+
+            {searchOpen && (
+                <div className="search-overlay" onClick={() => setSearchOpen(false)}>
+                    <div className="w-full max-w-2xl bg-stone-950 border border-[#ebd297]/30 rounded-2xl p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex items-center gap-3 mb-4">
+                            <span className="text-2xl">🔍</span>
+                            <input
+                                autoFocus
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder="Seiten durchsuchen..."
+                                className="w-full bg-stone-900 border border-[#ebd297]/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ebd297]"
+                            />
+                            <button onClick={() => setSearchOpen(false)} className="text-[#ebd297] text-xl">✕</button>
+                        </div>
+                        <div className="space-y-2 max-h-[50vh] overflow-y-auto">
+                            {navItems
+                                .filter(item => (item.label.toLowerCase().includes(searchQuery.toLowerCase()) || (item.path ?? '').toLowerCase().includes(searchQuery.toLowerCase())))
+                                .map(item => (
+                                    item.path?.startsWith('http') ? (
+                                        <a key={item.label} href={item.path} target="_blank" rel="noreferrer" className="block px-4 py-3 rounded-lg bg-black/40 border border-[#ebd297]/20 text-[#ebd297] hover:bg-black/60">
+                                            {item.label} →
+                                        </a>
+                                    ) : (
+                                        <Link key={item.label} to={item.path!} className="block px-4 py-3 rounded-lg bg-black/40 border border-[#ebd297]/20 text-[#ebd297] hover:bg-black/60" onClick={() => setSearchOpen(false)}>
+                                            {item.label}
+                                        </Link>
+                                    )
+                                ))}
+                            {navItems.filter(item => (item.label.toLowerCase().includes(searchQuery.toLowerCase()) || (item.path ?? '').toLowerCase().includes(searchQuery.toLowerCase()))).length === 0 && (
+                                <div className="text-stone-400 text-sm px-2">Keine Ergebnisse.</div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 };

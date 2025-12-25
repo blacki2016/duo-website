@@ -1,10 +1,26 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Loader2, CheckCircle, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Loader2, CheckCircle, Send, Clock3, MessageSquare, Calendar } from 'lucide-react';
 import { ContactStatus } from '../types';
 import ScrollToTop from '../components/ScrollToTop';
 
+const FAQS = [
+    {
+        q: 'Wie früh sollte ich buchen?',
+        a: 'Je eher, desto besser – ideal sind 4–8 Wochen im Voraus. Kurzfristige Anfragen sind möglich, falls Termine frei sind.'
+    },
+    {
+        q: 'Welche Infos braucht ihr?',
+        a: 'Datum, Ort, Anlass, ungefähre Gästezahl und Technik-Situation. Wir bringen vieles mit, benötigen aber Strom und Mindestfläche.'
+    },
+    {
+        q: 'Reist ihr deutschlandweit?',
+        a: 'Ja. Basis in Bayern, Einsätze in ganz D-A-CH. Fahrt- und ggf. Übernachtungskosten kalkulieren wir transparent vorab.'
+    }
+];
+
 const Booking: React.FC = () => {
     const [status, setStatus] = useState<ContactStatus>(ContactStatus.IDLE);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     // Form State - Simplified to only mandatory fields
     const [formData, setFormData] = useState({
@@ -99,12 +115,20 @@ const Booking: React.FC = () => {
                 {/* === COMPACT HERO SECTION === */}
                 <div className="container mx-auto px-4 mb-16 text-center">
                     <h1 className="text-4xl md:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#ebd297] via-[#fffebb] to-[#ebd297] mb-3 drop-shadow-sm">
-                        Kontakt
+                        Alles aus erster Hand!
                     </h1>
                     <div className="w-24 h-1 bg-[#ebd297] mx-auto rounded-full mb-4"></div>
                     <p className="text-stone-400 max-w-2xl mx-auto text-lg font-light">
-                        [Platzhalter für Kontakt-Intro-Text]
+                        Limäx Team: Max & Leo
                     </p>
+                    <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-white">
+                        <div className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-full border border-[#ebd297]/30">
+                            <Clock3 className="w-4 h-4 text-[#ebd297]" /> Antwort in &lt;24h
+                        </div>
+                        <div className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-full border border-[#ebd297]/30">
+                            <MessageSquare className="w-4 h-4 text-[#ebd297]" /> Telefon, E-Mail, WhatsApp
+                        </div>
+                    </div>
                 </div>
 
                 <div className="container mx-auto px-4">
@@ -118,11 +142,15 @@ const Booking: React.FC = () => {
 
                             {/* Box 1: Image - Full height cover (now below text) */}
                             <div className="relative h-[400px] md:h-full min-h-[400px] overflow-hidden group order-2 md:order-2 mt-40 md:mt-24">
-                                <img
-                                    src="/images/kontakt.jpg"
-                                    alt="[Künstler]"
-                                    className="w-full h-full object-cover object-top transition-transform duration-[1.5s] group-hover:scale-105"
-                                />
+                                <picture>
+                                    <source srcSet="/images/kontakt.webp" type="image/webp" />
+                                    <img
+                                        src="/images/kontakt.jpg"
+                                        alt="[Künstler]"
+                                        loading="lazy"
+                                        className="w-full h-full object-cover object-top transition-transform duration-[1.5s] group-hover:scale-105"
+                                    />
+                                </picture>
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#141415] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#141415]/80"></div>
                             </div>
 
@@ -150,6 +178,51 @@ const Booking: React.FC = () => {
                         </div>
                     </div>
 
+                    {/* Map & Availability */}
+                    <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
+                        <div className="bg-black/40 border border-[#ebd297]/20 rounded-2xl overflow-hidden shadow-lg">
+                            <div className="p-4 border-b border-white/5 flex items-center gap-3">
+                                <MapPin className="text-[#ebd297]" />
+                                <h3 className="text-white font-semibold">Einsatzgebiet</h3>
+                            </div>
+                            <div className="aspect-video">
+                                <iframe
+                                    title="Einsatzgebiet"
+                                    src="https://www.openstreetmap.org/export/embed.html?bbox=7.5%2C47.2%2C15.5%2C55.1&layer=mapnik"
+                                    className="w-full h-full border-0"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div className="p-4 text-sm text-stone-300">Bayern & deutschlandweit – europaweit auf Anfrage.</div>
+                        </div>
+
+                        <div className="bg-black/40 border border-[#ebd297]/20 rounded-2xl p-6 shadow-lg flex flex-col gap-4">
+                            <div className="flex items-center gap-3">
+                                <Calendar className="text-[#ebd297]" />
+                                <div>
+                                    <h3 className="text-white font-semibold text-lg">Verfügbarkeit prüfen</h3>
+                                    <p className="text-stone-400 text-sm">Wunschtermin angeben, wir antworten meist unter 24h.</p>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <label className="text-sm text-stone-300">
+                                    Startdatum
+                                    <input type="date" className="mt-1 w-full bg-stone-900 border border-[#ebd297]/30 rounded-lg px-3 py-2 text-white focus:border-[#ebd297] focus:outline-none" />
+                                </label>
+                                <label className="text-sm text-stone-300">
+                                    Enddatum
+                                    <input type="date" className="mt-1 w-full bg-stone-900 border border-[#ebd297]/30 rounded-lg px-3 py-2 text-white focus:border-[#ebd297] focus:outline-none" />
+                                </label>
+                            </div>
+                            <textarea
+                                rows={3}
+                                className="w-full bg-stone-900 border border-[#ebd297]/30 rounded-lg px-3 py-2 text-white focus:border-[#ebd297] focus:outline-none"
+                                placeholder="Event, Ort, Gästezahl, Wünsche"
+                            />
+                            <button className="btn-lively w-full py-3 rounded-xl font-bold">Verfügbarkeit anfragen</button>
+                        </div>
+                    </div>
+
                     {/* Existing Grid for Details & Form */}
                     <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
 
@@ -164,8 +237,8 @@ const Booking: React.FC = () => {
                                     </div>
                                     <div>
                                         <h3 className="text-stone-400 text-sm font-medium uppercase tracking-wide mb-1 font-sans">Telefon</h3>
-                                        <a href="tel:[TELEFON]" className="text-white hover:text-[#ebd297] transition-colors text-xl font-bold font-sans">
-                                            [Telefonnummer]
+                                        <a href="tel:015785585713" className="text-white hover:text-[#ebd297] transition-colors text-xl font-bold font-sans">
+                                            0157-85585713
                                         </a>
                                     </div>
                                 </div>
@@ -176,8 +249,8 @@ const Booking: React.FC = () => {
                                     </div>
                                     <div>
                                         <h3 className="text-stone-400 text-sm font-medium uppercase tracking-wide mb-1 font-sans">E-Mail</h3>
-                                        <a href="mailto:[EMAIL]" className="text-white hover:text-[#ebd297] transition-colors text-xl font-bold break-all font-sans">
-                                            [E-Mail-Adresse]
+                                        <a href="mailto:info@limaex.de" className="text-white hover:text-[#ebd297] transition-colors text-xl font-bold break-all font-sans">
+                                            info@limaex.de
                                         </a>
                                     </div>
                                 </div>
@@ -185,10 +258,10 @@ const Booking: React.FC = () => {
                                 {/* WhatsApp Button */}
                                 <div className="pt-2 pl-2">
                                     <a
-                                        href="#"
+                                        href="https://api.whatsapp.com/send/?phone=4915785585713&text&type=phone_number&app_absent=0"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-3 bg-[#ebd297] text-black px-8 py-4 rounded-full font-bold hover:bg-[#b38728] hover:text-white transition-all shadow-[0_0_20px_rgba(235,210,151,0.3)] hover:shadow-[0_0_30px_rgba(235,210,151,0.5)] transform hover:scale-105 duration-200 font-sans"
+                                        className="inline-flex items-center gap-3 bg-[#ebd297] text-black px-10 py-5 rounded-full font-extrabold text-lg hover:bg-[#b38728] hover:text-white transition-all shadow-[0_0_25px_rgba(235,210,151,0.4)] hover:shadow-[0_0_35px_rgba(235,210,151,0.6)] transform hover:scale-110 duration-200 font-sans"
                                     >
                                         <i className="fa-brands fa-whatsapp text-2xl"></i>
                                         WhatsApp schreiben
@@ -202,8 +275,8 @@ const Booking: React.FC = () => {
                                     <div>
                                         <h3 className="text-white font-medium text-lg mb-1 font-serif">Einsatzgebiet</h3>
                                         <p className="text-stone-400 leading-relaxed font-sans font-light">
-                                            [Basis/Standort]<br />
-                                            <span className="text-[#ebd297] font-semibold">[Einsatzgebiet]</span>
+                                            Neuhof an der Zenn<br />
+                                            <span className="text-[#ebd297] font-semibold">Bayern & deutschlandweit</span>
                                         </p>
                                     </div>
                                 </div>
@@ -298,6 +371,34 @@ const Booking: React.FC = () => {
                                     </button>
                                 </form>
                             )}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="container mx-auto px-4 mt-16">
+                    <div className="max-w-4xl mx-auto bg-[#141415] border border-[#ebd297]/15 rounded-2xl p-8 md:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.35)]">
+                        <h2 className="text-3xl font-serif font-bold text-[#ebd297] mb-6 text-center">Häufige Fragen</h2>
+                        <div className="space-y-4">
+                            {FAQS.map((item, idx) => {
+                                const isOpen = openFaq === idx;
+                                return (
+                                    <div key={item.q} className="border border-[#ebd297]/20 rounded-xl overflow-hidden">
+                                        <button
+                                            type="button"
+                                            onClick={() => setOpenFaq(isOpen ? null : idx)}
+                                            className="w-full flex items-center justify-between px-4 sm:px-6 py-4 bg-black/30 hover:bg-black/40 transition-colors text-left"
+                                        >
+                                            <span className="text-white font-semibold text-base sm:text-lg">{item.q}</span>
+                                            <span className="text-[#ebd297] text-xl font-bold">{isOpen ? '–' : '+'}</span>
+                                        </button>
+                                        {isOpen && (
+                                            <div className="px-4 sm:px-6 pb-4 text-stone-300 leading-relaxed bg-black/20 text-sm sm:text-base">
+                                                {item.a}
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>

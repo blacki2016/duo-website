@@ -224,9 +224,39 @@ const About: React.FC = () => {
         {/* Header */}
         <div className="pt-32 pb-16 px-4 text-center text-stone-200">
           <h1 className="text-4xl md:text-6xl font-serif font-bold text-[#ebd297] mb-6">Über uns</h1>
-          <p className="text-xl text-stone-400 max-width-2xl mx-auto">
-            [Platzhalter für Beschreibungstext - Geschichte und Werdegang des Künstlerduos]
+          <p className="text-xl text-stone-400 max-w-3xl mx-auto mb-12">
+            Duo Limäx – das sind zwei Künstler mit einer gemeinsamen Leidenschaft für Magie, Artistik, Comedy und Musik.
           </p>
+        </div>
+
+        {/* Team Section */}
+        <div className="container mx-auto px-4 pb-24">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+            {/* Leo Wieseckel */}
+            <div className="bg-black/40 backdrop-blur-sm border-2 border-[#ebd297]/20 rounded-xl p-8 hover:border-[#ebd297]/40 transition-colors">
+              <div className="mb-6">
+                <h3 className="text-3xl font-serif font-bold text-[#ebd297] mb-2">Leo Wieseckel</h3>
+                <p className="text-sm text-stone-400 uppercase tracking-widest">Magie & Kreation</p>
+              </div>
+              <div className="text-stone-300 leading-relaxed space-y-4">
+                <p>Die Magie ist sein Leben. Der aus Erlangen stammende Jungmagier war schon immer an besonderen Bühnenshows sowie an skurrilen Tricks interessiert, was im Limäx-Programm auch deutlich zu sehen ist. Standard gibt es für ihn nicht! Es muss schon immer etwas ganz Besonderes sein.</p>
+                <p>So ist er oft auch Erfinder neuer Showacts oder der Ideengeber für den Bau von Illusionen und Requisiten. Zu seinen Interessen ist in den letzten Jahren auch noch das Jonglieren gekommen. Ebenso begleitet er durch sein musikalisches Talent schon mal die eine oder andere Nummer am Klavier.</p>
+                <p>Viel Humor und der ständige Drang, etwas Außergewöhnliches zu schaffen machen ihn aus.</p>
+              </div>
+            </div>
+
+            {/* Maximilian Boy */}
+            <div className="bg-black/40 backdrop-blur-sm border-2 border-[#ebd297]/20 rounded-xl p-8 hover:border-[#ebd297]/40 transition-colors">
+              <div className="mb-6">
+                <h3 className="text-3xl font-serif font-bold text-[#ebd297] mb-2">Maximilian Boy</h3>
+                <p className="text-sm text-stone-400 uppercase tracking-widest">Performance & Pyrotechnik</p>
+              </div>
+              <div className="text-stone-300 leading-relaxed space-y-4">
+                <p>Moderationstalent plus ausgeprägte Fähigkeiten im Bereich der Szenenentwicklung und Organisation garantieren eine gute Performance.</p>
+                <p>Mit seiner langjährigen Erfahrung und Expertise im Bereich Pyrotechnik bringt er spektakuläre Feuereffekte und professionelle Show-Inszenierungen auf die Bühne.</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Timeline Section */}

@@ -162,7 +162,7 @@ const Privacy: React.FC = () => {
                     </p>
                     <p>
                         Telefon: 0157-85585713<br />
-                        E-Mail: <a href="mailto:info@maximilianboy.de">info@maximilianboy.de</a>
+                        E-Mail: <a href="mailto:info@limaex.de">info@limaex.de</a>
                     </p>
                     <p>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
 

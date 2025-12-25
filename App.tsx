@@ -10,6 +10,9 @@ import Privacy from './pages/Privacy';
 // import DuoLimax from './pages/DuoLimax';
 import About from './pages/About';
 import Impressions from './pages/Impressions';
+import Shows from './pages/Shows';
+import Media from './pages/Media';
+import Termine from './pages/Termine';
 // Removed unused pages from sitemap
 import GlobalFX from './components/GlobalFX';
 import NotFound from './pages/NotFound';
@@ -30,6 +33,7 @@ const AppContent: React.FC<{
   setLightboxSrc: (src: string | null) => void
 }> = ({ lightboxSrc, setLightboxSrc }) => {
   const location = useLocation();
+  const WHATSAPP_LINK = 'https://api.whatsapp.com/send/?phone=4915785585713&text=Frage%20zur%20Show%3A%20Seid%20ihr%20am%2015.08.%20noch%20frei%3F&type=phone_number&app_absent=0';
 
   return (
     <div className="flex flex-col min-h-screen bg-stone-950 text-stone-100 font-sans">
@@ -42,6 +46,9 @@ const AppContent: React.FC<{
           <Route path="/" element={<Home />} />
           <Route path="/allgemein/ueber-uns/" element={<About />} />
           <Route path="/allgemein/impressionen/" element={<Impressions />} />
+          <Route path="/shows" element={<Shows />} />
+          <Route path="/media" element={<Media />} />
+          <Route path="/termine" element={<Termine />} />
           <Route path="/kontakt" element={<Booking />} />
           <Route path="/buchung-anfragen" element={<BookingRequest />} />
           {/* Optional: weitere Seiten deaktiviert gemäß Sitemap */}
@@ -81,6 +88,18 @@ const AppContent: React.FC<{
           Termin prüfen
         </a>
       )}
+
+      {/* Floating WhatsApp / Live-Chat Button */}
+      <a
+        href={WHATSAPP_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-8 right-4 md:bottom-8 md:right-6 z-[9999] bg-gradient-to-br from-[#ebd297] to-[#b38728] text-black px-4 py-3 md:px-5 md:py-3 rounded-full font-bold shadow-[0_10px_25px_rgba(235,210,151,0.35)] flex items-center gap-2 hover:shadow-[0_14px_35px_rgba(235,210,151,0.5)] transition-all hover:scale-110"
+      >
+        <span className="text-xl">💬</span>
+        <span className="hidden sm:inline">Frage zur Show?</span>
+        <span className="hidden md:inline font-semibold">Schreib Leo direkt</span>
+      </a>
     </div>
   );
 };
