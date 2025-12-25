@@ -1,6 +1,8 @@
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_gizmL7nS_2nD6WDa9fdPd29A5WMD8Nox2');
+const CONTACT_FROM = process.env.RESEND_FROM || 'noreply@resend.dev';
+const CONTACT_TO = process.env.RESEND_TO_CONTACT || 'leonard@wieseckel.com';
 
 export default async function handler(req: any, res: any) {
     if (!process.env.RESEND_API_KEY) {
@@ -32,8 +34,8 @@ ${message}
         let response;
         try {
             response = await resend.emails.send({
-                from: 'noreply@limaex.de',
-                to: 'info@limaex.de',
+                from: CONTACT_FROM,
+                to: CONTACT_TO,
                 replyTo: email,
                 subject: `Neue Nachricht von ${name} (Website Kontakt)`,
                 text: emailBody,
