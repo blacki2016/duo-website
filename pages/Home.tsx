@@ -7,15 +7,15 @@ import ScrollToTop from '../components/ScrollToTop';
 
 // Hero Background Bilder (Desktop)
 const DESKTOP_SLIDES = [
-  `${import.meta.env.BASE_URL}images/schatten3.png`,
-  `${import.meta.env.BASE_URL}images/slider4.jpeg.jpg`,
-  `${import.meta.env.BASE_URL}images/limaex.slider7.jpg`
+  `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
+  `${import.meta.env.BASE_URL}images/mobile.slider2.1.png`,
+  `${import.meta.env.BASE_URL}images/mobile.slider3.png`
 ];
 
 // Hero Background Bilder (Mobile)
 const MOBILE_SLIDES = [
-  `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
-  `${import.meta.env.BASE_URL}images/mobile.slider2.jpg`,
+  `${import.meta.env.BASE_URL}images/mobile.slider1.png`,
+  `${import.meta.env.BASE_URL}images/limaex.slider5.jpg`,
   `${import.meta.env.BASE_URL}images/limaex.rola.jpg.webp`
 ];
 
@@ -104,7 +104,6 @@ const Home: React.FC = () => {
   // Hero Slider Logic
   useEffect(() => {
     const interval = setInterval(() => {
-      // Nutzt die Länge des Desktop-Arrays als Referenz (beide sollten gleich lang sein)
       setCurrentSlide((prev) => (prev + 1) % DESKTOP_SLIDES.length);
     }, 5000); 
     return () => clearInterval(interval);
@@ -163,33 +162,35 @@ const Home: React.FC = () => {
       <div className="fixed inset-0 z-0 pointer-events-none">
         {DESKTOP_SLIDES.map((slide, index) => (
           <React.Fragment key={index}>
-             {/* Desktop Bild (ab md Breakpoint) */}
+             {/* Desktop Bild */}
             <div
                 className={`hidden md:block absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
                 style={{ backgroundImage: `url('${slide}')` }}
             />
-            {/* Mobile Bild (bis md Breakpoint) - Nutzt das MOBILE_SLIDES Array */}
+            {/* Mobile Bild */}
             <div
                 className={`block md:hidden absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
                 style={{ 
-                    backgroundImage: `url('${MOBILE_SLIDES[index] || slide}')`, // Fallback auf Desktop slide, falls Mobile fehlt
+                    backgroundImage: `url('${MOBILE_SLIDES[index] || slide}')`,
                     backgroundPosition: 'center'
                 }}
             />
           </React.Fragment>
         ))}
-        {/* Gradient Overlay für Lesbarkeit */}
+        {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-stone-900/95 z-10"></div>
       </div>
 
       {/* --- HERO SECTION --- */}
-      <header className="relative z-20 min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-4 text-center">
+      {/* ÄNDERUNGEN:
+          - justify-start (Mobile): Richtet Inhalt am Start (oben) aus
+          - md:justify-center (Desktop): Richtet Inhalt mittig aus
+          - pt-28 (Mobile): Fixer Abstand von oben, schiebt es in die obere Hälfte
+      */}
+      <header className="relative z-20 min-h-screen flex flex-col items-center justify-start md:justify-center pt-28 md:pt-32 pb-20 px-4 text-center">
         
         {/* Haupttitel Block */}
-        {/* mt-4: Etwas mehr Abstand nach oben */}
         <div className="mb-8 mt-4 animate-fade-up">
-            
-            {/* py-2: Verhindert, dass bg-clip-text die ä-Punkte abschneidet */}
             <h1 className="py-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-cinzel font-black text-transparent bg-clip-text bg-gradient-to-r from-[#C8A663] via-[#F9EFAF] to-[#C8A663] drop-shadow-2xl leading-tight">
               DUO LIMÄX
             </h1>
@@ -201,7 +202,6 @@ const Home: React.FC = () => {
         {/* Aktuelles Programm: UKONGU */}
         <div className="relative mb-12 animate-fade-up delay-100 opacity-0 group cursor-default">
             
-            {/* Hintergrund-Glow Effekt */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#ebd297]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
 
             {/* Badge */}
@@ -228,17 +228,17 @@ const Home: React.FC = () => {
             </Link>
         </div>
 
-        {/* Scroll Indikator - Exakt Zentriert */}
+        {/* Scroll Indikator */}
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-[#ebd297] opacity-80 z-20 flex flex-col items-center gap-2">
             <span className="text-[10px] uppercase tracking-[0.2em]">Entdecken</span>
             <ChevronDown size={36} strokeWidth={1.5} />
         </div>
       </header>
 
-      {/* --- MAIN CONTENT (AB HIER SCROLLBAR) --- */}
+      {/* --- MAIN CONTENT --- */}
       <div className="relative z-20 bg-stone-900/80 backdrop-blur-sm border-t border-[#ebd297]/20 shadow-[0_-20px_60px_rgba(0,0,0,0.8)]">
         
-        {/* 1. KERNKOMPETENZEN (4 SÄULEN) */}
+        {/* 1. KERNKOMPETENZEN */}
         <section className="py-24 container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {LEISTUNGEN.map((leistung, idx) => (
@@ -261,7 +261,7 @@ const Home: React.FC = () => {
               <div className="aspect-video w-full">
                 <iframe
                     className="w-full h-full"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" // Dein Video Link
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" 
                     title="Duo Limäx Showreel"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -271,7 +271,7 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 3. SHOW FORMATE (CARDS) */}
+        {/* 3. SHOW FORMATE */}
         <section className="py-24 container mx-auto px-6">
           <div className="text-center mb-16">
              <h2 className="text-3xl md:text-5xl font-cinzel font-bold text-white mb-4">Showformate</h2>
@@ -304,7 +304,7 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 4. USP / WARUM WIR */}
+        {/* 4. USP */}
         <section className="py-24 bg-[#ebd297]/5 border-y border-[#ebd297]/10">
             <div className="container mx-auto px-6">
                 <div className="grid md:grid-cols-3 gap-12 text-center">
@@ -321,7 +321,7 @@ const Home: React.FC = () => {
             </div>
         </section>
 
-        {/* 5. PROFIL SECTION (IMAGE LEFT / TEXT RIGHT) */}
+        {/* 5. PROFIL */}
         <section className="py-24 container mx-auto px-6">
             <div className="flex flex-col md:flex-row gap-12 items-center max-w-6xl mx-auto bg-black/40 p-8 md:p-12 rounded-2xl border border-white/5">
                 <div className="w-full md:w-1/2 aspect-square md:aspect-[4/5] relative rounded-lg overflow-hidden shadow-xl border border-white/10">
@@ -348,11 +348,10 @@ const Home: React.FC = () => {
             </div>
         </section>
 
-        {/* 6. KONTAKT & CALL TO ACTION */}
+        {/* 6. KONTAKT */}
         <section className="py-24 text-center">
             <div className="container mx-auto px-6">
                 <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#1a1a1a] to-black border border-[#ebd297]/30 p-10 md:p-20 rounded-3xl relative overflow-hidden shadow-2xl">
-                    {/* Background Glow Effect */}
                     <div className="absolute top-0 left-0 w-full h-full bg-[#ebd297]/5 pointer-events-none"></div>
                     
                     <h2 className="text-3xl md:text-5xl font-cinzel font-bold text-white mb-6 relative z-10">
