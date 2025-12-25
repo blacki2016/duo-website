@@ -15,11 +15,11 @@ const Footer: React.FC = () => {
 
                     {/* COLUMN 1: BRANDING & SHORT INTRO */}
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                        <Link to="/" className="inline-block mb-6">
+                        <Link to="/" className="inline-block mb-6 md:ml-6">
                             <img
-                                src={`/images/logo.limaex.png`}
+                                src={`/images/bild.logo.png`}
                                 alt="Logo"
-                                className="h-32 w-auto object-contain no-zoom"
+                                className="h-40 w-auto object-contain no-zoom"
                             />
                         </Link>
 
