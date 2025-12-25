@@ -16,8 +16,8 @@ const DESKTOP_SLIDES = [
 const MOBILE_SLIDES = [
   `${import.meta.env.BASE_URL}images/mobile.slider1.4.jpg`,
   `${import.meta.env.BASE_URL}images/mobile.slider2.1.png`,
-  `${import.meta.env.BASE_URL}images/mobile.slider2..png`,
-  `${import.meta.env.BASE_URL}images/mobile.slider3.png`
+  `${import.meta.env.BASE_URL}images/mobile.slider3.png`,
+  `${import.meta.env.BASE_URL}images/mobile.slider4.png`
 ];
 
 // USP Data
