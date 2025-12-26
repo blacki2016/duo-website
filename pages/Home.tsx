@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { HeartHandshake, ShieldCheck, Megaphone, Flame, ChevronDown, Sparkles } from 'lucide-react';
+import { Megaphone, HeartHandshake, Flame } from 'lucide-react';
 import ScrollToTop from '../components/ScrollToTop';
 
 // --- KONFIGURATION ---
@@ -23,43 +23,14 @@ const MOBILE_SLIDES = [
 // USP Data
 const USPS = [
   {
-    icon: <ShieldCheck className="w-16 h-16 text-[#ebd297]" />,
-    title: "Sicherheit & TÜV",
-    desc: "Geprüfte Pyrotechnik, klare Abläufe und Abstimmung mit Behörden."
-  },
-  {
     icon: <Megaphone className="w-16 h-16 text-[#ebd297]" />,
     title: "Full Service",
-    desc: "Technik, Licht und Ton aus einer Hand. Wir kümmern uns um den Ablauf."
+    desc: "Ob Komplettlösung oder Integration in vorhandene Theatertechnik – wir sorgen für einen reibungslosen Ablauf."
   },
   {
     icon: <HeartHandshake className="w-16 h-16 text-[#ebd297]" />,
     title: "Duo Power",
     desc: "Synchronität und doppelte Energie für den maximalen Wow-Effekt."
-  }
-];
-
-// Leistungsbeschreibung
-const LEISTUNGEN = [
-  {
-    title: "Magie",
-    desc: "Ein Mix aus Großillusion und Close-Up, der verzaubert.",
-    icon: "✨"
-  },
-  {
-    title: "Artistik",
-    desc: "Von Jonglage bis Rola Bola – Artistik auf hohem Niveau.",
-    icon: "🤸"
-  },
-  {
-    title: "Comedy",
-    desc: "Humor ist der Schlüssel – wir bringen das Publikum zum Lachen.",
-    icon: "😄"
-  },
-  {
-    title: "Musik",
-    desc: "Live-Elemente mit Ukulele, Klavier und Percussion.",
-    icon: "🎵"
   }
 ];
 
@@ -148,36 +119,29 @@ const SHOW_DATA = [
 // Show Previews
 const SHOW_PREVIEWS = [
   {
-    title: "Duo Feuershow",
-    img: `${import.meta.env.BASE_URL}images/fire.jpg`,
-    features: ["Synchrones Feuer", "Pyro-Finale", "Wunschmusik"],
+    title: "UKONGU Mini",
+    img: `${import.meta.env.BASE_URL}images/mini.png`,
+    features: ["20 Minuten Show", "Perfekt für Events", "Geballte Highlights"],
     link: "/shows",
-    cta: "Zur Feuershow",
-    emoji: "🔥"
+    cta: "Zum Kurzformat",
+    emoji: "⚡",
+    isGlassy: true
   },
   {
-    title: "Licht & Artistik",
-    img: `${import.meta.env.BASE_URL}images/artistik.jpg`,
-    features: ["Partnerakrobatik", "LED-Logo Show", "Gala-Format"],
+    title: "Individuelles Konzept",
+    img: `${import.meta.env.BASE_URL}images/limaex.slider5.jpg`,
+    features: ["Maßgeschneidert", "Passend zum Anlass", "Einzigartige Momente"],
     link: "/shows",
-    cta: "Zur Lichtshow",
-    emoji: "💡"
+    cta: "Zur Beratung",
+    emoji: "🎨"
   },
   {
-    title: "Hochzeiten",
-    img: `${import.meta.env.BASE_URL}images/show.jpg`,
-    features: ["Feuerherzen", "Romantische Inszenierung", "First Dance"],
-    link: "/buchung-anfragen",
-    cta: "Hochzeits-Infos",
-    emoji: "💍"
-  },
-  {
-    title: "Events & Public",
-    img: `${import.meta.env.BASE_URL}images/events.jpg`,
-    features: ["Große Bühnen", "Stadtfeste", "Branding möglich"],
+    title: "UKONGU Abendprogramm",
+    img: `${import.meta.env.BASE_URL}images/ukongu.plakat.jpg`,
+    features: ["90 Minuten", "Theater & Bühne", "Das volle Erlebnis"],
     link: "/shows",
-    cta: "Event-Formate",
-    emoji: "🎪"
+    cta: "Zum Abendprogramm",
+    emoji: "🎭"
   }
 ];
 
@@ -244,25 +208,31 @@ const Home: React.FC = () => {
         .delay-200 { animation-delay: 0.4s; }
         .delay-300 { animation-delay: 0.6s; }
 
-        /* UKONGU Glow */
-        .ukongu-text {
-          /* Saubere Kanten: Smoothing + moderater Glow */
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-          text-rendering: optimizeLegibility;
-          text-shadow:
-            0 0 8px rgba(249, 239, 175, 0.85),
-            0 0 18px rgba(200, 166, 99, 0.6),
-            0 2px 8px rgba(0, 0, 0, 0.55);
-          filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+        /* UKONGU Logo Glow & Shimmer */
+        .ukongu-logo-wrap {
+          position: relative;
+          display: inline-block;
         }
-        
-        /* Pulse Animation für Badge */
-        @keyframes subtlePulse {
-           0%, 100% { opacity: 1; transform: scale(1); }
-           50% { opacity: 0.8; transform: scale(1.05); }
+        .ukongu-logo-wrap::before {
+          content: '';
+          position: absolute;
+          inset: -12%;
+          background: radial-gradient(circle at 50% 50%, rgba(235,210,151,0.35) 0%, rgba(235,210,151,0.18) 32%, transparent 70%);
+          filter: blur(18px);
+          opacity: 0.9;
+          z-index: 0;
+          pointer-events: none;
         }
-        .animate-subtle-pulse { animation: subtlePulse 3s infinite ease-in-out; }
+
+        .ukongu-logo {
+          position: relative;
+          z-index: 1;
+          filter:
+            drop-shadow(0 0 8px rgba(235,210,151,0.65))
+            drop-shadow(0 6px 18px rgba(235,210,151,0.45))
+            drop-shadow(0 12px 32px rgba(0,0,0,0.55));
+        }
+
       `}</style>
 
       {/* --- BACKGROUND SLIDER (FIXED) --- */}
@@ -282,58 +252,62 @@ const Home: React.FC = () => {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <header className="relative z-20 min-h-screen flex flex-col items-center justify-start md:justify-center pt-4 md:pt-32 pb-20 px-4 text-center">
+      <header className="relative z-20 min-h-screen flex flex-col items-center justify-center px-4 text-center pt-32 md:pt-48 pb-20">
 
-        {/* Haupttitel Block */}
-        <div className="mb-2 md:mb-8 mt-0 md:mt-4 animate-fade-up">
-          <h1 className="py-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-cinzel font-black text-transparent bg-clip-text bg-gradient-to-r from-[#C8A663] via-[#F9EFAF] to-[#C8A663] drop-shadow-2xl leading-tight">
-            DUO LIMÄX
-          </h1>
-        </div>
+        <div className="flex flex-col items-center w-full max-w-5xl mx-auto">
 
-        {/* Aktuelles Programm: UKONGU */}
-        {/* UPDATE: mt-48 auf mt-24 reduziert, damit es wieder höher kommt */}
-        <div className="relative mt-24 md:mt-10 mb-8 md:mb-12 animate-fade-up delay-100 opacity-0 group cursor-default">
-
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#ebd297]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-
-          {/* Badge */}
-          <div className="inline-flex items-center justify-center gap-2 border border-[#ebd297] px-4 py-1 rounded-full text-[#ebd297] text-xs font-bold tracking-widest uppercase mb-4 animate-subtle-pulse bg-black/40 backdrop-blur-sm">
-            <Sparkles size={12} /> Aktuelle Produktion
+          {/* 1. Haupttitel als Bild (LIMAEX) */}
+          <div className="animate-fade-up z-10">
+            <img
+              src={`${import.meta.env.BASE_URL}images/limaex.gold.png`}
+              alt="DUO LIMÄX"
+              className="mx-auto w-[280px] sm:w-[350px] md:w-[450px] lg:w-[550px] drop-shadow-[0_10px_25px_rgba(0,0,0,0.55)]"
+            />
           </div>
 
-          {/* Der Titel */}
-          <h2 className="text-5xl md:text-7xl font-black tracking-wide ukongu-text mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[#8E6F34] via-[#F9EFAF] to-[#8E6F34]">
-            UKONGU
-          </h2>
-          <p className="text-[#ebd297] font-serif italic text-xl md:text-2xl opacity-90">
-            Eine Show der Superlative
-          </p>
-        </div>
+          {/* 2. Schriftzug "präsentiert." */}
+          <div className="animate-fade-up delay-100 opacity-0 relative z-20 -mt-2 md:-mt-4">
+            <span className="text-[#ebd297] font-serif italic text-lg md:text-2xl tracking-widest drop-shadow-md">
+              präsentiert.
+            </span>
+          </div>
 
-        {/* Button */}
-        <div className="animate-fade-up delay-200 opacity-0 z-10">
-          <Link
-            to="/buchung-anfragen"
-            className="btn-gold inline-flex items-center gap-3 px-10 py-5 rounded-sm text-black font-bold uppercase tracking-wider text-base md:text-lg"
-          >
-            Show Anfragen <Flame className="w-5 h-5" />
-          </Link>
-        </div>
+          {/* 3. UKONGU Logo */}
+          <div className="animate-fade-up delay-100 opacity-0 -mt-12 md:-mt-20 relative z-10">
+            <div className="ukongu-logo-wrap">
+              <img
+                src={`${import.meta.env.BASE_URL}images/ukongu.gold.png`}
+                alt="UKONGU"
+                className="ukongu-logo mx-auto w-[160px] sm:w-[200px] md:w-[260px] lg:w-[320px]"
+              />
+            </div>
+          </div>
 
-        {/* Scroll Indikator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-[#ebd297] opacity-80 z-20 flex flex-col items-center gap-2">
-          <span className="text-[10px] uppercase tracking-[0.2em]">Entdecken</span>
-          <ChevronDown size={36} strokeWidth={1.5} />
+          {/* 4. Schriftzug "eine Show der Superlative!" */}
+          <div className="animate-fade-up delay-100 opacity-0 -mt-16 md:-mt-24 mb-10 relative z-20">
+            <span className="text-[#ebd297] font-serif italic text-lg md:text-2xl tracking-widest drop-shadow-md">
+              eine Show der Superlative!
+            </span>
+          </div>
+
+          {/* 5. Button */}
+          <div className="animate-fade-up delay-200 opacity-0 z-10">
+            <Link
+              to="/buchung-anfragen"
+              className="btn-gold inline-flex items-center gap-3 px-10 py-5 rounded-sm text-black font-bold uppercase tracking-wider text-base md:text-lg"
+            >
+              Show Anfragen <Flame className="w-5 h-5" />
+            </Link>
+          </div>
+
         </div>
       </header>
 
       {/* --- MAIN CONTENT --- */}
-      <div className="relative z-20 bg-stone-900/80 backdrop-blur-sm border-t border-[#ebd297]/20 shadow-[0_-20px_60px_rgba(0,0,0,0.8)]">
+      <div className="relative z-20 bg-stone-900/30 backdrop-blur-md border-t border-[#ebd297]/20 shadow-[0_-20px_60px_rgba(0,0,0,0.8)]">
 
         {/* 1. SHOWHIGHLIGHTS */}
-        <section className="py-24 bg-transparent border-t border-white/5 relative z-10">
-          {/* Lokales Styling für die Hover-Effekte */}
+        <section id="showhighlights" className="py-24 bg-transparent border-t border-white/5 relative z-10">
           <style>{`
             .show-card:hover .show-card-img {
                 transform: scale(1.03);
@@ -350,14 +324,12 @@ const Home: React.FC = () => {
               </p>
             </div>
 
-            {/* Grid angepasst für 6 Items: 1 spaltig (Mobile), 2 spaltig (Tablet), 3 spaltig (Desktop) */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1600px] mx-auto">
               {SHOW_DATA.map((show, i) => (
                 <div
                   key={i}
-                  className="bg-black/40 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ebd29780] hover:border-gold-300 transition-all hover:-translate-y-2 show-card group shadow-lg flex flex-col w-full"
+                  className="bg-black/60 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ebd29780] hover:border-gold-300 transition-all hover:-translate-y-2 show-card group shadow-lg flex flex-col w-full"
                 >
-                  {/* Image Container */}
                   <div className="h-[400px] overflow-hidden relative">
                     <img
                       src={show.img}
@@ -366,15 +338,12 @@ const Home: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
 
-                    {/* Title Overlay */}
                     <h3 className="absolute bottom-4 left-5 text-3xl font-serif font-bold text-[#ebd297] z-10 drop-shadow-md leading-tight">
                       {show.title}
                     </h3>
                   </div>
 
-                  {/* Content Container */}
                   <div className="p-5 flex-grow flex flex-col justify-between">
-                    {/* Features List */}
                     <div className="mb-4 flex-grow space-y-2">
                       {show.features.map((feature, idx) => (
                         <p key={idx} className="text-stone-200 text-base font-bold leading-snug flex items-start gap-2">
@@ -383,7 +352,6 @@ const Home: React.FC = () => {
                       ))}
                     </div>
 
-                    {/* CTA Button */}
                     <div className="mt-auto pt-4 border-t border-white/10">
                       <Link
                         to={show.link}
@@ -401,20 +369,7 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 2. KERNKOMPETENZEN */}
-        <section className="py-24 container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {LEISTUNGEN.map((leistung, idx) => (
-              <div key={idx} className="group p-8 bg-black/40 border border-white/5 hover:border-[#ebd297]/50 transition-all rounded-sm text-center hover:-translate-y-2 hover:bg-black/60 duration-300">
-                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform inline-block drop-shadow-md">{leistung.icon}</div>
-                <h3 className="text-xl font-cinzel font-bold text-[#ebd297] mb-3">{leistung.title}</h3>
-                <p className="text-stone-400 text-sm leading-relaxed">{leistung.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 3. SHOWREEL VIDEO */}
+        {/* 2. SHOWREEL VIDEO */}
         <section className="py-20 bg-black/30">
           <div className="container mx-auto px-6 text-center">
             <span className="text-[#ebd297] text-sm font-bold tracking-widest uppercase">Erlebe uns Live</span>
@@ -424,7 +379,7 @@ const Home: React.FC = () => {
               <div className="aspect-video w-full">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+                  src="https://www.youtube.com/embed/fLi4wht1iwI"
                   title="Duo Limäx Showreel"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -434,59 +389,78 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 4. SHOW FORMATE */}
+        {/* 3. SHOW FORMATE */}
         <section className="py-24 container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-cinzel font-bold text-white mb-4">Showformate</h2>
             <div className="w-24 h-1 bg-[#ebd297] mx-auto rounded-full shadow-[0_0_10px_#ebd297]"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {SHOW_PREVIEWS.map((show, i) => (
-              <div key={i} className="group bg-[#1a1a1a] rounded-xl overflow-hidden border border-white/5 hover:border-[#ebd297] transition-all flex flex-col shadow-lg">
-                <div className="h-64 overflow-hidden relative">
-                  <img src={show.img} alt={show.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                  <h3 className="absolute bottom-4 left-4 text-2xl font-cinzel font-bold text-[#ebd297] drop-shadow-md">{show.title}</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {SHOW_PREVIEWS.map((show: any, i) => (
+              <div key={i} className="group bg-[#1a1a1a]/50 rounded-xl overflow-hidden border border-white/5 hover:border-[#ebd297] transition-all flex flex-col shadow-lg h-full">
+                {/* HIER WURDE GEÄNDERT:
+                  Prüfung auf show.isGlassy.
+                  bg-white/10 -> Deutlich heller (Weiß-Anteil) als nur transparent/schwarz.
+                */}
+                <div
+                  className={`aspect-[2/3] w-full relative overflow-hidden ${
+                    show.isGlassy ? 'bg-white/10 backdrop-blur-md' : ''
+                  }`}
+                  style={{ backgroundColor: show.isGlassy ? undefined : (show.bgColor || '#000') }}
+                >
+                  <img
+                    src={show.img}
+                    alt={show.title}
+                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/80 to-transparent"></div>
+
+                  <div className="absolute bottom-0 left-0 p-4 w-full">
+                    <h3 className="text-2xl font-cinzel font-bold text-[#ebd297] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{show.title}</h3>
+                  </div>
                 </div>
 
-                <div className="p-6 flex-grow flex flex-col">
-                  <ul className="space-y-2 mb-6 flex-grow">
-                    {show.features.map((feat, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-stone-300">
-                        <span className="w-1.5 h-1.5 bg-[#ebd297] rounded-full mr-2 shadow-[0_0_5px_#ebd297]"></span> {feat}
+                <div className="p-6 flex-grow flex flex-col border-t border-white/10">
+                  <ul className="space-y-3 mb-6 flex-grow">
+                    {show.features.map((feat: string, idx: number) => (
+                      <li key={idx} className="flex items-start text-base text-stone-300">
+                        <span className="w-1.5 h-1.5 bg-[#ebd297] rounded-full mr-3 mt-2 shadow-[0_0_5px_#ebd297] flex-shrink-0"></span>
+                        {feat}
                       </li>
                     ))}
                   </ul>
-                  <Link to={show.link} className="text-[#ebd297] font-bold uppercase tracking-wider text-sm flex items-center gap-2 group-hover:gap-4 transition-all">
-                    {show.cta} <span>→</span>
-                  </Link>
+                  <div className="mt-auto">
+                    <Link to={show.link} className="text-[#ebd297] font-bold uppercase tracking-wider text-sm flex items-center gap-2 group-hover:gap-4 transition-all">
+                      {show.cta} <span>→</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 5. USP */}
+        {/* 4. USP */}
         <section className="py-24 bg-[#ebd297]/5 border-y border-[#ebd297]/10">
           <div className="container mx-auto px-6">
-            <div className="grid md:grid-cols-3 gap-12 text-center">
+            <div className="flex flex-col md:flex-row justify-center gap-12 md:gap-24 text-center">
               {USPS.map((usp, idx) => (
-                <div key={idx} className="flex flex-col items-center group">
+                <div key={idx} className="flex flex-col items-center group max-w-sm">
                   <div className="mb-6 p-5 rounded-full bg-black/50 border border-[#ebd297]/30 group-hover:border-[#ebd297] group-hover:shadow-[0_0_20px_rgba(235,210,151,0.2)] transition-all duration-300">
                     {usp.icon}
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">{usp.title}</h3>
-                  <p className="text-stone-400 leading-relaxed max-w-xs">{usp.desc}</p>
+                  <p className="text-stone-400 leading-relaxed">{usp.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* 6. PROFIL */}
+        {/* 5. PROFIL */}
         <section className="py-24 container mx-auto px-6">
-          <div className="flex flex-col md:flex-row gap-12 items-center max-w-6xl mx-auto bg-black/40 p-8 md:p-12 rounded-2xl border border-white/5">
+          <div className="flex flex-col md:flex-row gap-12 items-center max-w-6xl mx-auto bg-black/50 p-8 md:p-12 rounded-2xl border border-white/5">
             <div className="w-full md:w-1/2 aspect-square md:aspect-[4/5] relative rounded-lg overflow-hidden shadow-xl border border-white/10">
               <img
                 src={`${import.meta.env.BASE_URL}images/e85ca38e-53d8-4fcf-ae75-5ccb9b72aad6-2.jpg`}
@@ -511,10 +485,10 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 7. KONTAKT */}
+        {/* 6. KONTAKT */}
         <section className="py-24 text-center">
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#1a1a1a] to-black border border-[#ebd297]/30 p-10 md:p-20 rounded-3xl relative overflow-hidden shadow-2xl">
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#1a1a1a]/90 to-black/90 border border-[#ebd297]/30 p-10 md:p-20 rounded-3xl relative overflow-hidden shadow-2xl">
               <div className="absolute top-0 left-0 w-full h-full bg-[#ebd297]/5 pointer-events-none"></div>
 
               <h2 className="text-3xl md:text-5xl font-cinzel font-bold text-white mb-6 relative z-10">

@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
                         {/* QUOTE STYLE INTRO - BOLDER */}
                         <div className="relative mb-8 pl-4 border-l-2 border-[#ebd297]/50 py-1">
                             <p className="text-stone-100 text-base font-semibold leading-relaxed italic font-serif">
-                                "[Platzhalter für Zitat/Slogan - Kurzbeschreibung des Künstlerduos]"
+                                "Ukongu, eine Stadt? Ein Land? Oder ein magisches Tal?"
                             </p>
                         </div>
 
@@ -51,19 +51,19 @@ const Footer: React.FC = () => {
                         <h3 className="text-white font-serif font-bold text-lg mb-6 uppercase tracking-wider border-b-2 border-[#ebd297] pb-2 inline-block">Kontakt</h3>
                         <ul className="space-y-4">
                             <li>
-                                <a href="tel:[TELEFON]" className="group flex items-center gap-3 text-stone-300 hover:text-[#ebd297] transition-colors">
+                                <a href="tel:+491578585713" className="group flex items-center gap-3 text-stone-300 hover:text-[#ebd297] transition-colors">
                                     <div className="w-8 h-8 rounded bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] group-hover:scale-110 transition-transform">
                                         <Phone size={16} />
                                     </div>
-                                    <span className="font-bold">[Telefonnummer]</span>
+                                    <span className="font-bold">0157 85585713</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="mailto:[EMAIL]" className="group flex items-center gap-3 text-stone-300 hover:text-[#ebd297] transition-colors">
+                                <a href="mailto:info@limaex.de" className="group flex items-center gap-3 text-stone-300 hover:text-[#ebd297] transition-colors">
                                     <div className="w-8 h-8 rounded bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] group-hover:scale-110 transition-transform">
                                         <Mail size={16} />
                                     </div>
-                                    <span className="font-bold">[E-Mail]</span>
+                                    <span className="font-bold">info@limaex.de</span>
                                 </a>
                             </li>
                             <li>
@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
                                     <div className="w-8 h-8 rounded bg-[#ebd297]/10 flex items-center justify-center text-[#ebd297] shrink-0">
                                         <MapPin size={16} />
                                     </div>
-                                    <span className="font-bold pt-1">[Einsatzgebiet]</span>
+                                    <span className="font-bold pt-1">Basis bei Nürnberg<br />deutschlandweit & mehr</span>
                                 </div>
                             </li>
                             <li className="pt-4">
